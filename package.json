@@ -1,0 +1,48 @@
+{
+  "name": "@objectstack/templates",
+  "version": "1.0.0",
+  "description": "Small application templates for the ObjectStack cloud application marketplace",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "templates/*"
+  ],
+  "scripts": {
+    "dev": "objectstack serve --dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r --if-present lint",
+    "test": "vitest run --passWithNoTests",
+    "test:coverage": "vitest run --coverage --passWithNoTests",
+    "test:watch": "vitest --passWithNoTests",
+    "typecheck": "pnpm exec tsc --noEmit",
+    "validate": "objectstack validate",
+    "compile": "objectstack compile",
+    "clean": "pnpm -r exec rm -rf dist node_modules"
+  },
+  "keywords": [
+    "objectstack",
+    "templates",
+    "marketplace",
+    "applications",
+    "plugins"
+  ],
+  "author": "ObjectStack Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@objectstack/cli": "^3.0.8",
+    "@objectstack/driver-memory": "^3.0.8",
+    "@objectstack/runtime": "^3.0.8",
+    "@objectstack/spec": "^3.0.8",
+    "@types/node": "^25.2.3",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitest/coverage-v8": "^1.6.1",
+    "eslint": "^8.57.1",
+    "typescript": "^5.9.3",
+    "vitest": "^1.6.1"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9.0.0"
+  }
+}
