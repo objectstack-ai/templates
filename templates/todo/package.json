@@ -1,0 +1,29 @@
+{
+  "name": "@templates/todo",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Task management app template — todo lists and items with priorities",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js"
+    },
+    "./plugin": {
+      "default": "./dist/plugin.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && objectstack compile",
+    "typecheck": "tsc --noEmit",
+    "dev": "objectstack dev"
+  },
+  "keywords": ["todo", "tasks", "objectstack", "template"],
+  "dependencies": {
+    "@objectstack/spec": "^3.0.8"
+  },
+  "devDependencies": {
+    "@objectstack/cli": "^3.0.8",
+    "typescript": "^5.9.3"
+  }
+}
