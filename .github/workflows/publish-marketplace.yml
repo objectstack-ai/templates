@@ -1,0 +1,189 @@
+name: Publish Templates to Marketplace
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry-run mode — validate without publishing'
+        required: false
+        default: 'false'
+        type: boolean
+      templates:
+        description: 'Comma-separated template names to publish (empty = all)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9'
+
+jobs:
+  resolve-matrix:
+    name: Resolve template matrix
+    runs-on: ubuntu-latest
+    outputs:
+      templates: ${{ steps.set-matrix.outputs.templates }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve templates
+        id: set-matrix
+        run: |
+          INPUT="${{ inputs.templates }}"
+          if [ -n "${INPUT}" ]; then
+            # Convert comma-separated input to JSON array
+            TEMPLATES=$(echo "${INPUT}" | tr ',' '\n' | sed 's/^ *//;s/ *$//' | jq -R . | jq -sc .)
+          else
+            # Discover all templates from the templates/ directory
+            TEMPLATES=$(ls -d templates/*/ | xargs -I{} basename {} | jq -R . | jq -sc .)
+          fi
+          echo "templates=${TEMPLATES}" >> "$GITHUB_OUTPUT"
+          echo "📋 Templates: ${TEMPLATES}"
+
+  validate:
+    name: Typecheck & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+  publish:
+    name: Build & Publish (${{ matrix.template }})
+    needs: [validate, resolve-matrix]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        template: ${{ fromJson(needs.resolve-matrix.outputs.templates) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build template
+        run: pnpm --filter @templates/${{ matrix.template }} build
+
+      - name: Package artifact
+        id: package
+        run: |
+          TEMPLATE=${{ matrix.template }}
+          VERSION=$(node -p "require('./templates/${TEMPLATE}/package.json').version")
+          ARTIFACT="${TEMPLATE}-${VERSION}.tar.gz"
+
+          tar -czf "${ARTIFACT}" -C templates/${TEMPLATE} dist package.json README.md CHANGELOG.md
+          SHA256=$(sha256sum "${ARTIFACT}" | awk '{print $1}')
+
+          echo "artifact=${ARTIFACT}" >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "sha256=${SHA256}" >> "$GITHUB_OUTPUT"
+          echo "📦 ${ARTIFACT} (sha256: ${SHA256})"
+
+      - name: Publish to Marketplace
+        if: inputs.dry_run != 'true'
+        env:
+          MARKETPLACE_API_URL: ${{ vars.MARKETPLACE_API_URL }}
+          MARKETPLACE_API_KEY: ${{ secrets.MARKETPLACE_API_KEY }}
+        run: |
+          set -euo pipefail
+          TEMPLATE=${{ matrix.template }}
+          VERSION=${{ steps.package.outputs.version }}
+          ARTIFACT=${{ steps.package.outputs.artifact }}
+          SHA256=${{ steps.package.outputs.sha256 }}
+
+          API_URL="${MARKETPLACE_API_URL:-https://cloud.objectstack.io/api/marketplace}"
+
+          echo "🚀 Publishing ${TEMPLATE}@${VERSION}…"
+
+          # Step 1: Initiate publish
+          PUBLISH_RESPONSE=$(curl -sf -X POST "${API_URL}/publish" \
+            -H "Authorization: Bearer ${MARKETPLACE_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "{\"template\": \"${TEMPLATE}\", \"version\": \"${VERSION}\", \"sha256\": \"${SHA256}\"}")
+
+          PUBLISH_ID=$(echo "${PUBLISH_RESPONSE}" | jq -r '.publishId')
+          UPLOAD_URL=$(echo "${PUBLISH_RESPONSE}" | jq -r '.uploadUrl')
+
+          if [ -z "${PUBLISH_ID}" ] || [ "${PUBLISH_ID}" = "null" ]; then
+            echo "❌ Failed to initiate publish"
+            echo "${PUBLISH_RESPONSE}"
+            exit 1
+          fi
+          echo "✅ Publish initiated: ${PUBLISH_ID}"
+
+          # Step 2: Upload artifact
+          UPLOAD_STATUS=$(curl -sf -o /dev/null -w "%{http_code}" -X PUT "${UPLOAD_URL}" \
+            -H "Authorization: Bearer ${MARKETPLACE_API_KEY}" \
+            -H "Content-Type: application/gzip" \
+            --data-binary "@${ARTIFACT}")
+
+          if [ "${UPLOAD_STATUS}" -lt 200 ] || [ "${UPLOAD_STATUS}" -ge 300 ]; then
+            echo "❌ Upload failed (HTTP ${UPLOAD_STATUS}), rolling back…"
+            curl -sf -X DELETE "${API_URL}/publish/${PUBLISH_ID}" \
+              -H "Authorization: Bearer ${MARKETPLACE_API_KEY}" || true
+            exit 1
+          fi
+          echo "✅ Artifact uploaded"
+
+          # Step 3: Confirm publish
+          CONFIRM_STATUS=$(curl -sf -o /dev/null -w "%{http_code}" -X POST "${API_URL}/publish/${PUBLISH_ID}/confirm" \
+            -H "Authorization: Bearer ${MARKETPLACE_API_KEY}" \
+            -H "Content-Type: application/json")
+
+          if [ "${CONFIRM_STATUS}" -lt 200 ] || [ "${CONFIRM_STATUS}" -ge 300 ]; then
+            echo "❌ Confirm failed (HTTP ${CONFIRM_STATUS}), rolling back…"
+            curl -sf -X DELETE "${API_URL}/publish/${PUBLISH_ID}" \
+              -H "Authorization: Bearer ${MARKETPLACE_API_KEY}" || true
+            exit 1
+          fi
+
+          echo "🎉 ${TEMPLATE}@${VERSION} published successfully (ID: ${PUBLISH_ID})"
+
+      - name: Dry-run summary
+        if: inputs.dry_run == 'true'
+        run: |
+          echo "🧪 Dry-run complete for ${{ matrix.template }}"
+          echo "   Artifact: ${{ steps.package.outputs.artifact }}"
+          echo "   Version:  ${{ steps.package.outputs.version }}"
+          echo "   SHA256:   ${{ steps.package.outputs.sha256 }}"
+          echo "   Status:   ✅ Ready to publish"

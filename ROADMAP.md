@@ -11,7 +11,7 @@ This repository provides small, production-ready application templates that can 
 2026 Q1  ████████████████  Phase 1: Project Initialization   ✅ COMPLETE
 2026 Q1  ████████████████  Phase 2: Core Templates (Todo, Blog, Inventory)  🔄 IN PROGRESS
 2026 Q2  ████████████████  Phase 3: Extended Templates (Scheduler, FAQ, Project)  ⬜ PLANNED
-2026 Q3  ████████████████  Phase 4: Marketplace Integration & Polish  ⬜ PLANNED
+2026 Q3  ████████████████  Phase 4: Marketplace Integration & Polish  🔄 IN PROGRESS
 ```
 
 ## Current State
@@ -67,13 +67,22 @@ This repository provides small, production-ready application templates that can 
 
 ---
 
-## Phase 4: Marketplace Integration ⬜ PLANNED
+## Phase 4: Marketplace Integration 🔄 IN PROGRESS
 
+- [x] `objectstack` metadata in each template `package.json` (category, minVersion, permissions)
+- [x] GitHub Actions workflow for automated marketplace publishing (`publish-marketplace.yml`)
+  - [x] Tag push (`v*`) and manual (`workflow_dispatch`) triggers
+  - [x] Typecheck & test validation gate
+  - [x] Multi-template concurrent build with dynamic matrix
+  - [x] Artifact packaging (tar.gz) with SHA-256 checksums
+  - [x] Cloud API publish flow (initiate → upload → confirm) with rollback on failure
+  - [x] Dry-run mode for validation without publishing
+  - [x] Partial publish support (select specific templates)
+- [x] CHANGELOG.md for each template (todo, blog, inventory)
 - [ ] Marketplace metadata (icons, screenshots, pricing tiers)
 - [ ] One-click deploy documentation
 - [ ] Demo seed data for each template
-- [ ] Template versioning and changelog conventions
-- [ ] CI/CD pipeline for automated template validation
+- [ ] Cross-repo: cloud API marketplace endpoints (see [cloud repo](https://github.com/objectstack-ai/cloud))
 
 ---
 
@@ -81,4 +90,5 @@ This repository provides small, production-ready application templates that can 
 
 | Date | Version | Notes |
 |------|---------|-------|
+| 2026-02-27 | v1.1.0 | Marketplace CI/CD workflow, template metadata, changelogs |
 | 2026-02-24 | v1.0.0 | Project initialization — monorepo scaffold + 3 core templates |

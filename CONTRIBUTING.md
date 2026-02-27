@@ -44,6 +44,11 @@ mkdir -p templates/my-app/src
   "devDependencies": {
     "@objectstack/cli": "^3.0.8",
     "typescript": "^5.9.3"
+  },
+  "objectstack": {
+    "category": "app",
+    "minVersion": "3.0.0",
+    "permissions": ["data:read", "data:write"]
   }
 }
 ```
@@ -122,7 +127,9 @@ Add your template to the appropriate phase.
 - [ ] `pnpm typecheck` — zero TypeScript errors
 - [ ] `pnpm test` — all tests pass
 - [ ] `pnpm lint` — no ESLint errors
-- [ ] README added to the template directory
+- [ ] README.md added to the template directory
+- [ ] CHANGELOG.md added to the template directory
+- [ ] `objectstack` metadata in `package.json` (category, minVersion, permissions)
 - [ ] Template listed in root `README.md`
 - [ ] `ROADMAP.md` updated
 
