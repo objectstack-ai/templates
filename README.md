@@ -113,8 +113,9 @@ Push a version tag to trigger an automatic publish of **all** templates:
 pnpm typecheck
 pnpm test
 
-# 2. Update version in each template's package.json (and CHANGELOG.md)
+# 2. Update version in each template's package.json and CHANGELOG.md
 # e.g. templates/todo/package.json  →  "version": "1.1.0"
+# Add a new section in CHANGELOG.md documenting Added/Changed/Fixed/Removed items
 
 # 3. Commit the version bump
 git add .
@@ -170,6 +171,7 @@ resolve-matrix  ──→  validate  ──→  publish (per template, concurren
 3. **publish** — For each template in parallel:
    - `pnpm --filter @templates/<name> build` — Compile TypeScript and ObjectStack artifacts
    - Package `dist/`, `package.json`, `README.md`, `CHANGELOG.md` into `<name>-<version>.tar.gz`
+     > **Note**: `README.md` and `CHANGELOG.md` are required in each template directory. The packaging step will fail if they are missing.
    - Generate SHA-256 checksum
    - Call cloud API:
      - `POST /publish` — Initiate publish, receive `publishId` and `uploadUrl`
