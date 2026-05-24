@@ -8,7 +8,7 @@ type Flow = Automation.Flow;
  * Exercises a `record_change` flow that reads `previous.*` to detect deltas.
  */
 export const TaskAssignedFlow: Flow = {
-  name: 'task_assigned_notify',
+  name: 'todo_task_assigned_notify',
   label: 'Notify New Assignee',
   description: 'Notifies a user when a task is freshly assigned to them.',
   type: 'record_change',
@@ -21,7 +21,7 @@ export const TaskAssignedFlow: Flow = {
       type: 'start',
       label: 'Start',
       config: {
-        objectName: 'task',
+        objectName: 'todo_task',
         criteria: 'assignee != NULL AND assignee != PRIOR(assignee)',
       },
     },
@@ -30,7 +30,7 @@ export const TaskAssignedFlow: Flow = {
       type: 'get_record',
       label: 'Get Task',
       config: {
-        objectName: 'task',
+        objectName: 'todo_task',
         filter: { id: '{taskId}' },
         outputVariable: 'taskRecord',
       },
@@ -43,8 +43,8 @@ export const TaskAssignedFlow: Flow = {
         actionType: 'notification',
         recipients: ['{taskRecord.assignee}'],
         title: 'New task assigned: {taskRecord.subject}',
-        body: 'You have been assigned a task in {taskRecord.project.name}.',
-        link: '/objects/task/{taskRecord.id}',
+        body: 'You have a new task assigned to you.',
+        link: '/objects/todo_task/{taskRecord.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

@@ -8,22 +8,22 @@ import type { Page } from '@objectstack/spec/ui';
  * polymorphic `sys_comment` / `sys_attachment` discussion slot.
  */
 export const TaskDetailPage = {
-  name: 'task_detail_page',
+  name: 'todo_task_detail_page',
   label: 'Task Detail',
   description:
     'Slotted detail page for Task — header override only; defaults synthesize everything else.',
   type: 'record',
-  object: 'task',
+  object: 'todo_task',
   kind: 'slotted',
   regions: [],
   slots: {
     header: {
       type: 'page:header',
-      id: 'task_header_slotted',
+      id: 'todo_task_header_slotted',
       label: 'Task Header',
       properties: {
         title: '{subject}',
-        subtitle: '{project.name} · {status}',
+        subtitle: '{status} · {priority}',
         eyebrow: 'TASK',
         icon: 'check-square',
         breadcrumb: true,

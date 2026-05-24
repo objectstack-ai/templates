@@ -1,7 +1,7 @@
 {
   "name": "@template/todo",
   "version": "0.1.0",
-  "description": "ObjectStack starter template: task & project management",
+  "description": "ObjectStack starter template: lightweight task management",
   "license": "Apache-2.0",
   "private": true,
   "main": "./objectstack.config.ts",

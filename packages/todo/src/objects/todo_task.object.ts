@@ -2,23 +2,23 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { TaskStateMachine } from './task.state';
+import { TaskStateMachine } from './todo_task.state';
 
 /**
- * Task — the unit of work. Belongs to a project, optionally assigned, with a
- * status state machine and an approval trigger for urgent items.
+ * Task — the unit of work. Status state machine, optional assignee, optional
+ * labels (multi). Urgent tasks trigger the approval process.
  *
  * Polymorphic platform features come for free:
- *   - sys_comment  (thread_id = "task:{id}")
- *   - sys_attachment (parent_object="task", parent_id="{id}")
- *   - sys_activity / sys_audit_log (auto when enable.feeds/trackHistory=true)
+ *   - sys_comment    (thread_id = "todo_task:{id}")
+ *   - sys_attachment (parent_object = "todo_task", parent_id = "{id}")
+ *   - sys_activity / sys_audit_log (auto when enable.feeds/trackHistory = true)
  */
 export const Task = ObjectSchema.create({
-  name: 'task',
+  name: 'todo_task',
   label: 'Task',
   pluralLabel: 'Tasks',
   icon: 'check-square',
-  description: 'A single unit of work belonging to a project.',
+  description: 'A single unit of work.',
 
   fieldGroups: [
     { key: 'core', label: 'Task', icon: 'check-square' },
@@ -37,12 +37,6 @@ export const Task = ObjectSchema.create({
 
     description: Field.markdown({
       label: 'Description',
-      group: 'core',
-    }),
-
-    project: Field.lookup('project', {
-      label: 'Project',
-      required: true,
       group: 'core',
     }),
 
@@ -73,6 +67,12 @@ export const Task = ObjectSchema.create({
     assignee: Field.lookup('user', {
       label: 'Assignee',
       group: 'core',
+    }),
+
+    labels: Field.lookup('todo_label', {
+      label: 'Labels',
+      group: 'core',
+      multiple: true,
     }),
 
     // Planning
@@ -123,7 +123,6 @@ export const Task = ObjectSchema.create({
   },
 
   indexes: [
-    { fields: ['project'] },
     { fields: ['assignee'] },
     { fields: ['status'] },
     { fields: ['due_date'] },
@@ -145,7 +144,7 @@ export const Task = ObjectSchema.create({
   workflows: [
     {
       name: 'stamp_started_at',
-      objectName: 'task',
+      objectName: 'todo_task',
       triggerType: 'on_update',
       criteria: P`record.status == "doing" && previous.status != "doing" && record.started_at == null`,
       active: true,
@@ -155,7 +154,7 @@ export const Task = ObjectSchema.create({
     },
     {
       name: 'stamp_completed_at',
-      objectName: 'task',
+      objectName: 'todo_task',
       triggerType: 'on_update',
       criteria: P`record.status == "done" && previous.status != "done"`,
       active: true,

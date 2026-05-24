@@ -9,7 +9,7 @@ type Flow = Automation.Flow;
  * platform's notification/email services (no per-app email infra).
  */
 export const TaskOverdueFlow: Flow = {
-  name: 'task_overdue_notify',
+  name: 'todo_task_overdue_notify',
   label: 'Notify Assignee When Task Overdue',
   description: 'Sends a notification and email when an open task passes its due date.',
   type: 'record_change',
@@ -22,7 +22,7 @@ export const TaskOverdueFlow: Flow = {
       type: 'start',
       label: 'Start',
       config: {
-        objectName: 'task',
+        objectName: 'todo_task',
         criteria: 'due_date < TODAY() AND status IN ("todo", "doing")',
       },
     },
@@ -31,7 +31,7 @@ export const TaskOverdueFlow: Flow = {
       type: 'get_record',
       label: 'Get Task',
       config: {
-        objectName: 'task',
+        objectName: 'todo_task',
         filter: { id: '{taskId}' },
         outputVariable: 'taskRecord',
       },
@@ -44,8 +44,8 @@ export const TaskOverdueFlow: Flow = {
         actionType: 'notification',
         recipients: ['{taskRecord.assignee}'],
         title: 'Task overdue: {taskRecord.subject}',
-        body: 'Task "{taskRecord.subject}" in project {taskRecord.project.name} is past its due date ({taskRecord.due_date}).',
-        link: '/objects/task/{taskRecord.id}',
+        body: 'Task "{taskRecord.subject}" is past its due date ({taskRecord.due_date}).',
+        link: '/objects/todo_task/{taskRecord.id}',
       },
     },
     {
@@ -54,12 +54,11 @@ export const TaskOverdueFlow: Flow = {
       label: 'Email Assignee',
       config: {
         actionType: 'email',
-        template: 'task_overdue',
+        template: 'todo_task_overdue',
         recipients: ['{taskRecord.assignee.email}'],
         variables: {
           subject: '{taskRecord.subject}',
           dueDate: '{taskRecord.due_date}',
-          projectName: '{taskRecord.project.name}',
         },
       },
     },

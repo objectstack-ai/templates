@@ -7,8 +7,8 @@ import type { Hook, HookContext } from '@objectstack/spec/data';
  * machine and stamps audit metadata that workflows can't derive on insert.
  */
 const taskHook: Hook = {
-  name: 'task_automation',
-  object: 'task',
+  name: 'todo_task_automation',
+  object: 'todo_task',
   events: ['beforeInsert', 'beforeUpdate'],
   priority: 100,
   description: 'Normalize task fields on save.',

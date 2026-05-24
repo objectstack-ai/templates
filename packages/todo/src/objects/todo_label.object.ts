@@ -3,15 +3,15 @@
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 
 /**
- * Label — free-form tag attached to tasks via the `task_label` junction.
- * Kept deliberately tiny: name + color.
+ * Label — free-form tag attached to tasks via the multi-value `labels`
+ * lookup on `todo_task`. Kept deliberately tiny: name + color.
  */
 export const Label = ObjectSchema.create({
-  name: 'label',
+  name: 'todo_label',
   label: 'Label',
   pluralLabel: 'Labels',
   icon: 'tag',
-  description: 'Free-form tag for grouping tasks across projects.',
+  description: 'Free-form tag for grouping tasks.',
 
   fields: {
     name: Field.text({

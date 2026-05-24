@@ -3,25 +3,25 @@
 import { defineView } from '@objectstack/spec/ui';
 
 /**
- * Task views — grid (primary), kanban (by status), and "my open work" filter.
+ * Task views — grid (primary), kanban (by status), my-open, and overdue.
  */
 export const TaskViews = defineView({
   list: {
     type: 'grid',
     name: 'all_tasks',
     label: 'All Tasks',
-    data: { provider: 'object', object: 'task' },
+    data: { provider: 'object', object: 'todo_task' },
     columns: [
-      { field: 'subject', width: 280, link: true, pinned: 'left', sortable: true },
-      { field: 'project', width: 160, sortable: true },
-      { field: 'status', width: 110, sortable: true },
-      { field: 'priority', width: 100, sortable: true },
-      { field: 'assignee', width: 150 },
+      { field: 'subject', width: 320, link: true, pinned: 'left', sortable: true },
+      { field: 'status', width: 120, sortable: true },
+      { field: 'priority', width: 110, sortable: true },
+      { field: 'assignee', width: 160 },
+      { field: 'labels', width: 200 },
       { field: 'due_date', width: 130, sortable: true },
       { field: 'is_overdue', width: 100, align: 'center' },
     ],
     sort: [{ field: 'due_date', order: 'asc' }],
-    grouping: { fields: [{ field: 'project', order: 'asc', collapsed: false }] },
+    grouping: { fields: [{ field: 'status', order: 'asc', collapsed: false }] },
     selection: { type: 'multiple' },
     pagination: { pageSize: 50, pageSizeOptions: [25, 50, 100] },
     exportOptions: ['csv', 'xlsx'],
@@ -66,7 +66,7 @@ export const TaskViews = defineView({
       name: 'task_board',
       type: 'kanban',
       label: 'Task Board',
-      data: { provider: 'object', object: 'task' },
+      data: { provider: 'object', object: 'todo_task' },
       columns: ['subject', 'priority', 'assignee', 'due_date'],
       kanban: {
         groupByField: 'status',
@@ -78,8 +78,8 @@ export const TaskViews = defineView({
       name: 'my_open_tasks',
       type: 'grid',
       label: 'My Open Tasks',
-      data: { provider: 'object', object: 'task' },
-      columns: ['subject', 'project', 'priority', 'due_date'],
+      data: { provider: 'object', object: 'todo_task' },
+      columns: ['subject', 'priority', 'due_date', 'labels'],
       filter: [
         { field: 'assignee', operator: 'equals', value: '{current_user_id}' },
         { field: 'status', operator: 'in', value: ['todo', 'doing'] },
@@ -94,8 +94,8 @@ export const TaskViews = defineView({
       name: 'overdue_tasks',
       type: 'grid',
       label: 'Overdue Tasks',
-      data: { provider: 'object', object: 'task' },
-      columns: ['subject', 'project', 'assignee', 'priority', 'due_date'],
+      data: { provider: 'object', object: 'todo_task' },
+      columns: ['subject', 'assignee', 'priority', 'due_date'],
       filter: [
         { field: 'status', operator: 'in', value: ['todo', 'doing'] },
         { field: 'due_date', operator: 'less_than', value: '{today}' },
@@ -106,17 +106,17 @@ export const TaskViews = defineView({
 
   form: {
     type: 'tabbed',
-    data: { provider: 'object', object: 'task' },
+    data: { provider: 'object', object: 'todo_task' },
     sections: [
       {
         label: 'Task',
         columns: 2,
         fields: [
           { field: 'subject', required: true, colSpan: 2 },
-          'project',
           'assignee',
           'status',
           'priority',
+          { field: 'labels', colSpan: 2 },
         ],
       },
       {

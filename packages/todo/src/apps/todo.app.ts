@@ -28,16 +28,9 @@ export const TodoApp = App.create({
         {
           id: 'nav_task',
           type: 'object',
-          objectName: 'task',
+          objectName: 'todo_task',
           label: 'Tasks',
           icon: 'check-square',
-        },
-        {
-          id: 'nav_project',
-          type: 'object',
-          objectName: 'project',
-          label: 'Projects',
-          icon: 'folder-kanban',
         },
       ],
     },
@@ -47,7 +40,7 @@ export const TodoApp = App.create({
       label: 'Admin',
       icon: 'settings',
       children: [
-        { id: 'nav_label', type: 'object', objectName: 'label', label: 'Labels', icon: 'tag' },
+        { id: 'nav_label', type: 'object', objectName: 'todo_label', label: 'Labels', icon: 'tag' },
       ],
     },
     {
@@ -59,14 +52,14 @@ export const TodoApp = App.create({
         {
           id: 'nav_overdue',
           type: 'report',
-          reportName: 'overdue_tasks_by_assignee',
+          reportName: 'todo_overdue_tasks_by_assignee',
           label: 'Overdue by Assignee',
           icon: 'alert-triangle',
         },
         {
           id: 'nav_throughput',
           type: 'report',
-          reportName: 'task_throughput_by_week',
+          reportName: 'todo_task_throughput_by_week',
           label: 'Throughput',
           icon: 'trending-up',
         },

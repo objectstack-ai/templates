@@ -13,7 +13,7 @@ import * as apps from './src/apps/index.js';
 import { TodoTranslations } from './src/translations/index.js';
 import { allFlows } from './src/flows/index.js';
 import { allHooks } from './src/hooks/index.js';
-import { ProjectContributorSharingRule, RoleHierarchy } from './src/sharing/index.js';
+import { RoleHierarchy } from './src/sharing/index.js';
 import { TodoSeedData } from './src/data/index.js';
 
 export default defineStack({
@@ -23,7 +23,7 @@ export default defineStack({
     version: '0.1.0',
     type: 'app',
     name: 'Todo',
-    description: 'Starter template — task & project management on ObjectStack.',
+    description: 'Starter template — task management on ObjectStack.',
   },
 
   // Opt-in capabilities. Foundational services (queue/job/cache/settings/
@@ -42,7 +42,7 @@ export default defineStack({
   hooks: allHooks,
   translations: [TodoTranslations],
 
-  sharingRules: [ProjectContributorSharingRule],
+  sharingRules: [],
   roles: RoleHierarchy.roles.map((r) => ({
     name: r.name,
     label: r.label,
@@ -53,7 +53,7 @@ export default defineStack({
 
   i18n: {
     defaultLocale: 'en',
-    supportedLocales: ['en'],
+    supportedLocales: ['en', 'zh-CN', 'ja-JP', 'es-ES'],
     fallbackLocale: 'en',
     fileOrganization: 'per_locale',
   },

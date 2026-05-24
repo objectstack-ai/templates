@@ -9,9 +9,9 @@ import { ApprovalProcess } from '@objectstack/spec/automation';
  * on both outcomes.
  */
 export const UrgentTaskApproval = ApprovalProcess.create({
-  name: 'urgent_task_approval',
+  name: 'todo_urgent_task_approval',
   label: 'Urgent Task Approval',
-  object: 'task',
+  object: 'todo_task',
   active: true,
   description: "Tasks marked urgent require a lead's sign-off before work begins.",
 

@@ -57,7 +57,28 @@ PRs may raise a cap with justification, but the bar is **"this is impossible wit
 | `*.profile.ts` | Permission set | `PermissionSetSchema` |
 | `*.app.ts` | App / navigation | `AppSchema` |
 
-All names are `snake_case`. No prefix injection: the name in the file = the name at runtime = the name in the DB = the name in the URL.
+All names are `snake_case`. No platform-side prefix injection: the name in the file = the name at runtime = the name in the DB = the name in the URL.
+
+### Namespace prefix is mandatory
+
+Every template MUST prefix all of its custom object / table names with a
+short namespace that matches the package directory. This prevents
+table-name collisions when multiple templates are installed in the same
+tenant.
+
+| Template | Prefix | Examples |
+|---|---|---|
+| `hotcrm` | `crm_` | `crm_account`, `crm_contact`, `crm_opportunity`, `crm_task` |
+| `todo`   | `todo_` | `todo_task`, `todo_label` |
+
+Apply the prefix consistently across **every** reference: `*.object.ts`
+`name:`, views/dashboards/reports/flows/approvals/hooks `objectName` /
+`object` / `data.object`, `apps/*.app.ts` navigation `objectName`,
+permissions & sharing rules, seed `externalId` (use `<prefix>:…`), and
+the `objects.<name>` keys in `src/translations/*.ts`.
+
+Reserved namespace: `sys_*` is platform-owned — never use `sys_*` for a
+custom object.
 
 ## Authoring sequence
 
