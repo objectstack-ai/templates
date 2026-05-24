@@ -30,15 +30,6 @@ export const esES: TranslationData = {
         started_at: { label: 'Inicio' },
         completed_at: { label: 'Finalización' },
         estimate_hours: { label: 'Estimación (h)' },
-        approval_status: {
-          label: 'Aprobación',
-          options: {
-            not_required: 'No requerida',
-            pending: 'Pendiente',
-            approved: 'Aprobada',
-            rejected: 'Rechazada',
-          },
-        },
         is_overdue: { label: '¿Vencida?' },
       },
       _views: {
@@ -64,19 +55,11 @@ export const esES: TranslationData = {
   apps: {
     todo: {
       label: 'Todo',
-      description: 'Gestor ligero de tareas con aprobaciones y paneles.',
+      description: 'Gestor ligero de tareas.',
       navigation: {
-        group_work: { label: 'Trabajo' },
-        group_admin: { label: 'Administración' },
-        group_reports: { label: 'Informes' },
-        group_approvals: { label: 'Aprobaciones' },
         nav_dashboard: { label: 'Mi trabajo' },
         nav_task: { label: 'Tareas' },
         nav_label: { label: 'Etiquetas' },
-        nav_overdue: { label: 'Vencidas por responsable' },
-        nav_throughput: { label: 'Productividad' },
-        nav_approval_requests: { label: 'Mis aprobaciones' },
-        nav_approval_processes: { label: 'Procesos' },
       },
     },
   },
@@ -92,10 +75,6 @@ export const esES: TranslationData = {
     'common.export': 'Exportar',
     'common.back': 'Atrás',
     'common.confirm': 'Confirmar',
-    'nav.work': 'Trabajo',
-    'nav.admin': 'Administración',
-    'nav.reports': 'Informes',
-    'nav.approvals': 'Aprobaciones',
     'success.saved': 'Tarea guardada correctamente',
     'success.assigned': 'Tarea asignada correctamente',
     'confirm.delete': '¿Seguro que quieres eliminar este registro?',

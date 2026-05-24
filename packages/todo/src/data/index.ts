@@ -10,8 +10,7 @@ import { Label } from '../objects/todo_label.object';
  * surface of the template:
  *
  *   • all 4 statuses (todo / doing / done / cancelled) and 4 priorities
- *   • urgent tasks → approval process
- *   • overdue tasks → overdue report + overdue notification flow
+ *   • overdue tasks → overdue notification flow
  *   • completed tasks across time → throughput cube
  *   • multi-label tagging via the `labels` lookup (multiple: true)
  *

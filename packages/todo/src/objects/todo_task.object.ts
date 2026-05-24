@@ -6,7 +6,7 @@ import { TaskStateMachine } from './todo_task.state';
 
 /**
  * Task — the unit of work. Status state machine, optional assignee, optional
- * labels (multi). Urgent tasks trigger the approval process.
+ * labels (multi).
  *
  * Polymorphic platform features come for free:
  *   - sys_comment    (thread_id = "todo_task:{id}")
@@ -84,19 +84,6 @@ export const Task = ObjectSchema.create({
       scale: 2,
       min: 0,
       group: 'planning',
-    }),
-
-    // Approval mirror (written by the approval process — see approvals/)
-    approval_status: Field.select({
-      label: 'Approval Status',
-      group: 'meta',
-      readonly: true,
-      options: [
-        { label: 'Not Required', value: 'not_required', default: true },
-        { label: 'Pending', value: 'pending', color: '#F59E0B' },
-        { label: 'Approved', value: 'approved', color: '#10B981' },
-        { label: 'Rejected', value: 'rejected', color: '#EF4444' },
-      ],
     }),
 
     // Derived flags

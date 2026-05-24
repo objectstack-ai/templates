@@ -30,15 +30,6 @@ export const zhCN: TranslationData = {
         started_at: { label: '开始时间' },
         completed_at: { label: '完成时间' },
         estimate_hours: { label: '预估工时（小时）' },
-        approval_status: {
-          label: '审批状态',
-          options: {
-            not_required: '无需审批',
-            pending: '待审批',
-            approved: '已通过',
-            rejected: '已驳回',
-          },
-        },
         is_overdue: { label: '是否逾期' },
       },
       _views: {
@@ -64,19 +55,11 @@ export const zhCN: TranslationData = {
   apps: {
     todo: {
       label: '待办',
-      description: '轻量级任务跟踪应用，内置审批与仪表盘。',
+      description: '轻量级任务跟踪应用。',
       navigation: {
-        group_work: { label: '工作' },
-        group_admin: { label: '管理' },
-        group_reports: { label: '报表' },
-        group_approvals: { label: '审批' },
         nav_dashboard: { label: '我的工作台' },
         nav_task: { label: '任务' },
         nav_label: { label: '标签' },
-        nav_overdue: { label: '逾期任务（按负责人）' },
-        nav_throughput: { label: '完成趋势' },
-        nav_approval_requests: { label: '我的审批' },
-        nav_approval_processes: { label: '审批流程' },
       },
     },
   },
@@ -92,10 +75,6 @@ export const zhCN: TranslationData = {
     'common.export': '导出',
     'common.back': '返回',
     'common.confirm': '确认',
-    'nav.work': '工作',
-    'nav.admin': '管理',
-    'nav.reports': '报表',
-    'nav.approvals': '审批',
     'success.saved': '任务已保存',
     'success.assigned': '任务已分配',
     'confirm.delete': '确定删除这条记录吗？',

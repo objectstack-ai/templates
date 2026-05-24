@@ -34,15 +34,6 @@ export const en: TranslationData = {
         started_at: { label: 'Started At' },
         completed_at: { label: 'Completed At' },
         estimate_hours: { label: 'Estimate (h)' },
-        approval_status: {
-          label: 'Approval',
-          options: {
-            not_required: 'Not Required',
-            pending: 'Pending',
-            approved: 'Approved',
-            rejected: 'Rejected',
-          },
-        },
         is_overdue: { label: 'Overdue?' },
       },
       _views: {
@@ -68,19 +59,11 @@ export const en: TranslationData = {
   apps: {
     todo: {
       label: 'Todo',
-      description: 'Lightweight task tracker with approvals and dashboards.',
+      description: 'Lightweight task tracker.',
       navigation: {
-        group_work: { label: 'Work' },
-        group_admin: { label: 'Admin' },
-        group_reports: { label: 'Reports' },
-        group_approvals: { label: 'Approvals' },
         nav_dashboard: { label: 'My Work' },
         nav_task: { label: 'Tasks' },
         nav_label: { label: 'Labels' },
-        nav_overdue: { label: 'Overdue by Assignee' },
-        nav_throughput: { label: 'Throughput' },
-        nav_approval_requests: { label: 'My Approvals' },
-        nav_approval_processes: { label: 'Processes' },
       },
     },
   },
@@ -96,10 +79,6 @@ export const en: TranslationData = {
     'common.export': 'Export',
     'common.back': 'Back',
     'common.confirm': 'Confirm',
-    'nav.work': 'Work',
-    'nav.admin': 'Admin',
-    'nav.reports': 'Reports',
-    'nav.approvals': 'Approvals',
     'success.saved': 'Task saved successfully',
     'success.assigned': 'Task assigned successfully',
     'confirm.delete': 'Are you sure you want to delete this record?',

@@ -30,13 +30,6 @@ const taskHook: Hook = {
         input.completed_at = null;
       }
     }
-
-    // Urgent tasks always trigger the approval process — mirror initial status
-    // so the UI shows "pending" immediately rather than after the engine
-    // re-evaluates entryCriteria.
-    if (input.priority === 'urgent' && !input.approval_status) {
-      input.approval_status = 'pending';
-    }
   },
 };
 

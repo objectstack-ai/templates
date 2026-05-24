@@ -6,8 +6,6 @@ import * as objects from './src/objects/index.js';
 import * as views from './src/views/index.js';
 import * as pages from './src/pages/index.js';
 import * as dashboards from './src/dashboards/index.js';
-import * as reports from './src/reports/index.js';
-import * as approvals from './src/approvals/index.js';
 import * as profiles from './src/profiles/index.js';
 import * as apps from './src/apps/index.js';
 import { TodoTranslations } from './src/translations/index.js';
@@ -28,14 +26,12 @@ export default defineStack({
 
   // Opt-in capabilities. Foundational services (queue/job/cache/settings/
   // email/storage) are auto-injected by the CLI; we only list the extras.
-  requires: ['automation', 'analytics', 'auth', 'ui', 'approvals', 'sharing'],
+  requires: ['automation', 'analytics', 'auth', 'ui', 'sharing'],
 
   objects: Object.values(objects),
   views: Object.values(views),
   pages: Object.values(pages),
   dashboards: Object.values(dashboards),
-  reports: Object.values(reports),
-  approvals: Object.values(approvals),
   permissions: Object.values(profiles),
   apps: Object.values(apps),
   flows: allFlows,

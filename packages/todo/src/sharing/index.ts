@@ -2,7 +2,6 @@
 
 /**
  * Simple two-tier role hierarchy. Leads inherit Contributors' grants.
- * Used by the urgent-task approval (approvers: 'lead') and the profiles.
  */
 export const RoleHierarchy = {
   roles: [

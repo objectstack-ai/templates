@@ -30,15 +30,6 @@ export const jaJP: TranslationData = {
         started_at: { label: '開始日時' },
         completed_at: { label: '完了日時' },
         estimate_hours: { label: '見積（時間）' },
-        approval_status: {
-          label: '承認ステータス',
-          options: {
-            not_required: '承認不要',
-            pending: '承認待ち',
-            approved: '承認済み',
-            rejected: '却下',
-          },
-        },
         is_overdue: { label: '期限超過' },
       },
       _views: {
@@ -64,19 +55,11 @@ export const jaJP: TranslationData = {
   apps: {
     todo: {
       label: 'Todo',
-      description: '承認とダッシュボードを備えた軽量タスク管理ツール。',
+      description: '軽量タスク管理ツール。',
       navigation: {
-        group_work: { label: 'ワーク' },
-        group_admin: { label: '管理' },
-        group_reports: { label: 'レポート' },
-        group_approvals: { label: '承認' },
         nav_dashboard: { label: 'マイワーク' },
         nav_task: { label: 'タスク' },
         nav_label: { label: 'ラベル' },
-        nav_overdue: { label: '担当者別の期限超過' },
-        nav_throughput: { label: 'スループット' },
-        nav_approval_requests: { label: 'マイ承認' },
-        nav_approval_processes: { label: '承認プロセス' },
       },
     },
   },
@@ -92,10 +75,6 @@ export const jaJP: TranslationData = {
     'common.export': 'エクスポート',
     'common.back': '戻る',
     'common.confirm': '確認',
-    'nav.work': 'ワーク',
-    'nav.admin': '管理',
-    'nav.reports': 'レポート',
-    'nav.approvals': '承認',
     'success.saved': 'タスクを保存しました',
     'success.assigned': 'タスクを割り当てました',
     'confirm.delete': 'このレコードを削除しますか？',
