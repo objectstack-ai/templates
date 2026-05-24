@@ -13,7 +13,11 @@
     "typecheck": "pnpm -r typecheck",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
-    "lint": "pnpm -r lint"
+    "lint": "pnpm -r lint",
+    "publish:templates": "node scripts/publish-template.mjs",
+    "publish:templates:dry-run": "DRY_RUN=1 node scripts/publish-template.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "engines": {
     "node": ">=20",
@@ -28,6 +32,7 @@
     ]
   },
   "devDependencies": {
+    "prettier": "^3.3.3",
     "typescript": "^6.0.3"
   }
 }

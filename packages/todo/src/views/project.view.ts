@@ -9,21 +9,24 @@ export const ProjectViews = defineView({
     label: 'All Projects',
     data: { provider: 'object', object: 'project' },
     columns: [
-      { field: 'name',         width: 240, link: true, pinned: 'left', sortable: true },
-      { field: 'key',          width: 90  },
-      { field: 'status',       width: 120, sortable: true },
-      { field: 'owner',        width: 160 },
-      { field: 'task_count',   width: 110, align: 'right', summary: 'sum' },
-      { field: 'target_date',  width: 130, sortable: true },
+      { field: 'name', width: 240, link: true, pinned: 'left', sortable: true },
+      { field: 'key', width: 90 },
+      { field: 'status', width: 120, sortable: true },
+      { field: 'owner', width: 160 },
+      { field: 'task_count', width: 110, align: 'right', summary: 'sum' },
+      { field: 'target_date', width: 130, sortable: true },
     ],
-    sort: [{ field: 'status', order: 'asc' }, { field: 'name', order: 'asc' }],
+    sort: [
+      { field: 'status', order: 'asc' },
+      { field: 'name', order: 'asc' },
+    ],
     selection: { type: 'multiple' },
     pagination: { pageSize: 25, pageSizeOptions: [10, 25, 50] },
     exportOptions: ['csv', 'xlsx'],
     tabs: [
-      { name: 'all',    label: 'All',     view: 'all_projects', isDefault: true, pinned: true },
-      { name: 'active', label: 'Active',  view: 'active_projects' },
-      { name: 'mine',   label: 'Mine',    view: 'my_projects' },
+      { name: 'all', label: 'All', view: 'all_projects', isDefault: true, pinned: true },
+      { name: 'active', label: 'Active', view: 'active_projects' },
+      { name: 'mine', label: 'Mine', view: 'my_projects' },
     ],
   },
 
@@ -54,10 +57,7 @@ export const ProjectViews = defineView({
       {
         label: 'Project',
         columns: 2,
-        fields: [
-          { field: 'name', required: true, colSpan: 2 },
-          'key', 'status', 'owner', 'color',
-        ],
+        fields: [{ field: 'name', required: true, colSpan: 2 }, 'key', 'status', 'owner', 'color'],
       },
       {
         label: 'Schedule',

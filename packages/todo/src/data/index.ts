@@ -16,7 +16,7 @@ const labels = defineDataset(Label, {
   mode: 'upsert',
   externalId: 'name',
   records: [
-    { name: 'bug',     color: '#EF4444', description: 'A defect' },
+    { name: 'bug', color: '#EF4444', description: 'A defect' },
     { name: 'feature', color: '#3B82F6', description: 'New capability' },
   ],
 });
@@ -68,14 +68,9 @@ const taskLabels = defineDataset(TaskLabel, {
   mode: 'upsert',
   records: [
     { task: 'Fix mobile nav drawer animation', label: 'bug' },
-    { task: 'Design new pricing page mockups',  label: 'feature' },
+    { task: 'Design new pricing page mockups', label: 'feature' },
   ],
 });
 
 /** All seed datasets, loaded in dependency order. */
-export const TodoSeedData = [
-  labels,
-  projects,
-  tasks,
-  taskLabels,
-];
+export const TodoSeedData = [labels, projects, tasks, taskLabels];

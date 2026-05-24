@@ -13,9 +13,7 @@ export const TaskAssignedFlow: Flow = {
   description: 'Notifies a user when a task is freshly assigned to them.',
   type: 'record_change',
 
-  variables: [
-    { name: 'taskId', type: 'text', isInput: true, isOutput: false },
-  ],
+  variables: [{ name: 'taskId', type: 'text', isInput: true, isOutput: false }],
 
   nodes: [
     {
@@ -53,8 +51,8 @@ export const TaskAssignedFlow: Flow = {
   ],
 
   edges: [
-    { id: 'e1', source: 'start',    target: 'get_task', type: 'default' },
-    { id: 'e2', source: 'get_task', target: 'notify',   type: 'default' },
-    { id: 'e3', source: 'notify',   target: 'end',      type: 'default' },
+    { id: 'e1', source: 'start', target: 'get_task', type: 'default' },
+    { id: 'e2', source: 'get_task', target: 'notify', type: 'default' },
+    { id: 'e3', source: 'notify', target: 'end', type: 'default' },
   ],
 };

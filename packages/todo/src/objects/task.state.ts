@@ -18,7 +18,7 @@ export const TaskStateMachine: StateMachineConfig = {
   states: {
     todo: {
       on: {
-        START:  { target: 'doing',     description: 'Begin work on the task' },
+        START: { target: 'doing', description: 'Begin work on the task' },
         CANCEL: { target: 'cancelled' },
       },
       meta: {
@@ -28,9 +28,9 @@ export const TaskStateMachine: StateMachineConfig = {
     },
     doing: {
       on: {
-        COMPLETE: { target: 'done',      description: 'All acceptance criteria met' },
-        BLOCK:    { target: 'todo',      description: 'Unblock and re-queue' },
-        CANCEL:   { target: 'cancelled' },
+        COMPLETE: { target: 'done', description: 'All acceptance criteria met' },
+        BLOCK: { target: 'todo', description: 'Unblock and re-queue' },
+        CANCEL: { target: 'cancelled' },
       },
       meta: {
         aiInstructions:

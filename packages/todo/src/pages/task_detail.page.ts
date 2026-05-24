@@ -10,7 +10,8 @@ import type { Page } from '@objectstack/spec/ui';
 export const TaskDetailPage = {
   name: 'task_detail_page',
   label: 'Task Detail',
-  description: 'Slotted detail page for Task — header override only; defaults synthesize everything else.',
+  description:
+    'Slotted detail page for Task — header override only; defaults synthesize everything else.',
   type: 'record',
   object: 'task',
   kind: 'slotted',

@@ -1,0 +1,27 @@
+name: New template proposal
+description: Propose a new starter template
+labels: [template-proposal]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Template name
+      placeholder: helpdesk, procurement, sales-pipeline …
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope (objects, flows, dashboards)
+      description: |
+        Templates have hard caps — keep it narrow. List the 3–6 core objects,
+        the primary state machine, and 1–2 dashboards you'd ship.
+    validations:
+      required: true
+  - type: textarea
+    id: audience
+    attributes:
+      label: Who is this for?
+      description: What persona / industry adopts it on day one?
+    validations:
+      required: true

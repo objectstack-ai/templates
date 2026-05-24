@@ -21,9 +21,9 @@ export const Task = ObjectSchema.create({
   description: 'A single unit of work belonging to a project.',
 
   fieldGroups: [
-    { key: 'core',     label: 'Task',        icon: 'check-square' },
-    { key: 'planning', label: 'Planning',    icon: 'calendar' },
-    { key: 'meta',     label: 'Metadata',    icon: 'info', defaultExpanded: false },
+    { key: 'core', label: 'Task', icon: 'check-square' },
+    { key: 'planning', label: 'Planning', icon: 'calendar' },
+    { key: 'meta', label: 'Metadata', icon: 'info', defaultExpanded: false },
   ],
 
   fields: {
@@ -51,9 +51,9 @@ export const Task = ObjectSchema.create({
       required: true,
       group: 'core',
       options: [
-        { label: 'To Do',     value: 'todo',      color: '#94A3B8', default: true },
-        { label: 'Doing',     value: 'doing',     color: '#3B82F6' },
-        { label: 'Done',      value: 'done',      color: '#10B981' },
+        { label: 'To Do', value: 'todo', color: '#94A3B8', default: true },
+        { label: 'Doing', value: 'doing', color: '#3B82F6' },
+        { label: 'Done', value: 'done', color: '#10B981' },
         { label: 'Cancelled', value: 'cancelled', color: '#6B7280' },
       ],
     }),
@@ -63,9 +63,9 @@ export const Task = ObjectSchema.create({
       required: true,
       group: 'core',
       options: [
-        { label: 'Low',    value: 'low',    color: '#60A5FA' },
+        { label: 'Low', value: 'low', color: '#60A5FA' },
         { label: 'Normal', value: 'normal', color: '#10B981', default: true },
-        { label: 'High',   value: 'high',   color: '#F59E0B' },
+        { label: 'High', value: 'high', color: '#F59E0B' },
         { label: 'Urgent', value: 'urgent', color: '#EF4444' },
       ],
     }),
@@ -76,7 +76,7 @@ export const Task = ObjectSchema.create({
     }),
 
     // Planning
-    due_date: Field.date({ label: 'Due Date',     group: 'planning' }),
+    due_date: Field.date({ label: 'Due Date', group: 'planning' }),
     started_at: Field.datetime({ label: 'Started At', readonly: true, group: 'planning' }),
     completed_at: Field.datetime({ label: 'Completed At', readonly: true, group: 'planning' }),
     estimate_hours: Field.number({
@@ -93,9 +93,9 @@ export const Task = ObjectSchema.create({
       readonly: true,
       options: [
         { label: 'Not Required', value: 'not_required', default: true },
-        { label: 'Pending',      value: 'pending',  color: '#F59E0B' },
-        { label: 'Approved',     value: 'approved', color: '#10B981' },
-        { label: 'Rejected',     value: 'rejected', color: '#EF4444' },
+        { label: 'Pending', value: 'pending', color: '#F59E0B' },
+        { label: 'Approved', value: 'approved', color: '#10B981' },
+        { label: 'Rejected', value: 'rejected', color: '#EF4444' },
       ],
     }),
 

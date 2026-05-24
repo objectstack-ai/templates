@@ -13,7 +13,7 @@ export const UrgentTaskApproval = ApprovalProcess.create({
   label: 'Urgent Task Approval',
   object: 'task',
   active: true,
-  description: 'Tasks marked urgent require a lead\'s sign-off before work begins.',
+  description: "Tasks marked urgent require a lead's sign-off before work begins.",
 
   entryCriteria: 'record.priority == "urgent"',
   lockRecord: false,

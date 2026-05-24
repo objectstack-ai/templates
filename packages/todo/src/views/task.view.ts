@@ -12,9 +12,9 @@ export const TaskViews = defineView({
     label: 'All Tasks',
     data: { provider: 'object', object: 'task' },
     columns: [
-      { field: 'subject',  width: 280, link: true, pinned: 'left', sortable: true },
-      { field: 'project',  width: 160, sortable: true },
-      { field: 'status',   width: 110, sortable: true },
+      { field: 'subject', width: 280, link: true, pinned: 'left', sortable: true },
+      { field: 'project', width: 160, sortable: true },
+      { field: 'status', width: 110, sortable: true },
       { field: 'priority', width: 100, sortable: true },
       { field: 'assignee', width: 150 },
       { field: 'due_date', width: 130, sortable: true },
@@ -29,10 +29,10 @@ export const TaskViews = defineView({
       allowedVisualizations: ['grid', 'kanban'],
     },
     tabs: [
-      { name: 'all',     label: 'All',         view: 'all_tasks', isDefault: true, pinned: true },
-      { name: 'board',   label: 'Board',       icon: 'columns-3', view: 'task_board' },
-      { name: 'mine',    label: 'My Open',     icon: 'user',      view: 'my_open_tasks' },
-      { name: 'overdue', label: 'Overdue',     icon: 'clock',     view: 'overdue_tasks' },
+      { name: 'all', label: 'All', view: 'all_tasks', isDefault: true, pinned: true },
+      { name: 'board', label: 'Board', icon: 'columns-3', view: 'task_board' },
+      { name: 'mine', label: 'My Open', icon: 'user', view: 'my_open_tasks' },
+      { name: 'overdue', label: 'Overdue', icon: 'clock', view: 'overdue_tasks' },
     ],
     bulkActionDefs: [
       {
@@ -41,7 +41,13 @@ export const TaskViews = defineView({
         icon: 'user-check',
         operation: 'update',
         params: [
-          { name: 'assignee', label: 'New Assignee', type: 'lookup', object: 'user', required: true },
+          {
+            name: 'assignee',
+            label: 'New Assignee',
+            type: 'lookup',
+            object: 'user',
+            required: true,
+          },
         ],
         confirmText: 'Reassign {{count}} task(s)?',
       },
@@ -79,7 +85,10 @@ export const TaskViews = defineView({
         { field: 'assignee', operator: 'equals', value: '{current_user_id}' },
         { field: 'status', operator: 'in', value: ['todo', 'doing'] },
       ],
-      sort: [{ field: 'priority', order: 'desc' }, { field: 'due_date', order: 'asc' }],
+      sort: [
+        { field: 'priority', order: 'desc' },
+        { field: 'due_date', order: 'asc' },
+      ],
     },
 
     overdue_tasks: {
@@ -105,7 +114,10 @@ export const TaskViews = defineView({
         columns: 2,
         fields: [
           { field: 'subject', required: true, colSpan: 2 },
-          'project', 'assignee', 'status', 'priority',
+          'project',
+          'assignee',
+          'status',
+          'priority',
         ],
       },
       {

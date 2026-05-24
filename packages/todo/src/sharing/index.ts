@@ -7,7 +7,7 @@ export { ProjectContributorSharingRule } from './project.sharing';
  */
 export const RoleHierarchy = {
   roles: [
-    { name: 'lead',        label: 'Lead',        parentRole: null as string | null },
+    { name: 'lead', label: 'Lead', parentRole: null as string | null },
     { name: 'contributor', label: 'Contributor', parentRole: 'lead' as string | null },
   ],
 };

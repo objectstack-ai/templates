@@ -18,9 +18,7 @@ export const MyWorkDashboard: Dashboard = {
   header: {
     showTitle: true,
     showDescription: true,
-    actions: [
-      { label: 'New Task', icon: 'Plus', actionType: 'modal', actionUrl: 'create_task' },
-    ],
+    actions: [{ label: 'New Task', icon: 'Plus', actionType: 'modal', actionUrl: 'create_task' }],
   },
 
   widgets: [

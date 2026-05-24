@@ -10,7 +10,7 @@ export const ThroughputReport: ReportInput = {
   objectName: 'task',
   type: 'matrix',
   columns: [{ field: 'id', label: 'Completed', aggregate: 'count' }],
-  groupingsDown:   [{ field: 'project', sortOrder: 'asc' }],
+  groupingsDown: [{ field: 'project', sortOrder: 'asc' }],
   groupingsAcross: [{ field: 'completed_at', dateGranularity: 'week', sortOrder: 'asc' }],
   filter: { status: 'done' },
 };

@@ -33,9 +33,9 @@ export const Project = ObjectSchema.create({
       label: 'Status',
       required: true,
       options: [
-        { label: 'Active',    value: 'active',    color: '#10B981', default: true },
-        { label: 'On Hold',   value: 'on_hold',   color: '#F59E0B' },
-        { label: 'Archived',  value: 'archived',  color: '#6B7280' },
+        { label: 'Active', value: 'active', color: '#10B981', default: true },
+        { label: 'On Hold', value: 'on_hold', color: '#F59E0B' },
+        { label: 'Archived', value: 'archived', color: '#6B7280' },
       ],
     }),
     owner: Field.lookup('user', { label: 'Owner' }),
