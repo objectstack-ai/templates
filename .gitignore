@@ -13,3 +13,20 @@ playwright-report/
 .idea/
 .vscode/*
 !.vscode/settings.json
+
+# Test screenshots / browser artifacts must never be committed.
+# Restricted to common test-output patterns so real assets under src/ or
+# public/ (icons, logos, etc.) are still allowed.
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+/*.gif
+**/page-*.png
+**/page-*.jpeg
+**/screenshot-*.png
+**/screenshot-*.jpeg
+**/tasks-page.png
+**/trace.json
+**/trace.json.gz
+**/*.heapsnapshot
