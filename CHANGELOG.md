@@ -7,7 +7,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 ## [Unreleased]
 
 ### Added
-- Repo scaffolding: CI (Node 20 + 22 matrix, smoke boot), issue / PR templates, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `TEMPLATE_GUIDE.md`, EditorConfig, Prettier config, Dependabot.
+- Repo scaffolding: CI (Node 20 + 22 matrix, smoke boot), `CONTRIBUTING.md`, `TEMPLATE_GUIDE.md`, EditorConfig, Prettier config, Dependabot.
 - Restored marketplace publish workflow (`.github/workflows/publish.yml`, `scripts/publish-template.mjs`, `docs/PUBLISHING.md`).
 - `packages/todo` — first template: task & project management. 4 objects, state machine, 2 flows, 1 approval, 1 sharing rule, 2 profiles, 2 reports, 1 dashboard, English locale, seeded with one project + two labels.
 

@@ -1,8 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: 📚 Documentation
-    url: https://docs.objectstack.ai
-    about: Platform docs (runtime, spec, CLI)
-  - name: 💬 Discussions
-    url: https://github.com/objectstack-ai/framework/discussions
-    about: Questions, ideas, show-and-tell

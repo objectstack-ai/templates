@@ -48,14 +48,10 @@ templates/
 │       ├── objectstack.config.ts
 │       └── package.json
 ├── .github/
-│   ├── workflows/ci.yml       # typecheck, build, format, smoke
-│   ├── ISSUE_TEMPLATE/        # bug, new template
-│   ├── PULL_REQUEST_TEMPLATE.md
+│   ├── workflows/             # ci.yml (verify + smoke), publish.yml (marketplace)
 │   └── dependabot.yml
-├── CONTRIBUTING.md            # how to contribute
+├── CONTRIBUTING.md            # conventions for contributors (incl. AI agents)
 ├── TEMPLATE_GUIDE.md          # how to author a template
-├── CODE_OF_CONDUCT.md
-├── SECURITY.md
 ├── CHANGELOG.md
 ├── pnpm-workspace.yaml
 └── README.md
@@ -81,12 +77,10 @@ rm -rf packages/todo/.objectstack
 
 ## Contributing
 
-1. Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for workflow, commit style, and the PR checklist.
-2. Read [`TEMPLATE_GUIDE.md`](./TEMPLATE_GUIDE.md) before proposing a new template — it documents file suffixes, hard limits, schema gotchas, and the build-order playbook.
-3. Open a **New template proposal** issue before writing code for a new template.
-4. Bug reports use the **Bug report** issue template.
+1. Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the workflow.
+2. Read [`TEMPLATE_GUIDE.md`](./TEMPLATE_GUIDE.md) before adding a new template — it documents file suffixes, hard limits, schema gotchas, and the build-order playbook.
 
-PRs against `main`. CI must be green. Keep them focused.
+Push to `main`. CI must be green.
 
 ## Adding a new template (TL;DR)
 
