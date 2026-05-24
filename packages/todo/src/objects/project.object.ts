@@ -38,7 +38,7 @@ export const Project = ObjectSchema.create({
         { label: 'Archived',  value: 'archived',  color: '#6B7280' },
       ],
     }),
-    owner: Field.lookup('user', { label: 'Owner', required: true }),
+    owner: Field.lookup('user', { label: 'Owner' }),
     start_date: Field.date({ label: 'Start Date' }),
     target_date: Field.date({ label: 'Target Date' }),
     color: Field.color({
