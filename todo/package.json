@@ -1,0 +1,40 @@
+{
+  "name": "@template/todo",
+  "version": "0.1.0",
+  "description": "ObjectStack starter template: task & project management",
+  "license": "Apache-2.0",
+  "private": true,
+  "main": "./objectstack.config.ts",
+  "types": "./objectstack.config.ts",
+  "exports": {
+    ".": "./objectstack.config.ts",
+    "./objectstack.config": "./objectstack.config.ts"
+  },
+  "scripts": {
+    "dev": "objectstack dev -p 4002",
+    "start": "objectstack start -p 4002",
+    "build": "objectstack build",
+    "typecheck": "tsc --noEmit",
+    "test": "objectstack test"
+  },
+  "dependencies": {
+    "@objectstack/account": "^5.2.0",
+    "@objectstack/cli": "^5.2.0",
+    "@objectstack/driver-memory": "^5.2.0",
+    "@objectstack/driver-sql": "^5.2.0",
+    "@objectstack/metadata": "^5.2.0",
+    "@objectstack/objectql": "^5.2.0",
+    "@objectstack/runtime": "^5.2.0",
+    "@objectstack/service-analytics": "^5.2.0",
+    "@objectstack/service-automation": "^5.2.0",
+    "@objectstack/spec": "^5.2.0",
+    "@objectstack/studio": "^5.2.0",
+    "better-sqlite3": "^12.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

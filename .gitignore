@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.objectstack/
+.turbo/
+*.log
+.DS_Store
+.env
+.env.local
+coverage/
+.playwright-mcp/
+test-results/
+playwright-report/
+.idea/
+.vscode/*
+!.vscode/settings.json

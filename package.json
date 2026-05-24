@@ -1,0 +1,33 @@
+{
+  "name": "@objectstack/templates",
+  "version": "0.1.0",
+  "description": "Official starter templates for ObjectStack — consumed via `objectstack create --template <name>`",
+  "private": true,
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/objectstack-ai/templates.git"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @template/todo dev",
+    "typecheck": "pnpm -r typecheck",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "esbuild",
+      "sharp",
+      "msw"
+    ]
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
