@@ -2,7 +2,13 @@
 
 > A small, real-shaped task & project tracker. Forkable starting point for any internal tool that looks like *"things to do, grouped somehow"*.
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/todo)
+
 📜 **Read [CHARTER.md](./CHARTER.md) first** — it explains what's in scope, what isn't, and why.
+
+## Run in the browser
+
+Click the StackBlitz badge above to launch this template in a WebContainer. It uses `@objectstack/driver-sqlite-wasm` (sql.js) instead of `better-sqlite3`, which can't compile inside WebContainers. The `.stackblitzrc` sets `OS_DATABASE_DRIVER=sqlite-wasm` so the standalone stack picks the WASM driver automatically.
 
 ## Quick start
 

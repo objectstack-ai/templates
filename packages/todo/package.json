@@ -22,6 +22,7 @@
     "@objectstack/cli": "^6.0.0",
     "@objectstack/driver-memory": "^6.0.0",
     "@objectstack/driver-sql": "^6.0.0",
+    "@objectstack/driver-sqlite-wasm": "^6.0.0",
     "@objectstack/metadata": "^6.0.0",
     "@objectstack/objectql": "^6.0.0",
     "@objectstack/runtime": "^6.0.0",
@@ -29,6 +30,9 @@
     "@objectstack/service-automation": "^6.0.0",
     "@objectstack/spec": "^6.0.0",
     "@objectstack/studio": "^5.2.0",
+    "sql.js": "^1.14.1"
+  },
+  "optionalDependencies": {
     "better-sqlite3": "^12.10.0"
   },
   "devDependencies": {

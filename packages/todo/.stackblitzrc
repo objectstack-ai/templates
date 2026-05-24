@@ -1,0 +1,8 @@
+{
+  "installDependencies": true,
+  "startCommand": "pnpm dev",
+  "env": {
+    "OS_DATABASE_URL": ".objectstack/data/todo.wasm.db",
+    "OS_DATABASE_DRIVER": "sqlite-wasm"
+  }
+}
