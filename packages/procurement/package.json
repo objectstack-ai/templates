@@ -1,0 +1,51 @@
+{
+  "name": "@template/procurement",
+  "version": "0.1.0",
+  "description": "ObjectStack starter template: source-to-pay procurement management",
+  "license": "Apache-2.0",
+  "private": true,
+  "main": "./objectstack.config.ts",
+  "types": "./objectstack.config.ts",
+  "exports": {
+    ".": "./objectstack.config.ts",
+    "./objectstack.config": "./objectstack.config.ts"
+  },
+  "scripts": {
+    "dev": "objectstack dev -p 4004",
+    "start": "objectstack start -p 4004",
+    "build": "objectstack build",
+    "typecheck": "tsc --noEmit",
+    "test": "objectstack test"
+  },
+  "dependencies": {
+    "@objectstack/account": "^5.2.0",
+    "@objectstack/cli": "^5.2.0",
+    "@objectstack/driver-memory": "^5.2.0",
+    "@objectstack/driver-sql": "^5.2.0",
+    "@objectstack/metadata": "^5.2.0",
+    "@objectstack/objectql": "^5.2.0",
+    "@objectstack/runtime": "^5.2.0",
+    "@objectstack/service-analytics": "^5.2.0",
+    "@objectstack/service-automation": "^5.2.0",
+    "@objectstack/spec": "^5.2.0",
+    "@objectstack/studio": "^5.2.0",
+    "better-sqlite3": "^12.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "objectstack": {
+    "marketplace": {
+      "manifestId": "app.objectstack.template.contracts",
+      "displayName": "Contracts",
+      "description": "Post-signature contract lifecycle: AI-extracted metadata, multi-step approvals, obligation tracking, and renewal alerts. Bring your own Word + DocuSign.",
+      "category": "starter",
+      "iconUrl": "https://cdn.objectos.app/icons/contracts.svg",
+      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/contracts",
+      "readmePath": "README.md"
+    }
+  }
+}

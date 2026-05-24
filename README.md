@@ -15,9 +15,11 @@ pnpm dlx @objectstack/cli create my-app --template todo
 | Template | Domain | Status | Port |
 |---|---|---|---|
 | [`packages/todo/`](./packages/todo) | Task & project management — the universal starter | ✅ ready | 4002 |
-| `packages/helpdesk/` | Ticketing, SLA, knowledge base | 🚧 planned | 4003 |
-| `packages/procurement/` | Vendors, POs, approval chains | 🚧 planned | 4004 |
-| `packages/sales-pipeline/` | Lite CRM (leads, opportunities, accounts) | 🚧 planned | 4005 |
+| [`packages/contracts/`](./packages/contracts) | Post-signature contract lifecycle (CLM) — AI-extracted metadata, approvals, renewal alerts | ✅ v0 | 4003 |
+| [`packages/procurement/`](./packages/procurement) | Vendors, purchase requests, POs, goods receipt, 3-way-match rollup | ✅ v0 | 4004 |
+| [`packages/compliance/`](./packages/compliance) | SOC 2 / ISO 27001 controls, evidence with expiry, assessments | ✅ v0 | 4005 |
+| `packages/helpdesk/` | Ticketing, SLA, knowledge base | 🚧 planned | 4006 |
+| `packages/sales-pipeline/` | Lite CRM (leads, opportunities, accounts) | 🚧 planned | 4007 |
 
 > Looking for a full reference app? See [hotcrm](https://github.com/objectstack-ai/hotcrm) — the production-grade CRM built on the same engine.
 
