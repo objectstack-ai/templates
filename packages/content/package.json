@@ -1,7 +1,7 @@
 {
-  "name": "@template/contracts",
+  "name": "@template/content",
   "version": "0.1.0",
-  "description": "ObjectStack starter template: post-signature contract lifecycle management (CLM)",
+  "description": "ObjectStack starter template: content marketing engine — editorial calendar, competitive signals, ROI by channel",
   "license": "Apache-2.0",
   "private": true,
   "main": "./objectstack.config.ts",
@@ -11,8 +11,8 @@
     "./objectstack.config": "./objectstack.config.ts"
   },
   "scripts": {
-    "dev": "objectstack dev -p 4003",
-    "start": "objectstack start -p 4003",
+    "dev": "objectstack dev -p 4008",
+    "start": "objectstack start -p 4008",
     "build": "objectstack build",
     "typecheck": "tsc --noEmit",
     "test": "objectstack test"
@@ -39,12 +39,12 @@
   "packageManager": "pnpm@10.33.0",
   "objectstack": {
     "marketplace": {
-      "manifestId": "app.objectstack.template.contracts",
-      "displayName": "Contracts",
-      "description": "Post-signature contract lifecycle: AI-extracted metadata, multi-step approvals, obligation tracking, and renewal alerts. Bring your own Word + DocuSign.",
+      "manifestId": "app.objectstack.template.content",
+      "displayName": "Content",
+      "description": "Content marketing engine: pipeline → publish → measure. Editorial calendar, competitive signal capture, channel ROI rollups, and an 8-state piece workflow with approval gates.",
       "category": "starter",
-      "iconUrl": "https://cdn.objectos.app/icons/contracts.svg",
-      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/contracts",
+      "iconUrl": "https://cdn.objectos.app/icons/content.svg",
+      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/content",
       "readmePath": "README.md"
     }
   }

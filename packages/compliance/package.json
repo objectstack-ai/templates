@@ -28,7 +28,6 @@
     "@objectstack/service-analytics": "^6.1.1",
     "@objectstack/service-automation": "^6.1.1",
     "@objectstack/spec": "^6.1.1",
-    "@objectstack/studio": "^5.2.0",
     "better-sqlite3": "^12.10.0"
   },
   "devDependencies": {
@@ -37,6 +36,7 @@
   "engines": {
     "node": ">=20"
   },
+  "packageManager": "pnpm@10.33.0",
   "objectstack": {
     "marketplace": {
       "manifestId": "app.objectstack.template.contracts",

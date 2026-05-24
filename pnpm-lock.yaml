@@ -47,9 +47,46 @@ importers:
       '@objectstack/spec':
         specifier: ^6.1.1
         version: 6.1.1(ai@6.0.191(zod@4.4.3))
-      '@objectstack/studio':
-        specifier: ^5.2.0
-        version: 5.2.0(442f1c60b915bcf7d999cd5bbd423458)
+      better-sqlite3:
+        specifier: ^12.10.0
+        version: 12.10.0
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/content:
+    dependencies:
+      '@objectstack/account':
+        specifier: ^6.1.1
+        version: 6.1.1(@types/react@19.2.15)(ai@6.0.191(zod@4.4.3))(typescript@6.0.3)
+      '@objectstack/cli':
+        specifier: ^6.1.1
+        version: 6.1.1(@better-auth/core@1.6.11(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@objectstack/core@6.1.1(ai@6.0.191(zod@4.4.3)))(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(mongodb@7.2.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/driver-memory':
+        specifier: ^6.1.1
+        version: 6.1.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/driver-sql':
+        specifier: ^6.1.1
+        version: 6.1.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/metadata':
+        specifier: ^6.1.1
+        version: 6.1.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/objectql':
+        specifier: ^6.1.1
+        version: 6.1.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/runtime':
+        specifier: ^6.1.1
+        version: 6.1.1(@better-auth/core@1.6.11(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(mongodb@7.2.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/service-analytics':
+        specifier: ^6.1.1
+        version: 6.1.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/service-automation':
+        specifier: ^6.1.1
+        version: 6.1.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/spec':
+        specifier: ^6.1.1
+        version: 6.1.1(ai@6.0.191(zod@4.4.3))
       better-sqlite3:
         specifier: ^12.10.0
         version: 12.10.0
@@ -90,9 +127,6 @@ importers:
       '@objectstack/spec':
         specifier: ^6.1.1
         version: 6.1.1(ai@6.0.191(zod@4.4.3))
-      '@objectstack/studio':
-        specifier: ^5.2.0
-        version: 5.2.0(442f1c60b915bcf7d999cd5bbd423458)
       better-sqlite3:
         specifier: ^12.10.0
         version: 12.10.0
@@ -133,9 +167,6 @@ importers:
       '@objectstack/spec':
         specifier: ^6.1.1
         version: 6.1.1(ai@6.0.191(zod@4.4.3))
-      '@objectstack/studio':
-        specifier: ^5.2.0
-        version: 5.2.0(442f1c60b915bcf7d999cd5bbd423458)
       better-sqlite3:
         specifier: ^12.10.0
         version: 12.10.0
