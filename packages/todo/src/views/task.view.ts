@@ -30,7 +30,6 @@ export const TaskViews = defineView({
     },
     tabs: [
       { name: 'all', label: 'All', view: 'all_tasks', isDefault: true, pinned: true },
-      { name: 'board', label: 'Board', icon: 'columns-3', view: 'task_board' },
       { name: 'mine', label: 'My Open', icon: 'user', view: 'my_open_tasks' },
       { name: 'overdue', label: 'Overdue', icon: 'clock', view: 'overdue_tasks' },
     ],

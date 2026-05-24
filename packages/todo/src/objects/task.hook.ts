@@ -37,8 +37,6 @@ const taskHook: Hook = {
     if (input.priority === 'urgent' && !input.approval_status) {
       input.approval_status = 'pending';
     }
-
-    return ctx;
   },
 };
 

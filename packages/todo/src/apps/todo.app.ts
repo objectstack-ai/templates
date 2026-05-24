@@ -33,14 +33,6 @@ export const TodoApp = App.create({
           icon: 'check-square',
         },
         {
-          id: 'nav_board',
-          type: 'object',
-          objectName: 'task',
-          viewName: 'task_board',
-          label: 'Board',
-          icon: 'columns-3',
-        },
-        {
           id: 'nav_project',
           type: 'object',
           objectName: 'project',
