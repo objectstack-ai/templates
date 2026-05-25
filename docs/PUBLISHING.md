@@ -170,5 +170,6 @@ GitHub Releases → **Draft a new release**:
 2. Add the `objectstack.marketplace` block to its `package.json` with a
    fresh `manifestId` (e.g. `app.objectstack.template.helpdesk`).
 3. Ensure `pnpm build` emits `dist/objectstack.json`.
-4. Push to `main` — the workflow auto-discovers any directory under
-   `packages/` that has a `package.json`.
+4. Cut a release tagged `<name>-v0.1.0` (or run the workflow manually).
+   The script auto-discovers any directory under `packages/` that has a
+   `package.json` with a marketplace block.

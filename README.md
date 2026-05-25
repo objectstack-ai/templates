@@ -101,11 +101,17 @@ pnpm --filter @template/<your-template> dev
 
 ## Publishing to the marketplace
 
-Push to `main` → `.github/workflows/publish.yml` rebuilds every template
-and POSTs each one to the cloud control plane (`POST /api/v1/cloud/packages`
-+ `POST /api/v1/cloud/packages/:id/versions`). Re-running is idempotent —
-the version endpoint returns 409 when the `(package, version)` pair
-already exists and the script reports `skipped`.
+Publishing is **explicit** — there's no auto-publish on push. Two ways
+to trigger `.github/workflows/publish.yml`:
+
+1. **Actions → Publish to marketplace → Run workflow** (with optional
+   `dry_run` to inspect the payload first).
+2. **Create a GitHub Release** with a tag like `todo-v0.2.0` — the
+   workflow narrows the publish to that template via the tag pattern.
+
+Re-running is idempotent — the version endpoint returns 409 for any
+`(package, version)` pair that already exists, so unchanged templates are
+reported as `skipped` rather than failing.
 
 See [`docs/PUBLISHING.md`](./docs/PUBLISHING.md) for the full contract,
 required GitHub Secrets (`OS_CLOUD_API_KEY`) / Variables (`OS_CLOUD_URL`),
