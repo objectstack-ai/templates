@@ -94,6 +94,13 @@ export const RoiByChannelDashboard: Dashboard = {
       aggregate: 'sum',
       valueField: 'signups',
       categoryField: 'period_start',
+      chartConfig: {
+        type: 'line',
+        xAxis: { field: 'period_start', format: '%b %d', showGridLines: true, logarithmic: false },
+        yAxis: [{ field: 'signups', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
       layout: { x: 6, y: 2, w: 6, h: 5 },
       options: { cumulative: true },
     },

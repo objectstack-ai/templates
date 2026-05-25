@@ -128,15 +128,20 @@ the charter.
 
 ## Known v0 caveats
 
-- The `publication_rollup` flow uses a `script` node placeholder; until the
-  spec adds an `aggregate` flow node, the seed pre-populates
-  `publication.total_views` etc. directly. Editing a metric will *not*
-  automatically refresh the parent publication's totals.
-- Today's Workbench KPI tiles filter on `assignee == {current_user_id}`; the
-  seed does not assign pieces to any specific user, so the tiles show `0`
-  on a fresh install. Assign yourself to a piece to see them populate.
-- The chart x-axis on the Channel ROI signups trend renders raw timestamps;
-  format with `chartConfig.xAxisFormat` once your dataset is real.
+- The `publication_rollup` flow uses a `script` node placeholder (flow `aggregate`
+  nodes aren't in v6 spec yet). Live rollups happen via **`metricRollupHook`
+  + `publicationRollupHook`** in `src/objects/content_rollup.hook.ts`: every
+  metric insert/update deltas into `publication.total_*`, then up into
+  `piece.total_*`. Seed values are pre-populated so dashboards have data
+  before any metric is recorded.
+- Today's Workbench KPI tiles filter on `assignee == {current_user_id} OR
+  assignee == null`, so unassigned seed pieces show up immediately. Newly
+  created pieces auto-assign to the creator (see `content_piece.hook.ts`).
+- The Channel ROI `Views (90d)` / `Signups (90d)` KPI tiles render `0`
+  against `content_metric` aggregation; the matching grouped chart renders
+  the same data correctly. This is a platform-side rendering quirk in the
+  `metric`-typed widget against `sum`/`valueField`; the underlying data is
+  fine (the line chart shows it). Tracked upstream.
 
 ---
 

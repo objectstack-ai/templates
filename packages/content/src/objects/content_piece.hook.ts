@@ -24,6 +24,11 @@ const pieceHook: Hook = {
       input.status = 'backlog';
     }
 
+    if (event === 'beforeInsert' && !input.assignee) {
+      const session = (ctx as HookContext & { session?: { userId?: string } }).session;
+      if (session?.userId) input.assignee = session.userId;
+    }
+
     if (event === 'beforeUpdate' && previous) {
       // Sending in_review back to drafting → wipe submitted_at so a re-submit
       // gets a fresh timestamp.

@@ -1,5 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { pieceHook, signalHook } from '../objects/content_piece.hook';
+import { metricRollupHook, publicationRollupHook } from '../objects/content_rollup.hook';
 
-export const allHooks = [pieceHook, signalHook];
+export const allHooks = [pieceHook, signalHook, metricRollupHook, publicationRollupHook];

@@ -30,7 +30,7 @@ export const TodayWorkbenchDashboard: Dashboard = {
       type: 'metric',
       object: 'content_piece',
       filter: {
-        assignee: '{current_user_id}',
+        $or: [{ assignee: '{current_user_id}' }, { assignee: null }],
         status: { $in: ['backlog', 'drafting'] },
       },
       aggregate: 'count',
@@ -44,7 +44,7 @@ export const TodayWorkbenchDashboard: Dashboard = {
       type: 'metric',
       object: 'content_piece',
       filter: {
-        assignee: '{current_user_id}',
+        $or: [{ assignee: '{current_user_id}' }, { assignee: null }],
         status: 'in_review',
       },
       aggregate: 'count',
@@ -83,12 +83,12 @@ export const TodayWorkbenchDashboard: Dashboard = {
 
     {
       id: 'my_pieces_table',
-      title: 'Pieces I own, not done',
+      title: 'Pieces I own (or unassigned), not done',
       type: 'table',
       object: 'content_piece',
       aggregate: 'count',
       filter: {
-        assignee: '{current_user_id}',
+        $or: [{ assignee: '{current_user_id}' }, { assignee: null }],
         status: { $in: ['backlog', 'drafting', 'in_review', 'approved', 'scheduled'] },
       },
       layout: { x: 0, y: 2, w: 7, h: 5 },
