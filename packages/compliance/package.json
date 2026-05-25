@@ -18,16 +18,16 @@
     "test": "objectstack test"
   },
   "dependencies": {
-    "@objectstack/account": "^6.2.0",
-    "@objectstack/cli": "^6.2.0",
-    "@objectstack/driver-memory": "^6.2.0",
-    "@objectstack/driver-sql": "^6.2.0",
-    "@objectstack/metadata": "^6.2.0",
-    "@objectstack/objectql": "^6.2.0",
-    "@objectstack/runtime": "^6.2.0",
-    "@objectstack/service-analytics": "^6.2.0",
-    "@objectstack/service-automation": "^6.2.0",
-    "@objectstack/spec": "^6.2.0",
+    "@objectstack/account": "^6.3.0",
+    "@objectstack/cli": "^6.3.0",
+    "@objectstack/driver-memory": "^6.3.0",
+    "@objectstack/driver-sql": "^6.3.0",
+    "@objectstack/metadata": "^6.3.0",
+    "@objectstack/objectql": "^6.3.0",
+    "@objectstack/runtime": "^6.3.0",
+    "@objectstack/service-analytics": "^6.3.0",
+    "@objectstack/service-automation": "^6.3.0",
+    "@objectstack/spec": "^6.3.0",
     "better-sqlite3": "^12.10.0"
   },
   "devDependencies": {
