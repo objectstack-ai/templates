@@ -200,10 +200,14 @@ async function publishOne({ dir, pkg }) {
   log(`  ${wasCreated ? '✓ created' : '✓ patched'} sys_package id=${pkgId}`);
 
   // Step 2 — create sys_package_version (idempotent by 409).
+  // `auto_approve: true` is honoured for service-mode callers (= our CI's
+  // OS_CLOUD_API_KEY). Without it the version lands as `draft` and the
+  // public marketplace endpoint hides it forever.
   const versionBody = {
     version: ver,
     bundle,
     release_notes: mp.releaseNotes,
+    auto_approve: true,
   };
   const verRes = await postJson(
     `/api/v1/cloud/packages/${encodeURIComponent(pkgId)}/versions`,
