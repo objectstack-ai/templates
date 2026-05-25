@@ -8,6 +8,11 @@ import * as pages from './src/pages/index.js';
 import * as dashboards from './src/dashboards/index.js';
 import * as profiles from './src/profiles/index.js';
 import * as apps from './src/apps/index.js';
+// portals: declared as metadata (see ./src/portals/index.ts). Wire into
+// defineStack({ portals }) once @objectstack/spec ships the Portal kind
+// (framework #1294). The import is intentionally side-effect-free until
+// then so the portal definition is type-checked but unused at runtime.
+import './src/portals/index.js';
 import { HelpdeskTranslations } from './src/translations/index.js';
 import { allFlows } from './src/flows/index.js';
 import { allHooks } from './src/hooks/index.js';
@@ -33,6 +38,7 @@ export default defineStack({
   dashboards: Object.values(dashboards),
   permissions: Object.values(profiles),
   apps: Object.values(apps),
+  // portals: Object.values(portals), // enable after spec@>=6.4 ships kind: 'portal'
   flows: allFlows,
   hooks: allHooks,
   translations: [HelpdeskTranslations],
