@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.objectstack.dev/template-manifest.json",
+  "name": "content",
+  "specVersion": "^6.1.0",
+  "manifestId": "app.objectstack.template.content",
+  "displayName": "Content",
+  "description": "Content marketing engine: pipeline → publish → measure. Editorial calendar, competitive signal capture, channel ROI rollups, and an 8-state piece workflow with approval gates.",
+  "category": "starter",
+  "isStarter": true,
+  "publisher": "objectstack",
+  "license": "Apache-2.0",
+  "iconUrl": "https://cdn.objectos.app/icons/content.svg",
+  "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/content",
+  "tags": ["content", "marketing", "editorial", "roi"],
+  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "readmePath": "README.md"
+}

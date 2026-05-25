@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.objectstack.dev/template-manifest.json",
+  "name": "contracts",
+  "specVersion": "^6.1.0",
+  "manifestId": "app.objectstack.template.contracts",
+  "displayName": "Contracts",
+  "description": "Post-signature contract lifecycle: AI-extracted metadata, multi-step approvals, obligation tracking, and renewal alerts. Bring your own Word + DocuSign.",
+  "category": "starter",
+  "isStarter": true,
+  "publisher": "objectstack",
+  "license": "Apache-2.0",
+  "iconUrl": "https://cdn.objectos.app/icons/contracts.svg",
+  "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/contracts",
+  "tags": ["clm", "contracts", "legal", "approvals"],
+  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation", "objectstack-ai"],
+  "readmePath": "README.md"
+}

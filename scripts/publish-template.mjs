@@ -9,11 +9,13 @@
  * locally via `pnpm publish:templates`.
  *
  * Flow per template:
- *   1. Read `packages/<name>/package.json`            → version, marketplace meta
- *   2. Read `packages/<name>/dist/objectstack.json`   → compiled bundle
- *   3. POST {OS_CLOUD_URL}/api/v1/cloud/packages      → idempotent upsert of sys_package
+ *   1. Read `packages/<name>/package.json`               → version
+ *   2. Read `packages/<name>/objectstack.manifest.json`  → marketplace meta
+ *      (matches `TemplateManifestSchema` in @objectstack/spec/cloud)
+ *   3. Read `packages/<name>/dist/objectstack.json`      → compiled bundle
+ *   4. POST {OS_CLOUD_URL}/api/v1/cloud/packages         → idempotent upsert of sys_package
  *      (sets visibility=marketplace + display/description/icon/readme/category)
- *   4. POST {OS_CLOUD_URL}/api/v1/cloud/packages/:id/versions
+ *   5. POST {OS_CLOUD_URL}/api/v1/cloud/packages/:id/versions
  *      → creates sys_package_version. 409 (duplicate) is treated as SUCCESS
  *        so re-running the workflow is a no-op when nothing changed.
  *
@@ -28,14 +30,22 @@
  *                      e.g. "@template/todo,@template/helpdesk"
  *   DRY_RUN=1          print payloads, don't POST
  *
- * Marketplace metadata is read from `package.json.objectstack.marketplace`:
+ * Marketplace metadata is read from `packages/<name>/objectstack.manifest.json`
+ * (canonical Zod schema: TemplateManifestSchema in @objectstack/spec/cloud):
  *   {
+ *     "name": "todo",
+ *     "specVersion": "^6.1.0",
  *     "manifestId": "app.objectstack.template.todo",
  *     "displayName": "Todo",
  *     "description": "Universal task & project management starter…",
  *     "category": "starter",
+ *     "isStarter": true,
+ *     "publisher": "objectstack",
+ *     "license": "Apache-2.0",
  *     "iconUrl": "https://cdn.objectos.app/icons/todo.svg",
  *     "homepageUrl": "https://github.com/objectstack-ai/templates",
+ *     "tags": ["tasks","projects"],
+ *     "skills": ["objectstack-platform","objectstack-data"],
  *     "readmePath": "README.md"
  *   }
  *
@@ -137,14 +147,15 @@ async function postJson(path, body) {
 async function publishOne({ dir, pkg }) {
   const name = pkg.name;
   const ver = pkg.version;
-  const mp = pkg.objectstack?.marketplace;
 
   log(`\n── ${name} @ ${ver}`);
 
-  if (!mp) {
-    log('  ⚠ skipped: no `objectstack.marketplace` block in package.json');
+  const manifestPath = join(dir, 'objectstack.manifest.json');
+  if (!existsSync(manifestPath)) {
+    log(`  ⚠ skipped: no objectstack.manifest.json at ${manifestPath}`);
     return 'skipped';
   }
+  const mp = await readJson(manifestPath);
 
   const distPath = join(dir, 'dist', 'objectstack.json');
   if (!existsSync(distPath)) {
@@ -156,7 +167,7 @@ async function publishOne({ dir, pkg }) {
   const manifestId = mp.manifestId ?? bundle?.manifest?.id;
   if (!manifestId) {
     log(
-      '  ✗ no manifestId resolved (set objectstack.marketplace.manifestId or ensure bundle.manifest.id)',
+      '  ✗ no manifestId resolved (set manifestId in objectstack.manifest.json or ensure bundle.manifest.id)',
     );
     return 'failed';
   }
@@ -170,9 +181,12 @@ async function publishOne({ dir, pkg }) {
     display_name: mp.displayName,
     description: mp.description,
     category: mp.category,
+    tags: mp.tags,
+    is_starter: mp.isStarter,
+    publisher: mp.publisher,
     icon_url: mp.iconUrl,
     homepage_url: mp.homepageUrl,
-    license: pkg.license,
+    license: mp.license ?? pkg.license,
     readme,
   };
 
