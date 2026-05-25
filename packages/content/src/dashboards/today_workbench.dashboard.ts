@@ -59,7 +59,7 @@ export const TodayWorkbenchDashboard: Dashboard = {
       object: 'content_piece',
       filter: {
         status: 'scheduled',
-        publish_at: { $gte: '{week_start}', $lte: '{week_end}' },
+        publish_at: { $gte: '{current_week_start}' },
       },
       aggregate: 'count',
       colorVariant: 'blue',
@@ -73,7 +73,7 @@ export const TodayWorkbenchDashboard: Dashboard = {
       object: 'content_piece',
       filter: {
         status: 'published',
-        published_at: { $gte: '{7_days_ago}' },
+        published_at: { $gte: '{last_week_start}' },
       },
       aggregate: 'count',
       colorVariant: 'success',

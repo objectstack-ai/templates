@@ -56,7 +56,7 @@ export const EditorialCalendarDashboard: Dashboard = {
       object: 'content_piece',
       filter: {
         status: 'published',
-        published_at: { $gte: '{30_days_ago}' },
+        published_at: { $gte: '{last_month_start}' },
       },
       aggregate: 'count',
       colorVariant: 'success',
@@ -86,7 +86,7 @@ export const EditorialCalendarDashboard: Dashboard = {
       aggregate: 'count',
       filter: {
         status: { $in: ['approved', 'scheduled', 'published'] },
-        publish_at: { $gte: '{30_days_ago}', $lte: '{60_days_from_now}' },
+        publish_at: { $gte: '{last_month_start}' },
       },
       layout: { x: 0, y: 2, w: 8, h: 6 },
       options: {
@@ -100,7 +100,7 @@ export const EditorialCalendarDashboard: Dashboard = {
       title: 'Publications by Channel (30d)',
       type: 'pie',
       object: 'content_publication',
-      filter: { published_at: { $gte: '{30_days_ago}' } },
+      filter: { published_at: { $gte: '{last_month_start}' } },
       aggregate: 'count',
       categoryField: 'channel',
       layout: { x: 8, y: 2, w: 4, h: 6 },
