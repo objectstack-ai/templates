@@ -1,0 +1,51 @@
+{
+  "name": "@template/helpdesk",
+  "version": "0.1.0",
+  "description": "ObjectStack starter template: AI-first customer support helpdesk with native AI triage, suggested replies, and KB recall.",
+  "license": "Apache-2.0",
+  "private": true,
+  "main": "./objectstack.config.ts",
+  "types": "./objectstack.config.ts",
+  "exports": {
+    ".": "./objectstack.config.ts",
+    "./objectstack.config": "./objectstack.config.ts"
+  },
+  "scripts": {
+    "dev": "objectstack dev -p 4006",
+    "start": "objectstack start -p 4006",
+    "build": "objectstack build",
+    "typecheck": "tsc --noEmit",
+    "test": "objectstack test"
+  },
+  "dependencies": {
+    "@objectstack/account": "^6.2.0",
+    "@objectstack/cli": "^6.2.0",
+    "@objectstack/driver-memory": "^6.2.0",
+    "@objectstack/driver-sql": "^6.2.0",
+    "@objectstack/metadata": "^6.2.0",
+    "@objectstack/objectql": "^6.2.0",
+    "@objectstack/runtime": "^6.2.0",
+    "@objectstack/service-analytics": "^6.2.0",
+    "@objectstack/service-automation": "^6.2.0",
+    "@objectstack/spec": "^6.2.0",
+    "better-sqlite3": "^12.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "objectstack": {
+    "marketplace": {
+      "manifestId": "app.objectstack.template.helpdesk",
+      "displayName": "AI Helpdesk",
+      "description": "Customer support with AI as a first-class citizen: auto-triage, suggested replies, KB recall, sentiment-driven escalation. Customer portal included via permissions.",
+      "category": "starter",
+      "iconUrl": "https://cdn.objectos.app/icons/helpdesk.svg",
+      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/helpdesk",
+      "readmePath": "README.md"
+    }
+  }
+}

@@ -1,0 +1,157 @@
+// Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
+
+import type { TranslationData } from '@objectstack/spec/system';
+
+export const zhCN: TranslationData = {
+  objects: {
+    helpdesk_ticket: {
+      label: '工单',
+      pluralLabel: '工单',
+      description: '客户支持请求。AI 自动分诊、SLA 追踪、消息线程。',
+      fields: {
+        ticket_number: { label: '工单编号' },
+        name: { label: '主题' },
+        description: { label: '描述' },
+        channel: {
+          label: '渠道',
+          options: { email: '邮件', web: '网页表单', chat: '在线聊天', phone: '电话', api: 'API' },
+        },
+        status: {
+          label: '状态',
+          options: {
+            new: '新建', triaged: '已分诊', in_progress: '处理中',
+            waiting_customer: '等待客户', resolved: '已解决',
+            closed: '已关闭', escalated: '已升级',
+          },
+        },
+        priority: {
+          label: '优先级',
+          options: { low: '低', normal: '普通', high: '高', urgent: '紧急' },
+        },
+        customer: { label: '客户' },
+        team: { label: '团队' },
+        assignee: { label: '处理人' },
+        sla_policy: { label: 'SLA 策略' },
+        ai_summary: { label: 'AI 摘要' },
+        ai_category: {
+          label: 'AI 分类',
+          options: {
+            bug: '缺陷', how_to: '使用问题', billing: '账户/账单',
+            feature_request: '功能请求', outage: '故障',
+            feedback: '反馈', other: '其他',
+          },
+        },
+        ai_intent: { label: 'AI 意图' },
+        ai_sentiment: {
+          label: 'AI 情感',
+          options: { positive: '积极', neutral: '中性', frustrated: '不满', angry: '愤怒' },
+        },
+        ai_priority_suggestion: { label: 'AI 建议优先级' },
+        ai_language: { label: 'AI 识别语言' },
+        ai_suggested_reply: { label: 'AI 建议回复' },
+        ai_suggested_kb_ids: { label: 'AI 推荐知识库' },
+        ai_confidence: { label: 'AI 置信度' },
+        ai_triage_at: { label: 'AI 分诊时间' },
+        first_response_due_at: { label: '首响截止' },
+        resolution_due_at: { label: '解决截止' },
+        first_response_at: { label: '首响时间' },
+        resolved_at: { label: '解决时间' },
+        is_first_response_breached: { label: '首响超时' },
+        is_resolution_breached: { label: '解决超时' },
+        csat_score: { label: '满意度 (1–5)' },
+        csat_comment: { label: '满意度评论' },
+        tags: { label: '标签' },
+        internal_notes: { label: '内部备注' },
+      },
+      _views: {
+        all_tickets: { label: '全部工单', description: '所有工单，按状态分组' },
+        ticket_pipeline: { label: '工单看板', description: '按状态分组的看板' },
+        open_tickets: { label: '未关闭', description: '未关闭和未解决的工单' },
+        breaching_tickets: { label: 'SLA 超时', description: '已超过解决截止时间' },
+        angry_tickets: { label: '愤怒客户', description: 'AI 识别为愤怒情感' },
+        my_queue: { label: '我的队列', description: '分配给我的工单' },
+      },
+    },
+    helpdesk_customer: {
+      label: '客户', pluralLabel: '客户',
+      description: '提交工单的客户。',
+      fields: {
+        name: { label: '姓名' }, email: { label: '邮箱' }, company: { label: '公司' },
+        tier: { label: '客户等级', options: { free: '免费', pro: '专业版', business: '商业版', enterprise: '企业版' } },
+        locale: { label: '首选语言' }, portal_user: { label: '门户账号' },
+        timezone: { label: '时区' }, notes: { label: '备注' },
+      },
+    },
+    helpdesk_team: {
+      label: '团队', pluralLabel: '团队',
+      description: '客服团队 / 队列。',
+      fields: {
+        name: { label: '团队名称' }, code: { label: '团队代码' },
+        specialty: {
+          label: '专长',
+          options: { tier1: '一线 — 通用', tier2: '二线 — 技术', billing: '账单', account: '客户经理', trust: '信任与安全' },
+        },
+        manager: { label: '主管' }, is_active: { label: '启用' }, business_hours: { label: '工作时间' },
+      },
+    },
+    helpdesk_kb_article: {
+      label: '知识库文章', pluralLabel: '知识库',
+      description: '知识库文章。已发布文章可被 AI 召回。',
+      fields: {
+        name: { label: '标题' }, slug: { label: 'Slug' }, body: { label: '正文' },
+        category: {
+          label: '分类',
+          options: { getting_started: '入门', billing: '账户与账单', how_to: '使用指南', troubleshooting: '问题排查', api: 'API 与集成', known_issues: '已知问题' },
+        },
+        status: { label: '状态', options: { draft: '草稿', review: '审核中', published: '已发布', archived: '已归档' } },
+        tags: { label: '标签' }, locale: { label: '语言' }, author: { label: '作者' },
+        helpful_count: { label: '有用票数' }, unhelpful_count: { label: '无用票数' },
+        published_at: { label: '发布时间' },
+      },
+    },
+    helpdesk_message: {
+      label: '消息', pluralLabel: '消息',
+      description: '工单线程中的一条消息。',
+      fields: {
+        name: { label: '摘要' }, ticket: { label: '工单' },
+        direction: { label: '方向', options: { inbound: '收到', outbound: '发出', internal_note: '内部备注' } },
+        author_user: { label: '作者 (员工)' }, author_customer: { label: '作者 (客户)' },
+        body: { label: '正文' }, is_ai_drafted: { label: 'AI 起草' }, sent_at: { label: '发送时间' },
+      },
+    },
+    helpdesk_sla_policy: {
+      label: 'SLA 策略', pluralLabel: 'SLA 策略',
+      description: '按优先级配置首响和解决时间目标。',
+      fields: {
+        name: { label: '名称' },
+        applies_to_tier: { label: '适用等级', options: { free: '免费', pro: '专业版', business: '商业版', enterprise: '企业版' } },
+        is_default: { label: '默认' },
+        first_response_low_minutes: { label: '首响 — 低 (分钟)' },
+        first_response_normal_minutes: { label: '首响 — 普通 (分钟)' },
+        first_response_high_minutes: { label: '首响 — 高 (分钟)' },
+        first_response_urgent_minutes: { label: '首响 — 紧急 (分钟)' },
+        resolution_low_minutes: { label: '解决 — 低 (分钟)' },
+        resolution_normal_minutes: { label: '解决 — 普通 (分钟)' },
+        resolution_high_minutes: { label: '解决 — 高 (分钟)' },
+        resolution_urgent_minutes: { label: '解决 — 紧急 (分钟)' },
+        notes: { label: '备注' },
+      },
+    },
+  },
+  apps: {
+    helpdesk: {
+      label: 'AI 客服工单',
+      description: '基于 ObjectStack 的 AI 优先客户支持系统。',
+      navigation: {
+        nav_workbench: { label: '我的工作台' },
+        nav_manager: { label: '管理总览' },
+        nav_tickets: { label: '工单' },
+        nav_messages: { label: '消息' },
+        nav_customers: { label: '客户' },
+        nav_kb: { label: '知识库' },
+        nav_teams: { label: '团队' },
+        nav_sla: { label: 'SLA 策略' },
+      },
+    },
+  },
+};
