@@ -33,7 +33,7 @@ export const Channel = ObjectSchema.create({
         { label: 'Blog', value: 'blog', color: '#3B82F6', default: true },
         { label: 'Newsletter', value: 'newsletter', color: '#10B981' },
         { label: 'LinkedIn', value: 'linkedin', color: '#0EA5E9' },
-        { label: 'X (Twitter)', value: 'x', color: '#111827' },
+        { label: 'X (Twitter)', value: 'twitter_x', color: '#111827' },
         { label: 'YouTube', value: 'youtube', color: '#EF4444' },
         { label: 'Podcast', value: 'podcast', color: '#8B5CF6' },
         { label: 'Other', value: 'other', color: '#6B7280' },
