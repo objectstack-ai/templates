@@ -1,0 +1,71 @@
+// Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
+
+import type * as Automation from '@objectstack/spec/automation';
+type Flow = Automation.Flow;
+
+/**
+ * Time-off submitted → notify the requester's manager. The actual approval
+ * decision is recorded via the state machine (APPROVE / REJECT / KICKBACK
+ * events); this flow only routes the notification.
+ */
+export const TimeOffSubmittedFlow: Flow = {
+  name: 'hr_time_off_submitted_notify',
+  label: 'Notify Manager When Time-Off Submitted',
+  description: 'When a time-off request moves to submitted, notify the employee’s manager.',
+  type: 'record_change',
+
+  variables: [{ name: 'requestId', type: 'text', isInput: true, isOutput: false }],
+
+  nodes: [
+    {
+      id: 'start',
+      type: 'start',
+      label: 'Start',
+      config: {
+        objectName: 'hr_time_off_request',
+        criteria: 'status == "submitted" && PRIOR(status) != "submitted"',
+      },
+    },
+    {
+      id: 'get_request',
+      type: 'get_record',
+      label: 'Load Request',
+      config: {
+        objectName: 'hr_time_off_request',
+        filter: { id: '{requestId}' },
+        outputVariable: 'req',
+      },
+    },
+    {
+      id: 'get_employee',
+      type: 'get_record',
+      label: 'Load Employee',
+      config: {
+        objectName: 'hr_employee',
+        filter: { id: '{req.employee}' },
+        outputVariable: 'emp',
+      },
+    },
+    {
+      id: 'notify_manager',
+      type: 'script',
+      label: 'Notify Manager',
+      config: {
+        actionType: 'notification',
+        recipients: ['{emp.manager.user}'],
+        title: 'Time-off request from {emp.full_name}',
+        body:
+          '{emp.full_name} requested {req.leave_type} from {req.start_date} to {req.end_date}. Open to review.',
+        link: '/objects/hr_time_off_request/{req.id}',
+      },
+    },
+    { id: 'end', type: 'end', label: 'End' },
+  ],
+
+  edges: [
+    { id: 'e1', source: 'start', target: 'get_request', type: 'default' },
+    { id: 'e2', source: 'get_request', target: 'get_employee', type: 'default' },
+    { id: 'e3', source: 'get_employee', target: 'notify_manager', type: 'default' },
+    { id: 'e4', source: 'notify_manager', target: 'end', type: 'default' },
+  ],
+};

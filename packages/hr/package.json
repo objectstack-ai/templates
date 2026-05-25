@@ -1,0 +1,55 @@
+{
+  "name": "@template/hr",
+  "version": "0.1.0",
+  "description": "ObjectStack starter template: employee directory, org chart, time-off, and document tracking",
+  "license": "Apache-2.0",
+  "private": true,
+  "main": "./objectstack.config.ts",
+  "types": "./objectstack.config.ts",
+  "exports": {
+    ".": "./objectstack.config.ts",
+    "./objectstack.config": "./objectstack.config.ts"
+  },
+  "scripts": {
+    "dev": "objectstack dev -p 4009",
+    "start": "objectstack start -p 4009",
+    "build": "objectstack build",
+    "typecheck": "tsc --noEmit",
+    "test": "objectstack test"
+  },
+  "dependencies": {
+    "@objectstack/account": "^6.5.1",
+    "@objectstack/cli": "^6.5.1",
+    "@objectstack/driver-memory": "^6.5.1",
+    "@objectstack/driver-sql": "^6.5.1",
+    "@objectstack/driver-sqlite-wasm": "^6.5.1",
+    "@objectstack/metadata": "^6.5.1",
+    "@objectstack/objectql": "^6.5.1",
+    "@objectstack/runtime": "^6.5.1",
+    "@objectstack/service-analytics": "^6.5.1",
+    "@objectstack/service-automation": "^6.5.1",
+    "@objectstack/spec": "^6.5.1",
+    "sql.js": "^1.14.1"
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^12.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "objectstack": {
+    "marketplace": {
+      "manifestId": "app.objectstack.template.hr",
+      "displayName": "HR",
+      "description": "People Ops starter — employee directory, org chart, time-off approvals, and document expiry alerts on ObjectStack.",
+      "category": "starter",
+      "iconUrl": "https://cdn.objectos.app/icons/hr.svg",
+      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/hr",
+      "readmePath": "README.md"
+    }
+  }
+}

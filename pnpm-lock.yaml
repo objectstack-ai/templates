@@ -29,6 +29,9 @@ importers:
       '@objectstack/driver-sql':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/driver-sqlite-wasm':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
       '@objectstack/metadata':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))
@@ -47,13 +50,17 @@ importers:
       '@objectstack/spec':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+      sql.js:
+        specifier: ^1.14.1
+        version: 1.14.1
     devDependencies:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+    optionalDependencies:
+      better-sqlite3:
+        specifier: ^12.10.0
+        version: 12.10.0
 
   packages/content:
     dependencies:
@@ -69,6 +76,9 @@ importers:
       '@objectstack/driver-sql':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/driver-sqlite-wasm':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
       '@objectstack/metadata':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))
@@ -87,13 +97,17 @@ importers:
       '@objectstack/spec':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+      sql.js:
+        specifier: ^1.14.1
+        version: 1.14.1
     devDependencies:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+    optionalDependencies:
+      better-sqlite3:
+        specifier: ^12.10.0
+        version: 12.10.0
 
   packages/contracts:
     dependencies:
@@ -109,6 +123,9 @@ importers:
       '@objectstack/driver-sql':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/driver-sqlite-wasm':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
       '@objectstack/metadata':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))
@@ -127,13 +144,17 @@ importers:
       '@objectstack/spec':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+      sql.js:
+        specifier: ^1.14.1
+        version: 1.14.1
     devDependencies:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+    optionalDependencies:
+      better-sqlite3:
+        specifier: ^12.10.0
+        version: 12.10.0
 
   packages/helpdesk:
     dependencies:
@@ -149,44 +170,7 @@ importers:
       '@objectstack/driver-sql':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
-      '@objectstack/metadata':
-        specifier: ^6.5.1
-        version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      '@objectstack/objectql':
-        specifier: ^6.5.1
-        version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      '@objectstack/runtime':
-        specifier: ^6.5.1
-        version: 6.5.1(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.2.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@objectstack/service-analytics':
-        specifier: ^6.5.1
-        version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      '@objectstack/service-automation':
-        specifier: ^6.5.1
-        version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      '@objectstack/spec':
-        specifier: ^6.5.1
-        version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
-    devDependencies:
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/procurement:
-    dependencies:
-      '@objectstack/account':
-        specifier: ^6.5.1
-        version: 6.5.1(@types/react@19.2.15)(ai@6.0.191(zod@4.4.3))(typescript@6.0.3)
-      '@objectstack/cli':
-        specifier: ^6.5.1
-        version: 6.5.1(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@objectstack/core@6.5.1(ai@6.0.191(zod@4.4.3)))(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.2.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@objectstack/driver-memory':
-        specifier: ^6.5.1
-        version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      '@objectstack/driver-sql':
+      '@objectstack/driver-sqlite-wasm':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
       '@objectstack/metadata':
@@ -207,13 +191,111 @@ importers:
       '@objectstack/spec':
         specifier: ^6.5.1
         version: 6.5.1(ai@6.0.191(zod@4.4.3))
-      better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+      sql.js:
+        specifier: ^1.14.1
+        version: 1.14.1
     devDependencies:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+    optionalDependencies:
+      better-sqlite3:
+        specifier: ^12.10.0
+        version: 12.10.0
+
+  packages/hr:
+    dependencies:
+      '@objectstack/account':
+        specifier: ^6.5.1
+        version: 6.5.1(@types/react@19.2.15)(ai@6.0.191(zod@4.4.3))(typescript@6.0.3)
+      '@objectstack/cli':
+        specifier: ^6.5.1
+        version: 6.5.1(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@objectstack/core@6.5.1(ai@6.0.191(zod@4.4.3)))(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.2.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/driver-memory':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/driver-sql':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/driver-sqlite-wasm':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/metadata':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/objectql':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/runtime':
+        specifier: ^6.5.1
+        version: 6.5.1(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.2.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/service-analytics':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/service-automation':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/spec':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      sql.js:
+        specifier: ^1.14.1
+        version: 1.14.1
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    optionalDependencies:
+      better-sqlite3:
+        specifier: ^12.10.0
+        version: 12.10.0
+
+  packages/procurement:
+    dependencies:
+      '@objectstack/account':
+        specifier: ^6.5.1
+        version: 6.5.1(@types/react@19.2.15)(ai@6.0.191(zod@4.4.3))(typescript@6.0.3)
+      '@objectstack/cli':
+        specifier: ^6.5.1
+        version: 6.5.1(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@objectstack/core@6.5.1(ai@6.0.191(zod@4.4.3)))(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.2.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/driver-memory':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/driver-sql':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/driver-sqlite-wasm':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/metadata':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/objectql':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/runtime':
+        specifier: ^6.5.1
+        version: 6.5.1(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.2.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/service-analytics':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/service-automation':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/spec':
+        specifier: ^6.5.1
+        version: 6.5.1(ai@6.0.191(zod@4.4.3))
+      sql.js:
+        specifier: ^1.14.1
+        version: 1.14.1
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    optionalDependencies:
+      better-sqlite3:
+        specifier: ^12.10.0
+        version: 12.10.0
 
   packages/todo:
     dependencies:
@@ -4099,7 +4181,8 @@ snapshots:
 
   balanced-match@4.0.4: {}
 
-  base64-js@1.5.1: {}
+  base64-js@1.5.1:
+    optional: true
 
   better-auth@1.6.11(@opentelemetry/api@1.9.1)(better-sqlite3@12.10.0)(mongodb@7.2.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
     dependencies:
@@ -4142,16 +4225,19 @@ snapshots:
     dependencies:
       bindings: 1.5.0
       prebuild-install: 7.1.3
+    optional: true
 
   bindings@1.5.0:
     dependencies:
       file-uri-to-path: 1.0.0
+    optional: true
 
   bl@4.1.0:
     dependencies:
       buffer: 5.7.1
       inherits: 2.0.4
       readable-stream: 3.6.2
+    optional: true
 
   body-parser@2.2.2:
     dependencies:
@@ -4181,6 +4267,7 @@ snapshots:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
+    optional: true
 
   bundle-require@5.1.0(esbuild@0.28.0):
     dependencies:
@@ -4205,7 +4292,8 @@ snapshots:
     dependencies:
       readdirp: 5.0.0
 
-  chownr@1.1.4: {}
+  chownr@1.1.4:
+    optional: true
 
   class-variance-authority@0.7.1:
     dependencies:
@@ -4272,8 +4360,10 @@ snapshots:
   decompress-response@6.0.0:
     dependencies:
       mimic-response: 3.1.0
+    optional: true
 
-  deep-extend@0.6.0: {}
+  deep-extend@0.6.0:
+    optional: true
 
   defu@6.1.7: {}
 
@@ -4281,7 +4371,8 @@ snapshots:
 
   detect-libc@2.0.2: {}
 
-  detect-libc@2.1.2: {}
+  detect-libc@2.1.2:
+    optional: true
 
   detect-node-es@1.1.0: {}
 
@@ -4310,6 +4401,7 @@ snapshots:
   end-of-stream@1.4.5:
     dependencies:
       once: 1.4.0
+    optional: true
 
   es-define-property@1.0.1: {}
 
@@ -4364,7 +4456,8 @@ snapshots:
     dependencies:
       eventsource-parser: 3.0.8
 
-  expand-template@2.0.3: {}
+  expand-template@2.0.3:
+    optional: true
 
   express-rate-limit@8.5.2(express@5.2.1):
     dependencies:
@@ -4412,7 +4505,8 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.4
 
-  file-uri-to-path@1.0.0: {}
+  file-uri-to-path@1.0.0:
+    optional: true
 
   filelist@1.0.6:
     dependencies:
@@ -4433,7 +4527,8 @@ snapshots:
 
   fresh@2.0.0: {}
 
-  fs-constants@1.0.0: {}
+  fs-constants@1.0.0:
+    optional: true
 
   fsevents@2.3.3:
     optional: true
@@ -4464,7 +4559,8 @@ snapshots:
 
   getopts@2.3.0: {}
 
-  github-from-package@0.0.0: {}
+  github-from-package@0.0.0:
+    optional: true
 
   glob@13.0.6:
     dependencies:
@@ -4504,13 +4600,15 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
-  ieee754@1.2.1: {}
+  ieee754@1.2.1:
+    optional: true
 
   indent-string@4.0.0: {}
 
   inherits@2.0.4: {}
 
-  ini@1.3.8: {}
+  ini@1.3.8:
+    optional: true
 
   interpret@2.2.0: {}
 
@@ -4620,7 +4718,8 @@ snapshots:
     dependencies:
       mime-db: 1.54.0
 
-  mimic-response@3.1.0: {}
+  mimic-response@3.1.0:
+    optional: true
 
   mingo@7.2.1: {}
 
@@ -4632,11 +4731,13 @@ snapshots:
     dependencies:
       brace-expansion: 2.1.1
 
-  minimist@1.2.8: {}
+  minimist@1.2.8:
+    optional: true
 
   minipass@7.1.3: {}
 
-  mkdirp-classic@0.5.3: {}
+  mkdirp-classic@0.5.3:
+    optional: true
 
   mongodb-connection-string-url@7.0.1:
     dependencies:
@@ -4657,13 +4758,15 @@ snapshots:
 
   nanostores@1.3.0: {}
 
-  napi-build-utils@2.0.0: {}
+  napi-build-utils@2.0.0:
+    optional: true
 
   negotiator@1.0.0: {}
 
   node-abi@3.92.0:
     dependencies:
       semver: 7.8.1
+    optional: true
 
   object-assign@4.1.1: {}
 
@@ -4714,6 +4817,7 @@ snapshots:
       simple-get: 4.0.1
       tar-fs: 2.1.4
       tunnel-agent: 0.6.0
+    optional: true
 
   prettier@3.8.3: {}
 
@@ -4728,6 +4832,7 @@ snapshots:
     dependencies:
       end-of-stream: 1.4.5
       once: 1.4.0
+    optional: true
 
   punycode@2.3.1: {}
 
@@ -4762,6 +4867,7 @@ snapshots:
       ini: 1.3.8
       minimist: 1.2.8
       strip-json-comments: 2.0.1
+    optional: true
 
   react-dom@19.2.6(react@19.2.6):
     dependencies:
@@ -4818,6 +4924,7 @@ snapshots:
       inherits: 2.0.4
       string_decoder: 1.3.0
       util-deprecate: 1.0.2
+    optional: true
 
   readdirp@5.0.0: {}
 
@@ -4848,7 +4955,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  safe-buffer@5.2.1: {}
+  safe-buffer@5.2.1:
+    optional: true
 
   safer-buffer@2.1.2: {}
 
@@ -4925,13 +5033,15 @@ snapshots:
       side-channel-map: 1.0.1
       side-channel-weakmap: 1.0.2
 
-  simple-concat@1.0.1: {}
+  simple-concat@1.0.1:
+    optional: true
 
   simple-get@4.0.1:
     dependencies:
       decompress-response: 6.0.0
       once: 1.4.0
       simple-concat: 1.0.1
+    optional: true
 
   sparse-bitfield@3.0.3:
     dependencies:
@@ -4950,12 +5060,14 @@ snapshots:
   string_decoder@1.3.0:
     dependencies:
       safe-buffer: 5.2.1
+    optional: true
 
   strip-ansi@6.0.1:
     dependencies:
       ansi-regex: 5.0.1
 
-  strip-json-comments@2.0.1: {}
+  strip-json-comments@2.0.1:
+    optional: true
 
   supports-color@8.1.1:
     dependencies:
@@ -4971,6 +5083,7 @@ snapshots:
       mkdirp-classic: 0.5.3
       pump: 3.0.4
       tar-stream: 2.2.0
+    optional: true
 
   tar-stream@2.2.0:
     dependencies:
@@ -4979,6 +5092,7 @@ snapshots:
       fs-constants: 1.0.0
       inherits: 2.0.4
       readable-stream: 3.6.2
+    optional: true
 
   tarn@3.0.2: {}
 
@@ -5011,6 +5125,7 @@ snapshots:
   tunnel-agent@0.6.0:
     dependencies:
       safe-buffer: 5.2.1
+    optional: true
 
   type-fest@0.21.3: {}
 
@@ -5045,7 +5160,8 @@ snapshots:
     dependencies:
       react: 19.2.6
 
-  util-deprecate@1.0.2: {}
+  util-deprecate@1.0.2:
+    optional: true
 
   vary@1.1.2: {}
 
