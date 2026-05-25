@@ -1,16 +1,18 @@
 name: Publish to marketplace
 
-# Trigger on:
-#   1. Push to main that touches a template package or the publish script
-#      (auto-publish — re-runs are idempotent, no-op when version unchanged).
-#   2. Manual dispatch with optional template filter (for backfills / hotfix).
+# Trigger ONLY on explicit intent — never on plain push to main.
+#
+#   1. Manual dispatch — from Actions UI, with optional template filter +
+#      dry-run toggle. Use this for normal releases.
+#   2. GitHub Release published — tag like `todo-v0.2.0` or a multi-template
+#      release. The workflow filters via the tag name (if it looks like
+#      `<template>-v<semver>`) or just publishes whatever has a bumped
+#      version (the cloud side is idempotent — 409 on unchanged versions).
+#
+# Auto-publish on every push to main was intentionally removed: most pushes
+# touch unrelated code, versions don't bump in lockstep with commits, and a
+# bad publish lands on every user instantly.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'packages/**'
-      - 'scripts/publish-template.mjs'
-      - '.github/workflows/publish.yml'
   workflow_dispatch:
     inputs:
       templates:
@@ -21,11 +23,13 @@ on:
         description: 'Dry-run (print payloads, no HTTP)'
         type: boolean
         default: false
+  release:
+    types: [published]
 
 concurrency:
   group: publish-marketplace
   # Don't cancel in-flight publishes — they're idempotent but a partial run
-  # is preferable to a cancelled one (you'd retry the next push anyway).
+  # is preferable to a cancelled one (you'd retry the next dispatch anyway).
   cancel-in-progress: false
 
 permissions:
@@ -35,7 +39,7 @@ jobs:
   publish:
     name: Build + publish templates
     runs-on: ubuntu-latest
-    # Optional: only run on the canonical repo, never on forks (where
+    # Only run on the canonical repo, never on forks (where
     # OS_CLOUD_API_KEY is unavailable). Adjust to your org slug.
     if: github.repository == 'objectstack-ai/templates'
     steps:
@@ -56,10 +60,26 @@ jobs:
       - name: Build all templates
         run: pnpm -r build
 
+      - name: Resolve template filter from release tag
+        id: filter
+        # If the tag looks like `<name>-v<semver>` (e.g. todo-v0.2.0), narrow
+        # the publish to just that template. Otherwise leave the filter
+        # empty so all templates are evaluated (each one is idempotent).
+        run: |
+          FILTER="${{ inputs.templates }}"
+          if [ -z "$FILTER" ] && [ "${{ github.event_name }}" = "release" ]; then
+            TAG="${{ github.event.release.tag_name }}"
+            if [[ "$TAG" =~ ^([a-z0-9_-]+)-v[0-9] ]]; then
+              FILTER="@template/${BASH_REMATCH[1]}"
+              echo "Detected single-template release tag: $TAG -> filter=$FILTER"
+            fi
+          fi
+          echo "filter=$FILTER" >> "$GITHUB_OUTPUT"
+
       - name: Publish to marketplace
         env:
           OS_CLOUD_URL: ${{ vars.OS_CLOUD_URL }}
           OS_CLOUD_API_KEY: ${{ secrets.OS_CLOUD_API_KEY }}
-          PUBLISH_TEMPLATES: ${{ inputs.templates }}
+          PUBLISH_TEMPLATES: ${{ steps.filter.outputs.filter }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
         run: node scripts/publish-template.mjs

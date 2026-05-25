@@ -6,8 +6,12 @@ requires, and how to test or backfill locally.
 
 ## At a glance
 
+Publishing is **explicit** — there is no auto-publish on push. Two ways
+to trigger:
+
 ```
-push to main (touches packages/**) ──▶ GitHub Actions
+1. Actions UI → Run workflow                  (manual, supports dry-run)
+2. GitHub Release published (tag e.g. todo-v0.2.0)   (release-driven)
                                           │
                                           ├─ pnpm install
                                           ├─ pnpm -r build            (every template emits dist/objectstack.json)
@@ -18,10 +22,11 @@ push to main (touches packages/**) ──▶ GitHub Actions
                                                        └─ 409 (dup version) → treated as success
 ```
 
-Re-running the workflow is a no-op when nothing changed: the version
-endpoint returns `409 Conflict` for any `(package, version)` pair that
-already exists, and the script reports it as `skipped` rather than
-failing.
+When triggered via a release whose tag matches `<name>-v<semver>` (e.g.
+`todo-v0.2.0`), the workflow narrows the publish to that one template.
+Otherwise (or via manual dispatch with an empty filter) it walks every
+package — but each is idempotent, so unchanged versions return 409 and
+the script reports `skipped`.
 
 ## Required GitHub Actions config
 
@@ -90,12 +95,18 @@ new release of an existing template:
 
 1. Bump `packages/<name>/package.json` `version` (semver).
 2. Optionally set `objectstack.marketplace.releaseNotes` to a short string.
-3. Push to `main`. The workflow re-builds, re-publishes; the existing
-   `sys_package` row is patched (display/description/icon/readme) and a
-   new `sys_package_version` is inserted.
+3. Commit + push to `main` (nothing publishes yet — the workflow no longer
+   triggers on push).
+4. Cut the release. Two equivalent options:
+   - **Actions → Publish to marketplace → Run workflow** — optionally tick
+     `dry_run` first to inspect the payload, then run again without it.
+   - **GitHub Releases → Draft a new release** with tag `<name>-v<version>`
+     (e.g. `todo-v0.2.0`). When the release is published the workflow
+     fires automatically and narrows the publish to that template via the
+     tag pattern.
 
-If you push without bumping the version, the version POST returns 409
-and the script reports `skipped` — safe to ignore.
+If the version wasn't bumped, the version POST returns 409 and the script
+reports `skipped` — safe to ignore.
 
 ## Local dry-run
 
@@ -129,6 +140,18 @@ Actions → **Publish to marketplace** → **Run workflow**:
 
 - `templates`: leave empty to publish all, or comma-separated subset.
 - `dry_run`: tick to print payloads without writing.
+
+## Release-driven publish
+
+GitHub Releases → **Draft a new release**:
+
+- **Tag** `<template>-v<version>` (e.g. `todo-v0.2.0`) → the workflow
+  narrows the publish to `@template/<template>`.
+- Any other tag shape → workflow runs but evaluates every template (each
+  is idempotent — unchanged versions are skipped).
+- Use the release body as a public changelog. It is **not** posted to the
+  marketplace listing; set `objectstack.marketplace.releaseNotes` in
+  `package.json` if you want notes attached to the published version row.
 
 ## Failure modes
 
