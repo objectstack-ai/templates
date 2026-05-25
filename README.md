@@ -12,15 +12,17 @@ pnpm dlx @objectstack/cli create my-app --template todo
 
 ## Available templates
 
-| Template | Domain | Status | Port |
-|---|---|---|---|
-| [`packages/todo/`](./packages/todo) | Task & project management — the universal starter | ✅ ready | 4002 |
-| [`packages/contracts/`](./packages/contracts) | Post-signature contract lifecycle (CLM) — AI-extracted metadata, approvals, renewal alerts | ✅ v0 | 4003 |
-| [`packages/procurement/`](./packages/procurement) | Vendors, purchase requests, POs, goods receipt, 3-way-match rollup | ✅ v0 | 4004 |
-| [`packages/compliance/`](./packages/compliance) | SOC 2 / ISO 27001 controls, evidence with expiry, assessments | ✅ v0 | 4005 |
-| [`packages/content/`](./packages/content) | Content marketing engine — editorial calendar, competitive signals, channel ROI, 8-state piece lifecycle | ✅ v0 | 4008 |
-| `packages/helpdesk/` | Ticketing, SLA, knowledge base | 🚧 planned | 4006 |
-| `packages/sales-pipeline/` | Lite CRM (leads, opportunities, accounts) | 🚧 planned | 4007 |
+| Template | Domain | Status | Port | Try it |
+|---|---|---|---|---|
+| [`packages/todo/`](./packages/todo) | Task & project management — the universal starter | ✅ ready | 4002 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/todo) |
+| [`packages/contracts/`](./packages/contracts) | Post-signature contract lifecycle (CLM) — AI-extracted metadata, approvals, renewal alerts | ✅ v0 | 4003 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/contracts) |
+| [`packages/procurement/`](./packages/procurement) | Vendors, purchase requests, POs, goods receipt, 3-way-match rollup | ✅ v0 | 4004 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/procurement) |
+| [`packages/compliance/`](./packages/compliance) | SOC 2 / ISO 27001 controls, evidence with expiry, assessments | ✅ v0 | 4005 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/compliance) |
+| [`packages/helpdesk/`](./packages/helpdesk) | AI-first customer support — auto-triage, suggested replies, KB recall, sentiment escalation | ✅ v0 | 4006 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/helpdesk) |
+| [`packages/content/`](./packages/content) | Content marketing engine — editorial calendar, competitive signals, channel ROI, 8-state piece lifecycle | ✅ v0 | 4008 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/content) |
+| `packages/sales-pipeline/` | Lite CRM (leads, opportunities, accounts) | 🚧 planned | 4007 | — |
+
+> **StackBlitz tip:** every template runs in the browser via `@objectstack/driver-sqlite-wasm` (sql.js). Local dev still uses `better-sqlite3` (listed as an optional dependency) for full native speed.
 
 > Looking for a full reference app? See [hotcrm](https://github.com/objectstack-ai/hotcrm) — the production-grade CRM built on the same engine.
 

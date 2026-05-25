@@ -1,6 +1,6 @@
 {
   "name": "@template/compliance",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ObjectStack starter template: compliance posture & evidence management",
   "license": "Apache-2.0",
   "private": true,
@@ -22,12 +22,16 @@
     "@objectstack/cli": "^6.5.1",
     "@objectstack/driver-memory": "^6.5.1",
     "@objectstack/driver-sql": "^6.5.1",
+    "@objectstack/driver-sqlite-wasm": "^6.5.1",
     "@objectstack/metadata": "^6.5.1",
     "@objectstack/objectql": "^6.5.1",
     "@objectstack/runtime": "^6.5.1",
     "@objectstack/service-analytics": "^6.5.1",
     "@objectstack/service-automation": "^6.5.1",
     "@objectstack/spec": "^6.5.1",
+    "sql.js": "^1.14.1"
+  },
+  "optionalDependencies": {
     "better-sqlite3": "^12.10.0"
   },
   "devDependencies": {
@@ -39,12 +43,12 @@
   "packageManager": "pnpm@10.33.0",
   "objectstack": {
     "marketplace": {
-      "manifestId": "app.objectstack.template.contracts",
-      "displayName": "Contracts",
-      "description": "Post-signature contract lifecycle: AI-extracted metadata, multi-step approvals, obligation tracking, and renewal alerts. Bring your own Word + DocuSign.",
+      "manifestId": "app.objectstack.template.compliance",
+      "displayName": "Compliance",
+      "description": "Compliance posture & evidence management: SOC 2 / ISO 27001 / GDPR frameworks, controls, evidence with expiry tracking, and assessments.",
       "category": "starter",
-      "iconUrl": "https://cdn.objectos.app/icons/contracts.svg",
-      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/contracts",
+      "iconUrl": "https://cdn.objectos.app/icons/compliance.svg",
+      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/compliance",
       "readmePath": "README.md"
     }
   }

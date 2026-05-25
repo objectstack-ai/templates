@@ -2,6 +2,12 @@
 
 > Customer support template where **AI is a first-class citizen**, not a paid add-on. Native fields for triage, sentiment, suggested replies, and KB recall — driven by your choice of LLM provider.
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/helpdesk)
+
+## Run in the browser
+
+Click the StackBlitz badge above to launch this template in a WebContainer. It uses `@objectstack/driver-sqlite-wasm` (sql.js) instead of `better-sqlite3`, which can't compile inside WebContainers. The `.stackblitzrc` sets `OS_DATABASE_DRIVER=sqlite-wasm` so the standalone stack picks the WASM driver automatically. The `packageManager` field pins **pnpm** so StackBlitz/Corepack uses pnpm (npm trips over the optional `better-sqlite3` dependency inside WebContainers).
+
 ## Why this template
 
 | Most CRMs / helpdesks | This template |
