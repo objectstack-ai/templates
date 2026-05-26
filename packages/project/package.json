@@ -1,0 +1,53 @@
+{
+  "name": "@template/project",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-powered project management template for ObjectStack",
+  "author": "ObjectStack Contributors",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    "dev": "objectstack dev -p 4010",
+    "start": "objectstack start -p 4010",
+    "build": "objectstack build",
+    "typecheck": "tsc --noEmit",
+    "test": "objectstack test"
+  },
+  "dependencies": {
+    "@objectstack/account": "^6.5.1",
+    "@objectstack/cli": "^6.5.1",
+    "@objectstack/driver-memory": "^6.5.1",
+    "@objectstack/driver-sql": "^6.5.1",
+    "@objectstack/driver-sqlite-wasm": "^6.5.1",
+    "@objectstack/metadata": "^6.5.1",
+    "@objectstack/objectql": "^6.5.1",
+    "@objectstack/runtime": "^6.5.1",
+    "@objectstack/service-analytics": "^6.5.1",
+    "@objectstack/service-automation": "^6.5.1",
+    "@objectstack/spec": "^6.6.0",
+    "sql.js": "^1.14.1"
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^12.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "objectstack": {
+    "port": 4010,
+    "marketplace": {
+      "manifestId": "app.objectstack.template.project",
+      "displayName": "AI Project Management",
+      "description": "Project portfolio management with AI-powered risk prediction, delay forecasting, and resource optimization",
+      "iconUrl": "https://api.iconify.design/lucide:folder-kanban.svg",
+      "category": "productivity",
+      "tags": ["project-management", "pmo", "risk", "ai", "forecasting"],
+      "screenshots": [],
+      "minPlatformVersion": "6.5.0"
+    }
+  }
+}

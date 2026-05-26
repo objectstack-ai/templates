@@ -1,0 +1,7 @@
+{
+  "installDependencies": true,
+  "startCommand": "pnpm dev",
+  "env": {
+    "OS_DATABASE_DRIVER": "sqlite-wasm"
+  }
+}
