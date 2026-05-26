@@ -1,17 +1,25 @@
 {
   "$schema": "https://schemas.objectstack.dev/template-manifest.json",
-  "name": "todo",
+  "name": "hr",
   "specVersion": "^6.1.0",
-  "manifestId": "app.objectstack.template.todo",
-  "displayName": "Todo",
-  "description": "Universal task & project management starter — projects, tasks, comments, approvals, and dashboards on ObjectStack.",
+  "manifestId": "app.objectstack.template.hr",
+  "displayName": "HR",
+  "description": "People directory, time-off approvals, and document expiry tracking on ObjectStack.",
+  "tagline": "Directory, time-off, document expiry — your starter HRIS.",
   "category": "starter",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",
-  "iconUrl": "https://cdn.objectos.app/icons/todo.svg",
-  "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/todo",
-  "tags": ["tasks", "projects", "approvals"],
+  "iconUrl": "https://cdn.objectos.app/icons/hr.svg",
+  "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/hr",
+  "tags": ["hr", "hris", "people", "time-off"],
   "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
-  "readmePath": "README.md"
+  "readmePath": "README.md",
+  "translations": {
+    "zh-CN": {
+      "displayName": "人力资源",
+      "description": "在 ObjectStack 上管理员工花名册、请假审批与档案到期提醒。",
+      "tagline": "花名册、请假、档案到期 —— 起步 HRIS。"
+    }
+  }
 }

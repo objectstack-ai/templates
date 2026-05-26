@@ -5,6 +5,7 @@
   "manifestId": "app.objectstack.template.todo",
   "displayName": "Todo",
   "description": "Universal task & project management starter — projects, tasks, comments, approvals, and dashboards on ObjectStack.",
+  "tagline": "Tasks, projects, approvals — the universal starter.",
   "category": "starter",
   "isStarter": true,
   "publisher": "objectstack",
@@ -13,5 +14,24 @@
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/todo",
   "tags": ["tasks", "projects", "approvals"],
   "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
-  "readmePath": "README.md"
+  "readmePath": "README.md",
+  "translations": {
+    "zh-CN": {
+      "displayName": "待办",
+      "description": "通用任务与项目管理起步模板 —— 在 ObjectStack 上提供项目、任务、评论、审批与看板。",
+      "tagline": "任务、项目、审批 —— 通用起步模板。",
+      "readme": "README.zh-CN.md"
+    },
+    "ja-JP": {
+      "displayName": "Todo",
+      "description": "汎用タスク & プロジェクト管理スターター — ObjectStack 上のプロジェクト・タスク・コメント・承認・ダッシュボード。",
+      "tagline": "タスク・プロジェクト・承認 — 万能なスターター。"
+    },
+    "es-ES": {
+      "displayName": "Todo",
+      "description": "Plantilla inicial universal para gestión de tareas y proyectos: proyectos, tareas, comentarios, aprobaciones y paneles sobre ObjectStack.",
+      "tagline": "Tareas, proyectos y aprobaciones: la plantilla universal."
+    }
+  }
 }
+

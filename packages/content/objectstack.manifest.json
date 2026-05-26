@@ -5,6 +5,7 @@
   "manifestId": "app.objectstack.template.content",
   "displayName": "Content",
   "description": "Content marketing engine: pipeline → publish → measure. Editorial calendar, competitive signal capture, channel ROI rollups, and an 8-state piece workflow with approval gates.",
+  "tagline": "Pipeline, publish, measure — content marketing on rails.",
   "category": "starter",
   "isStarter": true,
   "publisher": "objectstack",
@@ -13,5 +14,13 @@
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/content",
   "tags": ["content", "marketing", "editorial", "roi"],
   "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
-  "readmePath": "README.md"
+  "readmePath": "README.md",
+  "translations": {
+    "zh-CN": {
+      "displayName": "内容运营",
+      "description": "内容营销引擎：从立项到发布再到效果衡量。涵盖编辑日历、竞品信号沉淀、渠道 ROI 汇总，以及带审批门的 8 状态稿件流。",
+      "tagline": "立项、发布、衡量 —— 内容营销开箱即用。"
+    }
+  }
 }
+

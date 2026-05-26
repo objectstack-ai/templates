@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.objectstack.dev/template-manifest.json",
+  "name": "helpdesk",
+  "specVersion": "^6.1.0",
+  "manifestId": "app.objectstack.template.helpdesk",
+  "displayName": "AI Helpdesk",
+  "description": "AI-first customer support: native AI triage, suggested replies, KB recall, sentiment-driven escalation, customer portal via permissions.",
+  "category": "starter",
+  "isStarter": true,
+  "publisher": "objectstack",
+  "license": "Apache-2.0",
+  "iconUrl": "https://cdn.objectos.app/icons/helpdesk.svg",
+  "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/helpdesk",
+  "tags": ["support", "ai", "tickets", "kb"],
+  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "readmePath": "README.md",
+  "translations": {
+    "zh-CN": {
+      "displayName": "AI 客服台",
+      "description": "AI 优先的客户支持：原生 AI 工单分诊、建议回复、知识库召回、基于情绪的升级，权限驱动的客户门户。",
+      "tagline": "AI 是一等公民的客服台。"
+    }
+  }
+}

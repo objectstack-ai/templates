@@ -5,6 +5,7 @@
   "manifestId": "app.objectstack.template.compliance",
   "displayName": "Compliance",
   "description": "Compliance posture & evidence management: control library, evidence requests, audit findings, and remediation workflows on ObjectStack.",
+  "tagline": "Controls, evidence, findings — your audit-ready starter.",
   "category": "starter",
   "isStarter": true,
   "publisher": "objectstack",
@@ -13,5 +14,13 @@
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/compliance",
   "tags": ["compliance", "audit", "evidence", "soc2", "iso27001"],
   "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
-  "readmePath": "README.md"
+  "readmePath": "README.md",
+  "translations": {
+    "zh-CN": {
+      "displayName": "合规",
+      "description": "合规态势与证据管理：控制项库、证据请求、审计发现、整改工作流，全部在 ObjectStack 上运行。",
+      "tagline": "控制项、证据、发现 —— 审计就绪的起步模板。"
+    }
+  }
 }
+

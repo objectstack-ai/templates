@@ -49,7 +49,7 @@ export default defineStack({
 
   i18n: {
     defaultLocale: 'en',
-    supportedLocales: ['en'],
+    supportedLocales: ['en', 'zh-CN'],
     fallbackLocale: 'en',
     fileOrganization: 'per_locale',
   },

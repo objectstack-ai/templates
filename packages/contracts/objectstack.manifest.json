@@ -5,6 +5,7 @@
   "manifestId": "app.objectstack.template.contracts",
   "displayName": "Contracts",
   "description": "Post-signature contract lifecycle: AI-extracted metadata, multi-step approvals, obligation tracking, and renewal alerts. Bring your own Word + DocuSign.",
+  "tagline": "Post-signature CLM with AI extraction.",
   "category": "starter",
   "isStarter": true,
   "publisher": "objectstack",
@@ -13,5 +14,13 @@
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/contracts",
   "tags": ["clm", "contracts", "legal", "approvals"],
   "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation", "objectstack-ai"],
-  "readmePath": "README.md"
+  "readmePath": "README.md",
+  "translations": {
+    "zh-CN": {
+      "displayName": "合同管理",
+      "description": "签署后合同全生命周期：AI 元数据抽取、多级审批、义务跟踪与续约提醒。Word 与 DocuSign 自带即可。",
+      "tagline": "签后 CLM，配合 AI 抽取。"
+    }
+  }
 }
+

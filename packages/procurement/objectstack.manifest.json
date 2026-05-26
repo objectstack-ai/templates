@@ -5,6 +5,7 @@
   "manifestId": "app.objectstack.template.procurement",
   "displayName": "Procurement",
   "description": "Source-to-pay procurement: vendors, requisitions, purchase orders, receipts, and invoice matching on ObjectStack.",
+  "tagline": "Source-to-pay: requisitions → POs → 3-way match.",
   "category": "starter",
   "isStarter": true,
   "publisher": "objectstack",
@@ -13,5 +14,13 @@
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/procurement",
   "tags": ["procurement", "source-to-pay", "vendors", "purchase-orders"],
   "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
-  "readmePath": "README.md"
+  "readmePath": "README.md",
+  "translations": {
+    "zh-CN": {
+      "displayName": "采购",
+      "description": "从需求到付款的全流程采购：供应商、请购单、采购订单、收货与发票匹配，全部跑在 ObjectStack 上。",
+      "tagline": "Source-to-Pay：请购 → 采购单 → 三单匹配。"
+    }
+  }
 }
+
