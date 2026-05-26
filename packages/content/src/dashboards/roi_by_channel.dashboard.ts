@@ -6,6 +6,12 @@ import type { Dashboard } from '@objectstack/spec/ui';
  * ROI by Channel — exec-readout dashboard. Views by channel over time,
  * cumulative signups, and the top-performing publications table.
  *
+ * Trend overlays: every "(90d)" KPI carries `compareTo: 'previousPeriod'`,
+ * so the exec lands on a delta-vs-prior-90d number instead of a static
+ * count. The signups trend uses `categoryGranularity: 'week'` (so each
+ * week is its own bucket, not each timestamp) and overlays YoY
+ * (`compareTo: 'previousYear'`) so seasonal patterns are obvious.
+ *
  * Filters use raw fields only (no formula fields — analytics service in
  * spec 5.2 cannot query derived expressions).
  */
@@ -29,9 +35,10 @@ export const RoiByChannelDashboard: Dashboard = {
       title: 'Views (90d)',
       type: 'metric',
       object: 'content_publication',
-      
+      filter: { published_at: { $gte: '{90_days_ago}' } },
       aggregate: 'sum',
       valueField: 'total_views',
+      compareTo: 'previousPeriod',
       colorVariant: 'blue',
       layout: { x: 0, y: 0, w: 3, h: 2 },
       options: { icon: 'Eye', format: '0,0' },
@@ -41,9 +48,10 @@ export const RoiByChannelDashboard: Dashboard = {
       title: 'Clicks (90d)',
       type: 'metric',
       object: 'content_publication',
-      
+      filter: { published_at: { $gte: '{90_days_ago}' } },
       aggregate: 'sum',
       valueField: 'total_clicks',
+      compareTo: 'previousPeriod',
       colorVariant: 'blue',
       layout: { x: 3, y: 0, w: 3, h: 2 },
       options: { icon: 'MousePointerClick', format: '0,0' },
@@ -53,9 +61,10 @@ export const RoiByChannelDashboard: Dashboard = {
       title: 'Signups (90d)',
       type: 'metric',
       object: 'content_publication',
-      
+      filter: { published_at: { $gte: '{90_days_ago}' } },
       aggregate: 'sum',
       valueField: 'total_signups',
+      compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 6, y: 0, w: 3, h: 2 },
       options: { icon: 'UserPlus', format: '0,0' },
@@ -65,9 +74,10 @@ export const RoiByChannelDashboard: Dashboard = {
       title: 'Attributed Revenue (90d)',
       type: 'metric',
       object: 'content_publication',
-      
+      filter: { published_at: { $gte: '{90_days_ago}' } },
       aggregate: 'sum',
       valueField: 'total_revenue',
+      compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'TrendingUp', format: '$0,0' },
@@ -78,22 +88,25 @@ export const RoiByChannelDashboard: Dashboard = {
       title: 'Views by Channel (90d)',
       type: 'bar',
       object: 'content_publication',
-      
+      filter: { published_at: { $gte: '{90_days_ago}' } },
       aggregate: 'sum',
       valueField: 'total_views',
       categoryField: 'channel',
+      compareTo: 'previousPeriod',
       layout: { x: 0, y: 2, w: 6, h: 5 },
       options: { stacked: true },
     },
     {
       id: 'signups_trend',
-      title: 'Cumulative Signups (90d)',
+      title: 'Signups by Week (90d)',
       type: 'line',
       object: 'content_metric',
       filter: { period_start: { $gte: '{last_quarter_start}' } },
       aggregate: 'sum',
       valueField: 'signups',
       categoryField: 'period_start',
+      categoryGranularity: 'week',
+      compareTo: 'previousYear',
       chartConfig: {
         type: 'line',
         xAxis: { field: 'period_start', format: '%b %d', showGridLines: true, logarithmic: false },
@@ -102,7 +115,6 @@ export const RoiByChannelDashboard: Dashboard = {
         showDataLabels: false,
       },
       layout: { x: 6, y: 2, w: 6, h: 5 },
-      options: { cumulative: true },
     },
 
     {

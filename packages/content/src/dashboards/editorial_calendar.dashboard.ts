@@ -5,6 +5,12 @@ import type { Dashboard } from '@objectstack/spec/ui';
 /**
  * Editorial Calendar — the lead's view. Drops the calendar widget in
  * center stage, with a channel-mix counter alongside.
+ *
+ * Trend overlay: the "Published (30d)" KPI carries `compareTo:
+ * 'previousPeriod'` so the lead sees a delta vs. the prior 30 days —
+ * the question they get asked at every weekly. The new monthly trend
+ * line also overlays the previous year (`categoryGranularity: 'month'`
+ * + `compareTo: 'previousYear'`) to spot seasonality.
  */
 export const EditorialCalendarDashboard: Dashboard = {
   name: 'editorial_calendar_dashboard',
@@ -59,6 +65,7 @@ export const EditorialCalendarDashboard: Dashboard = {
         published_at: { $gte: '{last_month_start}' },
       },
       aggregate: 'count',
+      compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 6, y: 0, w: 3, h: 2 },
       options: { icon: 'Send', format: '0,0' },
@@ -105,6 +112,28 @@ export const EditorialCalendarDashboard: Dashboard = {
       categoryField: 'channel',
       layout: { x: 8, y: 2, w: 4, h: 6 },
       options: { donut: true, legend: 'right' },
+    },
+    {
+      id: 'published_by_month',
+      title: 'Published Pieces by Month (last 12 months)',
+      type: 'line',
+      object: 'content_piece',
+      filter: {
+        status: 'published',
+        published_at: { $gte: '{12_months_ago}' },
+      },
+      aggregate: 'count',
+      categoryField: 'published_at',
+      categoryGranularity: 'month',
+      compareTo: 'previousYear',
+      chartConfig: {
+        type: 'line',
+        xAxis: { field: 'published_at', format: '%b %Y', showGridLines: true, logarithmic: false },
+        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
+      layout: { x: 0, y: 8, w: 12, h: 5 },
     },
   ],
 };

@@ -5,6 +5,12 @@ import type { Dashboard } from '@objectstack/spec/ui';
 /**
  * Manager Overview — volume, SLA compliance, sentiment distribution,
  * AI assist hit rate. Designed for support leads doing weekly reviews.
+ *
+ * Trend overlay: "Avg CSAT" carries `compareTo: 'previousPeriod'` so the
+ * lead lands on a satisfaction-trend delta, and a new "Resolutions by
+ * Day (30d)" line uses `categoryGranularity: 'day'` + `compareTo:
+ * 'previousPeriod'` to show throughput vs. the prior month — the chart
+ * support leads typically build by hand in spreadsheets after each WBR.
  */
 export const ManagerOverviewDashboard: Dashboard = {
   name: 'manager_overview_dashboard',
@@ -59,9 +65,13 @@ export const ManagerOverviewDashboard: Dashboard = {
       title: 'Avg CSAT',
       type: 'metric',
       object: 'helpdesk_ticket',
-      filter: { csat_score: { $gte: 1 } },
+      filter: {
+        csat_score: { $gte: 1 },
+        resolved_at: { $gte: '{30_days_ago}' },
+      },
       aggregate: 'avg',
       valueField: 'csat_score',
+      compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'Star', format: '0.00' },
@@ -119,6 +129,28 @@ export const ManagerOverviewDashboard: Dashboard = {
         pageSize: 10,
         sort: [{ field: 'priority', order: 'desc' }],
       },
+    },
+    {
+      id: 'resolutions_by_day',
+      title: 'Resolutions by Day (last 30 days)',
+      type: 'line',
+      object: 'helpdesk_ticket',
+      filter: {
+        status: { $in: ['resolved', 'closed'] },
+        resolved_at: { $gte: '{30_days_ago}' },
+      },
+      aggregate: 'count',
+      categoryField: 'resolved_at',
+      categoryGranularity: 'day',
+      compareTo: 'previousPeriod',
+      chartConfig: {
+        type: 'line',
+        xAxis: { field: 'resolved_at', format: '%b %d', showGridLines: true, logarithmic: false },
+        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
+      layout: { x: 0, y: 15, w: 12, h: 5 },
     },
   ],
 };

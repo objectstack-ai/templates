@@ -7,6 +7,11 @@ import type { Dashboard } from '@objectstack/spec/ui';
  * Surface what's pending approval, what's in flight with vendors, and
  * spend totals so the buying team has a single pane of glass.
  *
+ * Trend overlay: the new "PO Value by Month" line chart uses
+ * `categoryGranularity: 'month'` + `compareTo: 'previousYear'` so the
+ * buying team can see whether monthly commitment is up vs. the same
+ * month last year — the conversation the CFO opens every QBR with.
+ *
  * NOTE: filters use base fields only — analytics service in spec 5.2
  * does NOT resolve formula fields, so we recompute conditions inline.
  */
@@ -103,6 +108,26 @@ export const SpendAtAGlanceDashboard: Dashboard = {
         pageSize: 10,
         sort: [{ field: 'expected_delivery', order: 'asc' }],
       },
+    },
+    {
+      id: 'po_value_by_month',
+      title: 'PO Value by Month (last 12 months)',
+      type: 'line',
+      object: 'procurement_order',
+      filter: { order_date: { $gte: '{12_months_ago}' } },
+      aggregate: 'sum',
+      valueField: 'total_amount',
+      categoryField: 'order_date',
+      categoryGranularity: 'month',
+      compareTo: 'previousYear',
+      chartConfig: {
+        type: 'line',
+        xAxis: { field: 'order_date', format: '%b %Y', showGridLines: true, logarithmic: false },
+        yAxis: [{ field: 'total_amount', format: '$0,0', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
+      layout: { x: 0, y: 7, w: 12, h: 5 },
     },
   ],
 };

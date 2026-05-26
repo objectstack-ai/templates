@@ -5,6 +5,13 @@ import type { Dashboard } from '@objectstack/spec/ui';
 /**
  * Renewals at Risk — the landing dashboard. Surfaces what's about to
  * auto-renew, what's just signed, and total exposure by counterparty.
+ *
+ * Trend overlay: the "Contracts Signed by Month" line includes a YoY
+ * (`compareTo: 'previousYear'`) overlay rendered as a muted dashed series
+ * so the GC can see whether new-business velocity is up or down vs. the
+ * same month last year. Server-side date bucketing (`categoryGranularity:
+ * 'month'`) avoids the one-row-per-signed_date spike that would otherwise
+ * flatten the chart.
  */
 export const RenewalsAtRiskDashboard: Dashboard = {
   name: 'renewals_at_risk_dashboard',
@@ -116,6 +123,25 @@ export const RenewalsAtRiskDashboard: Dashboard = {
         pageSize: 10,
         sort: [{ field: 'due_date', order: 'asc' }],
       },
+    },
+    {
+      id: 'signed_by_month',
+      title: 'Contracts Signed by Month (last 12 months)',
+      type: 'line',
+      object: 'contracts_contract',
+      filter: { signed_date: { $gte: '{12_months_ago}' } },
+      aggregate: 'count',
+      categoryField: 'signed_date',
+      categoryGranularity: 'month',
+      compareTo: 'previousYear',
+      chartConfig: {
+        type: 'line',
+        xAxis: { field: 'signed_date', format: '%b %Y', showGridLines: true, logarithmic: false },
+        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
+      layout: { x: 0, y: 7, w: 12, h: 5 },
     },
   ],
 };

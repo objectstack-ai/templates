@@ -5,6 +5,11 @@ import type { Dashboard } from '@objectstack/spec/ui';
 /**
  * My Work — landing dashboard for any user. Surfaces "what's mine, what's
  * burning, what got done this week" without filters.
+ *
+ * Trend overlay: "Done This Week" carries `compareTo: 'previousPeriod'`
+ * (week-over-week delta) and a new weekly throughput line uses
+ * `categoryGranularity: 'week'` + `compareTo: 'previousPeriod'` so each
+ * person sees their personal throughput vs. the prior 12 weeks.
  */
 export const MyWorkDashboard: Dashboard = {
   name: 'my_work_dashboard',
@@ -59,6 +64,7 @@ export const MyWorkDashboard: Dashboard = {
         completed_at: { $gte: '{week_start}' },
       },
       aggregate: 'count',
+      compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 8, y: 0, w: 4, h: 2 },
       options: { icon: 'Trophy', format: '0,0' },
@@ -79,6 +85,29 @@ export const MyWorkDashboard: Dashboard = {
         columns: ['subject', 'priority', 'labels', 'due_date'],
         pageSize: 10,
       },
+    },
+    {
+      id: 'throughput_by_week',
+      title: 'My Throughput by Week (last 12 weeks)',
+      type: 'line',
+      object: 'todo_task',
+      filter: {
+        assignee: '{current_user_id}',
+        status: 'done',
+        completed_at: { $gte: '{12_weeks_ago}' },
+      },
+      aggregate: 'count',
+      categoryField: 'completed_at',
+      categoryGranularity: 'week',
+      compareTo: 'previousPeriod',
+      chartConfig: {
+        type: 'line',
+        xAxis: { field: 'completed_at', format: '%b %d', showGridLines: true, logarithmic: false },
+        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
+      layout: { x: 0, y: 6, w: 12, h: 4 },
     },
   ],
 };

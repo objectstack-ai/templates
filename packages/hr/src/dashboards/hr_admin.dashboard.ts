@@ -5,6 +5,12 @@ import type { Dashboard } from '@objectstack/spec/ui';
 /**
  * HR Dashboard — landing pane for HR Admins. Surfaces pending time-off
  * approvals, recent joiners, expiring documents, and a directory snapshot.
+ *
+ * Trend overlay: "New Hires (30d)" carries `compareTo: 'previousPeriod'`
+ * (this 30d vs. prior 30d) so the HR admin lands on a hiring-velocity
+ * delta. The new "Hires by Month" line uses `categoryGranularity:
+ * 'month'` + `compareTo: 'previousYear'` to expose YoY hiring patterns
+ * — the question every comp-cycle planning meeting opens with.
  */
 export const HrAdminDashboard: Dashboard = {
   name: 'hr_admin_dashboard',
@@ -51,8 +57,9 @@ export const HrAdminDashboard: Dashboard = {
       title: 'New Hires (30d)',
       type: 'metric',
       object: 'hr_employee',
-      filter: { hire_date: { $gte: '{today-30}' }, status: { $ne: 'terminated' } },
+      filter: { hire_date: { $gte: '{30_days_ago}' }, status: { $ne: 'terminated' } },
       aggregate: 'count',
+      compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 6, y: 0, w: 3, h: 2 },
       options: { icon: 'UserPlus', format: '0,0' },
@@ -147,6 +154,25 @@ export const HrAdminDashboard: Dashboard = {
         pageSize: 10,
         sort: [{ field: 'expires_at', order: 'asc' }],
       },
+    },
+    {
+      id: 'hires_by_month',
+      title: 'Hires by Month (last 12 months)',
+      type: 'line',
+      object: 'hr_employee',
+      filter: { hire_date: { $gte: '{12_months_ago}' } },
+      aggregate: 'count',
+      categoryField: 'hire_date',
+      categoryGranularity: 'month',
+      compareTo: 'previousYear',
+      chartConfig: {
+        type: 'line',
+        xAxis: { field: 'hire_date', format: '%b %Y', showGridLines: true, logarithmic: false },
+        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
+      layout: { x: 0, y: 13, w: 12, h: 5 },
     },
   ],
 };

@@ -5,6 +5,10 @@ import type { Dashboard } from '@objectstack/spec/ui';
 /**
  * Today Workbench — the IC's landing page. Surfaces what you own, what's
  * burning, and where to start triaging signals.
+ *
+ * "Published Last 7d" carries `compareTo: 'previousPeriod'` so each writer
+ * sees their week-over-week throughput delta on landing — the answer to
+ * the only question they really ask: "is this week better than last?"
  */
 export const TodayWorkbenchDashboard: Dashboard = {
   name: 'today_workbench_dashboard',
@@ -76,6 +80,7 @@ export const TodayWorkbenchDashboard: Dashboard = {
         published_at: { $gte: '{last_week_start}' },
       },
       aggregate: 'count',
+      compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'Send', format: '0,0' },

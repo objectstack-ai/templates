@@ -9,6 +9,11 @@ import type { Dashboard } from '@objectstack/spec/ui';
  *  • evidence that's about to expire (action queue)
  *  • assessments in flight
  *
+ * Trend overlay: the new "Assessments by Month" line chart uses
+ * `categoryGranularity: 'month'` + `compareTo: 'previousYear'` so the
+ * compliance lead can see whether assessment cadence is keeping pace with
+ * the prior year — the question audit committees ask first.
+ *
  * As with other templates, filters use base fields only.
  */
 export const ControlPostureDashboard: Dashboard = {
@@ -107,6 +112,28 @@ export const ControlPostureDashboard: Dashboard = {
         pageSize: 10,
         sort: [{ field: 'expires_on', order: 'asc' }],
       },
+    },
+    {
+      id: 'assessments_by_month',
+      title: 'Assessments Completed by Month (last 12 months)',
+      type: 'line',
+      object: 'compliance_assessment',
+      filter: {
+        status: 'complete',
+        assessed_at: { $gte: '{12_months_ago}' },
+      },
+      aggregate: 'count',
+      categoryField: 'assessed_at',
+      categoryGranularity: 'month',
+      compareTo: 'previousYear',
+      chartConfig: {
+        type: 'line',
+        xAxis: { field: 'assessed_at', format: '%b %Y', showGridLines: true, logarithmic: false },
+        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
+      layout: { x: 0, y: 7, w: 12, h: 5 },
     },
   ],
 };
