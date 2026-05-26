@@ -39,7 +39,7 @@ export const EmployeeViews = defineView({
       type: 'grid',
       label: 'Active Employees',
       data: { provider: 'object', object: 'hr_employee' },
-      columns: ['full_name', 'job_title', 'department', 'manager', 'hire_date'],
+      columns: ['full_name', 'job_title', 'department', 'manager', 'tenure_years', 'hire_date'],
       filter: [{ field: 'status', operator: 'equals', value: 'active' }],
       sort: [{ field: 'full_name', order: 'asc' }],
     },

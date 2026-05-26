@@ -115,13 +115,6 @@ export const TimeOffRequest = ObjectSchema.create({
       message: 'End date must be on or after start date.',
       condition: P`record.start_date != null && record.end_date != null && record.end_date < record.start_date`,
     },
-    {
-      name: 'submitted_requires_dates',
-      type: 'script',
-      severity: 'error',
-      message: 'Submitted requests must have both start and end dates.',
-      condition: P`record.status == "submitted" && (record.start_date == null || record.end_date == null)`,
-    },
   ],
 
   workflows: [

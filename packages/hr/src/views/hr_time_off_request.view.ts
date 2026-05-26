@@ -24,9 +24,10 @@ export const TimeOffRequestViews = defineView({
     exportOptions: ['csv', 'xlsx'],
     appearance: { allowedVisualizations: ['grid', 'kanban'] },
     tabs: [
-      { name: 'all', label: 'All', view: 'all_time_off', isDefault: true, pinned: true },
-      { name: 'pending', label: 'Pending', icon: 'clock', view: 'pending_time_off' },
+      { name: 'pending', label: 'Pending', icon: 'clock', view: 'pending_time_off', isDefault: true, pinned: true },
+      { name: 'pipeline', label: 'Approval Pipeline', icon: 'columns', view: 'time_off_pipeline' },
       { name: 'approved', label: 'Approved', icon: 'check', view: 'approved_time_off' },
+      { name: 'all', label: 'All', view: 'all_time_off' },
     ],
   },
 
