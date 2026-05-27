@@ -15,17 +15,17 @@
     "test": "objectstack test"
   },
   "dependencies": {
-    "@objectstack/account": "^6.5.1",
-    "@objectstack/cli": "^6.5.1",
-    "@objectstack/driver-memory": "^6.5.1",
-    "@objectstack/driver-sql": "^6.5.1",
-    "@objectstack/driver-sqlite-wasm": "^6.5.1",
-    "@objectstack/metadata": "^6.5.1",
-    "@objectstack/objectql": "^6.5.1",
-    "@objectstack/runtime": "^6.5.1",
-    "@objectstack/service-analytics": "^6.5.1",
-    "@objectstack/service-automation": "^6.5.1",
-    "@objectstack/spec": "^6.6.0",
+    "@objectstack/account": "^6.8.1",
+    "@objectstack/cli": "^6.8.1",
+    "@objectstack/driver-memory": "^6.8.1",
+    "@objectstack/driver-sql": "^6.8.1",
+    "@objectstack/driver-sqlite-wasm": "^6.8.1",
+    "@objectstack/metadata": "^6.8.1",
+    "@objectstack/objectql": "^6.8.1",
+    "@objectstack/runtime": "^6.8.1",
+    "@objectstack/service-analytics": "^6.8.1",
+    "@objectstack/service-automation": "^6.8.1",
+    "@objectstack/spec": "^6.8.1",
     "sql.js": "^1.14.1"
   },
   "optionalDependencies": {
@@ -45,7 +45,13 @@
       "description": "Project portfolio management with AI-powered risk prediction, delay forecasting, and resource optimization",
       "iconUrl": "https://api.iconify.design/lucide:folder-kanban.svg",
       "category": "productivity",
-      "tags": ["project-management", "pmo", "risk", "ai", "forecasting"],
+      "tags": [
+        "project-management",
+        "pmo",
+        "risk",
+        "ai",
+        "forecasting"
+      ],
       "screenshots": [],
       "minPlatformVersion": "6.5.0"
     }
