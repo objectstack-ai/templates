@@ -10,6 +10,36 @@ Official starter templates for [ObjectStack](https://github.com/objectstack-ai/f
 pnpm dlx @objectstack/cli create my-app --template todo
 ```
 
+## Built for AI-native development
+
+ObjectStack is designed from the ground up to be **authored, extended, and
+operated by AI agents** alongside humans. Every primitive — objects, views,
+flows, formulas, permissions, i18n — is a small, declarative TypeScript file
+that an LLM can read, diff, and safely modify without breaking the runtime.
+
+- **Skill bundle for agents.** The companion [`objectstack-ai/framework`](https://github.com/objectstack-ai/framework)
+  ships a set of authoring skills (`objectstack-data`, `objectstack-query`,
+  `objectstack-ui`, `objectstack-automation`, `objectstack-formula`,
+  `objectstack-i18n`, `objectstack-api`, `objectstack-platform`, `objectstack-ai`)
+  that teach Copilot CLI / Claude Code / Cursor / Codex exactly how to write
+  `*.object.ts`, `*.view.ts`, `*.flow.ts`, etc. — install once and every
+  ObjectStack project on your machine becomes agent-ready.
+- **Deterministic, diff-friendly metadata.** Schema, UI, automation, and
+  permissions all live in versioned source files — no opaque database state —
+  so an agent's change is reviewable in a normal PR.
+- **First-class AI runtime.** `@objectstack/ai` gives every object built-in
+  embeddings, semantic search, RAG, agent tools, and MCP integration; flows can
+  call LLMs as just another step.
+- **100% AI-built templates.** Every template in this repo (todo, contracts,
+  procurement, compliance, helpdesk, content, hr, project, …) was designed,
+  scaffolded, and iterated end-to-end with AI agents driving the ObjectStack
+  skill bundle — they are both useful starters **and** worked examples of what
+  AI-driven product development on ObjectStack looks like in practice.
+
+> Install the skills (see [below](#install-objectstack-skills-for-ai-agents))
+> and your agent can extend any of these templates — add an object, wire a
+> flow, ship a new view — using the same conventions we used to build them.
+
 ## Available templates
 
 | Template | Domain | Status | Port | Try it |
@@ -81,6 +111,20 @@ Reset a template's local SQLite database:
 ```bash
 rm -rf packages/todo/.objectstack
 ```
+
+## Install ObjectStack skills (for AI agents)
+
+If you're working on this repo with an AI coding agent (Copilot CLI, Claude
+Code, Cursor, etc.), install the ObjectStack authoring skills globally so the
+agent picks up the framework conventions automatically:
+
+```bash
+npx skills add objectstack-ai/framework
+```
+
+This installs the `objectstack-*` skill bundle (data, query, ui, automation,
+formula, i18n, api, platform, ai) into your user-level skills directory and
+makes them available across every project on your machine.
 
 ## Contributing
 
