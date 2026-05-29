@@ -1,5 +1,5 @@
 {
-  "name": "@template/compliance",
+  "name": "@objectlab/compliance",
   "version": "0.1.2",
   "description": "ObjectStack starter template: compliance posture & evidence management",
   "license": "Apache-2.0",
@@ -18,17 +18,17 @@
     "test": "objectstack test"
   },
   "dependencies": {
-    "@objectstack/account": "^7.1.0",
-    "@objectstack/cli": "^7.1.0",
-    "@objectstack/driver-memory": "^7.1.0",
-    "@objectstack/driver-sql": "^7.1.0",
-    "@objectstack/driver-sqlite-wasm": "^7.1.0",
-    "@objectstack/metadata": "^7.1.0",
-    "@objectstack/objectql": "^7.1.0",
-    "@objectstack/runtime": "^7.1.0",
-    "@objectstack/service-analytics": "^7.1.0",
-    "@objectstack/service-automation": "^7.1.0",
-    "@objectstack/spec": "^7.1.0",
+    "@objectstack/account": "^7.2.1",
+    "@objectstack/cli": "^7.2.1",
+    "@objectstack/driver-memory": "^7.2.1",
+    "@objectstack/driver-sql": "^7.2.1",
+    "@objectstack/driver-sqlite-wasm": "^7.2.1",
+    "@objectstack/metadata": "^7.2.1",
+    "@objectstack/objectql": "^7.2.1",
+    "@objectstack/runtime": "^7.2.1",
+    "@objectstack/service-analytics": "^7.2.1",
+    "@objectstack/service-automation": "^7.2.1",
+    "@objectstack/spec": "^7.2.1",
     "sql.js": "^1.14.1"
   },
   "optionalDependencies": {

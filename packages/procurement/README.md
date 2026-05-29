@@ -1,4 +1,4 @@
-# @template/procurement
+# @objectlab/procurement
 
 Source-to-pay procurement template for ObjectStack. See `CHARTER.md` for
 scope, fork points, and LOC budget.
@@ -13,7 +13,7 @@ Click the StackBlitz badge above to launch this template in a WebContainer. It u
 
 ```bash
 pnpm install
-pnpm -F @template/procurement dev   # http://localhost:4004
+pnpm -F @objectlab/procurement dev   # http://localhost:4004
 ```
 
 Seed data drops 4 vendors, 5 purchase requests, 4 POs, and 3 receipts that

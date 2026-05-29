@@ -1,4 +1,4 @@
-# @template/compliance — Charter
+# @objectlab/compliance — Charter
 
 > A template's purpose, scope, and self-imposed limits.
 

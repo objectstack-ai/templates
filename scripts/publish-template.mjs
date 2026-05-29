@@ -27,7 +27,7 @@
  *
  * Optional env:
  *   PUBLISH_TEMPLATES  comma-separated package names to publish (default: all)
- *                      e.g. "@template/todo,@template/helpdesk"
+ *                      e.g. "@objectlab/todo,@objectlab/helpdesk"
  *   DRY_RUN=1          print payloads, don't POST
  *
  * Marketplace metadata is read from `packages/<name>/objectstack.manifest.json`

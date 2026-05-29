@@ -1,4 +1,4 @@
-# @template/contracts — Charter
+# @objectlab/contracts — Charter
 
 > A template's purpose, scope, and self-imposed limits.
 
@@ -87,7 +87,7 @@ This template is **a starter scaffold**, _not_ a production-grade product.
 | Migration tooling | None | SharePoint / Drive / Word import |
 | Integrations | None | DocuSign / Adobe Sign / 法大大 / Slack / 飞书 |
 | Support | Community (GitHub issues) | SLA available |
-| Brand | `@template/contracts` | Independent name + marketplace listing |
+| Brand | `@objectlab/contracts` | Independent name + marketplace listing |
 
 **Graduation criteria** — we will spin up an independent product repo
 (`objectstack-contracts` or its own brand) **only if** the following signals

@@ -78,7 +78,7 @@ todo/
 
 ## Forking conventions
 
-- Rename `@template/todo` in `package.json` to your app id
+- Rename `@objectlab/todo` in `package.json` to your app id
 - Change `manifest.id` and `manifest.namespace` in `objectstack.config.ts`
 - Pick your own port (4002 is taken by the unforked template)
 - Add locales under `src/translations/`; update `i18n.supportedLocales` in the config

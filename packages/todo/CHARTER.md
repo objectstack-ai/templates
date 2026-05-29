@@ -1,4 +1,4 @@
-# @template/todo — Charter
+# @objectlab/todo — Charter
 
 > A template's purpose, scope, and self-imposed limits.
 

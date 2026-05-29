@@ -1,4 +1,4 @@
-# @template/content
+# @objectlab/content
 
 **Content marketing engine on ObjectStack.**
 
@@ -43,7 +43,7 @@ It is deliberately opinionated. Fork it.
 
 ```bash
 pnpm install
-pnpm --filter @template/content dev   # http://localhost:4008
+pnpm --filter @objectlab/content dev   # http://localhost:4008
 ```
 
 Open the URL, finish `_account/setup` (create the first owner), then click
@@ -96,7 +96,7 @@ Total: ~5,500 LOC. Read the CHARTER + SPEC for the design rationale.
 ## The AI action stubs
 
 Three files under `src/actions/` follow the same pattern as
-`@template/contracts/src/actions/extract_terms.action.ts`:
+`@objectlab/contracts/src/actions/extract_terms.action.ts`:
 
 - `summarize_competitor_signal` — given a captured signal, produces a
   one-paragraph TL;DR and suggests a topic angle.

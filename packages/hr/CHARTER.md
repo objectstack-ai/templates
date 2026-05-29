@@ -1,4 +1,4 @@
-# @template/hr — Charter
+# @objectlab/hr — Charter
 
 > A template's purpose, scope, and self-imposed limits.
 

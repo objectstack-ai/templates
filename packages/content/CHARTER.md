@@ -1,4 +1,4 @@
-# @template/content — Charter
+# @objectlab/content — Charter
 
 > A template's purpose, scope, and self-imposed limits.
 
@@ -73,7 +73,7 @@ These exist so the template stays a **template**, not a half-finished product:
 | AI actions | 3 | summarize / outline / cta |
 
 If a feature would push past a cap, fork into a new template (e.g.
-`@template/newsroom` for editorial-heavy, or `@template/devrel` for
+`@objectlab/newsroom` for editorial-heavy, or `@objectlab/devrel` for
 developer-relations specifics) rather than bloat this one.
 
 ## Relationship to other repos

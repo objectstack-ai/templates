@@ -1,4 +1,4 @@
-# @template/procurement — Charter
+# @objectlab/procurement — Charter
 
 > A template's purpose, scope, and self-imposed limits.
 

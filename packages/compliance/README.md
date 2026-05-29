@@ -1,4 +1,4 @@
-# @template/compliance
+# @objectlab/compliance
 
 Compliance posture & evidence management template for ObjectStack. See
 `CHARTER.md` for scope, fork points, and LOC budget.
@@ -13,7 +13,7 @@ Click the StackBlitz badge above to launch this template in a WebContainer. It u
 
 ```bash
 pnpm install
-pnpm -F @template/compliance dev   # http://localhost:4005
+pnpm -F @objectlab/compliance dev   # http://localhost:4005
 ```
 
 Seed data drops 3 frameworks (SOC2, ISO 27001, GDPR), 6 controls, 7 evidence

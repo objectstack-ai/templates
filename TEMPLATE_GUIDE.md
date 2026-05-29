@@ -145,7 +145,7 @@ Allocate the next free port and document it in the template's `README.md`.
 Before opening a PR adding a new template:
 
 - [ ] `pnpm typecheck` passes
-- [ ] `pnpm --filter @template/<name> dev` boots without errors
+- [ ] `pnpm --filter @objectlab/<name> dev` boots without errors
 - [ ] First-run flow works (`_account/setup` → console → app launcher → list view → create record)
 - [ ] Seed data visible in at least one list
 - [ ] Studio (`/_studio/<namespace>`) shows all metadata categories

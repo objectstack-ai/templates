@@ -78,7 +78,7 @@ Every template:
 ```
 templates/
 ├── packages/
-│   └── <name>/                # one template = one package = @template/<name>
+│   └── <name>/                # one template = one package = @objectlab/<name>
 │       ├── src/
 │       ├── CHARTER.md         # scope + hard limits (required)
 │       ├── README.md          # for the end user
@@ -101,7 +101,7 @@ Requires **Node ≥ 20** and **pnpm ≥ 10**.
 ```bash
 pnpm install
 
-pnpm --filter @template/todo dev   # http://localhost:4002
+pnpm --filter @objectlab/todo dev   # http://localhost:4002
 pnpm typecheck
 pnpm format
 ```
@@ -137,14 +137,14 @@ Push to `main`. CI must be green.
 
 ```bash
 cp -r packages/todo packages/<your-template>
-# edit package.json: name → @template/<your-template>, port → next free
+# edit package.json: name → @objectlab/<your-template>, port → next free
 # edit package.json: objectstack.marketplace.{manifestId,displayName,description,iconUrl,…}
 # edit objectstack.config.ts: namespace, port
 # rewrite CHARTER.md with your scope
 # build out src/ following the order in TEMPLATE_GUIDE.md
 # add row to the table above
 pnpm install
-pnpm --filter @template/<your-template> dev
+pnpm --filter @objectlab/<your-template> dev
 ```
 
 ## Publishing to the marketplace

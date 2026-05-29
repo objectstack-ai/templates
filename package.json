@@ -9,7 +9,7 @@
     "url": "https://github.com/objectstack-ai/templates.git"
   },
   "scripts": {
-    "dev": "pnpm --filter @template/todo dev",
+    "dev": "pnpm --filter @objectlab/todo dev",
     "typecheck": "pnpm -r typecheck",
     "build": "pnpm -r build",
     "test": "pnpm -r test",

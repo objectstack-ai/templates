@@ -1,4 +1,4 @@
-# @template/content — Phase 0 Spec
+# @objectlab/content — Phase 0 Spec
 
 > Design surface. Review this before any code lands. Everything below is
 > proposal-grade; if you push back on an object or a state, we redesign

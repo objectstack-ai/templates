@@ -64,7 +64,7 @@ jobs:
 
       - name: Boot todo dev server
         run: |
-          pnpm --filter @template/todo dev &
+          pnpm --filter @objectlab/todo dev &
           SERVER_PID=$!
           for i in {1..30}; do
             if curl -sf http://localhost:4002/_console/ > /dev/null; then

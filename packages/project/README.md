@@ -1,4 +1,4 @@
-# @template/project — AI Project Management
+# @objectlab/project — AI Project Management
 
 > Project portfolio management with **AI-powered risk prediction**, delay forecasting, and resource conflict detection. Complements the `todo` template (task-level) with project-level planning and predictive analytics for PMOs.
 
@@ -25,7 +25,7 @@ Unlike traditional PM tools where AI is an expensive add-on, **AI fields are bui
 
 ```bash
 pnpm install
-pnpm --filter @template/project dev   # http://localhost:4010
+pnpm --filter @objectlab/project dev   # http://localhost:4010
 ```
 
 Open the URL, complete `/_account/setup`, and you'll see the PMO dashboard with seed projects.

@@ -1,4 +1,4 @@
-# @template/contracts
+# @objectlab/contracts
 
 **Post-signature contract lifecycle management on ObjectStack.**
 
@@ -43,7 +43,7 @@ the tools you already pay for there.
 
 ```bash
 pnpm install
-pnpm --filter @template/contracts dev   # http://localhost:4003
+pnpm --filter @objectlab/contracts dev   # http://localhost:4003
 ```
 
 Open the URL, finish `_account/setup`, and the seed data (2 parties +

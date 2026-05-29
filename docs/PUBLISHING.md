@@ -47,7 +47,7 @@ The publish script reads `packages/<name>/package.json` and expects an
 
 ```jsonc
 {
-  "name": "@template/todo",
+  "name": "@objectlab/todo",
   "version": "0.1.0",
   "license": "Apache-2.0",
   "objectstack": {
@@ -115,7 +115,7 @@ reports `skipped` — safe to ignore.
 pnpm publish:templates:dry-run
 
 # Filter to one template
-PUBLISH_TEMPLATES=@template/todo pnpm publish:templates:dry-run
+PUBLISH_TEMPLATES=@objectlab/todo pnpm publish:templates:dry-run
 ```
 
 ## Local live publish (rare — use the workflow instead)
@@ -146,7 +146,7 @@ Actions → **Publish to marketplace** → **Run workflow**:
 GitHub Releases → **Draft a new release**:
 
 - **Tag** `<template>-v<version>` (e.g. `todo-v0.2.0`) → the workflow
-  narrows the publish to `@template/<template>`.
+  narrows the publish to `@objectlab/<template>`.
 - Any other tag shape → workflow runs but evaluates every template (each
   is idempotent — unchanged versions are skipped).
 - Use the release body as a public changelog. It is **not** posted to the

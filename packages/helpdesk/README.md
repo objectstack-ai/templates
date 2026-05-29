@@ -1,4 +1,4 @@
-# @template/helpdesk — AI-First Customer Support
+# @objectlab/helpdesk — AI-First Customer Support
 
 > Customer support template where **AI is a first-class citizen**, not a paid add-on. Native fields for triage, sentiment, suggested replies, and KB recall — driven by your choice of LLM provider.
 
