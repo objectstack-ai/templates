@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.objectstack.dev/template-manifest.json",
+  "name": "project",
+  "specVersion": "^7.2.0",
+  "manifestId": "app.objectstack.template.project",
+  "displayName": "AI Project Management",
+  "description": "Project portfolio management with AI-powered risk prediction, delay forecasting, and resource conflict detection. Complements the todo template (task-level) with project-level planning and predictive analytics for PMOs.",
+  "tagline": "PMO planning with AI risk & delay forecasting.",
+  "category": "productivity",
+  "isStarter": false,
+  "publisher": "objectstack",
+  "license": "Apache-2.0",
+  "iconUrl": "https://api.iconify.design/lucide:folder-kanban.svg",
+  "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/project",
+  "tags": ["project-management", "pmo", "risk", "ai", "forecasting"],
+  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "readmePath": "README.md"
+}
