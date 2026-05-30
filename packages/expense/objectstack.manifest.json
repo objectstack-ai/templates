@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.objectstack.dev/template-manifest.json",
+  "name": "expense",
+  "specVersion": "^6.1.0",
+  "manifestId": "app.objectstack.template.expense",
+  "displayName": "Expense",
+  "description": "Employee expense & reimbursement: multi-line expense reports, category policy, amount-tiered approvals, and reimbursement tracking on ObjectStack.",
+  "tagline": "Report-first expense: claim \u2192 approve \u2192 reimburse.",
+  "category": "starter",
+  "isStarter": true,
+  "publisher": "objectstack",
+  "license": "Apache-2.0",
+  "iconUrl": "https://cdn.objectos.app/icons/expense.svg",
+  "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/expense",
+  "tags": ["expense", "reimbursement", "finance", "approvals"],
+  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "readmePath": "README.md",
+  "translations": {
+    "zh-CN": {
+      "displayName": "\u62a5\u9500",
+      "description": "\u5458\u5de5\u8d39\u7528\u62a5\u9500\uff1a\u591a\u660e\u7ec6\u62a5\u9500\u5355\u3001\u8d39\u7528\u7c7b\u522b\u653f\u7b56\u3001\u6309\u91d1\u989d\u5206\u7ea7\u7684\u5ba1\u6279\uff0c\u4ee5\u53ca\u6253\u6b3e\u8fdb\u5ea6\u8ddf\u8e2a\uff0c\u5168\u90e8\u8dd1\u5728 ObjectStack \u4e0a\u3002",
+      "tagline": "\u5148\u586b\u5355\u540e\u62a5\u9500\uff1a\u62a5\u9500\u5355 \u2192 \u5ba1\u6279 \u2192 \u6253\u6b3e\u3002"
+    }
+  }
+}

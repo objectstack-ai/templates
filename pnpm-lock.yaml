@@ -156,6 +156,53 @@ importers:
         specifier: ^12.10.0
         version: 12.10.0
 
+  packages/expense:
+    dependencies:
+      '@objectstack/account':
+        specifier: ^7.2.1
+        version: 7.2.1
+      '@objectstack/cli':
+        specifier: ^7.2.1
+        version: 7.2.1(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@objectstack/core@7.2.1(ai@6.0.191(zod@4.4.3)))(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.2.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/driver-memory':
+        specifier: ^7.2.1
+        version: 7.2.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/driver-sql':
+        specifier: ^7.2.1
+        version: 7.2.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/driver-sqlite-wasm':
+        specifier: ^7.2.1
+        version: 7.2.1(ai@6.0.191(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/metadata':
+        specifier: ^7.2.1
+        version: 7.2.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/objectql':
+        specifier: ^7.2.1
+        version: 7.2.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/runtime':
+        specifier: ^7.2.1
+        version: 7.2.1(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(ai@6.0.191(zod@4.4.3))(better-call@1.3.5(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.2.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/service-analytics':
+        specifier: ^7.2.1
+        version: 7.2.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/service-automation':
+        specifier: ^7.2.1
+        version: 7.2.1(ai@6.0.191(zod@4.4.3))
+      '@objectstack/spec':
+        specifier: ^7.2.1
+        version: 7.2.1(ai@6.0.191(zod@4.4.3))
+      sql.js:
+        specifier: ^1.14.1
+        version: 1.14.1
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    optionalDependencies:
+      better-sqlite3:
+        specifier: ^12.10.0
+        version: 12.10.0
+
   packages/helpdesk:
     dependencies:
       '@objectstack/account':

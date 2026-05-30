@@ -7,6 +7,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 ## [Unreleased]
 
 ### Added
+- `packages/expense` — employee expense & reimbursement template (v0). 3
+  objects (`report`, `line`, `category`), report lifecycle state machine
+  (`draft → submitted → approved → reimbursed`, with reject/kickback/reopen),
+  1 approval process (`expense_approval`, manager sign-off gating
+  submit→approved), 3 flows (notify on submit, notify on reimburse, escalate
+  approvals stale 3 days), 1 dashboard (Expenses Overview), 2 profiles
+  (`expense_employee` / `expense_admin`) over a 3-tier role hierarchy. A line
+  rollup hook keeps `report.total_amount` in sync with its lines; a report
+  hook stamps `submitted_at` / `approved_at` / `reimbursed_at` on transition
+  and auto-numbers reports. Receipt-required policy at $75; approval threshold
+  at $1,000. 6 categories + 5 reports (every state) + 13 lines of seed data,
+  en + zh-CN locales. Port 4011.
 - Repo scaffolding: CI (Node 20 + 22 matrix, smoke boot), `CONTRIBUTING.md`, `TEMPLATE_GUIDE.md`, EditorConfig, Prettier config, Dependabot.
 - Restored marketplace publish workflow (`.github/workflows/publish.yml`, `scripts/publish-template.mjs`, `docs/PUBLISHING.md`).
 - `packages/todo` — first template: task & project management. 4 objects, state machine, 2 flows, 1 approval, 1 sharing rule, 2 profiles, 2 reports, 1 dashboard, English locale, seeded with one project + two labels.
