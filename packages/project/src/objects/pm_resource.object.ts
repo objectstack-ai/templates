@@ -26,7 +26,7 @@ export const Resource = ObjectSchema.create({
     }),
     person: Field.lookup('user', {
       label: 'Person',
-      required: true,
+      required: false,
       group: 'core',
     }),
     role: Field.text({
