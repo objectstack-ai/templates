@@ -8,7 +8,8 @@
   "scripts": {
     "compile": "node scripts/compile-marketplace.mjs",
     "dev": "pnpm run compile && objectstack dev all --artifact dist/objectstack.json -p 4000 --fresh",
-    "start": "objectstack dev all --artifact dist/objectstack.json -p 4000"
+    "start": "objectstack dev all --artifact dist/objectstack.json -p 4000",
+    "clean": "rm -rf .objectstack/marketplace-packages dist"
   },
   "dependencies": {
     "@objectstack/account": "^7.4.1",
