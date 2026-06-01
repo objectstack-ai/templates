@@ -50,9 +50,17 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ALL_DIR = resolve(HERE, '..'); // packages/all (the runtime cwd for `dev all`)
 const PACKAGES_DIR = resolve(ALL_DIR, '..'); // packages
 
-// The real on-disk location the runtime's MarketplaceInstallLocalPlugin uses:
-//   storageDir = resolve(process.cwd(), '.objectstack/installed-packages')
-const INSTALLED_DIR = join(ALL_DIR, '.objectstack', 'installed-packages');
+// Compile-input store. We deliberately do NOT use the runtime's live-install
+// folder (`.objectstack/installed-packages/`): the MarketplaceInstallLocalPlugin
+// auto-rehydrates THAT folder at boot, which would double-register every app on
+// top of the `--artifact` env we serve (id=undefined / "Overwriting package").
+// This is a compile-time cache, distinct from the runtime's live store, so the
+// composed artifact is the single source of truth at serve time.
+const INSTALLED_DIR = join(ALL_DIR, '.objectstack', 'marketplace-packages');
+// If a genuine marketplace install populated the runtime's live folder, fold it
+// in too — but warn, because serving `--artifact` from this cwd would also
+// rehydrate it (run `start` from a clean cwd, or uninstall, to avoid that).
+const LIVE_INSTALL_DIR = join(ALL_DIR, '.objectstack', 'installed-packages');
 const OUT = join(ALL_DIR, 'dist', 'objectstack.json');
 
 // Mirror MarketplaceInstallLocalPlugin.safeFilename so files we write are
@@ -114,14 +122,14 @@ function installFromWorkspace() {
   return installed;
 }
 
-/** Read every installed entry; unwrap to the App's full artifact. */
-function readInstalledArtifacts() {
-  if (!existsSync(INSTALLED_DIR)) return [];
+/** Read every installed entry from a store; unwrap to the App's full artifact. */
+function readStore(dir) {
+  if (!existsSync(dir)) return [];
   const out = [];
-  for (const file of readdirSync(INSTALLED_DIR).filter((f) => f.endsWith('.json')).sort()) {
+  for (const file of readdirSync(dir).filter((f) => f.endsWith('.json')).sort()) {
     let entry;
     try {
-      entry = JSON.parse(readFileSync(join(INSTALLED_DIR, file), 'utf8'));
+      entry = JSON.parse(readFileSync(join(dir, file), 'utf8'));
     } catch {
       log(`  ! ${file}: invalid JSON, skipped`);
       continue;
@@ -133,6 +141,19 @@ function readInstalledArtifacts() {
     out.push({ source, artifact });
   }
   return out;
+}
+
+/** Read installed Apps: the compile cache, plus any genuine live installs. */
+function readInstalledArtifacts() {
+  const cache = readStore(INSTALLED_DIR);
+  const live = readStore(LIVE_INSTALL_DIR);
+  if (live.length > 0) {
+    log(`  ⓘ folding in ${live.length} live marketplace install(s) from .objectstack/installed-packages/`);
+    log('    (the runtime rehydrates that folder too — run `start` from a clean cwd to avoid double-load)');
+  }
+  // De-dupe by namespace; cache wins (it's the deterministic workspace copy).
+  const seen = new Set(cache.map((e) => e.source));
+  return [...cache, ...live.filter((e) => !seen.has(e.source))];
 }
 
 /** `compile` — compose installed Apps into one environment artifact. */
