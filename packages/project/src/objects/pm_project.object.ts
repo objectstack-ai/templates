@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { tmpl } from '@objectstack/spec';
 import { ProjectStateMachine } from './pm_project.state.js';
 
 /**
@@ -184,7 +184,9 @@ export const Project = ObjectSchema.create({
     }),
   },
 
-  stateMachine: ProjectStateMachine,
+  stateMachines: {
+    lifecycle: ProjectStateMachine,
+  },
 
   enable: {
     trackHistory: true,

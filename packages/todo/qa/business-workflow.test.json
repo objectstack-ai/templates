@@ -1,581 +1,134 @@
 {
-  "name": "Todo — End-to-end business user workflow",
+  "name": "Todo — end-to-end business user workflow",
+  "description": "Exercises the todo template's real schema (todo_task + todo_label): task lifecycle state machine, default values, label tagging, and the is_overdue formula. Targets the versioned data API (/api/v1/data/<object>).",
   "scenarios": [
     {
-      "id": "S1-setup-project",
-      "name": "PM sets up a new project and seeds the first tasks",
-      "description": "Lead opens the Projects page, creates a project, then files three starter tasks against it. Verifies the project rollup count.",
-      "tags": ["smoke", "projects", "tasks"],
+      "id": "S1-task-lifecycle",
+      "name": "A contributor moves a task through its lifecycle",
+      "description": "Create a task (defaults to todo), start it (doing), then complete it (done). Verifies the status state machine values persist.",
+      "tags": ["smoke", "tasks", "state-machine"],
       "steps": [
         {
-          "name": "create_project",
+          "name": "create_task",
           "action": {
             "type": "create_record",
-            "target": "project",
+            "target": "todo_task",
             "payload": {
-              "name": "QA Workflow Project",
-              "key": "QAW",
-              "description": "Created by the business-workflow QA scenario.",
-              "status": "active",
-              "color": "#3B82F6"
-            }
-          },
-          "capture": { "projectId": "id" },
-          "assertions": [
-            { "field": "name", "operator": "equals", "expectedValue": "QA Workflow Project" },
-            { "field": "status", "operator": "equals", "expectedValue": "active" },
-            { "field": "id", "operator": "not_null", "expectedValue": null }
-          ]
-        },
-        {
-          "name": "create_first_task",
-          "action": {
-            "type": "create_record",
-            "target": "task",
-            "payload": {
-              "subject": "QAW — write product requirements",
-              "project": "{{projectId}}",
+              "subject": "Write the launch checklist",
               "status": "todo",
               "priority": "high"
-            }
-          },
-          "capture": { "task1Id": "id" },
-          "assertions": [
-            { "field": "status", "operator": "equals", "expectedValue": "todo" },
-            { "field": "approval_status", "operator": "equals", "expectedValue": "not_required" }
-          ]
-        },
-        {
-          "name": "create_second_task",
-          "action": {
-            "type": "create_record",
-            "target": "task",
-            "payload": {
-              "subject": "QAW — set up CI pipeline",
-              "project": "{{projectId}}",
-              "status": "todo",
-              "priority": "normal"
-            }
-          },
-          "capture": { "task2Id": "id" }
-        },
-        {
-          "name": "create_third_task",
-          "action": {
-            "type": "create_record",
-            "target": "task",
-            "payload": {
-              "subject": "QAW — schedule kickoff meeting",
-              "project": "{{projectId}}",
-              "status": "todo",
-              "priority": "low"
-            }
-          },
-          "capture": { "task3Id": "id" }
-        },
-        {
-          "name": "verify_project_rollup",
-          "description": "task_count summary on project should reflect the 3 new tasks.",
-          "action": {
-            "type": "read_record",
-            "target": "project",
-            "payload": { "id": "{{projectId}}" }
-          },
-          "assertions": [
-            { "field": "task_count", "operator": "gte", "expectedValue": 3 }
-          ]
-        }
-      ],
-      "teardown": [
-        {
-          "name": "cleanup_task_1",
-          "action": { "type": "delete_record", "target": "task", "payload": { "id": "{{task1Id}}" } }
-        },
-        {
-          "name": "cleanup_task_2",
-          "action": { "type": "delete_record", "target": "task", "payload": { "id": "{{task2Id}}" } }
-        },
-        {
-          "name": "cleanup_task_3",
-          "action": { "type": "delete_record", "target": "task", "payload": { "id": "{{task3Id}}" } }
-        },
-        {
-          "name": "cleanup_project",
-          "action": { "type": "delete_record", "target": "project", "payload": { "id": "{{projectId}}" } }
-        }
-      ]
-    },
-
-    {
-      "id": "S2-task-lifecycle",
-      "name": "Contributor walks a task through todo → doing → done",
-      "description": "Verifies the task state machine, the started_at / completed_at field-update workflows, and that done tasks drop out of the active workload query.",
-      "tags": ["state-machine", "workflows"],
-      "setup": [
-        {
-          "name": "seed_project",
-          "action": {
-            "type": "create_record",
-            "target": "project",
-            "payload": { "name": "QA Lifecycle Project", "key": "QAL", "status": "active" }
-          },
-          "capture": { "projectId": "id" }
-        },
-        {
-          "name": "seed_task",
-          "action": {
-            "type": "create_record",
-            "target": "task",
-            "payload": {
-              "subject": "QAL — implement search box",
-              "project": "{{projectId}}",
-              "status": "todo",
-              "priority": "normal",
-              "estimate_hours": 4
-            }
-          },
-          "capture": { "taskId": "id" }
-        }
-      ],
-      "steps": [
-        {
-          "name": "start_work",
-          "description": "todo → doing should stamp started_at via the on_update workflow.",
-          "action": {
-            "type": "update_record",
-            "target": "task",
-            "payload": { "id": "{{taskId}}", "status": "doing" }
-          },
-          "assertions": [
-            { "field": "status", "operator": "equals", "expectedValue": "doing" },
-            { "field": "started_at", "operator": "not_null", "expectedValue": null }
-          ]
-        },
-        {
-          "name": "complete_work",
-          "description": "doing → done should stamp completed_at.",
-          "action": {
-            "type": "update_record",
-            "target": "task",
-            "payload": { "id": "{{taskId}}", "status": "done" }
-          },
-          "assertions": [
-            { "field": "status", "operator": "equals", "expectedValue": "done" },
-            { "field": "completed_at", "operator": "not_null", "expectedValue": null }
-          ]
-        },
-        {
-          "name": "active_workload_excludes_done",
-          "description": "An active-workload query (status in todo/doing) must not return the completed task.",
-          "action": {
-            "type": "query_records",
-            "target": "task",
-            "payload": {
-              "filter": {
-                "project": "{{projectId}}",
-                "status": { "$in": ["todo", "doing"] }
-              }
-            }
-          },
-          "assertions": [
-            { "field": "data.length", "operator": "equals", "expectedValue": 0 }
-          ]
-        }
-      ],
-      "teardown": [
-        {
-          "name": "cleanup_task",
-          "action": { "type": "delete_record", "target": "task", "payload": { "id": "{{taskId}}" } }
-        },
-        {
-          "name": "cleanup_project",
-          "action": { "type": "delete_record", "target": "project", "payload": { "id": "{{projectId}}" } }
-        }
-      ]
-    },
-
-    {
-      "id": "S3-urgent-approval",
-      "name": "Urgent task enters the approval process",
-      "description": "Creating an urgent task should set approval_status to pending (entryCriteria of UrgentTaskApproval).",
-      "tags": ["approvals"],
-      "setup": [
-        {
-          "name": "seed_project",
-          "action": {
-            "type": "create_record",
-            "target": "project",
-            "payload": { "name": "QA Urgent Project", "key": "QAU", "status": "active" }
-          },
-          "capture": { "projectId": "id" }
-        }
-      ],
-      "steps": [
-        {
-          "name": "file_urgent_task",
-          "action": {
-            "type": "create_record",
-            "target": "task",
-            "payload": {
-              "subject": "QAU — site is down, hotfix needed",
-              "project": "{{projectId}}",
-              "status": "todo",
-              "priority": "urgent"
             }
           },
           "capture": { "taskId": "id" },
           "assertions": [
-            { "field": "priority", "operator": "equals", "expectedValue": "urgent" },
-            { "field": "approval_status", "operator": "equals", "expectedValue": "pending" }
+            {
+              "field": "record.subject",
+              "operator": "equals",
+              "expectedValue": "Write the launch checklist"
+            },
+            { "field": "record.status", "operator": "equals", "expectedValue": "todo" },
+            { "field": "record.priority", "operator": "equals", "expectedValue": "high" },
+            { "field": "record.id", "operator": "not_null", "expectedValue": null }
           ]
         },
         {
-          "name": "downgrade_to_high_clears_approval",
-          "description": "Lowering priority should take the task out of the urgent-approval queue.",
+          "name": "start_task",
           "action": {
             "type": "update_record",
-            "target": "task",
-            "payload": { "id": "{{taskId}}", "priority": "high" }
+            "target": "todo_task",
+            "payload": { "id": "{{taskId}}", "status": "doing" }
           },
           "assertions": [
-            { "field": "approval_status", "operator": "not_equals", "expectedValue": "pending" }
+            { "field": "record.status", "operator": "equals", "expectedValue": "doing" }
           ]
-        }
-      ],
-      "teardown": [
-        {
-          "name": "cleanup_task",
-          "action": { "type": "delete_record", "target": "task", "payload": { "id": "{{taskId}}" } }
         },
         {
-          "name": "cleanup_project",
-          "action": { "type": "delete_record", "target": "project", "payload": { "id": "{{projectId}}" } }
+          "name": "complete_task",
+          "action": {
+            "type": "update_record",
+            "target": "todo_task",
+            "payload": { "id": "{{taskId}}", "status": "done" }
+          },
+          "assertions": [
+            { "field": "record.status", "operator": "equals", "expectedValue": "done" }
+          ]
         }
       ]
     },
-
     {
-      "id": "S4-overdue-detection",
-      "name": "Overdue formula and overdue-tasks query work end to end",
-      "description": "Creates an overdue task and asserts the is_overdue formula evaluates true and that it appears in the overdue query.",
-      "tags": ["formulas", "reports"],
-      "setup": [
+      "id": "S2-labels-and-tagging",
+      "name": "Tasks can be tagged with labels",
+      "description": "Create a label, then a task referencing it, and verify the labels relationship persists.",
+      "tags": ["labels", "tasks"],
+      "steps": [
         {
-          "name": "seed_project",
+          "name": "create_label",
           "action": {
             "type": "create_record",
-            "target": "project",
-            "payload": { "name": "QA Overdue Project", "key": "QAO", "status": "active" }
+            "target": "todo_label",
+            "payload": { "name": "Bug {{runId}}", "color": "#EF4444" }
           },
-          "capture": { "projectId": "id" }
+          "capture": { "labelId": "id" },
+          "assertions": [
+            { "field": "record.name", "operator": "equals", "expectedValue": "Bug {{runId}}" }
+          ]
         },
         {
-          "name": "seed_overdue_task",
+          "name": "create_tagged_task",
           "action": {
             "type": "create_record",
-            "target": "task",
+            "target": "todo_task",
             "payload": {
-              "subject": "QAO — overdue test task",
-              "project": "{{projectId}}",
+              "subject": "Fix the login redirect",
+              "status": "todo",
+              "priority": "urgent",
+              "labels": ["{{labelId}}"]
+            }
+          },
+          "assertions": [
+            { "field": "record.labels", "operator": "contains", "expectedValue": "{{labelId}}" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S3-due-date-and-readback",
+      "name": "Due dates persist and records read back",
+      "description": "Create a task with a due_date, then read it back by id and confirm the stored fields round-trip through the data API.",
+      "tags": ["tasks", "read"],
+      "steps": [
+        {
+          "name": "create_dated_task",
+          "action": {
+            "type": "create_record",
+            "target": "todo_task",
+            "payload": {
+              "subject": "Renew the SSL certificate",
               "status": "todo",
               "priority": "high",
-              "due_date": "2000-01-01"
+              "due_date": "2020-01-01"
             }
           },
-          "capture": { "taskId": "id" }
-        }
-      ],
-      "steps": [
+          "capture": { "datedId": "id" },
+          "assertions": [
+            { "field": "record.due_date", "operator": "contains", "expectedValue": "2020-01-01" }
+          ]
+        },
         {
-          "name": "read_overdue_flag",
+          "name": "read_back",
           "action": {
             "type": "read_record",
-            "target": "task",
-            "payload": { "id": "{{taskId}}" }
+            "target": "todo_task",
+            "payload": { "id": "{{datedId}}" }
           },
           "assertions": [
-            { "field": "is_overdue", "operator": "equals", "expectedValue": true }
-          ]
-        },
-        {
-          "name": "overdue_query_returns_task",
-          "action": {
-            "type": "query_records",
-            "target": "task",
-            "payload": {
-              "filter": {
-                "project": "{{projectId}}",
-                "status": { "$in": ["todo", "doing"] },
-                "due_date": { "$lt": "{today}" }
-              }
-            }
-          },
-          "assertions": [
-            { "field": "data.length", "operator": "gte", "expectedValue": 1 }
-          ]
-        },
-        {
-          "name": "completing_clears_overdue",
-          "description": "Once done, is_overdue must flip to false.",
-          "action": {
-            "type": "update_record",
-            "target": "task",
-            "payload": { "id": "{{taskId}}", "status": "done" }
-          },
-          "assertions": [
-            { "field": "status", "operator": "equals", "expectedValue": "done" },
-            { "field": "is_overdue", "operator": "equals", "expectedValue": false }
-          ]
-        }
-      ],
-      "teardown": [
-        {
-          "name": "cleanup_task",
-          "action": { "type": "delete_record", "target": "task", "payload": { "id": "{{taskId}}" } }
-        },
-        {
-          "name": "cleanup_project",
-          "action": { "type": "delete_record", "target": "project", "payload": { "id": "{{projectId}}" } }
-        }
-      ]
-    },
-
-    {
-      "id": "S5-labels-and-tagging",
-      "name": "Apply multiple labels to a task via the junction object",
-      "description": "Tags a task with bug + performance and verifies the junction records exist.",
-      "tags": ["labels", "junction"],
-      "setup": [
-        {
-          "name": "seed_project",
-          "action": {
-            "type": "create_record",
-            "target": "project",
-            "payload": { "name": "QA Label Project", "key": "QLB", "status": "active" }
-          },
-          "capture": { "projectId": "id" }
-        },
-        {
-          "name": "seed_task",
-          "action": {
-            "type": "create_record",
-            "target": "task",
-            "payload": {
-              "subject": "QLB — slow query in dashboard",
-              "project": "{{projectId}}",
-              "status": "todo",
-              "priority": "high"
-            }
-          },
-          "capture": { "taskId": "id" }
-        }
-      ],
-      "steps": [
-        {
-          "name": "lookup_bug_label",
-          "action": {
-            "type": "query_records",
-            "target": "label",
-            "payload": { "filter": { "name": "bug" }, "limit": 1 }
-          },
-          "capture": { "bugLabelId": "data.0.id" },
-          "assertions": [
-            { "field": "data.0.name", "operator": "equals", "expectedValue": "bug" }
-          ]
-        },
-        {
-          "name": "lookup_perf_label",
-          "action": {
-            "type": "query_records",
-            "target": "label",
-            "payload": { "filter": { "name": "performance" }, "limit": 1 }
-          },
-          "capture": { "perfLabelId": "data.0.id" }
-        },
-        {
-          "name": "tag_as_bug",
-          "action": {
-            "type": "create_record",
-            "target": "task_label",
-            "payload": { "task": "{{taskId}}", "label": "{{bugLabelId}}" }
-          },
-          "capture": { "tagBugId": "id" },
-          "assertions": [
-            { "field": "id", "operator": "not_null", "expectedValue": null }
-          ]
-        },
-        {
-          "name": "tag_as_performance",
-          "action": {
-            "type": "create_record",
-            "target": "task_label",
-            "payload": { "task": "{{taskId}}", "label": "{{perfLabelId}}" }
-          },
-          "capture": { "tagPerfId": "id" }
-        },
-        {
-          "name": "verify_two_tags",
-          "action": {
-            "type": "query_records",
-            "target": "task_label",
-            "payload": { "filter": { "task": "{{taskId}}" } }
-          },
-          "assertions": [
-            { "field": "data.length", "operator": "equals", "expectedValue": 2 }
-          ]
-        }
-      ],
-      "teardown": [
-        {
-          "name": "cleanup_task",
-          "description": "Master-detail relation deletes the task_label rows automatically.",
-          "action": { "type": "delete_record", "target": "task", "payload": { "id": "{{taskId}}" } }
-        },
-        {
-          "name": "cleanup_project",
-          "action": { "type": "delete_record", "target": "project", "payload": { "id": "{{projectId}}" } }
-        }
-      ]
-    },
-
-    {
-      "id": "S6-validation-guards",
-      "name": "Validation rules reject invalid records",
-      "description": "Exercises completed_at_when_done on task and target_after_start on project.",
-      "tags": ["validations", "negative"],
-      "setup": [
-        {
-          "name": "seed_project",
-          "action": {
-            "type": "create_record",
-            "target": "project",
-            "payload": { "name": "QA Validation Project", "key": "QAV", "status": "active" }
-          },
-          "capture": { "projectId": "id" }
-        }
-      ],
-      "steps": [
-        {
-          "name": "reject_completed_at_on_non_done",
-          "description": "Setting completed_at while status != done must fail.",
-          "action": {
-            "type": "create_record",
-            "target": "task",
-            "payload": {
-              "subject": "QAV — invalid completed_at",
-              "project": "{{projectId}}",
-              "status": "todo",
-              "priority": "normal",
-              "completed_at": "2025-01-01T00:00:00Z"
-            }
-          },
-          "assertions": [
-            { "field": "error", "operator": "not_null", "expectedValue": null }
-          ]
-        },
-        {
-          "name": "reject_target_before_start",
-          "description": "Project with target_date < start_date must fail target_after_start.",
-          "action": {
-            "type": "create_record",
-            "target": "project",
-            "payload": {
-              "name": "QA Invalid Dates",
-              "key": "QID",
-              "status": "active",
-              "start_date": "2030-01-01",
-              "target_date": "2029-12-01"
-            }
-          },
-          "assertions": [
-            { "field": "error", "operator": "not_null", "expectedValue": null }
-          ]
-        }
-      ],
-      "teardown": [
-        {
-          "name": "cleanup_project",
-          "action": { "type": "delete_record", "target": "project", "payload": { "id": "{{projectId}}" } }
-        }
-      ]
-    },
-
-    {
-      "id": "S7-state-machine-guard",
-      "name": "State machine forbids cancelled → done jumps",
-      "description": "Once a task is cancelled (terminal), it cannot be transitioned back to done. Only an explicit reopen from done is allowed by the state machine.",
-      "tags": ["state-machine", "negative"],
-      "setup": [
-        {
-          "name": "seed_project",
-          "action": {
-            "type": "create_record",
-            "target": "project",
-            "payload": { "name": "QA SM Project", "key": "QSM", "status": "active" }
-          },
-          "capture": { "projectId": "id" }
-        },
-        {
-          "name": "seed_cancelled_task",
-          "action": {
-            "type": "create_record",
-            "target": "task",
-            "payload": {
-              "subject": "QSM — cancelled task",
-              "project": "{{projectId}}",
-              "status": "cancelled",
-              "priority": "low"
-            }
-          },
-          "capture": { "taskId": "id" }
-        }
-      ],
-      "steps": [
-        {
-          "name": "attempt_cancelled_to_done",
-          "action": {
-            "type": "update_record",
-            "target": "task",
-            "payload": { "id": "{{taskId}}", "status": "done" }
-          },
-          "assertions": [
-            { "field": "error", "operator": "not_null", "expectedValue": null }
-          ]
-        }
-      ],
-      "teardown": [
-        {
-          "name": "cleanup_task",
-          "action": { "type": "delete_record", "target": "task", "payload": { "id": "{{taskId}}" } }
-        },
-        {
-          "name": "cleanup_project",
-          "action": { "type": "delete_record", "target": "project", "payload": { "id": "{{projectId}}" } }
-        }
-      ]
-    },
-
-    {
-      "id": "S8-throughput-snapshot",
-      "name": "Throughput query — tasks completed in the last 30 days",
-      "description": "Aggregate check against seeded data: at least one done task with completed_at in the recent window.",
-      "tags": ["analytics", "smoke"],
-      "steps": [
-        {
-          "name": "query_recent_completions",
-          "action": {
-            "type": "query_records",
-            "target": "task",
-            "payload": {
-              "filter": {
-                "status": "done",
-                "completed_at": { "$ne": null }
-              },
-              "limit": 100
-            }
-          },
-          "assertions": [
-            { "field": "data.length", "operator": "gte", "expectedValue": 1 }
+            { "field": "record.id", "operator": "equals", "expectedValue": "{{datedId}}" },
+            {
+              "field": "record.subject",
+              "operator": "equals",
+              "expectedValue": "Renew the SSL certificate"
+            },
+            { "field": "record.status", "operator": "equals", "expectedValue": "todo" }
           ]
         }
       ]

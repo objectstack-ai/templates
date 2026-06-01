@@ -46,11 +46,8 @@ export const RiskViews = defineView({
       name: 'active_risks',
       type: 'grid',
       label: 'Active Risks',
-      data: {
-        provider: 'object',
-        object: 'pm_risk',
-        filter: 'status in ["identified", "monitoring", "mitigating"]',
-      },
+      data: { provider: 'object', object: 'pm_risk' },
+      filter: [{ field: 'status', operator: 'in', value: ['identified', 'monitoring', 'mitigating'] }],
       columns: [
         { field: 'risk_id', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },
@@ -67,11 +64,8 @@ export const RiskViews = defineView({
       name: 'critical_risks',
       type: 'grid',
       label: 'Critical Risks',
-      data: {
-        provider: 'object',
-        object: 'pm_risk',
-        filter: 'priority == "critical" || ai_impact_score >= 4',
-      },
+      data: { provider: 'object', object: 'pm_risk' },
+      filter: [{ field: 'priority', operator: 'equals', value: 'critical' }],
       columns: [
         { field: 'risk_id', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },

@@ -40,15 +40,13 @@ export const EvidenceExpiringFlow: Flow = {
     },
     {
       id: 'notify',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Collector',
       config: {
-        actionType: 'notification',
         recipients: ['{ev.collected_by}'],
         title: 'Evidence expiring soon: {ev.title}',
-        body:
-          'Evidence "{ev.title}" expires on {ev.expires_on}. Collect a fresh copy and resubmit.',
-        link: '/objects/compliance_evidence/{ev.id}',
+        body: 'Evidence "{ev.title}" expires on {ev.expires_on}. Collect a fresh copy and resubmit.',
+        actionUrl: '/objects/compliance_evidence/{ev.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

@@ -11,7 +11,6 @@ import * as apps from './src/apps/index.js';
 import { ExpenseTranslations } from './src/translations/index.js';
 import { allFlows } from './src/flows/index.js';
 import { allHooks } from './src/hooks/index.js';
-import { allApprovals } from './src/approvals/index.js';
 import { RoleHierarchy } from './src/sharing/index.js';
 import { ExpenseSeedData } from './src/data/index.js';
 
@@ -36,7 +35,6 @@ export default defineStack({
   apps: Object.values(apps),
   flows: allFlows,
   hooks: allHooks,
-  approvals: allApprovals,
   translations: [ExpenseTranslations],
 
   sharingRules: [],

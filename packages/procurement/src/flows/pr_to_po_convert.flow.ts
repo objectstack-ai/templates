@@ -58,7 +58,8 @@ export const PRToPOConvertFlow: Flow = {
           received_amount: 0,
           order_date: 'today()',
           expected_delivery: '{pr.needed_by}',
-          notes: 'Auto-generated from PR {pr.request_number} ({pr.title}). Review line items before sending.',
+          notes:
+            'Auto-generated from PR {pr.request_number} ({pr.title}). Review line items before sending.',
         },
         outputVariable: 'po',
       },
@@ -75,15 +76,13 @@ export const PRToPOConvertFlow: Flow = {
     },
     {
       id: 'notify_buyer',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Buyer',
       config: {
-        actionType: 'notification',
         recipients: ['{pr.requester}'],
         title: 'PO drafted: {pr.title}',
-        body:
-          'A draft PO was created from your approved request "{pr.title}". Add line items and send to the vendor.',
-        link: '/objects/procurement_order/{po.id}',
+        body: 'A draft PO was created from your approved request "{pr.title}". Add line items and send to the vendor.',
+        actionUrl: '/objects/procurement_order/{po.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

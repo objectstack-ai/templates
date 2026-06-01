@@ -39,15 +39,13 @@ export const ExpenseReimbursedFlow: Flow = {
     },
     {
       id: 'notify_employee',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Employee',
       config: {
-        actionType: 'notification',
         recipients: ['{report.requester}'],
         title: 'Reimbursed: {report.title}',
-        body:
-          'Your expense report "{report.title}" ({report.total_amount}) has been reimbursed via {report.payment_method}. Reference: {report.payment_reference}.',
-        link: '/objects/expense_report/{report.id}',
+        body: 'Your expense report "{report.title}" ({report.total_amount}) has been reimbursed via {report.payment_method}. Reference: {report.payment_reference}.',
+        actionUrl: '/objects/expense_report/{report.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

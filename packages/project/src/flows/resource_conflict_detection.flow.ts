@@ -12,13 +12,10 @@ type Flow = Automation.Flow;
 export const ResourceConflictDetectionFlow: Flow = {
   name: 'pm_resource_conflict_detection',
   label: 'Resource Conflict Detection',
-  description:
-    'Alert project managers when a team member is overallocated across projects.',
+  description: 'Alert project managers when a team member is overallocated across projects.',
   type: 'record_change',
 
-  variables: [
-    { name: 'resourceId', type: 'text', isInput: true, isOutput: false },
-  ],
+  variables: [{ name: 'resourceId', type: 'text', isInput: true, isOutput: false }],
 
   nodes: [
     {
@@ -41,12 +38,15 @@ export const ResourceConflictDetectionFlow: Flow = {
     },
     {
       id: 'query_person_allocations',
-      type: 'query',
+      type: 'get_record',
       label: 'Find All Allocations for This Person',
       config: {
         objectName: 'pm_resource',
-        filter: 'person = {resource.person} AND (end_date IS NULL OR end_date >= TODAY())',
-        filterDialect: 'objectql',
+        // Active allocations for this person; end-date window is applied in the
+        // calculation step below.
+        filter: { person: '{resource.person}' },
+        limit: 500,
+        outputVariable: 'query_person_allocations',
       },
     },
     {
@@ -64,7 +64,7 @@ export const ResourceConflictDetectionFlow: Flow = {
     },
     {
       id: 'check_conflict',
-      type: 'condition',
+      type: 'decision',
       label: 'Overallocated (> 40 hours)?',
       config: {
         condition: 'totalHours > 40',
@@ -86,12 +86,12 @@ export const ResourceConflictDetectionFlow: Flow = {
     },
     {
       id: 'notify_pms',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Project Managers',
       config: {
-        actionType: 'send_notification',
         to: '{affectedProjects[*].project_manager}',
-        message: 'Resource conflict: {{resource.person.name}} is allocated {{totalHours}} hours/week across multiple projects.',
+        message:
+          'Resource conflict: {{resource.person.name}} is allocated {{totalHours}} hours/week across multiple projects.',
       },
     },
     {
@@ -106,8 +106,21 @@ export const ResourceConflictDetectionFlow: Flow = {
     { id: 'e2', source: 'get_resource', target: 'query_person_allocations', type: 'default' },
     { id: 'e3', source: 'query_person_allocations', target: 'calculate_total', type: 'default' },
     { id: 'e4', source: 'calculate_total', target: 'check_conflict', type: 'default' },
-    { id: 'e5', source: 'check_conflict', target: 'update_project_ai', type: 'true' },
-    { id: 'e6', source: 'check_conflict', target: 'end', type: 'false' },
+    {
+      id: 'e5',
+      source: 'check_conflict',
+      target: 'update_project_ai',
+      type: 'conditional',
+      condition: 'totalHours > 40',
+      label: 'Overallocated',
+    },
+    {
+      id: 'e6',
+      source: 'check_conflict',
+      target: 'end',
+      isDefault: true,
+      label: 'Within capacity',
+    },
     { id: 'e7', source: 'update_project_ai', target: 'notify_pms', type: 'default' },
     { id: 'e8', source: 'notify_pms', target: 'end', type: 'default' },
   ],

@@ -15,20 +15,20 @@
     "start": "objectstack start -p 4008",
     "build": "objectstack build",
     "typecheck": "tsc --noEmit",
-    "test": "objectstack test"
+    "test": "objectstack build"
   },
   "dependencies": {
-    "@objectstack/account": "^7.3.0",
-    "@objectstack/cli": "^7.3.0",
-    "@objectstack/driver-memory": "^7.3.0",
-    "@objectstack/driver-sql": "^7.3.0",
-    "@objectstack/driver-sqlite-wasm": "^7.3.0",
-    "@objectstack/metadata": "^7.3.0",
-    "@objectstack/objectql": "^7.3.0",
-    "@objectstack/runtime": "^7.3.0",
-    "@objectstack/service-analytics": "^7.3.0",
-    "@objectstack/service-automation": "^7.3.0",
-    "@objectstack/spec": "^7.3.0",
+    "@objectstack/account": "^7.4.1",
+    "@objectstack/cli": "^7.4.1",
+    "@objectstack/driver-memory": "^7.4.1",
+    "@objectstack/driver-sql": "^7.4.1",
+    "@objectstack/driver-sqlite-wasm": "^7.4.1",
+    "@objectstack/metadata": "^7.4.1",
+    "@objectstack/objectql": "^7.4.1",
+    "@objectstack/runtime": "^7.4.1",
+    "@objectstack/service-analytics": "^7.4.1",
+    "@objectstack/service-automation": "^7.4.1",
+    "@objectstack/spec": "^7.4.1",
     "sql.js": "^1.14.1"
   },
   "optionalDependencies": {

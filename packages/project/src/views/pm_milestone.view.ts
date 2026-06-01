@@ -41,11 +41,8 @@ export const MilestoneViews = defineView({
       name: 'upcoming_milestones',
       type: 'grid',
       label: 'Upcoming Milestones',
-      data: {
-        provider: 'object',
-        object: 'pm_milestone',
-        filter: 'status in ["not_started", "in_progress"] && due_date != null',
-      },
+      data: { provider: 'object', object: 'pm_milestone' },
+      filter: [{ field: 'status', operator: 'in', value: ['not_started', 'in_progress'] }, { field: 'due_date', operator: 'not_equals', value: null }],
       columns: [
         { field: 'name', width: 280, link: true, pinned: 'left' },
         { field: 'project', width: 160 },
@@ -60,11 +57,8 @@ export const MilestoneViews = defineView({
       name: 'at_risk_milestones',
       type: 'grid',
       label: 'At Risk Milestones',
-      data: {
-        provider: 'object',
-        object: 'pm_milestone',
-        filter: 'status == "at_risk"',
-      },
+      data: { provider: 'object', object: 'pm_milestone' },
+      filter: [{ field: 'status', operator: 'equals', value: 'at_risk' }],
       columns: [
         { field: 'name', width: 280, link: true, pinned: 'left' },
         { field: 'project', width: 160 },
@@ -79,11 +73,8 @@ export const MilestoneViews = defineView({
       name: 'critical_path_milestones',
       type: 'grid',
       label: 'Critical Path Milestones',
-      data: {
-        provider: 'object',
-        object: 'pm_milestone',
-        filter: 'is_critical_path == true',
-      },
+      data: { provider: 'object', object: 'pm_milestone' },
+      filter: [{ field: 'is_critical_path', operator: 'equals', value: true }],
       columns: [
         { field: 'name', width: 280, link: true, pinned: 'left' },
         { field: 'project', width: 160 },

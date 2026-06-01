@@ -50,15 +50,13 @@ export const FailedControlEscalationFlow: Flow = {
     },
     {
       id: 'notify_owner',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Control Owner',
       config: {
-        actionType: 'notification',
         recipients: ['{ctrl.owner}', 'role:compliance_admin'],
         title: 'Failed control: {ctrl.code} {ctrl.title}',
-        body:
-          'Assessment "{asmt.title}" on {ctrl.code} ({ctrl.criticality}) FAILED. Remediation due {asmt.remediation_due}.',
-        link: '/objects/compliance_assessment/{asmt.id}',
+        body: 'Assessment "{asmt.title}" on {ctrl.code} ({ctrl.criticality}) FAILED. Remediation due {asmt.remediation_due}.',
+        actionUrl: '/objects/compliance_assessment/{asmt.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

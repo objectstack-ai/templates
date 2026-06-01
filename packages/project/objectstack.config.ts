@@ -4,7 +4,7 @@ import * as objects from './src/objects/index.js';
 import * as views from './src/views/index.js';
 import * as apps from './src/apps/index.js';
 import { ProjectTranslations } from './src/translations/index.js';
-// import { allFlows } from './src/flows/index.js';
+import { allFlows } from './src/flows/index.js';
 import { ProjectSeedData } from './src/data/index.js';
 
 export default defineStack({
@@ -23,18 +23,10 @@ export default defineStack({
   views: Object.values(views),
   apps: Object.values(apps),
   translations: [ProjectTranslations],
-  
-  // flows: allFlows,  // TODO: Fix flow API to match platform schema
-  flows: [],
-  
+
+  flows: allFlows,
+
   data: ProjectSeedData,
-  
-  // TODO: Complete these in next iteration
-  pages: [],
-  dashboards: [],
-  permissions: [],
-  sharingRules: [],
-  roles: [],
 
   i18n: {
     defaultLocale: 'en',

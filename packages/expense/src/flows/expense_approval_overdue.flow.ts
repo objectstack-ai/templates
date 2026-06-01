@@ -41,15 +41,13 @@ export const ExpenseApprovalOverdueFlow: Flow = {
     },
     {
       id: 'escalate',
-      type: 'script',
+      type: 'notify',
       label: 'Escalate',
       config: {
-        actionType: 'notification',
         recipients: ['role:expense_manager'],
         title: 'Still pending: {report.title}',
-        body:
-          'Report "{report.title}" ({report.total_amount}) has awaited approval for 3 days. Please review.',
-        link: '/objects/expense_report/{report.id}',
+        body: 'Report "{report.title}" ({report.total_amount}) has awaited approval for 3 days. Please review.',
+        actionUrl: '/objects/expense_report/{report.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

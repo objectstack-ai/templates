@@ -1,68 +1,69 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import type { StateMachineSchema } from '@objectstack/spec/automation';
+import { StateMachineConfig } from '@objectstack/spec/automation';
 
 /**
  * Project status state machine.
- * Drives the lifecycle: planning → active → (at_risk) → completed/cancelled
+ * Drives the lifecycle: planning → active → (at_risk / on_hold) → completed/cancelled
  */
-export const ProjectStateMachine: StateMachineSchema = {
-  field: 'status',
+export const ProjectStateMachine: StateMachineConfig = {
+  id: 'project_lifecycle',
   initial: 'planning',
-
-  states: [
-    {
-      value: 'planning',
-      label: 'Planning',
-      description: 'Project is being scoped and planned.',
-      actions: [],
+  states: {
+    planning: {
+      on: {
+        START: { target: 'active', description: 'Scope approved — kick the project off.' },
+        CANCEL: { target: 'cancelled' },
+      },
+      meta: {
+        aiInstructions:
+          'Project is being scoped. Confirm dates and a project manager before transitioning to active.',
+      },
     },
-    {
-      value: 'active',
-      label: 'Active',
-      description: 'Project is underway.',
-      actions: [],
+    active: {
+      on: {
+        FLAG_RISK: { target: 'at_risk', description: 'Risks or delays identified.' },
+        PAUSE: { target: 'on_hold', description: 'Paused by an external blocker.' },
+        COMPLETE: { target: 'completed', description: 'All milestones delivered.' },
+        CANCEL: { target: 'cancelled' },
+      },
+      meta: {
+        aiInstructions:
+          'Project is underway. Move to at_risk if AI risk score is high or a milestone slips.',
+      },
     },
-    {
-      value: 'at_risk',
-      label: 'At Risk',
-      description: 'Project has identified risks or delays.',
-      actions: [],
+    at_risk: {
+      on: {
+        MITIGATE: { target: 'active', description: 'Risks mitigated — back on track.' },
+        PAUSE: { target: 'on_hold', description: 'Paused by an external blocker.' },
+        COMPLETE: { target: 'completed', description: 'Delivered despite risks.' },
+        CANCEL: { target: 'cancelled' },
+      },
+      meta: {
+        aiInstructions:
+          'Project has identified risks. Recommend mitigation actions before resuming or completing.',
+      },
     },
-    {
-      value: 'on_hold',
-      label: 'On Hold',
-      description: 'Project paused due to external blockers.',
-      actions: [],
+    on_hold: {
+      on: {
+        RESUME: { target: 'active', description: 'Blocker cleared — resume work.' },
+        CANCEL: { target: 'cancelled' },
+      },
+      meta: {
+        aiInstructions: 'Project paused. Surface the blocker and an expected resume date.',
+      },
     },
-    {
-      value: 'completed',
-      label: 'Completed',
-      description: 'Project successfully delivered.',
-      terminal: true,
-      actions: [],
+    completed: {
+      type: 'final',
+      meta: {
+        aiInstructions: 'Project delivered and terminal. Do not change status.',
+      },
     },
-    {
-      value: 'cancelled',
-      label: 'Cancelled',
-      description: 'Project terminated before completion.',
-      terminal: true,
-      actions: [],
+    cancelled: {
+      type: 'final',
+      meta: {
+        aiInstructions: 'Project cancelled and terminal. Do not change status.',
+      },
     },
-  ],
-
-  transitions: [
-    { from: 'planning', to: 'active', label: 'Start Project' },
-    { from: 'planning', to: 'cancelled', label: 'Cancel' },
-    { from: 'active', to: 'at_risk', label: 'Flag Risk' },
-    { from: 'active', to: 'on_hold', label: 'Pause' },
-    { from: 'active', to: 'completed', label: 'Complete' },
-    { from: 'active', to: 'cancelled', label: 'Cancel' },
-    { from: 'at_risk', to: 'active', label: 'Risks Mitigated' },
-    { from: 'at_risk', to: 'on_hold', label: 'Pause' },
-    { from: 'at_risk', to: 'completed', label: 'Complete Despite Risks' },
-    { from: 'at_risk', to: 'cancelled', label: 'Cancel' },
-    { from: 'on_hold', to: 'active', label: 'Resume' },
-    { from: 'on_hold', to: 'cancelled', label: 'Cancel' },
-  ],
+  },
 };

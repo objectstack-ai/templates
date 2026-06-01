@@ -22,8 +22,7 @@ export const EvidenceAutoExpireFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'compliance_evidence',
-        criteria:
-          'status == "approved" && expires_on != null && expires_on == daysAgo(0)',
+        criteria: 'status == "approved" && expires_on != null && expires_on == daysAgo(0)',
         criteriaDialect: 'cel',
       },
     },

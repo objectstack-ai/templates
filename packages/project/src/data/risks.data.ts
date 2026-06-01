@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { defineDataset } from '@objectstack/spec/data';
-import { Risk } from '../objects/pm_risk.object';
+import { Risk } from '../objects/pm_risk.object.js';
 
 /**
  * Risks for the sample projects.

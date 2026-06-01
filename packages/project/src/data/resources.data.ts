@@ -2,7 +2,7 @@
 
 import { defineDataset } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
-import { Resource } from '../objects/pm_resource.object';
+import { Resource } from '../objects/pm_resource.object.js';
 
 /**
  * Resource allocations for the sample projects.

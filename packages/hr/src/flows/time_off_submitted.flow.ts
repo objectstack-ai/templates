@@ -48,15 +48,13 @@ export const TimeOffSubmittedFlow: Flow = {
     },
     {
       id: 'notify_manager',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Manager',
       config: {
-        actionType: 'notification',
         recipients: ['{emp.manager.user}'],
         title: 'Time-off request from {emp.full_name}',
-        body:
-          '{emp.full_name} requested {req.leave_type} from {req.start_date} to {req.end_date}. Open to review.',
-        link: '/objects/hr_time_off_request/{req.id}',
+        body: '{emp.full_name} requested {req.leave_type} from {req.start_date} to {req.end_date}. Open to review.',
+        actionUrl: '/objects/hr_time_off_request/{req.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },
