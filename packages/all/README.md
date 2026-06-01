@@ -111,12 +111,12 @@ through the browser as a business user:
   `lead` / `contributor` role and permission; the compiler keeps the first and
   shadows the rest (logged on compile). Fine for a "see everything" dev
   environment; for production isolation each app would namespace its roles.
-- **Partial zh-CN coverage (per-template, not aggregator).** Under a Chinese
-  locale, object/field labels are translated, but several dashboard titles, KPI
-  widget labels, and view/page nav items remain English (e.g. helpdesk's "My
-  Workbench", "SLA Breaching"; the `pm` app name). Each template needs to extend
-  its translation bundle to cover dashboards/views — out of scope for the
-  aggregator.
+- **zh-CN coverage is complete** for object/field labels, select options, object
+  descriptions, app nav, and dashboards across all 9 apps (audited to 100%). The
+  one item still in English is list-view *tab* labels (e.g. "Project
+  Board") — the `objects.<obj>._views` translations exist per schema, but the
+  current console build doesn't apply them to the tab strip. Other locales
+  (ja-JP/es-ES) remain partial where templates ship them.
 - **Empty *personal* dashboards for a fresh admin.** "My Work"-style dashboards
   filter to the current user; seed records are owned by seed users, so the admin
   sees 0 there until records are assigned. Org-wide dashboard widgets still
