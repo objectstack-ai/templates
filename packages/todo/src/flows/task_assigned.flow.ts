@@ -37,14 +37,13 @@ export const TaskAssignedFlow: Flow = {
     },
     {
       id: 'notify',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Assignee',
       config: {
-        actionType: 'notification',
         recipients: ['{taskRecord.assignee}'],
         title: 'New task assigned: {taskRecord.subject}',
         body: 'You have a new task assigned to you.',
-        link: '/objects/todo_task/{taskRecord.id}',
+        actionUrl: '/objects/todo_task/{taskRecord.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

@@ -2,7 +2,7 @@
 
 import { defineDataset } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
-import { Milestone } from '../objects/pm_milestone.object';
+import { Milestone } from '../objects/pm_milestone.object.js';
 
 /**
  * Milestones for the sample projects.

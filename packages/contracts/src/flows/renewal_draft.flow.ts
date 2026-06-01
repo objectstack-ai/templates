@@ -22,7 +22,7 @@ export const ContractRenewalDraftFlow: Flow = {
   name: 'contracts_contract_renewal_draft',
   label: 'Create Renewal Draft Before End Date',
   description:
-    'When a non-auto-renewing active contract is within its renewal-notice window, drop a draft renewal into the owner\'s queue.',
+    "When a non-auto-renewing active contract is within its renewal-notice window, drop a draft renewal into the owner's queue.",
   type: 'record_change',
 
   variables: [{ name: 'contractId', type: 'text', isInput: true, isOutput: false }],
@@ -72,15 +72,13 @@ export const ContractRenewalDraftFlow: Flow = {
     },
     {
       id: 'notify_owner',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Owner',
       config: {
-        actionType: 'notification',
         recipients: ['{parent.owner}'],
         title: 'Renewal draft ready: {parent.title}',
-        body:
-          'A draft renewal for "{parent.title}" was prepared. End date approaching ({parent.end_date}). Review and send.',
-        link: '/objects/contracts_contract/{draft.id}',
+        body: 'A draft renewal for "{parent.title}" was prepared. End date approaching ({parent.end_date}). Review and send.',
+        actionUrl: '/objects/contracts_contract/{draft.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

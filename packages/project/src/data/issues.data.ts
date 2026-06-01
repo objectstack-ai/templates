@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { defineDataset } from '@objectstack/spec/data';
-import { Issue } from '../objects/pm_issue.object';
+import { Issue } from '../objects/pm_issue.object.js';
 
 /**
  * Issues for the sample projects.

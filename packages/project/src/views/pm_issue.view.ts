@@ -44,11 +44,8 @@ export const IssueViews = defineView({
       name: 'open_issues',
       type: 'grid',
       label: 'Open Issues',
-      data: {
-        provider: 'object',
-        object: 'pm_issue',
-        filter: 'status == "open"',
-      },
+      data: { provider: 'object', object: 'pm_issue' },
+      filter: [{ field: 'status', operator: 'equals', value: 'open' }],
       columns: [
         { field: 'issue_number', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },
@@ -65,11 +62,8 @@ export const IssueViews = defineView({
       name: 'bug_issues',
       type: 'grid',
       label: 'Bugs',
-      data: {
-        provider: 'object',
-        object: 'pm_issue',
-        filter: 'type == "bug"',
-      },
+      data: { provider: 'object', object: 'pm_issue' },
+      filter: [{ field: 'type', operator: 'equals', value: 'bug' }],
       columns: [
         { field: 'issue_number', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },
@@ -85,11 +79,8 @@ export const IssueViews = defineView({
       name: 'blocker_issues',
       type: 'grid',
       label: 'Blockers',
-      data: {
-        provider: 'object',
-        object: 'pm_issue',
-        filter: 'type == "blocker" && status == "open"',
-      },
+      data: { provider: 'object', object: 'pm_issue' },
+      filter: [{ field: 'type', operator: 'equals', value: 'blocker' }, { field: 'status', operator: 'equals', value: 'open' }],
       columns: [
         { field: 'issue_number', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },

@@ -11,8 +11,7 @@ type Flow = Automation.Flow;
 export const ExpenseSubmittedFlow: Flow = {
   name: 'expense_report_submitted',
   label: 'Notify Approver on Submit',
-  description:
-    'When an expense report is submitted, alert the expense-manager role to review it.',
+  description: 'When an expense report is submitted, alert the expense-manager role to review it.',
   type: 'record_change',
 
   variables: [{ name: 'reportId', type: 'text', isInput: true, isOutput: false }],
@@ -40,15 +39,13 @@ export const ExpenseSubmittedFlow: Flow = {
     },
     {
       id: 'notify_manager',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Manager',
       config: {
-        actionType: 'notification',
         recipients: ['role:expense_manager'],
         title: 'Expense report awaiting approval: {report.title}',
-        body:
-          'Report "{report.title}" for {report.total_amount} ({report.cost_center}) is awaiting your approval.',
-        link: '/objects/expense_report/{report.id}',
+        body: 'Report "{report.title}" for {report.total_amount} ({report.cost_center}) is awaiting your approval.',
+        actionUrl: '/objects/expense_report/{report.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

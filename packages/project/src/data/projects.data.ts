@@ -2,7 +2,7 @@
 
 import { defineDataset } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
-import { Project } from '../objects/pm_project.object';
+import { Project } from '../objects/pm_project.object.js';
 
 /**
  * 3 sample projects covering different states and risk profiles:

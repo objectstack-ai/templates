@@ -47,8 +47,7 @@ export const SignalToTopicPromotionFlow: Flow = {
       config: {
         objectName: 'content_topic',
         values: {
-          title:
-            '{signal.recommended_topic_title}',
+          title: '{signal.recommended_topic_title}',
           brief:
             'Promoted from signal "{signal.headline}". Source: {signal.source_url}.\n\n{signal.summary}',
           pillar: 'industry_insight',
@@ -72,15 +71,13 @@ export const SignalToTopicPromotionFlow: Flow = {
     },
     {
       id: 'notify',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Owner',
       config: {
-        actionType: 'notification',
         recipients: ['{signal.created_by}'],
         title: 'Topic ready: {topic.title}',
-        body:
-          'Signal "{signal.headline}" was promoted into a new topic. Draft when you have a slot.',
-        link: '/objects/content_topic/{topic.id}',
+        body: 'Signal "{signal.headline}" was promoted into a new topic. Draft when you have a slot.',
+        actionUrl: '/objects/content_topic/{topic.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

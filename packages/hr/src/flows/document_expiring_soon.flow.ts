@@ -27,8 +27,7 @@ export const DocumentExpiringSoonFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'hr_document',
-        criteria:
-          'expires_at != NULL AND expires_at >= TODAY() AND expires_at <= TODAY() + 30',
+        criteria: 'expires_at != NULL AND expires_at >= TODAY() AND expires_at <= TODAY() + 30',
       },
     },
     {
@@ -53,15 +52,13 @@ export const DocumentExpiringSoonFlow: Flow = {
     },
     {
       id: 'notify_hr',
-      type: 'script',
+      type: 'notify',
       label: 'Notify HR',
       config: {
-        actionType: 'notification',
         recipients: ['role:hr_admin', '{emp.user}'],
         title: 'Document expiring: {doc.name}',
-        body:
-          '{doc.name} ({doc.doc_type}) for {emp.full_name} expires {doc.expires_at}.',
-        link: '/objects/hr_document/{doc.id}',
+        body: '{doc.name} ({doc.doc_type}) for {emp.full_name} expires {doc.expires_at}.',
+        actionUrl: '/objects/hr_document/{doc.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

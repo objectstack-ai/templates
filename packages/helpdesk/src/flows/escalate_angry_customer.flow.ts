@@ -12,8 +12,7 @@ type Flow = Automation.Flow;
 export const EscalateAngryCustomerFlow: Flow = {
   name: 'helpdesk_escalate_angry_customer',
   label: 'Escalate When Customer is Angry',
-  description:
-    'On angry sentiment + high/urgent priority, escalate to team manager.',
+  description: 'On angry sentiment + high/urgent priority, escalate to team manager.',
   type: 'record_change',
 
   variables: [{ name: 'ticketId', type: 'text', isInput: true, isOutput: false }],
@@ -52,15 +51,13 @@ export const EscalateAngryCustomerFlow: Flow = {
     },
     {
       id: 'notify_manager',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Team Manager',
       config: {
-        actionType: 'notification',
         recipients: ['{ticket.team.manager}'],
         title: 'Angry customer: {ticket.ticket_number}',
-        body:
-          'AI detected angry sentiment on {priority} ticket "{ticket.name}" from {ticket.customer}. Intervene now.',
-        link: '/objects/helpdesk_ticket/{ticket.id}',
+        body: 'AI detected angry sentiment on {priority} ticket "{ticket.name}" from {ticket.customer}. Intervene now.',
+        actionUrl: '/objects/helpdesk_ticket/{ticket.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

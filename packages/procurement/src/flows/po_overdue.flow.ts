@@ -41,15 +41,13 @@ export const POOverdueFlow: Flow = {
     },
     {
       id: 'notify_buyer',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Buyer',
       config: {
-        actionType: 'notification',
         recipients: ['{po.owner}'],
         title: 'PO overdue: {po.po_number}',
-        body:
-          'PO "{po.po_number}" with {po.vendor} was expected on {po.expected_delivery} but is still {po.status}. Follow up with the vendor.',
-        link: '/objects/procurement_order/{po.id}',
+        body: 'PO "{po.po_number}" with {po.vendor} was expected on {po.expected_delivery} but is still {po.status}. Follow up with the vendor.',
+        actionUrl: '/objects/procurement_order/{po.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

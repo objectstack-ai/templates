@@ -6,6 +6,56 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 
 ## [Unreleased]
 
+### Changed
+- Upgraded all templates to `@objectstack/* ^7.4.1` (from `^7.3.0`).
+- **Approvals migrated to the 7.4.x flow-node model (ADR-0019).** The standalone
+  `ApprovalProcess` export and the stack-level `approvals:` key were removed in
+  7.4.x; approvals are now an `approval` node on a `record_change` flow whose
+  `approve` / `reject` out-edges carry the decision branches. Reworked
+  `packages/expense` (`expense_approval.flow.ts`) and `packages/content`
+  (`publish_approval.flow.ts`) accordingly and deleted their `src/approvals/`
+  directories.
+- **Repaired `packages/project`** (previously did not typecheck): rewrote both
+  state machines to the canonical `StateMachineConfig` (XState) shape and
+  `stateMachines: { lifecycle }` wiring; fixed flow `type: 'scheduled'` →
+  `'schedule'` and converted condition-node out-edges to
+  `type: 'conditional'` + `condition` / `isDefault`; moved view `filter` out of
+  the `data` provider to the view-level array form; normalised ESM relative
+  imports to `.js`; and wired the three flows back into the stack.
+
+- **Flow capability re-evaluation against the 7.4.x node registry.**
+  - Notifications now use the real builtin **`notify`** node (delivers via the
+    messaging service — inbox/email/push) instead of `script` +
+    `actionType: 'notification'`, which the 7.4.x script executor treats as a
+    **no-op** (log only). Migrated all 21 notification nodes + 2 templated-email
+    nodes (`actionType: 'email'`, also a log-only stub → `notify` with
+    `channels: ['email']`) across todo, expense, content, contracts, helpdesk,
+    hr, procurement, compliance, project. `link:` → `actionUrl:` to match the
+    `notify` config.
+  - `packages/project` flows used node types with **no runtime executor**
+    (`query`, `foreach`, `condition`) — they built but could never run. Rewrote
+    to the registered builtins (`get_record`, `loop`, `decision`) with
+    object-form filters, and wired the three flows into the stack. (The AI /
+    scheduled-scan logic in these flows remains a documented v0 stub:
+    `invoke_function` targets and per-item iteration depend on engine features
+    not yet wired.)
+
+- **QA scenario fixtures rewritten + runnable.** `packages/todo` and
+  `packages/hr` shipped obsolete `qa/*.test.json` (both were copies of an old
+  todo suite targeting removed objects `project`/`task`/`task_label`). Rewrote
+  them against the real schemas (todo: `todo_task`/`todo_label` lifecycle,
+  labels, due-date round-trip; hr: `hr_employee` onboarding, `hr_time_off_request`
+  draft→submitted→approved, `hr_document`). Added `scripts/run-qa.mjs`, a small
+  runner that authenticates (better-auth sign-up) and executes the scenarios
+  against the versioned data API — needed because the `objectstack test` adapter
+  bundled in `@objectstack/core` 7.4.x targets `/api/data/<object>` while the
+  7.4.x REST plugin serves `/api/v1/data/<object>` (so the bundled runner 404s).
+  Both suites pass green (`pnpm --filter @objectlab/<todo|hr> test:qa` against a
+  running `objectstack dev`). Each template's `test` script now runs
+  `objectstack build` (the schema/protocol validation gate).
+
+All nine templates pass `tsc --noEmit` and `objectstack build` on 7.4.1.
+
 ### Added
 - `packages/expense` — employee expense & reimbursement template (v0). 3
   objects (`report`, `line`, `category`), report lifecycle state machine

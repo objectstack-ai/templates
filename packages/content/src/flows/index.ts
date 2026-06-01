@@ -2,12 +2,14 @@
 
 import { SignalToTopicPromotionFlow } from './signal_to_topic_promotion.flow';
 import { CtaCreationDefaultFlow } from './cta_creation_default.flow';
+import { PublishApprovalFlow } from './publish_approval.flow';
 import { PublicationRollupFlow } from './publication_rollup.flow';
 import { StampLifecycleTimestampsFlow } from './stamp_lifecycle_timestamps.flow';
 
 export const allFlows = [
   SignalToTopicPromotionFlow,
   CtaCreationDefaultFlow,
+  PublishApprovalFlow,
   PublicationRollupFlow,
   StampLifecycleTimestampsFlow,
 ];

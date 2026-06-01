@@ -154,7 +154,9 @@ export const Risk = ObjectSchema.create({
     }),
   },
 
-  stateMachine: RiskStateMachine,
+  stateMachines: {
+    lifecycle: RiskStateMachine,
+  },
 
   enable: {
     trackHistory: true,

@@ -13,9 +13,8 @@ type Flow = Automation.Flow;
 export const MilestoneDeadlineWarningFlow: Flow = {
   name: 'pm_milestone_deadline_warning',
   label: 'Milestone Deadline Warning',
-  description:
-    'Alert project managers when milestones are approaching or overdue.',
-  type: 'scheduled',
+  description: 'Alert project managers when milestones are approaching or overdue.',
+  type: 'schedule',
 
   variables: [],
 
@@ -29,42 +28,36 @@ export const MilestoneDeadlineWarningFlow: Flow = {
       },
     },
     {
-      id: 'query_upcoming',
-      type: 'query',
-      label: 'Find Upcoming Milestones (7 days)',
+      id: 'query_open',
+      type: 'get_record',
+      label: 'Find Open Milestones',
       config: {
         objectName: 'pm_milestone',
-        filter: 'status IN ["not_started", "in_progress"] AND planned_date BETWEEN TODAY() AND DATE_ADD(TODAY(), 7)',
-        filterDialect: 'objectql',
+        // Open milestones; the deadline window (due ≤ 7 days / overdue) is
+        // refined downstream against planned_date.
+        filter: { status: { $in: ['not_started', 'in_progress'] } },
+        limit: 500,
+        outputVariable: 'openMilestones',
       },
     },
     {
       id: 'notify_upcoming',
-      type: 'script',
+      type: 'notify',
       label: 'Notify PM of Upcoming Milestones',
       config: {
-        actionType: 'send_notification',
-        to: '{query_upcoming.records[*].project.project_manager}',
-        message: 'Milestone "{{milestone.name}}" due {{milestone.planned_date}}',
-      },
-    },
-    {
-      id: 'query_overdue',
-      type: 'query',
-      label: 'Find Overdue Milestones',
-      config: {
-        objectName: 'pm_milestone',
-        filter: 'status IN ["not_started", "in_progress"] AND planned_date < TODAY()',
-        filterDialect: 'objectql',
+        recipients: ['{openMilestones.records[*].project.project_manager}'],
+        title: 'Milestones approaching their planned date',
+        body: 'One or more milestones you own are due within the next 7 days. Review the milestone board.',
+        actionUrl: '/objects/pm_milestone',
       },
     },
     {
       id: 'mark_missed',
       type: 'update_record',
-      label: 'Mark as Missed',
+      label: 'Mark Overdue as Missed',
       config: {
         objectName: 'pm_milestone',
-        recordIds: '{query_overdue.records[*].id}',
+        recordIds: '{openMilestones.records[*].id}',
         values: {
           status: 'missed',
         },
@@ -72,10 +65,9 @@ export const MilestoneDeadlineWarningFlow: Flow = {
     },
     {
       id: 'escalate_overdue',
-      type: 'script',
+      type: 'notify',
       label: 'Escalate to PMO',
       config: {
-        actionType: 'send_notification',
         to: 'pmo_team',
         message: 'OVERDUE: Milestone "{{milestone.name}}" in project {{milestone.project.name}}',
       },
@@ -88,11 +80,10 @@ export const MilestoneDeadlineWarningFlow: Flow = {
   ],
 
   edges: [
-    { id: 'e1', source: 'start', target: 'query_upcoming', type: 'default' },
-    { id: 'e2', source: 'query_upcoming', target: 'notify_upcoming', type: 'default' },
-    { id: 'e3', source: 'notify_upcoming', target: 'query_overdue', type: 'default' },
-    { id: 'e4', source: 'query_overdue', target: 'mark_missed', type: 'default' },
-    { id: 'e5', source: 'mark_missed', target: 'escalate_overdue', type: 'default' },
-    { id: 'e6', source: 'escalate_overdue', target: 'end', type: 'default' },
+    { id: 'e1', source: 'start', target: 'query_open', type: 'default' },
+    { id: 'e2', source: 'query_open', target: 'notify_upcoming', type: 'default' },
+    { id: 'e3', source: 'notify_upcoming', target: 'mark_missed', type: 'default' },
+    { id: 'e4', source: 'mark_missed', target: 'escalate_overdue', type: 'default' },
+    { id: 'e5', source: 'escalate_overdue', target: 'end', type: 'default' },
   ],
 };

@@ -34,7 +34,8 @@ export const PublicationRollupFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'content_metric',
-        criteria: 'ISCHANGED(views) OR ISCHANGED(clicks) OR ISCHANGED(signups) OR ISCHANGED(revenue) OR ISNEW()',
+        criteria:
+          'ISCHANGED(views) OR ISCHANGED(clicks) OR ISCHANGED(signups) OR ISCHANGED(revenue) OR ISNEW()',
       },
     },
     {

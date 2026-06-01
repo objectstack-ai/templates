@@ -51,15 +51,13 @@ export const SlaResolutionBreachFlow: Flow = {
     },
     {
       id: 'notify_manager',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Team Manager',
       config: {
-        actionType: 'notification',
         recipients: ['{ticket.team.manager}'],
         title: 'SLA breached: {ticket.ticket_number}',
-        body:
-          'Ticket "{ticket.name}" missed its resolution SLA ({ticket.resolution_due_at}). Auto-escalated.',
-        link: '/objects/helpdesk_ticket/{ticket.id}',
+        body: 'Ticket "{ticket.name}" missed its resolution SLA ({ticket.resolution_due_at}). Auto-escalated.',
+        actionUrl: '/objects/helpdesk_ticket/{ticket.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

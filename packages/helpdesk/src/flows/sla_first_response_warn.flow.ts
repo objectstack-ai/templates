@@ -51,15 +51,13 @@ export const SlaFirstResponseWarnFlow: Flow = {
     },
     {
       id: 'notify_assignee',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Assignee',
       config: {
-        actionType: 'notification',
         recipients: ['{ticket.assignee}'],
         title: 'First-response SLA at risk: {ticket.ticket_number}',
-        body:
-          'Ticket "{ticket.name}" from {ticket.customer} is near its first-response deadline ({ticket.first_response_due_at}). Reply now.',
-        link: '/objects/helpdesk_ticket/{ticket.id}',
+        body: 'Ticket "{ticket.name}" from {ticket.customer} is near its first-response deadline ({ticket.first_response_due_at}). Reply now.',
+        actionUrl: '/objects/helpdesk_ticket/{ticket.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

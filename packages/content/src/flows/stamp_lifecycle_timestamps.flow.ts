@@ -51,14 +51,13 @@ export const StampLifecycleTimestampsFlow: Flow = {
     },
     {
       id: 'notify_editor',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Editor',
       config: {
-        actionType: 'notification',
         recipients: ['{piece.editor}'],
         title: 'Review ready: {piece.title}',
         body: '{piece.assignee} submitted "{piece.title}" for your review.',
-        link: '/objects/content_piece/{piece.id}',
+        actionUrl: '/objects/content_piece/{piece.id}',
       },
     },
     {
@@ -71,14 +70,13 @@ export const StampLifecycleTimestampsFlow: Flow = {
     },
     {
       id: 'notify_published',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Writer',
       config: {
-        actionType: 'notification',
         recipients: ['{piece.assignee}'],
         title: 'Live: {piece.title}',
         body: '"{piece.title}" is published. Metrics will appear after the first snapshot is recorded.',
-        link: '/objects/content_piece/{piece.id}',
+        actionUrl: '/objects/content_piece/{piece.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

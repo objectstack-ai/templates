@@ -14,8 +14,7 @@ type Flow = Automation.Flow;
 export const AutoCloseResolvedFlow: Flow = {
   name: 'helpdesk_auto_close_resolved',
   label: 'Auto-Close Long-Resolved Tickets',
-  description:
-    'Close tickets that have been resolved for 7 days with no further customer reply.',
+  description: 'Close tickets that have been resolved for 7 days with no further customer reply.',
   type: 'record_change',
 
   variables: [{ name: 'ticketId', type: 'text', isInput: true, isOutput: false }],

@@ -26,8 +26,7 @@ export const PRApprovalRequiredFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'procurement_request',
-        criteria:
-          'status == "submitted" && estimated_amount != null && estimated_amount >= 5000',
+        criteria: 'status == "submitted" && estimated_amount != null && estimated_amount >= 5000',
         criteriaDialect: 'cel',
       },
     },
@@ -43,15 +42,13 @@ export const PRApprovalRequiredFlow: Flow = {
     },
     {
       id: 'notify_finance',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Finance',
       config: {
-        actionType: 'notification',
         recipients: ['role:finance_approver'],
         title: 'PR awaiting approval: {pr.title}',
-        body:
-          'PR "{pr.title}" for {pr.estimated_amount} ({pr.category}) requires approval. Needed by {pr.needed_by}.',
-        link: '/objects/procurement_request/{pr.id}',
+        body: 'PR "{pr.title}" for {pr.estimated_amount} ({pr.category}) requires approval. Needed by {pr.needed_by}.',
+        actionUrl: '/objects/procurement_request/{pr.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

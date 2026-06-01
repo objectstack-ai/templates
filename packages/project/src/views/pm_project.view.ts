@@ -57,11 +57,8 @@ export const ProjectViews = defineView({
       name: 'active_projects',
       type: 'grid',
       label: 'Active Projects',
-      data: {
-        provider: 'object',
-        object: 'pm_project',
-        filter: 'status == "active"',
-      },
+      data: { provider: 'object', object: 'pm_project' },
+      filter: [{ field: 'status', operator: 'equals', value: 'active' }],
       columns: [
         { field: 'code', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },
@@ -78,11 +75,8 @@ export const ProjectViews = defineView({
       name: 'at_risk_projects',
       type: 'grid',
       label: 'At Risk Projects',
-      data: {
-        provider: 'object',
-        object: 'pm_project',
-        filter: 'health == "at_risk" || ai_risk_score >= 70',
-      },
+      data: { provider: 'object', object: 'pm_project' },
+      filter: [{ field: 'health', operator: 'equals', value: 'at_risk' }],
       columns: [
         { field: 'code', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },
@@ -98,11 +92,8 @@ export const ProjectViews = defineView({
       name: 'my_projects',
       type: 'grid',
       label: 'My Projects',
-      data: {
-        provider: 'object',
-        object: 'pm_project',
-        filter: 'project_manager == $currentUser.id',
-      },
+      data: { provider: 'object', object: 'pm_project' },
+      filter: [{ field: 'project_manager', operator: 'equals', value: '{current_user_id}' }],
       columns: [
         { field: 'code', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },

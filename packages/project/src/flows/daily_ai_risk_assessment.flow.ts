@@ -24,11 +24,9 @@ export const DailyAIRiskAssessmentFlow: Flow = {
   label: 'Daily AI Risk Assessment',
   description:
     'Run AI predictions for active projects: completion probability, delay forecast, risk score.',
-  type: 'scheduled',
+  type: 'schedule',
 
-  variables: [
-    { name: 'projectId', type: 'text', isInput: true, isOutput: false },
-  ],
+  variables: [{ name: 'projectId', type: 'text', isInput: true, isOutput: false }],
 
   nodes: [
     {
@@ -41,20 +39,21 @@ export const DailyAIRiskAssessmentFlow: Flow = {
     },
     {
       id: 'query_active_projects',
-      type: 'query',
+      type: 'get_record',
       label: 'Find Active Projects',
       config: {
         objectName: 'pm_project',
-        filter: 'status IN ["active", "at_risk"]',
-        filterDialect: 'objectql',
+        filter: { status: { $in: ['active', 'at_risk'] } },
+        limit: 500,
+        outputVariable: 'activeProjects',
       },
     },
     {
       id: 'foreach_project',
-      type: 'foreach',
+      type: 'loop',
       label: 'For Each Project',
       config: {
-        collection: '{query_active_projects.records}',
+        collection: '{activeProjects.records}',
         iteratorVar: 'project',
       },
     },
@@ -88,7 +87,7 @@ export const DailyAIRiskAssessmentFlow: Flow = {
     },
     {
       id: 'check_high_risk',
-      type: 'condition',
+      type: 'decision',
       label: 'Risk Score > 70?',
       config: {
         condition: 'project.ai_risk_score > 70',
@@ -97,10 +96,9 @@ export const DailyAIRiskAssessmentFlow: Flow = {
     },
     {
       id: 'notify_pmo',
-      type: 'script',
+      type: 'notify',
       label: 'Notify PMO of High Risk',
       config: {
-        actionType: 'send_notification',
         to: 'pmo_team',
         message: 'Project {{project.name}} has high risk score: {{project.ai_risk_score}}',
       },
@@ -123,8 +121,21 @@ export const DailyAIRiskAssessmentFlow: Flow = {
     { id: 'e3', source: 'foreach_project', target: 'ai_prediction', type: 'default' },
     { id: 'e4', source: 'ai_prediction', target: 'update_project', type: 'default' },
     { id: 'e5', source: 'update_project', target: 'check_high_risk', type: 'default' },
-    { id: 'e6', source: 'check_high_risk', target: 'notify_pmo', type: 'true' },
-    { id: 'e7', source: 'check_high_risk', target: 'end_loop', type: 'false' },
+    {
+      id: 'e6',
+      source: 'check_high_risk',
+      target: 'notify_pmo',
+      type: 'conditional',
+      condition: 'project.ai_risk_score > 70',
+      label: 'High risk',
+    },
+    {
+      id: 'e7',
+      source: 'check_high_risk',
+      target: 'end_loop',
+      isDefault: true,
+      label: 'Acceptable',
+    },
     { id: 'e8', source: 'notify_pmo', target: 'end_loop', type: 'default' },
     { id: 'e9', source: 'end_loop', target: 'end', type: 'default' },
   ],

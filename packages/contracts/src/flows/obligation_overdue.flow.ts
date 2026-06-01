@@ -38,15 +38,13 @@ export const ObligationOverdueFlow: Flow = {
     },
     {
       id: 'notify',
-      type: 'script',
+      type: 'notify',
       label: 'Notify Assignee',
       config: {
-        actionType: 'notification',
         recipients: ['{obligationRecord.assignee}'],
         title: 'Obligation overdue: {obligationRecord.summary}',
-        body:
-          'Obligation "{obligationRecord.summary}" on contract {obligationRecord.contract} is past its due date ({obligationRecord.due_date}).',
-        link: '/objects/contracts_obligation/{obligationRecord.id}',
+        body: 'Obligation "{obligationRecord.summary}" on contract {obligationRecord.contract} is past its due date ({obligationRecord.due_date}).',
+        actionUrl: '/objects/contracts_obligation/{obligationRecord.id}',
       },
     },
     { id: 'end', type: 'end', label: 'End' },

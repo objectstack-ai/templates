@@ -1,66 +1,66 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import type { StateMachineSchema } from '@objectstack/spec/automation';
+import { StateMachineConfig } from '@objectstack/spec/automation';
 
 /**
  * Risk status state machine.
- * Lifecycle: identified → assessed → mitigating → monitoring → closed/realized
+ * Lifecycle: identified → assessing → mitigating → monitoring → closed/realized
  */
-export const RiskStateMachine: StateMachineSchema = {
-  field: 'status',
+export const RiskStateMachine: StateMachineConfig = {
+  id: 'risk_lifecycle',
   initial: 'identified',
-
-  states: [
-    {
-      value: 'identified',
-      label: 'Identified',
-      description: 'Risk has been logged.',
-      actions: [],
+  states: {
+    identified: {
+      on: {
+        ASSESS: { target: 'assessing', description: 'Begin impact / likelihood assessment.' },
+        CLOSE: { target: 'closed', description: 'Not relevant — close it out.' },
+      },
+      meta: {
+        aiInstructions:
+          'Risk has been logged. Score impact and likelihood before moving to assessing.',
+      },
     },
-    {
-      value: 'assessing',
-      label: 'Assessing',
-      description: 'Impact and likelihood being evaluated.',
-      actions: [],
+    assessing: {
+      on: {
+        MITIGATE: { target: 'mitigating', description: 'Begin mitigation work.' },
+        MONITOR: { target: 'monitoring', description: 'Accept and watch for triggers.' },
+        CLOSE: { target: 'closed', description: 'Close the risk.' },
+      },
+      meta: {
+        aiInstructions:
+          'Risk is being assessed. Recommend mitigate vs. accept-and-monitor based on score.',
+      },
     },
-    {
-      value: 'mitigating',
-      label: 'Mitigating',
-      description: 'Actively working to reduce risk.',
-      actions: [],
+    mitigating: {
+      on: {
+        MITIGATED: { target: 'monitoring', description: 'Mitigation complete — monitor residual.' },
+        REALIZE: { target: 'realized', description: 'Risk has occurred.' },
+      },
+      meta: {
+        aiInstructions: 'Mitigation in progress. Track owner and due date on mitigation actions.',
+      },
     },
-    {
-      value: 'monitoring',
-      label: 'Monitoring',
-      description: 'Mitigation in place, watching for triggers.',
-      actions: [],
+    monitoring: {
+      on: {
+        REACTIVATE: { target: 'mitigating', description: 'Triggers re-emerged — re-mitigate.' },
+        CLOSE: { target: 'closed', description: 'Residual risk acceptable — close.' },
+        REALIZE: { target: 'realized', description: 'Risk has occurred.' },
+      },
+      meta: {
+        aiInstructions: 'Mitigation in place. Watch for trigger conditions; close when stable.',
+      },
     },
-    {
-      value: 'closed',
-      label: 'Closed',
-      description: 'Risk no longer relevant.',
-      terminal: true,
-      actions: [],
+    closed: {
+      type: 'final',
+      meta: {
+        aiInstructions: 'Risk closed and terminal. Do not change status.',
+      },
     },
-    {
-      value: 'realized',
-      label: 'Realized',
-      description: 'Risk has occurred, now an issue.',
-      terminal: true,
-      actions: [],
+    realized: {
+      type: 'final',
+      meta: {
+        aiInstructions: 'Risk realized and terminal — track follow-up as an issue.',
+      },
     },
-  ],
-
-  transitions: [
-    { from: 'identified', to: 'assessing', label: 'Start Assessment' },
-    { from: 'identified', to: 'closed', label: 'Close (Not Relevant)' },
-    { from: 'assessing', to: 'mitigating', label: 'Begin Mitigation' },
-    { from: 'assessing', to: 'monitoring', label: 'Accept & Monitor' },
-    { from: 'assessing', to: 'closed', label: 'Close' },
-    { from: 'mitigating', to: 'monitoring', label: 'Mitigation Complete' },
-    { from: 'mitigating', to: 'realized', label: 'Risk Realized' },
-    { from: 'monitoring', to: 'mitigating', label: 'Re-Activate Mitigation' },
-    { from: 'monitoring', to: 'closed', label: 'Close' },
-    { from: 'monitoring', to: 'realized', label: 'Risk Realized' },
-  ],
+  },
 };

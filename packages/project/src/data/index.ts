@@ -1,10 +1,10 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { projects } from './projects.data.ts';
-import { milestones } from './milestones.data.ts';
-import { risks } from './risks.data.ts';
-import { issues } from './issues.data.ts';
-import { resources } from './resources.data.ts';
+import { projects } from './projects.data.js';
+import { milestones } from './milestones.data.js';
+import { risks } from './risks.data.js';
+import { issues } from './issues.data.js';
+import { resources } from './resources.data.js';
 
 /**
  * All seed datasets, loaded in dependency order:
