@@ -55,7 +55,13 @@ export const en: TranslationData = {
         request_number: { label: 'PR Number' },
         requester: { label: 'Requester' },
         vendor: { label: 'Preferred Vendor' },
-        category: { label: 'Category' },
+        category: {
+          label: 'Category',
+          options: {
+            saas: 'Software / SaaS', hardware: 'Hardware', services: 'Professional Services',
+            marketing: 'Marketing', facilities: 'Facilities', other: 'Other',
+          },
+        },
         status: {
           label: 'Status',
           options: {
@@ -100,7 +106,10 @@ export const en: TranslationData = {
         owner: { label: 'Buyer' },
         total_amount: { label: 'Total Amount' },
         received_amount: { label: 'Received Amount' },
-        payment_terms: { label: 'Payment Terms' },
+        payment_terms: {
+          label: 'Payment Terms',
+          options: { net_15: 'Net 15', net_30: 'Net 30', net_45: 'Net 45', net_60: 'Net 60', upfront: 'Upfront' },
+        },
         is_fully_received: { label: 'Fully Received' },
         order_date: { label: 'Order Date' },
         expected_delivery: { label: 'Expected Delivery' },
