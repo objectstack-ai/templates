@@ -46,7 +46,13 @@ export const zhCN: TranslationData = {
         request_number: { label: '申请单号' },
         requester: { label: '申请人' },
         vendor: { label: '建议供应商' },
-        category: { label: '类别' },
+        category: {
+          label: '类别',
+          options: {
+            saas: '软件 / SaaS', hardware: '硬件', services: '专业服务',
+            marketing: '市场营销', facilities: '行政设施', other: '其他',
+          },
+        },
         status: {
           label: '状态',
           options: {
@@ -88,7 +94,10 @@ export const zhCN: TranslationData = {
         owner: { label: '采购员' },
         total_amount: { label: '订单金额' },
         received_amount: { label: '已收货金额' },
-        payment_terms: { label: '付款条款' },
+        payment_terms: {
+          label: '付款条款',
+          options: { net_15: '15 天', net_30: '30 天', net_45: '45 天', net_60: '60 天', upfront: '预付' },
+        },
         is_fully_received: { label: '已全部收货' },
         order_date: { label: '下单日期' },
         expected_delivery: { label: '预计到货' },

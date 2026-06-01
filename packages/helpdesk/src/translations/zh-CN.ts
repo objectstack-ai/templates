@@ -46,7 +46,10 @@ export const zhCN: TranslationData = {
           label: 'AI 情感',
           options: { positive: '积极', neutral: '中性', frustrated: '不满', angry: '愤怒' },
         },
-        ai_priority_suggestion: { label: 'AI 建议优先级' },
+        ai_priority_suggestion: {
+          label: 'AI 建议优先级',
+          options: { low: '低', normal: '普通', high: '高', urgent: '紧急' },
+        },
         ai_language: { label: 'AI 识别语言' },
         ai_suggested_reply: { label: 'AI 建议回复' },
         ai_suggested_kb_ids: { label: 'AI 推荐知识库' },

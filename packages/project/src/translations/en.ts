@@ -3,99 +3,169 @@
 import type { TranslationData } from '@objectstack/spec/system';
 
 /**
- * English translations for Project Management template.
+ * English translations for the AI Project Management template.
  *
- * Shape follows `TranslationData`: field labels live under
- * `objects.<obj>.fields.<field>`, plural labels use `pluralLabel`, and the app
- * shell is translated under `apps.<app>`.
+ * Shape follows `TranslationData`: per-object label/pluralLabel/description,
+ * field labels + select options under `objects.<obj>.fields.<field>`, list-view
+ * labels under `objects.<obj>._views.<view>`, and the app shell under `apps.pm`.
+ * Field names mirror the `*.object.ts` definitions exactly.
  */
 export const en: TranslationData = {
   objects: {
     pm_project: {
       label: 'Project',
       pluralLabel: 'Projects',
+      description: 'A time-bound initiative with milestones, resources, and AI-powered risk prediction.',
       fields: {
-        code: { label: 'Project Code' },
         name: { label: 'Project Name' },
         description: { label: 'Description' },
-        status: { label: 'Status' },
-        priority: { label: 'Priority' },
-        health: { label: 'Health' },
+        status: {
+          label: 'Status',
+          options: {
+            planning: 'Planning', active: 'Active', at_risk: 'At Risk',
+            on_hold: 'On Hold', completed: 'Completed', cancelled: 'Cancelled',
+          },
+        },
+        priority: {
+          label: 'Priority',
+          options: { low: 'Low', medium: 'Medium', high: 'High', critical: 'Critical' },
+        },
+        project_type: {
+          label: 'Type',
+          options: { internal: 'Internal', client: 'Client', rnd: 'R&D', maintenance: 'Maintenance' },
+        },
         start_date: { label: 'Start Date' },
-        target_end_date: { label: 'Target End Date' },
+        planned_end_date: { label: 'Planned End Date' },
         actual_end_date: { label: 'Actual End Date' },
-        progress_percent: { label: 'Progress %' },
-        ai_completion_probability: { label: 'AI Completion Probability %' },
-        ai_delay_days: { label: 'AI Delay Days' },
+        ai_completion_probability: { label: 'AI Completion Probability' },
+        ai_delay_days: { label: 'AI Predicted Delay (Days)' },
         ai_risk_score: { label: 'AI Risk Score' },
-        ai_budget_variance_percent: { label: 'AI Budget Variance %' },
+        ai_budget_variance_forecast: { label: 'AI Budget Variance %' },
         ai_resource_bottleneck: { label: 'AI Resource Bottleneck' },
-        ai_recommended_action: { label: 'AI Recommended Action' },
+        ai_recommended_action: { label: 'AI Recommended Actions' },
+        ai_last_prediction_at: { label: 'Last AI Prediction' },
         planned_budget: { label: 'Planned Budget' },
         actual_cost: { label: 'Actual Cost' },
-        forecast_cost: { label: 'Forecast Cost' },
         project_manager: { label: 'Project Manager' },
         sponsor: { label: 'Sponsor' },
-        team_size: { label: 'Team Size' },
+        progress_percent: { label: 'Progress %' },
       },
+      _views: { all_projects: { label: 'All Projects' } },
     },
     pm_milestone: {
       label: 'Milestone',
       pluralLabel: 'Milestones',
+      description: 'A key delivery point or decision gate in a project timeline.',
       fields: {
         name: { label: 'Milestone Name' },
         description: { label: 'Description' },
         project: { label: 'Project' },
-        status: { label: 'Status' },
-        due_date: { label: 'Due Date' },
-        completed_at: { label: 'Completed At' },
-        is_critical_path: { label: 'Critical Path' },
+        status: {
+          label: 'Status',
+          options: {
+            not_started: 'Not Started', in_progress: 'In Progress',
+            completed: 'Completed', missed: 'Missed',
+          },
+        },
+        planned_date: { label: 'Planned Date' },
+        actual_date: { label: 'Actual Date' },
+        owner: { label: 'Owner' },
         deliverables: { label: 'Deliverables' },
       },
+      _views: { all_milestones: { label: 'All Milestones' } },
     },
     pm_risk: {
       label: 'Risk',
       pluralLabel: 'Risks',
+      description: 'A potential threat or uncertainty that could impact project delivery.',
       fields: {
-        risk_id: { label: 'Risk ID' },
-        name: { label: 'Risk Name' },
+        name: { label: 'Risk Title' },
         description: { label: 'Description' },
         project: { label: 'Project' },
-        category: { label: 'Category' },
-        status: { label: 'Status' },
-        impact: { label: 'Impact' },
-        likelihood: { label: 'Likelihood' },
-        priority: { label: 'Priority' },
+        status: {
+          label: 'Status',
+          options: {
+            identified: 'Identified', assessing: 'Assessing', mitigating: 'Mitigating',
+            monitoring: 'Monitoring', closed: 'Closed', realized: 'Realized',
+          },
+        },
+        category: {
+          label: 'Category',
+          options: {
+            technical: 'Technical', resource: 'Resource', schedule: 'Schedule',
+            budget: 'Budget', external: 'External', scope: 'Scope',
+          },
+        },
+        impact: {
+          label: 'Impact (Manual)',
+          options: { very_low: 'Very Low', low: 'Low', medium: 'Medium', high: 'High', very_high: 'Very High' },
+        },
+        likelihood: {
+          label: 'Likelihood (Manual)',
+          options: { very_low: 'Very Low', low: 'Low', medium: 'Medium', high: 'High', very_high: 'Very High' },
+        },
+        priority: { label: 'Risk Priority (Impact × Likelihood)' },
         ai_impact_score: { label: 'AI Impact Score' },
         ai_likelihood: { label: 'AI Likelihood' },
         ai_mitigation_suggestion: { label: 'AI Mitigation Suggestion' },
-        ai_similar_risks: { label: 'AI Similar Risks' },
-        response_strategy: { label: 'Response Strategy' },
-        response_plan: { label: 'Response Plan' },
-        response_owner: { label: 'Response Owner' },
-        response_cost: { label: 'Response Cost' },
+        ai_similar_risks: { label: 'AI Similar Past Risks' },
+        mitigation_plan: { label: 'Mitigation Plan' },
+        contingency_plan: { label: 'Contingency Plan' },
+        owner: { label: 'Risk Owner' },
       },
+      _views: { all_risks: { label: 'All Risks' } },
     },
     pm_issue: {
       label: 'Issue',
       pluralLabel: 'Issues',
+      description: 'A current problem that requires resolution.',
       fields: {
-        issue_number: { label: 'Issue #' },
-        name: { label: 'Issue Name' },
+        name: { label: 'Issue Title' },
         description: { label: 'Description' },
         project: { label: 'Project' },
-        type: { label: 'Type' },
-        status: { label: 'Status' },
-        priority: { label: 'Priority' },
-        reported_by: { label: 'Reported By' },
+        status: {
+          label: 'Status',
+          options: {
+            open: 'Open', in_progress: 'In Progress', blocked: 'Blocked',
+            resolved: 'Resolved', closed: 'Closed',
+          },
+        },
+        severity: {
+          label: 'Severity',
+          options: { low: 'Low', medium: 'Medium', high: 'High', critical: 'Critical' },
+        },
         assigned_to: { label: 'Assigned To' },
-        reported_at: { label: 'Reported At' },
-        resolved_at: { label: 'Resolved At' },
+        related_risk: { label: 'Related Risk' },
         resolution: { label: 'Resolution' },
       },
+      _views: { all_issues: { label: 'All Issues' } },
     },
-    pm_resource: { label: 'Resource', pluralLabel: 'Resources' },
-    pm_timesheet: { label: 'Timesheet', pluralLabel: 'Timesheets' },
+    pm_resource: {
+      label: 'Resource',
+      pluralLabel: 'Resources',
+      description: 'Team member or budget allocated to a project.',
+      fields: {
+        project: { label: 'Project' },
+        person: { label: 'Person' },
+        role: { label: 'Role' },
+        allocated_hours_per_week: { label: 'Allocated Hours/Week' },
+        start_date: { label: 'Allocation Start' },
+        end_date: { label: 'Allocation End' },
+      },
+    },
+    pm_timesheet: {
+      label: 'Timesheet Entry',
+      pluralLabel: 'Timesheet Entries',
+      description: 'Daily time tracking entry for a project.',
+      fields: {
+        project: { label: 'Project' },
+        person: { label: 'Person' },
+        work_date: { label: 'Work Date' },
+        hours: { label: 'Hours' },
+        description: { label: 'Description' },
+        billable: { label: 'Billable' },
+      },
+    },
   },
 
   apps: {

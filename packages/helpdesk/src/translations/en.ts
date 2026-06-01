@@ -46,7 +46,10 @@ export const en: TranslationData = {
           label: 'AI Sentiment',
           options: { positive: 'Positive', neutral: 'Neutral', frustrated: 'Frustrated', angry: 'Angry' },
         },
-        ai_priority_suggestion: { label: 'AI Suggested Priority' },
+        ai_priority_suggestion: {
+          label: 'AI Suggested Priority',
+          options: { low: 'Low', normal: 'Normal', high: 'High', urgent: 'Urgent' },
+        },
         ai_language: { label: 'AI Detected Language' },
         ai_suggested_reply: { label: 'AI Suggested Reply' },
         ai_suggested_kb_ids: { label: 'AI Suggested KB Articles' },
