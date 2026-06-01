@@ -154,4 +154,33 @@ export const en: TranslationData = {
       },
     },
   },
+  dashboards: {
+    agent_workbench_dashboard: {
+      label: 'Agent Workbench',
+      description: 'Your queue at a glance. Breaches, angry customers, AI-ready replies.',
+      widgets: {
+        my_open: { title: 'My Open Tickets' },
+        breaching_resolution: { title: 'SLA Breaching' },
+        angry: { title: 'Angry Customers' },
+        awaiting_triage: { title: 'Awaiting Triage' },
+        my_queue_table: { title: 'My Queue (Priority Sorted)' },
+        breaching_table: { title: 'SLA Breaches' },
+      },
+    },
+    manager_overview_dashboard: {
+      label: 'Support Manager Overview',
+      widgets: {
+        total_open: { title: 'Open Tickets' },
+        breaching_overview: { title: 'SLA Breaching' },
+        escalated: { title: 'Escalated' },
+        avg_csat: { title: 'Avg CSAT' },
+        tickets_by_status: { title: 'Tickets by Status' },
+        tickets_by_sentiment: { title: 'Sentiment Distribution' },
+        tickets_by_category: { title: 'AI Category Mix' },
+        tickets_by_channel: { title: 'Volume by Channel' },
+        recent_escalated: { title: 'Recently Escalated' },
+        resolutions_by_day: { title: 'Resolutions by Day (last 30 days)' },
+      },
+    },
+  },
 };

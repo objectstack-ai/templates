@@ -154,4 +154,33 @@ export const zhCN: TranslationData = {
       },
     },
   },
+  dashboards: {
+    agent_workbench_dashboard: {
+      label: '客服工作台',
+      description: '一眼掌握你的队列：即将超时、不满客户、AI 拟好的回复。',
+      widgets: {
+        my_open: { title: '我的待处理工单' },
+        breaching_resolution: { title: 'SLA 即将超时' },
+        angry: { title: '不满客户' },
+        awaiting_triage: { title: '待分类' },
+        my_queue_table: { title: '我的队列（按优先级）' },
+        breaching_table: { title: 'SLA 超时工单' },
+      },
+    },
+    manager_overview_dashboard: {
+      label: '客服经理总览',
+      widgets: {
+        total_open: { title: '待处理工单' },
+        breaching_overview: { title: 'SLA 即将超时' },
+        escalated: { title: '已升级' },
+        avg_csat: { title: '平均满意度' },
+        tickets_by_status: { title: '按状态分布' },
+        tickets_by_sentiment: { title: '情绪分布' },
+        tickets_by_category: { title: 'AI 分类占比' },
+        tickets_by_channel: { title: '按渠道分布' },
+        recent_escalated: { title: '最近升级' },
+        resolutions_by_day: { title: '每日解决量（近 30 天）' },
+      },
+    },
+  },
 };
