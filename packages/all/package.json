@@ -1,0 +1,27 @@
+{
+  "name": "@objectlab/all",
+  "version": "0.1.0",
+  "description": "Install-everything workspace — composes every ObjectStack template into one runtime, as if installed together from the marketplace.",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "compile": "node scripts/compile-marketplace.mjs",
+    "dev": "pnpm run compile && objectstack dev all --artifact dist/objectstack.json -p 4000 --fresh",
+    "start": "objectstack dev all --artifact dist/objectstack.json -p 4000"
+  },
+  "dependencies": {
+    "@objectstack/account": "^7.4.1",
+    "@objectstack/cli": "^7.4.1",
+    "@objectstack/driver-sqlite-wasm": "^7.4.1",
+    "@objectstack/runtime": "^7.4.1",
+    "sql.js": "^1.14.1"
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^12.10.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.33.0"
+}

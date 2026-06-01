@@ -55,6 +55,20 @@ that an LLM can read, diff, and safely modify without breaking the runtime.
 | [`packages/expense/`](./packages/expense) | Employee expense & reimbursement — multi-line reports, category policy, amount-tiered approval, reimbursement tracking | ✅ v0 | 4011 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/expense) |
 | `packages/sales-pipeline/` | Lite CRM (leads, opportunities, accounts) | 🚧 planned | 4007 | — |
 
+### Run them all at once
+
+Want every template in **one runtime, one app launcher** — as if you installed
+them all together from the marketplace? Use the `all` aggregator:
+
+```bash
+pnpm dev:all      # builds every template, composes them, boots on :4000
+```
+
+It compiles each template's artifact into a single **environment** bundle and
+serves it (admin: `admin@objectos.ai` / `admin123`). See
+[`packages/all/`](./packages/all) for how composition happens at the
+environment layer without breaking the one-app-per-package rule (ADR-0019).
+
 > **StackBlitz tip:** every template runs in the browser via `@objectstack/driver-sqlite-wasm` (sql.js). Local dev still uses `better-sqlite3` (listed as an optional dependency) for full native speed.
 
 > Looking for a full reference app? See [hotcrm](https://github.com/objectstack-ai/hotcrm) — the production-grade CRM built on the same engine.

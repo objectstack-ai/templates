@@ -10,6 +10,7 @@
   },
   "scripts": {
     "dev": "pnpm --filter @objectlab/todo dev",
+    "dev:all": "pnpm -r --filter=!@objectlab/all build && pnpm --filter @objectlab/all dev",
     "typecheck": "pnpm -r typecheck",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
