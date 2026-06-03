@@ -33,3 +33,7 @@ playwright-report/
 
 # Local Claude Code tooling/session state
 .claude/
+
+# Installed AI skills (skills.sh)
+.agents/
+skills-lock.json

@@ -28,8 +28,8 @@ export const PRToPOConvertFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'procurement_request',
-        criteria: 'status == "approved" && converted_po == null',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "approved" && converted_po == null',
       },
     },
     {
@@ -38,7 +38,7 @@ export const PRToPOConvertFlow: Flow = {
       label: 'Load PR',
       config: {
         objectName: 'procurement_request',
-        filter: { id: '{prId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'pr',
       },
     },
@@ -48,7 +48,7 @@ export const PRToPOConvertFlow: Flow = {
       label: 'Create Draft PO',
       config: {
         objectName: 'procurement_order',
-        values: {
+        fields: {
           po_number: 'PO-DRAFT-{pr.request_number}',
           vendor: '{pr.vendor}',
           source_request: '{pr.id}',
@@ -70,8 +70,8 @@ export const PRToPOConvertFlow: Flow = {
       label: 'Mark PR Converted',
       config: {
         objectName: 'procurement_request',
-        recordId: '{pr.id}',
-        values: { status: 'converted', converted_po: '{po.id}' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'converted', converted_po: '{po.id}' },
       },
     },
     {

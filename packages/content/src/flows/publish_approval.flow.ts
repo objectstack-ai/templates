@@ -32,8 +32,8 @@ export const PublishApprovalFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'content_piece',
-        criteria: 'status == "in_review"',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "in_review"',
       },
     },
     {
@@ -58,8 +58,8 @@ export const PublishApprovalFlow: Flow = {
       label: 'Mark Approved',
       config: {
         objectName: 'content_piece',
-        recordId: '{pieceId}',
-        values: { status: 'approved' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'approved' },
       },
     },
     {
@@ -79,8 +79,8 @@ export const PublishApprovalFlow: Flow = {
       label: 'Send Back to Drafting',
       config: {
         objectName: 'content_piece',
-        recordId: '{pieceId}',
-        values: { status: 'drafting' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'drafting' },
       },
     },
     {

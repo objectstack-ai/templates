@@ -23,8 +23,8 @@ export const ExpenseSubmittedFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'expense_report',
-        criteria: 'status == "submitted"',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "submitted"',
       },
     },
     {
@@ -33,7 +33,7 @@ export const ExpenseSubmittedFlow: Flow = {
       label: 'Load Report',
       config: {
         objectName: 'expense_report',
-        filter: { id: '{reportId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'report',
       },
     },

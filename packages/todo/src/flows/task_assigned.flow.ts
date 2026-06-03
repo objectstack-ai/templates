@@ -22,7 +22,8 @@ export const TaskAssignedFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'todo_task',
-        criteria: 'assignee != NULL AND assignee != PRIOR(assignee)',
+        triggerType: 'record-after-update',
+        condition: 'record.assignee != null && record.assignee != previous.assignee',
       },
     },
     {
@@ -31,7 +32,7 @@ export const TaskAssignedFlow: Flow = {
       label: 'Get Task',
       config: {
         objectName: 'todo_task',
-        filter: { id: '{taskId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'taskRecord',
       },
     },

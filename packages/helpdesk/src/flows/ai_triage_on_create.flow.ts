@@ -42,9 +42,8 @@ export const AITriageOnCreateFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'helpdesk_ticket',
-        criteria: 'status == "new"',
-        criteriaDialect: 'cel',
-        triggerOn: 'create',
+        triggerType: 'record-after-create',
+        condition: 'status == "new"',
       },
     },
     {
@@ -67,8 +66,8 @@ export const AITriageOnCreateFlow: Flow = {
       label: 'Advance Status → triaged',
       config: {
         objectName: 'helpdesk_ticket',
-        recordId: '{ticketId}',
-        values: { status: 'triaged' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'triaged' },
       },
     },
     { id: 'end', type: 'end', label: 'End' },

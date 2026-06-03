@@ -23,7 +23,8 @@ export const ObligationOverdueFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'contracts_obligation',
-        criteria: 'due_date < TODAY() AND status = "open"',
+        triggerType: 'record-after-update',
+        condition: 'due_date != null && due_date < daysFromNow(0) && status == "open"',
       },
     },
     {
@@ -32,7 +33,7 @@ export const ObligationOverdueFlow: Flow = {
       label: 'Get Obligation',
       config: {
         objectName: 'contracts_obligation',
-        filter: { id: '{obligationId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'obligationRecord',
       },
     },

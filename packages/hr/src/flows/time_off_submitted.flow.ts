@@ -23,7 +23,8 @@ export const TimeOffSubmittedFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'hr_time_off_request',
-        criteria: 'status == "submitted" && PRIOR(status) != "submitted"',
+        triggerType: 'record-after-update',
+        condition: "record.status == 'submitted' && previous.status != 'submitted'",
       },
     },
     {
@@ -32,7 +33,7 @@ export const TimeOffSubmittedFlow: Flow = {
       label: 'Load Request',
       config: {
         objectName: 'hr_time_off_request',
-        filter: { id: '{requestId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'req',
       },
     },

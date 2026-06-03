@@ -27,7 +27,8 @@ export const CtaCreationDefaultFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'content_piece',
-        criteria: 'target_channels != NULL AND ISNEW()',
+        triggerType: 'record-after-create',
+        condition: '!isBlank(record.target_channels)',
       },
     },
     {
@@ -36,7 +37,7 @@ export const CtaCreationDefaultFlow: Flow = {
       label: 'Load Piece',
       config: {
         objectName: 'content_piece',
-        filter: { id: '{pieceId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'piece',
       },
     },
@@ -56,7 +57,7 @@ export const CtaCreationDefaultFlow: Flow = {
       label: 'Create Default CTA',
       config: {
         objectName: 'content_cta',
-        values: {
+        fields: {
           piece: '{piece.id}',
           label_text: 'Get started',
           goal: '{channel.default_cta_goal}',

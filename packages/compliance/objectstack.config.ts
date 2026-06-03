@@ -24,7 +24,7 @@ export default defineStack({
     description: 'Starter template — compliance posture & evidence management on ObjectStack.',
   },
 
-  requires: ['automation', 'analytics', 'auth', 'ui', 'sharing'],
+  requires: ['automation', 'triggers', 'analytics', 'auth', 'ui', 'sharing'],
 
   objects: Object.values(objects),
   views: Object.values(views),

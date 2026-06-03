@@ -31,9 +31,9 @@ export const ContractRenewalAlertFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'contracts_contract',
-        criteria:
+        triggerType: 'record-after-update',
+        condition:
           'status == "active" && end_date != null && (end_date == daysFromNow(60) || end_date == daysFromNow(30) || end_date == daysFromNow(7))',
-        criteriaDialect: 'cel',
       },
     },
     {
@@ -42,7 +42,7 @@ export const ContractRenewalAlertFlow: Flow = {
       label: 'Get Contract',
       config: {
         objectName: 'contracts_contract',
-        filter: { id: '{contractId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'contractRecord',
       },
     },

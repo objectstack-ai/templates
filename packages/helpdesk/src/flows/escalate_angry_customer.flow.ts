@@ -24,9 +24,9 @@ export const EscalateAngryCustomerFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'helpdesk_ticket',
-        criteria:
+        triggerType: 'record-after-update',
+        condition:
           'ai_sentiment == "angry" && (priority == "high" || priority == "urgent") && status != "escalated" && status != "closed"',
-        criteriaDialect: 'cel',
       },
     },
     {
@@ -35,7 +35,7 @@ export const EscalateAngryCustomerFlow: Flow = {
       label: 'Load Ticket',
       config: {
         objectName: 'helpdesk_ticket',
-        filter: { id: '{ticketId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'ticket',
       },
     },
@@ -45,8 +45,8 @@ export const EscalateAngryCustomerFlow: Flow = {
       label: 'Mark Escalated',
       config: {
         objectName: 'helpdesk_ticket',
-        recordId: '{ticketId}',
-        values: { status: 'escalated' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'escalated' },
       },
     },
     {

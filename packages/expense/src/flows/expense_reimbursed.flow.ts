@@ -23,8 +23,8 @@ export const ExpenseReimbursedFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'expense_report',
-        criteria: 'status == "reimbursed"',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "reimbursed"',
       },
     },
     {
@@ -33,7 +33,7 @@ export const ExpenseReimbursedFlow: Flow = {
       label: 'Load Report',
       config: {
         objectName: 'expense_report',
-        filter: { id: '{reportId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'report',
       },
     },

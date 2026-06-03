@@ -14,10 +14,11 @@ export default defineStack({
     version: '0.1.0',
     type: 'app',
     name: 'AI Project Management',
-    description: 'Project portfolio management with AI-powered risk prediction and resource optimization.',
+    description:
+      'Project portfolio management with AI-powered risk prediction and resource optimization.',
   },
 
-  requires: ['automation', 'analytics', 'auth', 'ui'],
+  requires: ['automation', 'triggers', 'job', 'analytics', 'auth', 'ui'],
 
   objects: Object.values(objects),
   views: Object.values(views),

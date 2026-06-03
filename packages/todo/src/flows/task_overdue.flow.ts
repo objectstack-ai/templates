@@ -23,7 +23,8 @@ export const TaskOverdueFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'todo_task',
-        criteria: 'due_date < TODAY() AND status IN ("todo", "doing")',
+        triggerType: 'record-after-update',
+        condition: "record.due_date < today() && record.status in ['todo', 'doing']",
       },
     },
     {
@@ -32,7 +33,7 @@ export const TaskOverdueFlow: Flow = {
       label: 'Get Task',
       config: {
         objectName: 'todo_task',
-        filter: { id: '{taskId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'taskRecord',
       },
     },

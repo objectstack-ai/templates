@@ -30,7 +30,7 @@ export default defineStack({
       'AI-first customer support: native AI triage, suggested replies, KB recall, sentiment-driven escalation, customer portal via permissions.',
   },
 
-  requires: ['automation', 'analytics', 'auth', 'ui', 'sharing'],
+  requires: ['automation', 'triggers', 'analytics', 'auth', 'ui', 'sharing'],
 
   objects: Object.values(objects),
   views: Object.values(views),

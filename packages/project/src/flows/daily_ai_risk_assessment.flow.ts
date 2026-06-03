@@ -78,8 +78,8 @@ export const DailyAIRiskAssessmentFlow: Flow = {
       label: 'Update Project AI Fields',
       config: {
         objectName: 'pm_project',
-        recordId: '{project.id}',
-        values: {
+        filter: { id: '{project.id}' },
+        fields: {
           ai_last_prediction_at: '{now()}',
           // Other ai_* fields set by the stub/LLM function
         },

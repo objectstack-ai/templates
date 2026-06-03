@@ -24,9 +24,9 @@ export const SlaResolutionBreachFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'helpdesk_ticket',
-        criteria:
+        triggerType: 'record-after-update',
+        condition:
           'resolution_due_at != null && resolved_at == null && resolution_due_at < now() && status != "closed" && status != "escalated"',
-        criteriaDialect: 'cel',
       },
     },
     {
@@ -35,7 +35,7 @@ export const SlaResolutionBreachFlow: Flow = {
       label: 'Load Ticket',
       config: {
         objectName: 'helpdesk_ticket',
-        filter: { id: '{ticketId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'ticket',
       },
     },
@@ -45,8 +45,8 @@ export const SlaResolutionBreachFlow: Flow = {
       label: 'Mark Escalated',
       config: {
         objectName: 'helpdesk_ticket',
-        recordId: '{ticketId}',
-        values: { status: 'escalated', priority: 'urgent' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'escalated', priority: 'urgent' },
       },
     },
     {

@@ -26,8 +26,8 @@ export const PRApprovalRequiredFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'procurement_request',
-        criteria: 'status == "submitted" && estimated_amount != null && estimated_amount >= 5000',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "submitted" && estimated_amount != null && estimated_amount >= 5000',
       },
     },
     {
@@ -36,7 +36,7 @@ export const PRApprovalRequiredFlow: Flow = {
       label: 'Load PR',
       config: {
         objectName: 'procurement_request',
-        filter: { id: '{prId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'pr',
       },
     },

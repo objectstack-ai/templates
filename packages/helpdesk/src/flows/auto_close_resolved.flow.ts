@@ -26,8 +26,8 @@ export const AutoCloseResolvedFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'helpdesk_ticket',
-        criteria: 'status == "resolved" && resolved_at != null && resolved_at <= daysAgo(7)',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "resolved" && resolved_at != null && resolved_at <= daysAgo(7)',
       },
     },
     {
@@ -36,8 +36,8 @@ export const AutoCloseResolvedFlow: Flow = {
       label: 'Mark Closed',
       config: {
         objectName: 'helpdesk_ticket',
-        recordId: '{ticketId}',
-        values: { status: 'closed' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'closed' },
       },
     },
     { id: 'end', type: 'end', label: 'End' },
