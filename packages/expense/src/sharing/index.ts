@@ -11,7 +11,11 @@
 export const RoleHierarchy = {
   roles: [
     { name: 'expense_admin', label: 'Expense Admin', parentRole: null as string | null },
-    { name: 'expense_manager', label: 'Expense Manager', parentRole: 'expense_admin' as string | null },
+    {
+      name: 'expense_manager',
+      label: 'Expense Manager',
+      parentRole: 'expense_admin' as string | null,
+    },
     { name: 'expense_employee', label: 'Employee', parentRole: 'expense_manager' as string | null },
   ],
 };

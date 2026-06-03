@@ -23,7 +23,10 @@ export const IssueViews = defineView({
       { field: 'reported_at', width: 120, sortable: true },
       { field: 'resolved_at', width: 120 },
     ],
-    sort: [{ field: 'priority', order: 'desc' }, { field: 'reported_at', order: 'desc' }],
+    sort: [
+      { field: 'priority', order: 'desc' },
+      { field: 'reported_at', order: 'desc' },
+    ],
     grouping: { fields: [{ field: 'status', order: 'asc', collapsed: false }] },
     selection: { type: 'multiple' },
     pagination: { pageSize: 50, pageSizeOptions: [25, 50, 100] },
@@ -72,7 +75,10 @@ export const IssueViews = defineView({
         { field: 'priority', width: 100 },
         { field: 'assigned_to', width: 140 },
       ],
-      sort: [{ field: 'status', order: 'asc' }, { field: 'priority', order: 'desc' }],
+      sort: [
+        { field: 'status', order: 'asc' },
+        { field: 'priority', order: 'desc' },
+      ],
     },
 
     blocker_issues: {
@@ -80,7 +86,10 @@ export const IssueViews = defineView({
       type: 'grid',
       label: 'Blockers',
       data: { provider: 'object', object: 'pm_issue' },
-      filter: [{ field: 'type', operator: 'equals', value: 'blocker' }, { field: 'status', operator: 'equals', value: 'open' }],
+      filter: [
+        { field: 'type', operator: 'equals', value: 'blocker' },
+        { field: 'status', operator: 'equals', value: 'open' },
+      ],
       columns: [
         { field: 'issue_number', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },

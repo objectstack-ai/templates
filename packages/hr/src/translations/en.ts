@@ -40,7 +40,12 @@ export const en: TranslationData = {
         },
         employment_type: {
           label: 'Employment Type',
-          options: { full_time: 'Full-time', part_time: 'Part-time', contractor: 'Contractor', intern: 'Intern' },
+          options: {
+            full_time: 'Full-time',
+            part_time: 'Part-time',
+            contractor: 'Contractor',
+            intern: 'Intern',
+          },
         },
         hire_date: { label: 'Hire Date' },
         end_date: { label: 'End Date' },
@@ -51,7 +56,10 @@ export const en: TranslationData = {
         notes: { label: 'Internal Notes' },
       },
       _views: {
-        all_employees: { label: 'All Employees', description: 'Every employee grouped by department' },
+        all_employees: {
+          label: 'All Employees',
+          description: 'Every employee grouped by department',
+        },
         active_employees: { label: 'Active', description: 'Currently active staff' },
         employees_on_leave: { label: 'On Leave', description: 'Staff currently on leave' },
       },
@@ -89,7 +97,10 @@ export const en: TranslationData = {
       _views: {
         all_time_off: { label: 'All Requests', description: 'Every request grouped by status' },
         time_off_pipeline: { label: 'Approval Pipeline', description: 'Kanban grouped by status' },
-        pending_time_off: { label: 'Pending Approval', description: 'Submitted requests awaiting decision' },
+        pending_time_off: {
+          label: 'Pending Approval',
+          description: 'Submitted requests awaiting decision',
+        },
         approved_time_off: { label: 'Approved', description: 'Approved requests by start date' },
       },
     },
@@ -119,8 +130,14 @@ export const en: TranslationData = {
       },
       _views: {
         all_documents: { label: 'All Documents', description: 'Every document grouped by type' },
-        expiring_documents: { label: 'Expiring Soon', description: 'Documents expiring within 30 days' },
-        expired_documents: { label: 'Expired', description: 'Documents already past their expiry date' },
+        expiring_documents: {
+          label: 'Expiring Soon',
+          description: 'Documents expiring within 30 days',
+        },
+        expired_documents: {
+          label: 'Expired',
+          description: 'Documents already past their expiry date',
+        },
       },
     },
   },
@@ -168,10 +185,22 @@ export const en: TranslationData = {
       widgets: {
         headcount: { title: 'Active Headcount', description: 'Employees in active status' },
         on_leave: { title: 'On Leave', description: 'Employees currently on leave' },
-        pending_time_off: { title: 'Pending Approvals', description: 'Time-off requests awaiting manager decision' },
-        expiring_docs: { title: 'Documents Expiring (30d)', description: 'Documents whose expires_at falls in the next 30 days' },
-        pending_time_off_table: { title: 'Pending Time-Off Requests', description: 'Submitted requests, oldest first' },
-        expiring_docs_table: { title: 'Documents Expiring Soon', description: 'Documents expiring within 30 days' },
+        pending_time_off: {
+          title: 'Pending Approvals',
+          description: 'Time-off requests awaiting manager decision',
+        },
+        expiring_docs: {
+          title: 'Documents Expiring (30d)',
+          description: 'Documents whose expires_at falls in the next 30 days',
+        },
+        pending_time_off_table: {
+          title: 'Pending Time-Off Requests',
+          description: 'Submitted requests, oldest first',
+        },
+        expiring_docs_table: {
+          title: 'Documents Expiring Soon',
+          description: 'Documents expiring within 30 days',
+        },
       },
     },
   },

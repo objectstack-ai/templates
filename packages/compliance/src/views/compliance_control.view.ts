@@ -51,9 +51,7 @@ export const ControlViews = defineView({
       label: 'My Controls',
       data: { provider: 'object', object: 'compliance_control' },
       columns: ['code', 'title', 'framework', 'criticality', 'last_status', 'last_assessed_at'],
-      filter: [
-        { field: 'owner', operator: 'equals', value: '{current_user_id}' },
-      ],
+      filter: [{ field: 'owner', operator: 'equals', value: '{current_user_id}' }],
       sort: [{ field: 'code', order: 'asc' }],
     },
 
@@ -63,10 +61,11 @@ export const ControlViews = defineView({
       label: 'Failing Controls',
       data: { provider: 'object', object: 'compliance_control' },
       columns: ['code', 'title', 'framework', 'criticality', 'owner', 'last_assessed_at'],
-      filter: [
-        { field: 'last_status', operator: 'in', value: ['failed', 'partial'] },
+      filter: [{ field: 'last_status', operator: 'in', value: ['failed', 'partial'] }],
+      sort: [
+        { field: 'criticality', order: 'asc' },
+        { field: 'code', order: 'asc' },
       ],
-      sort: [{ field: 'criticality', order: 'asc' }, { field: 'code', order: 'asc' }],
     },
 
     overdue_controls: {
@@ -75,9 +74,7 @@ export const ControlViews = defineView({
       label: 'Overdue for Review',
       data: { provider: 'object', object: 'compliance_control' },
       columns: ['code', 'title', 'framework', 'criticality', 'owner', 'last_assessed_at'],
-      filter: [
-        { field: 'is_overdue_for_review', operator: 'equals', value: true },
-      ],
+      filter: [{ field: 'is_overdue_for_review', operator: 'equals', value: true }],
       sort: [{ field: 'criticality', order: 'asc' }],
     },
   },

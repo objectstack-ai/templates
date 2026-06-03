@@ -103,11 +103,7 @@ export const Task = ObjectSchema.create({
     mru: true,
   },
 
-  indexes: [
-    { fields: ['assignee'] },
-    { fields: ['status'] },
-    { fields: ['due_date'] },
-  ],
+  indexes: [{ fields: ['assignee'] }, { fields: ['status'] }, { fields: ['due_date'] }],
 
   titleFormat: tmpl`{{record.subject}}`,
   compactLayout: ['subject', 'status', 'priority', 'assignee', 'due_date'],
@@ -117,7 +113,12 @@ export const Task = ObjectSchema.create({
       type: 'state_machine',
       name: 'task_lifecycle',
       field: 'status',
-      transitions: {todo:["doing", "cancelled"], doing:["done", "todo", "cancelled"], done:["todo"], cancelled:[]},
+      transitions: {
+        todo: ['doing', 'cancelled'],
+        doing: ['done', 'todo', 'cancelled'],
+        done: ['todo'],
+        cancelled: [],
+      },
       message: 'Illegal status transition.',
     },
     {

@@ -134,7 +134,8 @@ export const Contract = ObjectSchema.create({
       scale: 0,
       min: 0,
       group: 'renewal',
-      description: 'Days before end_date by which we must notify to cancel. Drives alert lead time.',
+      description:
+        'Days before end_date by which we must notify to cancel. Drives alert lead time.',
     }),
 
     // Derived signals
@@ -193,7 +194,8 @@ export const Contract = ObjectSchema.create({
       label: 'Tags',
       maxLength: 200,
       group: 'meta',
-      description: 'Comma-separated free tags. Replace with a proper junction in your fork if needed.',
+      description:
+        'Comma-separated free tags. Replace with a proper junction in your fork if needed.',
     }),
 
     notes: Field.markdown({
@@ -229,7 +231,15 @@ export const Contract = ObjectSchema.create({
       type: 'state_machine',
       name: 'contract_lifecycle',
       field: 'status',
-      transitions: {draft:["in_review", "cancelled"], in_review:["signed", "draft", "cancelled"], signed:["active", "terminated"], active:["expired", "terminated", "active"], expired:[], terminated:[], cancelled:[]},
+      transitions: {
+        draft: ['in_review', 'cancelled'],
+        in_review: ['signed', 'draft', 'cancelled'],
+        signed: ['active', 'terminated'],
+        active: ['expired', 'terminated', 'active'],
+        expired: [],
+        terminated: [],
+        cancelled: [],
+      },
       message: 'Illegal status transition.',
     },
     {

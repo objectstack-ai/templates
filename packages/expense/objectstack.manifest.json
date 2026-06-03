@@ -13,7 +13,12 @@
   "iconUrl": "https://cdn.objectos.app/icons/expense.svg",
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/expense",
   "tags": ["expense", "reimbursement", "finance", "approvals"],
-  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "skills": [
+    "objectstack-platform",
+    "objectstack-data",
+    "objectstack-ui",
+    "objectstack-automation"
+  ],
   "readmePath": "README.md",
   "translations": {
     "zh-CN": {

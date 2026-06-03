@@ -48,16 +48,7 @@ export interface ExtractTermsInput {
 
 export interface ExtractedTerms {
   party_legal_name: string | null;
-  contract_type:
-    | 'nda'
-    | 'msa'
-    | 'sow'
-    | 'dpa'
-    | 'vendor'
-    | 'employment'
-    | 'lease'
-    | 'other'
-    | null;
+  contract_type: 'nda' | 'msa' | 'sow' | 'dpa' | 'vendor' | 'employment' | 'lease' | 'other' | null;
   total_value: number | null;
   currency: string | null;
   effective_date: string | null; // ISO date
@@ -171,10 +162,7 @@ export async function runExtraction(
 export interface ExtractTermsContext {
   loadContractPdfText: (contractId: string) => Promise<string>;
   loadContract: (contractId: string) => Promise<Record<string, unknown>>;
-  updateContract: (
-    contractId: string,
-    patch: Record<string, unknown>,
-  ) => Promise<void>;
+  updateContract: (contractId: string, patch: Record<string, unknown>) => Promise<void>;
 }
 
 export async function extractTerms(

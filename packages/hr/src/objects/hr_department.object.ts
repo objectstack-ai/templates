@@ -49,10 +49,7 @@ export const Department = ObjectSchema.create({
     mru: true,
   },
 
-  indexes: [
-    { fields: ['name'], unique: true },
-    { fields: ['parent'] },
-  ],
+  indexes: [{ fields: ['name'], unique: true }, { fields: ['parent'] }],
 
   titleFormat: tmpl`{{record.name}}`,
   compactLayout: ['name', 'code', 'parent', 'head'],

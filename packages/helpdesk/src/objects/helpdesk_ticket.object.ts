@@ -19,8 +19,7 @@ export const Ticket = ObjectSchema.create({
   label: 'Ticket',
   pluralLabel: 'Tickets',
   icon: 'life-buoy',
-  description:
-    'A customer support request. AI-triaged, SLA-tracked, threaded with messages.',
+  description: 'A customer support request. AI-triaged, SLA-tracked, threaded with messages.',
 
   fieldGroups: [
     { key: 'core', label: 'Ticket', icon: 'life-buoy' },
@@ -259,7 +258,15 @@ export const Ticket = ObjectSchema.create({
       type: 'state_machine',
       name: 'ticket_lifecycle',
       field: 'status',
-      transitions: {new:["triaged", "escalated"], triaged:["in_progress", "escalated"], in_progress:["waiting_customer", "resolved", "escalated"], waiting_customer:["in_progress", "resolved", "escalated"], resolved:["closed", "in_progress"], escalated:["in_progress", "resolved"], closed:[]},
+      transitions: {
+        new: ['triaged', 'escalated'],
+        triaged: ['in_progress', 'escalated'],
+        in_progress: ['waiting_customer', 'resolved', 'escalated'],
+        waiting_customer: ['in_progress', 'resolved', 'escalated'],
+        resolved: ['closed', 'in_progress'],
+        escalated: ['in_progress', 'resolved'],
+        closed: [],
+      },
       message: 'Illegal status transition.',
     },
     {

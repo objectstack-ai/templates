@@ -67,11 +67,7 @@ export const EmployeeDocument = ObjectSchema.create({
     mru: true,
   },
 
-  indexes: [
-    { fields: ['employee'] },
-    { fields: ['doc_type'] },
-    { fields: ['expires_at'] },
-  ],
+  indexes: [{ fields: ['employee'] }, { fields: ['doc_type'] }, { fields: ['expires_at'] }],
 
   titleFormat: tmpl`{{record.name}}`,
   compactLayout: ['name', 'employee', 'doc_type', 'expires_at'],

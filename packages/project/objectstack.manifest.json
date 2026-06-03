@@ -13,6 +13,11 @@
   "iconUrl": "https://api.iconify.design/lucide:folder-kanban.svg",
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/project",
   "tags": ["project-management", "pmo", "risk", "ai", "forecasting"],
-  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "skills": [
+    "objectstack-platform",
+    "objectstack-data",
+    "objectstack-ui",
+    "objectstack-automation"
+  ],
   "readmePath": "README.md"
 }

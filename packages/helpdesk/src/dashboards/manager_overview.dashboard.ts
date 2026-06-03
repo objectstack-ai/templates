@@ -125,7 +125,15 @@ export const ManagerOverviewDashboard: Dashboard = {
       filter: { status: 'escalated' },
       layout: { x: 0, y: 10, w: 12, h: 5 },
       options: {
-        columns: ['ticket_number', 'name', 'customer', 'team', 'assignee', 'ai_sentiment', 'priority'],
+        columns: [
+          'ticket_number',
+          'name',
+          'customer',
+          'team',
+          'assignee',
+          'ai_sentiment',
+          'priority',
+        ],
         pageSize: 10,
         sort: [{ field: 'priority', order: 'desc' }],
       },

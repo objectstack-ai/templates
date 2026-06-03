@@ -13,7 +13,12 @@
   "iconUrl": "https://cdn.objectos.app/icons/todo.svg",
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/todo",
   "tags": ["tasks", "projects", "approvals"],
-  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "skills": [
+    "objectstack-platform",
+    "objectstack-data",
+    "objectstack-ui",
+    "objectstack-automation"
+  ],
   "readmePath": "README.md",
   "translations": {
     "zh-CN": {
@@ -34,4 +39,3 @@
     }
   }
 }
-

@@ -33,9 +33,15 @@ export const jaJP: TranslationData = {
         is_overdue: { label: '期限超過' },
       },
       _views: {
-        all_tasks: { label: 'すべてのタスク', description: 'すべてのタスクをステータスでグループ化' },
+        all_tasks: {
+          label: 'すべてのタスク',
+          description: 'すべてのタスクをステータスでグループ化',
+        },
         task_board: { label: 'タスクボード', description: 'ステータス別のカンバンビュー' },
-        my_open_tasks: { label: 'マイ未完了タスク', description: '自分に割り当てられた未完了タスク' },
+        my_open_tasks: {
+          label: 'マイ未完了タスク',
+          description: '自分に割り当てられた未完了タスク',
+        },
         overdue_tasks: { label: '期限超過タスク', description: '期限を過ぎた未完了タスク' },
       },
     },
@@ -97,10 +103,16 @@ export const jaJP: TranslationData = {
         create_task: { label: '新規タスク' },
       },
       widgets: {
-        my_open_tasks: { title: 'マイ未完了タスク', description: '自分に割り当てられた未完了または進行中のタスク' },
+        my_open_tasks: {
+          title: 'マイ未完了タスク',
+          description: '自分に割り当てられた未完了または進行中のタスク',
+        },
         my_overdue: { title: '期限超過', description: '期限を過ぎた自分の未完了タスク' },
         done_this_week: { title: '今週の完了', description: '今週の始めから完了したタスク' },
-        recent_overdue_list: { title: '期限超過タスク', description: '古い順にソートされた期限超過タスク' },
+        recent_overdue_list: {
+          title: '期限超過タスク',
+          description: '古い順にソートされた期限超過タスク',
+        },
       },
     },
   },

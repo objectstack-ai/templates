@@ -162,11 +162,7 @@ export const Risk = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [
-    { fields: ['project'] },
-    { fields: ['status'] },
-    { fields: ['category'] },
-  ],
+  indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['category'] }],
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
@@ -176,7 +172,14 @@ export const Risk = ObjectSchema.create({
       type: 'state_machine',
       name: 'risk_lifecycle',
       field: 'status',
-      transitions: {identified:["assessing", "closed"], assessing:["mitigating", "monitoring", "closed"], mitigating:["monitoring", "realized"], monitoring:["mitigating", "closed", "realized"], closed:[], realized:[]},
+      transitions: {
+        identified: ['assessing', 'closed'],
+        assessing: ['mitigating', 'monitoring', 'closed'],
+        mitigating: ['monitoring', 'realized'],
+        monitoring: ['mitigating', 'closed', 'realized'],
+        closed: [],
+        realized: [],
+      },
       message: 'Illegal status transition.',
     },
   ],

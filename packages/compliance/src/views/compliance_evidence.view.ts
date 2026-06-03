@@ -37,9 +37,7 @@ export const EvidenceViews = defineView({
       label: 'Pending Review',
       data: { provider: 'object', object: 'compliance_evidence' },
       columns: ['title', 'control', 'evidence_type', 'collected_on', 'collected_by'],
-      filter: [
-        { field: 'status', operator: 'equals', value: 'submitted' },
-      ],
+      filter: [{ field: 'status', operator: 'equals', value: 'submitted' }],
       sort: [{ field: 'collected_on', order: 'asc' }],
     },
 
@@ -76,8 +74,14 @@ export const EvidenceViews = defineView({
       {
         label: 'Lifecycle',
         columns: 2,
-        fields: ['collected_on', 'expires_on', 'collected_by', 'approved_by',
-                 'is_expiring_soon', 'is_expired'],
+        fields: [
+          'collected_on',
+          'expires_on',
+          'collected_by',
+          'approved_by',
+          'is_expiring_soon',
+          'is_expired',
+        ],
       },
       { label: 'Source / Notes', columns: 1, fields: ['source_url', 'notes'] },
     ],

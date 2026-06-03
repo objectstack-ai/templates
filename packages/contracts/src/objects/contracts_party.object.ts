@@ -91,10 +91,7 @@ export const Party = ObjectSchema.create({
     mru: true,
   },
 
-  indexes: [
-    { fields: ['legal_name'], unique: true },
-    { fields: ['party_type'] },
-  ],
+  indexes: [{ fields: ['legal_name'], unique: true }, { fields: ['party_type'] }],
 
   compactLayout: ['legal_name', 'party_type', 'country', 'primary_contact_email'],
   displayNameField: 'legal_name',

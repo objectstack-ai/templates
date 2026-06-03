@@ -31,7 +31,12 @@ export const TicketViews = defineView({
     tabs: [
       { name: 'all', label: 'All', view: 'all_tickets', isDefault: true, pinned: true },
       { name: 'open', label: 'Open', icon: 'inbox', view: 'open_tickets' },
-      { name: 'breaching', label: 'Breaching SLA', icon: 'alert-triangle', view: 'breaching_tickets' },
+      {
+        name: 'breaching',
+        label: 'Breaching SLA',
+        icon: 'alert-triangle',
+        view: 'breaching_tickets',
+      },
       { name: 'angry', label: 'Angry', icon: 'flame', view: 'angry_tickets' },
     ],
   },
@@ -54,9 +59,21 @@ export const TicketViews = defineView({
       type: 'grid',
       label: 'Open Tickets',
       data: { provider: 'object', object: 'helpdesk_ticket' },
-      columns: ['ticket_number', 'name', 'status', 'priority', 'ai_sentiment', 'assignee', 'first_response_due_at'],
+      columns: [
+        'ticket_number',
+        'name',
+        'status',
+        'priority',
+        'ai_sentiment',
+        'assignee',
+        'first_response_due_at',
+      ],
       filter: [
-        { field: 'status', operator: 'in', value: ['new', 'triaged', 'in_progress', 'waiting_customer', 'escalated'] },
+        {
+          field: 'status',
+          operator: 'in',
+          value: ['new', 'triaged', 'in_progress', 'waiting_customer', 'escalated'],
+        },
       ],
       sort: [{ field: 'priority', order: 'desc' }],
     },
@@ -66,7 +83,14 @@ export const TicketViews = defineView({
       type: 'grid',
       label: 'Breaching SLA',
       data: { provider: 'object', object: 'helpdesk_ticket' },
-      columns: ['ticket_number', 'name', 'priority', 'first_response_due_at', 'resolution_due_at', 'assignee'],
+      columns: [
+        'ticket_number',
+        'name',
+        'priority',
+        'first_response_due_at',
+        'resolution_due_at',
+        'assignee',
+      ],
       filter: [
         { field: 'status', operator: 'not_in', value: ['closed', 'resolved'] },
         { field: 'resolution_due_at', operator: 'less_than', value: '{today}' },
@@ -92,7 +116,14 @@ export const TicketViews = defineView({
       type: 'grid',
       label: 'My Queue',
       data: { provider: 'object', object: 'helpdesk_ticket' },
-      columns: ['ticket_number', 'name', 'status', 'priority', 'ai_sentiment', 'first_response_due_at'],
+      columns: [
+        'ticket_number',
+        'name',
+        'status',
+        'priority',
+        'ai_sentiment',
+        'first_response_due_at',
+      ],
       filter: [
         { field: 'assignee', operator: 'equals', value: '{currentUser}' },
         { field: 'status', operator: 'not_in', value: ['closed', 'resolved'] },
@@ -153,7 +184,12 @@ export const TicketViews = defineView({
       {
         label: 'CSAT & Notes',
         columns: 2,
-        fields: ['csat_score', 'csat_comment', { field: 'tags', colSpan: 2 }, { field: 'internal_notes', colSpan: 2 }],
+        fields: [
+          'csat_score',
+          'csat_comment',
+          { field: 'tags', colSpan: 2 },
+          { field: 'internal_notes', colSpan: 2 },
+        ],
       },
     ],
   },

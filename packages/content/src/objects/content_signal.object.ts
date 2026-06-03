@@ -146,7 +146,7 @@ export const Signal = ObjectSchema.create({
       type: 'state_machine',
       name: 'content_signal_lifecycle',
       field: 'status',
-      transitions: {captured:["promoted", "ignored"], promoted:[], ignored:[]},
+      transitions: { captured: ['promoted', 'ignored'], promoted: [], ignored: [] },
       message: 'Illegal status transition.',
     },
     {

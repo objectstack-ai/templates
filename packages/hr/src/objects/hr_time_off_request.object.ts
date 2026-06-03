@@ -44,7 +44,8 @@ export const TimeOffRequest = ObjectSchema.create({
     days: Field.formula({
       label: 'Calendar Days',
       group: 'core',
-      description: 'Inclusive calendar-day span (weekends + holidays counted). Switch to a working-days helper if your policy excludes them.',
+      description:
+        'Inclusive calendar-day span (weekends + holidays counted). Switch to a working-days helper if your policy excludes them.',
       expression: F`record.start_date != null && record.end_date != null ? (record.end_date - record.start_date) + 1 : null`,
     }),
     reason: Field.markdown({
@@ -94,11 +95,7 @@ export const TimeOffRequest = ObjectSchema.create({
     mru: true,
   },
 
-  indexes: [
-    { fields: ['employee'] },
-    { fields: ['status'] },
-    { fields: ['start_date'] },
-  ],
+  indexes: [{ fields: ['employee'] }, { fields: ['status'] }, { fields: ['start_date'] }],
 
   titleFormat: tmpl`{{record.leave_type}} · {{record.start_date}} → {{record.end_date}}`,
   compactLayout: ['employee', 'leave_type', 'start_date', 'end_date', 'status'],
@@ -108,7 +105,13 @@ export const TimeOffRequest = ObjectSchema.create({
       type: 'state_machine',
       name: 'time_off_lifecycle',
       field: 'status',
-      transitions: {draft:["submitted", "cancelled"], submitted:["approved", "rejected", "draft"], approved:["cancelled"], rejected:["draft"], cancelled:[]},
+      transitions: {
+        draft: ['submitted', 'cancelled'],
+        submitted: ['approved', 'rejected', 'draft'],
+        approved: ['cancelled'],
+        rejected: ['draft'],
+        cancelled: [],
+      },
       message: 'Illegal status transition.',
     },
     {

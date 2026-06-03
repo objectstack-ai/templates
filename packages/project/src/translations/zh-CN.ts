@@ -22,8 +22,12 @@ export const zhCN: TranslationData = {
         status: {
           label: '状态',
           options: {
-            planning: '规划中', active: '进行中', at_risk: '存在风险',
-            on_hold: '已暂停', completed: '已完成', cancelled: '已取消',
+            planning: '规划中',
+            active: '进行中',
+            at_risk: '存在风险',
+            on_hold: '已暂停',
+            completed: '已完成',
+            cancelled: '已取消',
           },
         },
         priority: {
@@ -63,8 +67,10 @@ export const zhCN: TranslationData = {
         status: {
           label: '状态',
           options: {
-            not_started: '未开始', in_progress: '进行中',
-            completed: '已完成', missed: '已错过',
+            not_started: '未开始',
+            in_progress: '进行中',
+            completed: '已完成',
+            missed: '已错过',
           },
         },
         planned_date: { label: '计划日期' },
@@ -85,15 +91,23 @@ export const zhCN: TranslationData = {
         status: {
           label: '状态',
           options: {
-            identified: '已识别', assessing: '评估中', mitigating: '缓解中',
-            monitoring: '监控中', closed: '已关闭', realized: '已发生',
+            identified: '已识别',
+            assessing: '评估中',
+            mitigating: '缓解中',
+            monitoring: '监控中',
+            closed: '已关闭',
+            realized: '已发生',
           },
         },
         category: {
           label: '类别',
           options: {
-            technical: '技术', resource: '资源', schedule: '进度',
-            budget: '预算', external: '外部', scope: '范围',
+            technical: '技术',
+            resource: '资源',
+            schedule: '进度',
+            budget: '预算',
+            external: '外部',
+            scope: '范围',
           },
         },
         impact: {
@@ -126,8 +140,11 @@ export const zhCN: TranslationData = {
         status: {
           label: '状态',
           options: {
-            open: '待处理', in_progress: '处理中', blocked: '受阻',
-            resolved: '已解决', closed: '已关闭',
+            open: '待处理',
+            in_progress: '处理中',
+            blocked: '受阻',
+            resolved: '已解决',
+            closed: '已关闭',
           },
         },
         severity: {

@@ -36,7 +36,13 @@ export const en: TranslationData = {
         },
         default_payment_terms: {
           label: 'Default Payment Terms',
-          options: { net_15: 'Net 15', net_30: 'Net 30', net_45: 'Net 45', net_60: 'Net 60', upfront: 'Upfront' },
+          options: {
+            net_15: 'Net 15',
+            net_30: 'Net 30',
+            net_45: 'Net 45',
+            net_60: 'Net 60',
+            upfront: 'Upfront',
+          },
         },
         country: { label: 'Country' },
         website: { label: 'Website' },
@@ -58,8 +64,12 @@ export const en: TranslationData = {
         category: {
           label: 'Category',
           options: {
-            saas: 'Software / SaaS', hardware: 'Hardware', services: 'Professional Services',
-            marketing: 'Marketing', facilities: 'Facilities', other: 'Other',
+            saas: 'Software / SaaS',
+            hardware: 'Hardware',
+            services: 'Professional Services',
+            marketing: 'Marketing',
+            facilities: 'Facilities',
+            other: 'Other',
           },
         },
         status: {
@@ -84,14 +94,18 @@ export const en: TranslationData = {
         all_requests: { label: 'All Requests', description: 'Every request, grouped by status' },
         request_pipeline: { label: 'Request Pipeline', description: 'Kanban grouped by status' },
         my_requests: { label: 'My Requests', description: 'Requests where you are the requester' },
-        awaiting_approval: { label: 'Awaiting Approval', description: 'Submitted PRs above the approval threshold' },
+        awaiting_approval: {
+          label: 'Awaiting Approval',
+          description: 'Submitted PRs above the approval threshold',
+        },
       },
     },
 
     procurement_order: {
       label: 'Purchase Order',
       pluralLabel: 'Purchase Orders',
-      description: 'A commitment to a vendor. Created from an approved PR; closed when fully received.',
+      description:
+        'A commitment to a vendor. Created from an approved PR; closed when fully received.',
       fields: {
         po_number: { label: 'PO Number' },
         vendor: { label: 'Vendor' },
@@ -99,8 +113,12 @@ export const en: TranslationData = {
         status: {
           label: 'Status',
           options: {
-            draft: 'Draft', sent: 'Sent', partial: 'Partial Receipt',
-            received: 'Received', closed: 'Closed', cancelled: 'Cancelled',
+            draft: 'Draft',
+            sent: 'Sent',
+            partial: 'Partial Receipt',
+            received: 'Received',
+            closed: 'Closed',
+            cancelled: 'Cancelled',
           },
         },
         owner: { label: 'Buyer' },
@@ -108,7 +126,13 @@ export const en: TranslationData = {
         received_amount: { label: 'Received Amount' },
         payment_terms: {
           label: 'Payment Terms',
-          options: { net_15: 'Net 15', net_30: 'Net 30', net_45: 'Net 45', net_60: 'Net 60', upfront: 'Upfront' },
+          options: {
+            net_15: 'Net 15',
+            net_30: 'Net 30',
+            net_45: 'Net 45',
+            net_60: 'Net 60',
+            upfront: 'Upfront',
+          },
         },
         is_fully_received: { label: 'Fully Received' },
         order_date: { label: 'Order Date' },
@@ -187,12 +211,24 @@ export const en: TranslationData = {
       description: 'Open POs, MTD commitments, requests awaiting approval.',
       actions: { create_request: { label: 'New Request' } },
       widgets: {
-        awaiting_approval: { title: 'PRs Awaiting Approval', description: 'Submitted PRs above the approval threshold' },
+        awaiting_approval: {
+          title: 'PRs Awaiting Approval',
+          description: 'Submitted PRs above the approval threshold',
+        },
         open_pos: { title: 'Open Purchase Orders', description: 'Sent or partially-received POs' },
-        overdue_pos: { title: 'Overdue Deliveries', description: 'Open POs past expected_delivery' },
+        overdue_pos: {
+          title: 'Overdue Deliveries',
+          description: 'Open POs past expected_delivery',
+        },
         open_commitment: { title: 'Open Commitment ($)', description: 'Total value of open POs' },
-        pending_requests_table: { title: 'Requests Awaiting Approval', description: 'Submitted PRs sorted by amount' },
-        open_pos_table: { title: 'Open Purchase Orders', description: 'Open POs sorted by expected delivery' },
+        pending_requests_table: {
+          title: 'Requests Awaiting Approval',
+          description: 'Submitted PRs sorted by amount',
+        },
+        open_pos_table: {
+          title: 'Open Purchase Orders',
+          description: 'Open POs sorted by expected delivery',
+        },
       },
     },
   },

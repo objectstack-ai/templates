@@ -393,7 +393,10 @@ export const zhCN: TranslationData = {
         pieces_published_30d: { title: '近 30 天已发布', description: '过去 30 天内发布的内容' },
         pieces_overdue: { title: '已逾期', description: '发布时间已过但尚未发布的内容' },
         calendar_main: { title: '即将发布的内容', description: '发布时间在未来 30 天内的内容' },
-        publications_by_channel: { title: '渠道分布(近期)', description: '按渠道统计的近期发布记录' },
+        publications_by_channel: {
+          title: '渠道分布(近期)',
+          description: '按渠道统计的近期发布记录',
+        },
       },
     },
     roi_by_channel_dashboard: {
@@ -407,7 +410,10 @@ export const zhCN: TranslationData = {
         total_revenue_90d: { title: '累计收入', description: '所有发布渠道的归因收入总和' },
         views_by_channel_bar: { title: '各渠道浏览', description: '按渠道汇总的浏览数' },
         signups_trend: { title: '注册趋势(近 90 天)', description: '每日注册数,近 90 天' },
-        top_publications: { title: 'Top 发布(近 90 天)', description: '近 90 天收入最高的发布记录' },
+        top_publications: {
+          title: 'Top 发布(近 90 天)',
+          description: '近 90 天收入最高的发布记录',
+        },
       },
     },
   },

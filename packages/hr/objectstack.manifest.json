@@ -13,7 +13,12 @@
   "iconUrl": "https://cdn.objectos.app/icons/hr.svg",
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/hr",
   "tags": ["hr", "hris", "people", "time-off"],
-  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "skills": [
+    "objectstack-platform",
+    "objectstack-data",
+    "objectstack-ui",
+    "objectstack-automation"
+  ],
   "readmePath": "README.md",
   "translations": {
     "zh-CN": {

@@ -61,11 +61,7 @@ export const GoodsReceipt = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [
-    { fields: ['purchase_order'] },
-    { fields: ['received_at'] },
-    { fields: ['quality'] },
-  ],
+  indexes: [{ fields: ['purchase_order'] }, { fields: ['received_at'] }, { fields: ['quality'] }],
 
   titleFormat: tmpl`Receipt {{record.receipt_number}}`,
   compactLayout: ['receipt_number', 'purchase_order', 'quality', 'received_value', 'received_at'],

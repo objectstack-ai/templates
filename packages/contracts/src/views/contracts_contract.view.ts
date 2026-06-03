@@ -35,7 +35,12 @@ export const ContractViews = defineView({
       { name: 'all', label: 'All', view: 'all_contracts', isDefault: true, pinned: true },
       { name: 'mine', label: 'My Contracts', icon: 'user', view: 'my_contracts' },
       { name: 'expiring', label: 'Expiring ≤ 60d', icon: 'clock', view: 'expiring_contracts' },
-      { name: 'pending', label: 'Pending Approval', icon: 'check', view: 'pending_approval_contracts' },
+      {
+        name: 'pending',
+        label: 'Pending Approval',
+        icon: 'check',
+        view: 'pending_approval_contracts',
+      },
     ],
     bulkActionDefs: [
       {

@@ -57,7 +57,12 @@ export const en: TranslationData = {
         reimbursed_at: { label: 'Reimbursed At' },
         payment_method: {
           label: 'Payment Method',
-          options: { bank_transfer: 'Bank Transfer', payroll: 'Payroll', cash: 'Cash', check: 'Check' },
+          options: {
+            bank_transfer: 'Bank Transfer',
+            payroll: 'Payroll',
+            cash: 'Cash',
+            check: 'Check',
+          },
         },
         payment_reference: { label: 'Payment Reference' },
         notes: { label: 'Internal Notes' },
@@ -66,8 +71,14 @@ export const en: TranslationData = {
         all_reports: { label: 'All Reports', description: 'Every report, grouped by status' },
         report_pipeline: { label: 'Report Pipeline', description: 'Kanban grouped by status' },
         my_reports: { label: 'My Reports', description: 'Reports where you are the employee' },
-        awaiting_approval: { label: 'Awaiting Approval', description: 'Submitted reports pending a decision' },
-        awaiting_reimbursement: { label: 'To Reimburse', description: 'Approved reports awaiting payment' },
+        awaiting_approval: {
+          label: 'Awaiting Approval',
+          description: 'Submitted reports pending a decision',
+        },
+        awaiting_reimbursement: {
+          label: 'To Reimburse',
+          description: 'Approved reports awaiting payment',
+        },
       },
     },
 
@@ -84,7 +95,11 @@ export const en: TranslationData = {
         amount: { label: 'Amount' },
         payment_source: {
           label: 'Paid With',
-          options: { personal_card: 'Personal Card', cash: 'Cash', personal_other: 'Personal — Other' },
+          options: {
+            personal_card: 'Personal Card',
+            cash: 'Cash',
+            personal_other: 'Personal — Other',
+          },
         },
         needs_receipt: { label: 'Receipt Required' },
         receipt_attached: { label: 'Receipt Attached' },
@@ -137,14 +152,35 @@ export const en: TranslationData = {
       description: 'Reports awaiting approval, amounts owed, and spend trend.',
       actions: { create_report: { label: 'New Report' } },
       widgets: {
-        awaiting_approval: { title: 'Awaiting Approval', description: 'Submitted reports pending a decision' },
-        awaiting_reimbursement: { title: 'To Reimburse', description: 'Approved reports awaiting payment' },
-        owed_amount: { title: 'Owed to Employees ($)', description: 'Total of approved, unpaid reports' },
+        awaiting_approval: {
+          title: 'Awaiting Approval',
+          description: 'Submitted reports pending a decision',
+        },
+        awaiting_reimbursement: {
+          title: 'To Reimburse',
+          description: 'Approved reports awaiting payment',
+        },
+        owed_amount: {
+          title: 'Owed to Employees ($)',
+          description: 'Total of approved, unpaid reports',
+        },
         reimbursed_total: { title: 'Reimbursed ($)', description: 'Total reimbursed to date' },
-        pending_reports_table: { title: 'Reports Awaiting Approval', description: 'Submitted reports sorted by amount' },
-        to_reimburse_table: { title: 'Approved — To Reimburse', description: 'Approved reports awaiting payment' },
-        spend_by_category: { title: 'Spend by Category', description: 'Line amounts grouped by category' },
-        spend_by_month: { title: 'Reimbursed by Month', description: 'Reimbursed totals over the last 12 months' },
+        pending_reports_table: {
+          title: 'Reports Awaiting Approval',
+          description: 'Submitted reports sorted by amount',
+        },
+        to_reimburse_table: {
+          title: 'Approved — To Reimburse',
+          description: 'Approved reports awaiting payment',
+        },
+        spend_by_category: {
+          title: 'Spend by Category',
+          description: 'Line amounts grouped by category',
+        },
+        spend_by_month: {
+          title: 'Reimbursed by Month',
+          description: 'Reimbursed totals over the last 12 months',
+        },
       },
     },
   },

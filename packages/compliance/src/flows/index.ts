@@ -4,8 +4,4 @@ import { EvidenceExpiringFlow } from './evidence_expiring.flow';
 import { EvidenceAutoExpireFlow } from './evidence_auto_expire.flow';
 import { FailedControlEscalationFlow } from './failed_control_escalation.flow';
 
-export const allFlows = [
-  EvidenceExpiringFlow,
-  EvidenceAutoExpireFlow,
-  FailedControlEscalationFlow,
-];
+export const allFlows = [EvidenceExpiringFlow, EvidenceAutoExpireFlow, FailedControlEscalationFlow];

@@ -17,8 +17,20 @@ export const ExpenseApp = App.create({
       label: 'Overview',
       icon: 'gauge',
     },
-    { id: 'nav_report', type: 'object', objectName: 'expense_report', label: 'Reports', icon: 'receipt' },
+    {
+      id: 'nav_report',
+      type: 'object',
+      objectName: 'expense_report',
+      label: 'Reports',
+      icon: 'receipt',
+    },
     { id: 'nav_line', type: 'object', objectName: 'expense_line', label: 'Lines', icon: 'list' },
-    { id: 'nav_category', type: 'object', objectName: 'expense_category', label: 'Categories', icon: 'tag' },
+    {
+      id: 'nav_category',
+      type: 'object',
+      objectName: 'expense_category',
+      label: 'Categories',
+      icon: 'tag',
+    },
   ],
 });

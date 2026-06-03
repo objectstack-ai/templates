@@ -24,7 +24,7 @@ function arg(name, fallback) {
   return i >= 0 && argv[i + 1] ? argv[i + 1] : fallback;
 }
 
-const baseUrl = (arg('url', 'http://localhost:4002')).replace(/\/$/, '');
+const baseUrl = arg('url', 'http://localhost:4002').replace(/\/$/, '');
 const apiBase = `${baseUrl}/api/v1`;
 const file = arg('file', 'qa/business-workflow.test.json');
 
@@ -130,7 +130,9 @@ async function execute(action) {
     case 'query_records':
       return dataFetch('POST', `${target}/query`, payload);
     case 'wait':
-      return new Promise((r) => setTimeout(() => r({ waited: payload.duration || 0 }), payload.duration || 0));
+      return new Promise((r) =>
+        setTimeout(() => r({ waited: payload.duration || 0 }), payload.duration || 0),
+      );
     default:
       throw new Error(`unsupported action type: ${type}`);
   }
@@ -138,7 +140,8 @@ async function execute(action) {
 
 async function runStep(step, ctx) {
   const result = await execute(interpolate(step.action, ctx));
-  if (step.capture) for (const [k, p] of Object.entries(step.capture)) ctx[k] = getByPath(result, p);
+  if (step.capture)
+    for (const [k, p] of Object.entries(step.capture)) ctx[k] = getByPath(result, p);
   // Interpolate assertions too so expectedValue can reference captured vars.
   if (step.assertions) for (const a of step.assertions) assertOne(result, interpolate(a, ctx));
   return result;

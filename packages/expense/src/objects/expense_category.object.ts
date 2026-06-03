@@ -16,8 +16,7 @@ export const ExpenseCategory = ObjectSchema.create({
   label: 'Expense Category',
   pluralLabel: 'Expense Categories',
   icon: 'tag',
-  description:
-    'A spend type (meals, travel, lodging, …) used to code and report expense lines.',
+  description: 'A spend type (meals, travel, lodging, …) used to code and report expense lines.',
 
   fields: {
     name: Field.text({
@@ -40,8 +39,7 @@ export const ExpenseCategory = ObjectSchema.create({
     per_txn_limit: Field.currency({
       label: 'Per-Transaction Limit',
       min: 0,
-      description:
-        'Soft cap shown to submitters. Hard enforcement is a fork point.',
+      description: 'Soft cap shown to submitters. Hard enforcement is a fork point.',
     }),
     active: Field.boolean({
       label: 'Active',

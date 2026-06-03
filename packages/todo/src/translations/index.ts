@@ -23,4 +23,3 @@ export const TodoTranslations: TranslationBundle = {
   'ja-JP': jaJP,
   'es-ES': esES,
 };
-

@@ -82,11 +82,7 @@ export const Milestone = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [
-    { fields: ['project'] },
-    { fields: ['status'] },
-    { fields: ['planned_date'] },
-  ],
+  indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['planned_date'] }],
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',

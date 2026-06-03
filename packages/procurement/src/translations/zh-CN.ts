@@ -17,17 +17,32 @@ export const zhCN: TranslationData = {
         category: {
           label: '类别',
           options: {
-            saas: '软件 / SaaS', hardware: '硬件', services: '专业服务',
-            marketing: '市场营销', facilities: '行政设施', other: '其他',
+            saas: '软件 / SaaS',
+            hardware: '硬件',
+            services: '专业服务',
+            marketing: '市场营销',
+            facilities: '行政设施',
+            other: '其他',
           },
         },
         status: {
           label: '状态',
-          options: { active: '生效', onboarding: '入驻中', suspended: '已暂停', archived: '已归档' },
+          options: {
+            active: '生效',
+            onboarding: '入驻中',
+            suspended: '已暂停',
+            archived: '已归档',
+          },
         },
         default_payment_terms: {
           label: '默认付款条款',
-          options: { net_15: '15 天', net_30: '30 天', net_45: '45 天', net_60: '60 天', upfront: '预付' },
+          options: {
+            net_15: '15 天',
+            net_30: '30 天',
+            net_45: '45 天',
+            net_60: '60 天',
+            upfront: '预付',
+          },
         },
         country: { label: '国家/地区' },
         website: { label: '网站' },
@@ -49,15 +64,22 @@ export const zhCN: TranslationData = {
         category: {
           label: '类别',
           options: {
-            saas: '软件 / SaaS', hardware: '硬件', services: '专业服务',
-            marketing: '市场营销', facilities: '行政设施', other: '其他',
+            saas: '软件 / SaaS',
+            hardware: '硬件',
+            services: '专业服务',
+            marketing: '市场营销',
+            facilities: '行政设施',
+            other: '其他',
           },
         },
         status: {
           label: '状态',
           options: {
-            draft: '草稿', submitted: '已提交', approved: '已批准',
-            rejected: '已驳回', converted: '已转为订单',
+            draft: '草稿',
+            submitted: '已提交',
+            approved: '已批准',
+            rejected: '已驳回',
+            converted: '已转为订单',
           },
         },
         justification: { label: '业务理由' },
@@ -87,8 +109,12 @@ export const zhCN: TranslationData = {
         status: {
           label: '状态',
           options: {
-            draft: '草稿', sent: '已发送', partial: '部分到货',
-            received: '已收货', closed: '已关闭', cancelled: '已取消',
+            draft: '草稿',
+            sent: '已发送',
+            partial: '部分到货',
+            received: '已收货',
+            closed: '已关闭',
+            cancelled: '已取消',
           },
         },
         owner: { label: '采购员' },
@@ -96,7 +122,13 @@ export const zhCN: TranslationData = {
         received_amount: { label: '已收货金额' },
         payment_terms: {
           label: '付款条款',
-          options: { net_15: '15 天', net_30: '30 天', net_45: '45 天', net_60: '60 天', upfront: '预付' },
+          options: {
+            net_15: '15 天',
+            net_30: '30 天',
+            net_45: '45 天',
+            net_60: '60 天',
+            upfront: '预付',
+          },
         },
         is_fully_received: { label: '已全部收货' },
         order_date: { label: '下单日期' },

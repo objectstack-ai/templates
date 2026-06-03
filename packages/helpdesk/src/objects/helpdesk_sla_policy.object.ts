@@ -41,15 +41,33 @@ export const SLAPolicy = ObjectSchema.create({
       description: 'Fallback policy when no tier match.',
     }),
 
-    first_response_low_minutes: Field.number({ label: 'First Response — Low (min)', defaultValue: 1440 }),
-    first_response_normal_minutes: Field.number({ label: 'First Response — Normal (min)', defaultValue: 480 }),
-    first_response_high_minutes: Field.number({ label: 'First Response — High (min)', defaultValue: 120 }),
-    first_response_urgent_minutes: Field.number({ label: 'First Response — Urgent (min)', defaultValue: 30 }),
+    first_response_low_minutes: Field.number({
+      label: 'First Response — Low (min)',
+      defaultValue: 1440,
+    }),
+    first_response_normal_minutes: Field.number({
+      label: 'First Response — Normal (min)',
+      defaultValue: 480,
+    }),
+    first_response_high_minutes: Field.number({
+      label: 'First Response — High (min)',
+      defaultValue: 120,
+    }),
+    first_response_urgent_minutes: Field.number({
+      label: 'First Response — Urgent (min)',
+      defaultValue: 30,
+    }),
 
     resolution_low_minutes: Field.number({ label: 'Resolution — Low (min)', defaultValue: 10080 }),
-    resolution_normal_minutes: Field.number({ label: 'Resolution — Normal (min)', defaultValue: 2880 }),
+    resolution_normal_minutes: Field.number({
+      label: 'Resolution — Normal (min)',
+      defaultValue: 2880,
+    }),
     resolution_high_minutes: Field.number({ label: 'Resolution — High (min)', defaultValue: 1440 }),
-    resolution_urgent_minutes: Field.number({ label: 'Resolution — Urgent (min)', defaultValue: 240 }),
+    resolution_urgent_minutes: Field.number({
+      label: 'Resolution — Urgent (min)',
+      defaultValue: 240,
+    }),
 
     notes: Field.markdown({ label: 'Notes' }),
   },

@@ -14,9 +14,7 @@ export const Resource = ObjectSchema.create({
   icon: 'users',
   description: 'Team member or budget allocated to a project.',
 
-  fieldGroups: [
-    { key: 'core', label: 'Allocation', icon: 'users', defaultExpanded: true },
-  ],
+  fieldGroups: [{ key: 'core', label: 'Allocation', icon: 'users', defaultExpanded: true }],
 
   fields: {
     project: Field.lookup('pm_project', {
@@ -63,11 +61,7 @@ export const Resource = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [
-    { fields: ['project'] },
-    { fields: ['person'] },
-    { fields: ['start_date'] },
-  ],
+  indexes: [{ fields: ['project'] }, { fields: ['person'] }, { fields: ['start_date'] }],
 
   titleFormat: tmpl`{{record.person.name}} → {{record.project.name}}`,
   compactLayout: ['person', 'project', 'role', 'allocated_hours_per_week'],

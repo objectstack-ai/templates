@@ -81,7 +81,13 @@ export const Assessment = ObjectSchema.create({
       type: 'state_machine',
       name: 'assessment_lifecycle',
       field: 'status',
-      transitions: {planned:["in_progress"], in_progress:["passed", "failed", "partial"], passed:["in_progress"], failed:["in_progress"], partial:["in_progress"]},
+      transitions: {
+        planned: ['in_progress'],
+        in_progress: ['passed', 'failed', 'partial'],
+        passed: ['in_progress'],
+        failed: ['in_progress'],
+        partial: ['in_progress'],
+      },
       message: 'Illegal status transition.',
     },
     {

@@ -123,10 +123,18 @@ export const RoiByChannelDashboard: Dashboard = {
       type: 'table',
       object: 'content_publication',
       aggregate: 'count',
-      
+
       layout: { x: 0, y: 7, w: 12, h: 5 },
       options: {
-        columns: ['piece', 'channel', 'published_at', 'total_views', 'total_clicks', 'total_signups', 'total_revenue'],
+        columns: [
+          'piece',
+          'channel',
+          'published_at',
+          'total_views',
+          'total_clicks',
+          'total_signups',
+          'total_revenue',
+        ],
         pageSize: 10,
         sort: [{ field: 'total_signups', order: 'desc' }],
       },

@@ -70,17 +70,9 @@ export type PortalNavItem =
   | (BasePortalNavItem & { type: 'dashboard'; dashboardName: string })
   | (BasePortalNavItem & { type: 'url'; url: string; target?: '_self' | '_blank' });
 
-export type PortalAuthMode =
-  | 'authenticated'
-  | 'magic-link'
-  | 'anonymous'
-  | `sso:${string}`;
+export type PortalAuthMode = 'authenticated' | 'magic-link' | 'anonymous' | `sso:${string}`;
 
-export type PortalLayout =
-  | 'console'
-  | 'minimal'
-  | 'embedded'
-  | `custom:${string}`;
+export type PortalLayout = 'console' | 'minimal' | 'embedded' | `custom:${string}`;
 
 export interface PortalInput {
   kind: 'portal';

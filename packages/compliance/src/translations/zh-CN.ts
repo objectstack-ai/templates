@@ -8,17 +8,29 @@ import type { TranslationData } from '@objectstack/spec/system';
 export const zhCN: TranslationData = {
   objects: {
     compliance_framework: {
-      label: '合规框架', pluralLabel: '合规框架',
+      label: '合规框架',
+      pluralLabel: '合规框架',
       description: '正在认证或贯标的合规标准。',
       fields: {
         short_name: { label: '简称' },
         full_name: { label: '全称' },
         family: {
           label: '类别',
-          options: { soc2: 'SOC 2', iso27001: 'ISO 27001 / 27002', hipaa: 'HIPAA', gdpr: 'GDPR', pci: 'PCI DSS', nist_csf: 'NIST CSF', custom: '自定义' },
+          options: {
+            soc2: 'SOC 2',
+            iso27001: 'ISO 27001 / 27002',
+            hipaa: 'HIPAA',
+            gdpr: 'GDPR',
+            pci: 'PCI DSS',
+            nist_csf: 'NIST CSF',
+            custom: '自定义',
+          },
         },
         version: { label: '版本' },
-        status: { label: '状态', options: { active: '生效', adopted: '已采用', retired: '已退役' } },
+        status: {
+          label: '状态',
+          options: { active: '生效', adopted: '已采用', retired: '已退役' },
+        },
         next_audit_date: { label: '下次审计日期' },
         auditor: { label: '外部审计方' },
         description: { label: '描述' },
@@ -26,7 +38,8 @@ export const zhCN: TranslationData = {
     },
 
     compliance_control: {
-      label: '控制项', pluralLabel: '控制项',
+      label: '控制项',
+      pluralLabel: '控制项',
       description: '单个控制要求，需要佐证材料并定期评估。',
       fields: {
         code: { label: '控制项编号' },
@@ -34,7 +47,16 @@ export const zhCN: TranslationData = {
         framework: { label: '所属框架' },
         category: {
           label: '分类',
-          options: { access: '访问控制', change: '变更管理', risk: '风险管理', vendor: '供应商管理', incident: '事件响应', data: '数据保护', physical: '物理安全', other: '其他' },
+          options: {
+            access: '访问控制',
+            change: '变更管理',
+            risk: '风险管理',
+            vendor: '供应商管理',
+            incident: '事件响应',
+            data: '数据保护',
+            physical: '物理安全',
+            other: '其他',
+          },
         },
         criticality: { label: '重要等级', options: { high: '高', medium: '中', low: '低' } },
         last_status: {
@@ -58,18 +80,34 @@ export const zhCN: TranslationData = {
     },
 
     compliance_evidence: {
-      label: '佐证材料', pluralLabel: '佐证材料',
+      label: '佐证材料',
+      pluralLabel: '佐证材料',
       description: '支持一项或多项控制项的证据。',
       fields: {
         title: { label: '标题' },
         control: { label: '主控制项' },
         evidence_type: {
           label: '类型',
-          options: { policy: '制度文件', screenshot: '截图', log: '日志导出', config: '配置导出', training: '培训记录', pentest: '渗透测试报告', audit_letter: '外部审计函', other: '其他' },
+          options: {
+            policy: '制度文件',
+            screenshot: '截图',
+            log: '日志导出',
+            config: '配置导出',
+            training: '培训记录',
+            pentest: '渗透测试报告',
+            audit_letter: '外部审计函',
+            other: '其他',
+          },
         },
         status: {
           label: '状态',
-          options: { pending: '待收集', submitted: '已提交', approved: '已批准', rejected: '已驳回', expired: '已过期' },
+          options: {
+            pending: '待收集',
+            submitted: '已提交',
+            approved: '已批准',
+            rejected: '已驳回',
+            expired: '已过期',
+          },
         },
         description: { label: '描述' },
         collected_on: { label: '收集日期' },
@@ -89,7 +127,8 @@ export const zhCN: TranslationData = {
     },
 
     compliance_assessment: {
-      label: '评估', pluralLabel: '评估',
+      label: '评估',
+      pluralLabel: '评估',
       description: '对单个控制项的一次定期测试。',
       fields: {
         title: { label: '标题' },
@@ -99,7 +138,13 @@ export const zhCN: TranslationData = {
         assessor: { label: '评估人' },
         status: {
           label: '状态',
-          options: { planned: '已计划', in_progress: '进行中', passed: '通过', partial: '部分通过', failed: '未通过' },
+          options: {
+            planned: '已计划',
+            in_progress: '进行中',
+            passed: '通过',
+            partial: '部分通过',
+            failed: '未通过',
+          },
         },
         finding: { label: '审计发现' },
         remediation_plan: { label: '整改计划' },
@@ -128,9 +173,14 @@ export const zhCN: TranslationData = {
   },
 
   messages: {
-    'common.save': '保存', 'common.cancel': '取消', 'common.delete': '删除',
-    'common.edit': '编辑', 'common.create': '新建', 'common.search': '搜索',
-    'common.filter': '筛选', 'common.export': '导出',
+    'common.save': '保存',
+    'common.cancel': '取消',
+    'common.delete': '删除',
+    'common.edit': '编辑',
+    'common.create': '新建',
+    'common.search': '搜索',
+    'common.filter': '筛选',
+    'common.export': '导出',
     'success.saved': '保存成功',
     'error.required': '此字段必填',
   },

@@ -101,10 +101,19 @@ export const en: TranslationData = {
         create_task: { label: 'New Task' },
       },
       widgets: {
-        my_open_tasks: { title: 'My Open Tasks', description: 'Tasks assigned to you that are still to do or in progress' },
+        my_open_tasks: {
+          title: 'My Open Tasks',
+          description: 'Tasks assigned to you that are still to do or in progress',
+        },
         my_overdue: { title: 'Overdue', description: 'Your open tasks past their due date' },
-        done_this_week: { title: 'Done This Week', description: 'Tasks you completed since the start of the week' },
-        recent_overdue_list: { title: 'Overdue Tasks', description: 'Your open tasks past their due date, sorted by oldest first' },
+        done_this_week: {
+          title: 'Done This Week',
+          description: 'Tasks you completed since the start of the week',
+        },
+        recent_overdue_list: {
+          title: 'Overdue Tasks',
+          description: 'Your open tasks past their due date, sorted by oldest first',
+        },
       },
     },
   },

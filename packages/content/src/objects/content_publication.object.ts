@@ -107,11 +107,7 @@ export const Publication = ObjectSchema.create({
     mru: true,
   },
 
-  indexes: [
-    { fields: ['piece'] },
-    { fields: ['channel'] },
-    { fields: ['published_at'] },
-  ],
+  indexes: [{ fields: ['piece'] }, { fields: ['channel'] }, { fields: ['published_at'] }],
 
   titleFormat: tmpl`{{record.piece}} on {{record.channel}}`,
   compactLayout: ['piece', 'channel', 'published_at', 'total_views', 'total_signups'],

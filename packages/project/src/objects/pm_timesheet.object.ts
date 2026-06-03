@@ -14,9 +14,7 @@ export const Timesheet = ObjectSchema.create({
   icon: 'clock',
   description: 'Daily time tracking entry for a project.',
 
-  fieldGroups: [
-    { key: 'core', label: 'Time Entry', icon: 'clock', defaultExpanded: true },
-  ],
+  fieldGroups: [{ key: 'core', label: 'Time Entry', icon: 'clock', defaultExpanded: true }],
 
   fields: {
     project: Field.lookup('pm_project', {
@@ -65,11 +63,7 @@ export const Timesheet = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [
-    { fields: ['project'] },
-    { fields: ['person'] },
-    { fields: ['work_date'] },
-  ],
+  indexes: [{ fields: ['project'] }, { fields: ['person'] }, { fields: ['work_date'] }],
 
   titleFormat: tmpl`{{record.person.name}} - {{record.work_date}}`,
   compactLayout: ['person', 'project', 'work_date', 'hours'],

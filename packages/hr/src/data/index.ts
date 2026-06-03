@@ -21,7 +21,12 @@ const departments = defineDataset(Department, {
   externalId: 'name',
   records: [
     { name: 'Engineering', code: 'ENG', description: 'Builds and runs the product.' },
-    { name: 'Platform', code: 'ENG-PLAT', parent: 'Engineering', description: 'Infrastructure and developer experience.' },
+    {
+      name: 'Platform',
+      code: 'ENG-PLAT',
+      parent: 'Engineering',
+      description: 'Infrastructure and developer experience.',
+    },
     { name: 'Marketing', code: 'MKT', description: 'Brand, content, and growth.' },
     { name: 'People Ops', code: 'PPL', description: 'HR, recruiting, and culture.' },
   ],

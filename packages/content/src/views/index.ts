@@ -3,9 +3,4 @@
 export { PieceViews } from './content_piece.view';
 export { SignalViews } from './content_signal.view';
 export { PublicationViews } from './content_publication.view';
-export {
-  TopicViews,
-  CompetitorViews,
-  ChannelViews,
-  TemplateViews,
-} from './content_reference.view';
+export { TopicViews, CompetitorViews, ChannelViews, TemplateViews } from './content_reference.view';

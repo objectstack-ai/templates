@@ -13,7 +13,8 @@ export const zhCN: TranslationData = {
     contracts_contract: {
       label: '合同',
       pluralLabel: '合同',
-      description: '与单一交易对手签署（或谈判中）的协议。在「文件」标签中上传签署版 PDF，然后调用 extract_terms 自动填充元数据。',
+      description:
+        '与单一交易对手签署（或谈判中）的协议。在「文件」标签中上传签署版 PDF，然后调用 extract_terms 自动填充元数据。',
       fields: {
         title: { label: '标题' },
         contract_number: { label: '合同编号' },
@@ -196,7 +197,10 @@ export const zhCN: TranslationData = {
         auto_renewing_30: { title: '30 天内自动续约', description: '30 天内将自动续约的生效合同' },
         pending_approval: { title: '待审批', description: '审核中、金额超过审批阈值的合同' },
         active_total_value: { title: '生效合同总金额', description: '所有生效合同金额之和' },
-        expiring_table: { title: '即将到期的合同 (60 天内)', description: '按到期日升序排列的生效合同' },
+        expiring_table: {
+          title: '即将到期的合同 (60 天内)',
+          description: '按到期日升序排列的生效合同',
+        },
         pending_obligations: { title: '待办义务', description: '所有按到期日排序的待办义务' },
       },
     },
