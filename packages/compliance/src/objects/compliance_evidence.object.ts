@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { EvidenceStateMachine } from './compliance_evidence.state';
-
 /**
  * Evidence — a piece of proof supporting one or more controls. Attach
  * PDFs / screenshots / logs via the platform's sys_attachment slot.
@@ -84,8 +82,8 @@ export const Evidence = ObjectSchema.create({
       group: 'lifecycle',
       expression: F`record.expires_on != null && record.expires_on < today()`,
     }),
-    collected_by: Field.lookup('user', { label: 'Collected By', group: 'lifecycle' }),
-    approved_by: Field.lookup('user', { label: 'Approved By', group: 'lifecycle' }),
+    collected_by: Field.lookup('sys_user', { label: 'Collected By', group: 'lifecycle' }),
+    approved_by: Field.lookup('sys_user', { label: 'Approved By', group: 'lifecycle' }),
     source_url: Field.text({
       label: 'Source URL',
       group: 'meta',
@@ -94,8 +92,6 @@ export const Evidence = ObjectSchema.create({
     }),
     notes: Field.markdown({ label: 'Notes', group: 'meta' }),
   },
-
-  stateMachines: { lifecycle: EvidenceStateMachine },
 
   enable: {
     trackHistory: true,
@@ -119,6 +115,13 @@ export const Evidence = ObjectSchema.create({
   compactLayout: ['title', 'control', 'evidence_type', 'status', 'expires_on'],
 
   validations: [
+    {
+      type: 'state_machine',
+      name: 'evidence_lifecycle',
+      field: 'status',
+      transitions: {pending:["submitted"], submitted:["approved", "rejected"], approved:["expired"], rejected:["pending"], expired:["pending"]},
+      message: 'Illegal status transition.',
+    },
     {
       name: 'submitted_requires_collected_on',
       type: 'script',

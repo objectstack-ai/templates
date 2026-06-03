@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { TicketStateMachine } from './helpdesk_ticket.state';
-
 /**
  * Helpdesk Ticket — the central object. **AI fields are first-class**:
  * `ai_summary`, `ai_category`, `ai_priority_suggestion`, `ai_sentiment`,
@@ -101,7 +99,7 @@ export const Ticket = ObjectSchema.create({
       label: 'Team',
       group: 'people',
     }),
-    assignee: Field.lookup('user', {
+    assignee: Field.lookup('sys_user', {
       label: 'Assignee',
       group: 'people',
       description: 'Agent currently responsible.',
@@ -230,8 +228,6 @@ export const Ticket = ObjectSchema.create({
     }),
   },
 
-  stateMachines: { lifecycle: TicketStateMachine },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -260,6 +256,13 @@ export const Ticket = ObjectSchema.create({
 
   validations: [
     {
+      type: 'state_machine',
+      name: 'ticket_lifecycle',
+      field: 'status',
+      transitions: {new:["triaged", "escalated"], triaged:["in_progress", "escalated"], in_progress:["waiting_customer", "resolved", "escalated"], waiting_customer:["in_progress", "resolved", "escalated"], resolved:["closed", "in_progress"], escalated:["in_progress", "resolved"], closed:[]},
+      message: 'Illegal status transition.',
+    },
+    {
       name: 'resolved_requires_resolved_at',
       type: 'script',
       severity: 'error',
@@ -275,16 +278,6 @@ export const Ticket = ObjectSchema.create({
     },
   ],
 
-  workflows: [
-    {
-      name: 'auto_set_resolved_at',
-      objectName: 'helpdesk_ticket',
-      triggerType: 'on_update',
-      criteria: P`record.status == "resolved" && record.resolved_at == null`,
-      active: true,
-      actions: [
-        { name: 'stamp_resolved_at', type: 'field_update', field: 'resolved_at', value: 'now()' },
-      ],
-    },
-  ],
+  // `resolved_at` is stamped by `helpdesk_ticket.hook.ts` on resolution.
+  // Object-level `workflows` are not a supported 7.x ObjectSchema field.
 });

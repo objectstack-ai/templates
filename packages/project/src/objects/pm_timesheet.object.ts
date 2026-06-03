@@ -24,7 +24,7 @@ export const Timesheet = ObjectSchema.create({
       required: true,
       group: 'core',
     }),
-    person: Field.lookup('user', {
+    person: Field.lookup('sys_user', {
       label: 'Person',
       required: true,
       group: 'core',

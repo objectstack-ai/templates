@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { PurchaseOrderStateMachine } from './procurement_order.state';
-
 /**
  * Purchase Order — formal commitment to a vendor. One PO per (vendor,
  * request) pair. Line items live in `lines` as JSON to stay under the
@@ -59,7 +57,7 @@ export const PurchaseOrder = ObjectSchema.create({
         { label: 'Cancelled', value: 'cancelled', color: '#EF4444' },
       ],
     }),
-    owner: Field.lookup('user', {
+    owner: Field.lookup('sys_user', {
       label: 'Buyer',
       group: 'core',
       description: 'Internal buyer responsible. Defaults to created_by.',
@@ -75,7 +73,8 @@ export const PurchaseOrder = ObjectSchema.create({
       group: 'commercial',
       min: 0,
       defaultValue: 0,
-      description: 'Sum of accepted goods-receipt values. Maintained by hook.',
+      description:
+        'Sum of accepted goods-receipt values. Stored header field — maintained at the top level (client/seed), not by a cross-object rollup hook (unsupported in the standalone runtime; see procurement/src/hooks/index.ts).',
     }),
     payment_terms: Field.select({
       label: 'Payment Terms',
@@ -120,8 +119,6 @@ export const PurchaseOrder = ObjectSchema.create({
     notes: Field.markdown({ label: 'Internal Notes', group: 'meta' }),
   },
 
-  stateMachines: { lifecycle: PurchaseOrderStateMachine },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -145,6 +142,13 @@ export const PurchaseOrder = ObjectSchema.create({
 
   validations: [
     {
+      type: 'state_machine',
+      name: 'po_lifecycle',
+      field: 'status',
+      transitions: {draft:["sent"], sent:["partial", "received", "cancelled"], partial:["received", "closed"], received:["closed"], closed:[], cancelled:[]},
+      message: 'Illegal status transition.',
+    },
+    {
       name: 'sent_requires_order_date',
       type: 'script',
       severity: 'error',
@@ -160,16 +164,6 @@ export const PurchaseOrder = ObjectSchema.create({
     },
   ],
 
-  workflows: [
-    {
-      name: 'auto_mark_received',
-      objectName: 'procurement_order',
-      triggerType: 'on_update',
-      criteria: P`record.received_amount != null && record.total_amount != null && record.received_amount >= record.total_amount && (record.status == "sent" || record.status == "partial")`,
-      active: true,
-      actions: [
-        { name: 'set_received', type: 'field_update', field: 'status', value: 'received' },
-      ],
-    },
-  ],
+  // Auto-advance to "received" is handled by `procurement_order.hook.ts`.
+  // Object-level `workflows` are not a supported 7.x ObjectSchema field.
 });

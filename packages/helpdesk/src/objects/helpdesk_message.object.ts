@@ -38,7 +38,7 @@ export const Message = ObjectSchema.create({
         { label: 'Internal Note', value: 'internal_note', color: '#94A3B8' },
       ],
     }),
-    author_user: Field.lookup('user', { label: 'Author (User)' }),
+    author_user: Field.lookup('sys_user', { label: 'Author (User)' }),
     author_customer: Field.lookup('helpdesk_customer', { label: 'Author (Customer)' }),
     body: Field.markdown({
       label: 'Body',

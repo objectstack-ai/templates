@@ -83,7 +83,7 @@ export const Obligation = ObjectSchema.create({
       description: 'Required for kind=payment. Currency: USD (override per-fork).',
     }),
 
-    assignee: Field.lookup('user', {
+    assignee: Field.lookup('sys_user', {
       label: 'Assignee',
       group: 'core',
       description: 'Internal owner responsible for fulfilling or chasing this obligation.',
@@ -134,16 +134,7 @@ export const Obligation = ObjectSchema.create({
     },
   ],
 
-  workflows: [
-    {
-      name: 'stamp_completed_at',
-      objectName: 'contracts_obligation',
-      triggerType: 'on_update',
-      criteria: P`record.status == "done" && previous.status != "done"`,
-      active: true,
-      actions: [
-        { name: 'set_completed_at', type: 'field_update', field: 'completed_at', value: 'now()' },
-      ],
-    },
-  ],
+  // `completed_at` is stamped by `contracts_obligation.hook.ts` when the
+  // obligation is marked done. Object-level `workflows` are not a supported
+  // 7.x ObjectSchema field.
 });

@@ -44,7 +44,7 @@ export const TaskViews = defineView({
             name: 'assignee',
             label: 'New Assignee',
             type: 'lookup',
-            object: 'user',
+            object: 'sys_user',
             required: true,
           },
         ],

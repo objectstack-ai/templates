@@ -38,7 +38,7 @@ export const Team = ObjectSchema.create({
         { label: 'Trust & Safety', value: 'trust' },
       ],
     }),
-    manager: Field.lookup('user', { label: 'Manager' }),
+    manager: Field.lookup('sys_user', { label: 'Manager' }),
     is_active: Field.boolean({ label: 'Active', defaultValue: true }),
     business_hours: Field.text({
       label: 'Business Hours',

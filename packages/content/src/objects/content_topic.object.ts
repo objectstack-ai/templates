@@ -91,7 +91,7 @@ export const Topic = ObjectSchema.create({
       ],
     }),
 
-    owner: Field.lookup('user', {
+    owner: Field.lookup('sys_user', {
       label: 'Owner',
       group: 'core',
       description:

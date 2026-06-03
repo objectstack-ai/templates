@@ -34,6 +34,21 @@ const timeOffHook: Hook = {
       input.decided_at = null;
       input.decision_note = null;
     }
+
+    // Stamp lifecycle timestamps on status entry. (Previously dead object
+    // `workflows`; `workflows` is not a supported 7.x ObjectSchema field.)
+    if (event === 'beforeUpdate' && previous) {
+      const now = new Date().toISOString();
+      if (input.status === 'submitted' && previous.status !== 'submitted') {
+        input.submitted_at = now;
+      }
+      if (
+        (input.status === 'approved' || input.status === 'rejected') &&
+        previous.status === 'submitted'
+      ) {
+        input.decided_at = now;
+      }
+    }
   },
 };
 

@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { PurchaseRequestStateMachine } from './procurement_request.state';
-
 /**
  * Purchase Request — what someone wants to buy. Goes through approval,
  * then is converted into one Purchase Order by the
@@ -42,7 +40,7 @@ export const PurchaseRequest = ObjectSchema.create({
       maxLength: 40,
       group: 'core',
     }),
-    requester: Field.lookup('user', {
+    requester: Field.lookup('sys_user', {
       label: 'Requester',
       group: 'core',
       description: 'Person making the request. Defaults to created_by.',
@@ -107,8 +105,6 @@ export const PurchaseRequest = ObjectSchema.create({
     notes: Field.markdown({ label: 'Internal Notes', group: 'meta' }),
   },
 
-  stateMachines: { lifecycle: PurchaseRequestStateMachine },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -131,6 +127,13 @@ export const PurchaseRequest = ObjectSchema.create({
   compactLayout: ['title', 'vendor', 'estimated_amount', 'status', 'needed_by'],
 
   validations: [
+    {
+      type: 'state_machine',
+      name: 'pr_lifecycle',
+      field: 'status',
+      transitions: {draft:["submitted"], submitted:["approved", "rejected", "draft"], approved:["converted"], rejected:["draft"], converted:[]},
+      message: 'Illegal status transition.',
+    },
     {
       name: 'submitted_requires_amount',
       type: 'script',

@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, tmpl } from '@objectstack/spec';
-import { AssessmentStateMachine } from './compliance_assessment.state';
-
 /**
  * Assessment — a discrete test of a control. Each control should have
  * one per `review_frequency_days`. Result rolls up onto Control.last_status.
@@ -34,7 +32,7 @@ export const Assessment = ObjectSchema.create({
     assessed_at: Field.datetime({
       label: 'Assessed At',
     }),
-    assessor: Field.lookup('user', { label: 'Assessor' }),
+    assessor: Field.lookup('sys_user', { label: 'Assessor' }),
     status: Field.select({
       label: 'Status',
       required: true,
@@ -56,8 +54,6 @@ export const Assessment = ObjectSchema.create({
     }),
     remediation_due: Field.date({ label: 'Remediation Due' }),
   },
-
-  stateMachines: { lifecycle: AssessmentStateMachine },
 
   enable: {
     trackHistory: true,
@@ -81,6 +77,13 @@ export const Assessment = ObjectSchema.create({
   compactLayout: ['title', 'control', 'status', 'cycle', 'assessed_at'],
 
   validations: [
+    {
+      type: 'state_machine',
+      name: 'assessment_lifecycle',
+      field: 'status',
+      transitions: {planned:["in_progress"], in_progress:["passed", "failed", "partial"], passed:["in_progress"], failed:["in_progress"], partial:["in_progress"]},
+      message: 'Illegal status transition.',
+    },
     {
       name: 'failed_requires_remediation',
       type: 'script',

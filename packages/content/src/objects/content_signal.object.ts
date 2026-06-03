@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, tmpl } from '@objectstack/spec';
-import { SignalStateMachine } from './content_signal.state';
-
 /**
  * Signal — a captured event worth potentially writing about. Sources:
  *   - a competitor published something (auto-captured via RSS / manual)
@@ -123,10 +121,6 @@ export const Signal = ObjectSchema.create({
     notes: Field.markdown({ label: 'Notes', group: 'meta' }),
   },
 
-  stateMachines: {
-    lifecycle: SignalStateMachine,
-  },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -149,6 +143,13 @@ export const Signal = ObjectSchema.create({
 
   validations: [
     {
+      type: 'state_machine',
+      name: 'content_signal_lifecycle',
+      field: 'status',
+      transitions: {captured:["promoted", "ignored"], promoted:[], ignored:[]},
+      message: 'Illegal status transition.',
+    },
+    {
       name: 'competitor_post_requires_competitor',
       type: 'script',
       severity: 'error',
@@ -157,16 +158,6 @@ export const Signal = ObjectSchema.create({
     },
   ],
 
-  workflows: [
-    {
-      name: 'stamp_promoted_at',
-      objectName: 'content_signal',
-      triggerType: 'on_update',
-      criteria: P`record.status == "promoted" && previous.status != "promoted"`,
-      active: true,
-      actions: [
-        { name: 'set_promoted_at', type: 'field_update', field: 'promoted_at', value: 'now()' },
-      ],
-    },
-  ],
+  // `promoted_at` is stamped by `content_piece.hook.ts` (signalHook) on
+  // promotion. Object-level `workflows` are not a supported 7.x field.
 });

@@ -50,7 +50,7 @@ export const Customer = ObjectSchema.create({
       maxLength: 16,
       description: 'BCP-47, e.g. en, zh-CN, ja. Used for reply suggestions.',
     }),
-    portal_user: Field.lookup('user', {
+    portal_user: Field.lookup('sys_user', {
       label: 'Portal User',
       description: 'Linked user account for portal login.',
     }),

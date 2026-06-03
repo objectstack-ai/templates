@@ -49,7 +49,7 @@ export const Employee = ObjectSchema.create({
       group: 'identity',
     }),
     phone: Field.text({ label: 'Phone', maxLength: 40, group: 'identity' }),
-    user: Field.lookup('user', {
+    user: Field.lookup('sys_user', {
       label: 'Login User',
       description: 'Linked platform account for self-service.',
       group: 'identity',
@@ -163,12 +163,9 @@ export const Employee = ObjectSchema.create({
       message: 'Terminated employees must have an end date.',
       condition: P`record.status == "terminated" && record.end_date == null`,
     },
-    {
-      name: 'manager_is_not_self',
-      type: 'script',
-      severity: 'error',
-      message: 'An employee cannot be their own manager.',
-      condition: P`record.manager != null && record.manager == record.id`,
-    },
+    // The "employee cannot be their own manager" guard lives in
+    // `hr_employee.hook.ts`: it needs the record's own primary key, which the
+    // ADR-0032 build-time expression validator does not expose as a declared
+    // field (so `record.manager == record.id` would fail `objectstack build`).
   ],
 });

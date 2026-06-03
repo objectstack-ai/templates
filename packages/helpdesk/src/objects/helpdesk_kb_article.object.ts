@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { tmpl } from '@objectstack/spec';
-import { KBArticleStateMachine } from './helpdesk_kb_article.state';
-
 /**
  * KB Article — knowledge base entry. The AI triage flow recalls relevant
  * articles by category and recent usage, attaching IDs to
@@ -63,13 +61,11 @@ export const KBArticle = ObjectSchema.create({
       maxLength: 16,
       description: 'BCP-47 tag. Each translation is a separate article.',
     }),
-    author: Field.lookup('user', { label: 'Author' }),
+    author: Field.lookup('sys_user', { label: 'Author' }),
     helpful_count: Field.number({ label: 'Helpful Votes', defaultValue: 0 }),
     unhelpful_count: Field.number({ label: 'Unhelpful Votes', defaultValue: 0 }),
     published_at: Field.datetime({ label: 'Published At' }),
   },
-
-  stateMachines: { lifecycle: KBArticleStateMachine },
 
   enable: {
     trackHistory: true,
@@ -84,4 +80,13 @@ export const KBArticle = ObjectSchema.create({
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
   compactLayout: ['name', 'category', 'status', 'locale'],
+  validations: [
+    {
+      type: 'state_machine',
+      name: 'kb_article_lifecycle',
+      field: 'status',
+      transitions: {draft:["review"], review:["published", "draft"], published:["archived", "draft"], archived:["draft"]},
+      message: 'Illegal status transition.',
+    },
+  ],
 });

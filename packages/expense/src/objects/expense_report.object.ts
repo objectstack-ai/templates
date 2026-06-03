@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { ExpenseReportStateMachine } from './expense_report.state';
-
 /**
  * Expense Report — the reimbursement claim an employee submits. It is a
  * header over one or more `expense_line` rows; `total_amount` is rolled up
@@ -44,7 +42,7 @@ export const ExpenseReport = ObjectSchema.create({
       maxLength: 40,
       group: 'core',
     }),
-    requester: Field.lookup('user', {
+    requester: Field.lookup('sys_user', {
       label: 'Employee',
       group: 'core',
       description: 'Person claiming reimbursement. Defaults to created_by.',
@@ -121,8 +119,6 @@ export const ExpenseReport = ObjectSchema.create({
     notes: Field.markdown({ label: 'Internal Notes', group: 'meta' }),
   },
 
-  stateMachines: { lifecycle: ExpenseReportStateMachine },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -145,6 +141,13 @@ export const ExpenseReport = ObjectSchema.create({
   compactLayout: ['title', 'requester', 'total_amount', 'status', 'period_end'],
 
   validations: [
+    {
+      type: 'state_machine',
+      name: 'expense_report_lifecycle',
+      field: 'status',
+      transitions: {draft:["submitted"], submitted:["approved", "rejected", "draft"], approved:["reimbursed"], rejected:["draft"], reimbursed:[]},
+      message: 'Illegal status transition.',
+    },
     {
       name: 'submitted_requires_amount',
       type: 'script',
