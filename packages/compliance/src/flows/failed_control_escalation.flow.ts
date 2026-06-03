@@ -24,8 +24,8 @@ export const FailedControlEscalationFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'compliance_assessment',
-        criteria: 'status == "failed"',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "failed"',
       },
     },
     {
@@ -34,7 +34,7 @@ export const FailedControlEscalationFlow: Flow = {
       label: 'Load Assessment',
       config: {
         objectName: 'compliance_assessment',
-        filter: { id: '{assessmentId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'asmt',
       },
     },

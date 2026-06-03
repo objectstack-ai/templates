@@ -22,8 +22,8 @@ export const EvidenceAutoExpireFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'compliance_evidence',
-        criteria: 'status == "approved" && expires_on != null && expires_on == daysAgo(0)',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "approved" && expires_on != null && expires_on == daysAgo(0)',
       },
     },
     {
@@ -32,8 +32,8 @@ export const EvidenceAutoExpireFlow: Flow = {
       label: 'Mark Expired',
       config: {
         objectName: 'compliance_evidence',
-        recordId: '{evidenceId}',
-        values: { status: 'expired' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'expired' },
       },
     },
     { id: 'end', type: 'end', label: 'End' },

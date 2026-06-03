@@ -27,7 +27,8 @@ export const SignalToTopicPromotionFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'content_signal',
-        criteria: 'status == "promoted" && PRIOR(status) != "promoted"',
+        triggerType: 'record-after-update',
+        condition: 'status == "promoted" && PRIOR(status) != "promoted"',
       },
     },
     {
@@ -36,7 +37,7 @@ export const SignalToTopicPromotionFlow: Flow = {
       label: 'Load Signal',
       config: {
         objectName: 'content_signal',
-        filter: { id: '{signalId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'signal',
       },
     },
@@ -46,7 +47,7 @@ export const SignalToTopicPromotionFlow: Flow = {
       label: 'Create Topic',
       config: {
         objectName: 'content_topic',
-        values: {
+        fields: {
           title: '{signal.recommended_topic_title}',
           brief:
             'Promoted from signal "{signal.headline}". Source: {signal.source_url}.\n\n{signal.summary}',
@@ -65,8 +66,8 @@ export const SignalToTopicPromotionFlow: Flow = {
       label: 'Link Topic Back to Signal',
       config: {
         objectName: 'content_signal',
-        recordId: '{signal.id}',
-        values: { promoted_topic: '{topic.id}' },
+        filter: { id: '{record.id}' },
+        fields: { promoted_topic: '{topic.id}' },
       },
     },
     {

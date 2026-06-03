@@ -25,8 +25,8 @@ export const ExpenseApprovalOverdueFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'expense_report',
-        criteria: 'status == "submitted" && submitted_at != null && submitted_at == daysAgo(3)',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "submitted" && submitted_at != null && submitted_at == daysAgo(3)',
       },
     },
     {
@@ -35,7 +35,7 @@ export const ExpenseApprovalOverdueFlow: Flow = {
       label: 'Load Report',
       config: {
         objectName: 'expense_report',
-        filter: { id: '{reportId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'report',
       },
     },

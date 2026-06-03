@@ -34,9 +34,9 @@ export const SlaFirstResponseWarnFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'helpdesk_ticket',
-        criteria:
+        triggerType: 'record-after-update',
+        condition:
           'first_response_due_at != null && first_response_at == null && status != "closed" && status != "resolved"',
-        criteriaDialect: 'cel',
       },
     },
     {
@@ -45,7 +45,7 @@ export const SlaFirstResponseWarnFlow: Flow = {
       label: 'Load Ticket',
       config: {
         objectName: 'helpdesk_ticket',
-        filter: { id: '{ticketId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'ticket',
       },
     },

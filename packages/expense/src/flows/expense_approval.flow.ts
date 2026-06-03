@@ -32,8 +32,8 @@ export const ExpenseApprovalFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'expense_report',
-        criteria: 'status == "submitted"',
-        criteriaDialect: 'cel',
+        triggerType: 'record-after-update',
+        condition: 'status == "submitted"',
       },
     },
     {
@@ -58,8 +58,8 @@ export const ExpenseApprovalFlow: Flow = {
       label: 'Mark Approved',
       config: {
         objectName: 'expense_report',
-        recordId: '{reportId}',
-        values: { status: 'approved' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'approved' },
       },
     },
     {
@@ -79,8 +79,8 @@ export const ExpenseApprovalFlow: Flow = {
       label: 'Mark Rejected',
       config: {
         objectName: 'expense_report',
-        recordId: '{reportId}',
-        values: { status: 'rejected' },
+        filter: { id: '{record.id}' },
+        fields: { status: 'rejected' },
       },
     },
     {

@@ -23,9 +23,9 @@ export const EvidenceExpiringFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'compliance_evidence',
-        criteria:
+        triggerType: 'record-after-update',
+        condition:
           'status == "approved" && expires_on != null && (expires_on == daysFromNow(30) || expires_on == daysFromNow(7))',
-        criteriaDialect: 'cel',
       },
     },
     {
@@ -34,7 +34,7 @@ export const EvidenceExpiringFlow: Flow = {
       label: 'Load Evidence',
       config: {
         objectName: 'compliance_evidence',
-        filter: { id: '{evidenceId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'ev',
       },
     },

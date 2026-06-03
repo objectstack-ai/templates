@@ -24,9 +24,9 @@ export const POOverdueFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'procurement_order',
-        criteria:
+        triggerType: 'record-after-update',
+        condition:
           '(status == "sent" || status == "partial") && expected_delivery != null && expected_delivery == daysAgo(1)',
-        criteriaDialect: 'cel',
       },
     },
     {
@@ -35,7 +35,7 @@ export const POOverdueFlow: Flow = {
       label: 'Load PO',
       config: {
         objectName: 'procurement_order',
-        filter: { id: '{poId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'po',
       },
     },

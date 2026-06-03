@@ -28,7 +28,8 @@ export const StampLifecycleTimestampsFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'content_piece',
-        criteria: 'ISCHANGED(status)',
+        triggerType: 'record-after-update',
+        condition: 'ISCHANGED(status)',
       },
     },
     {
@@ -37,7 +38,7 @@ export const StampLifecycleTimestampsFlow: Flow = {
       label: 'Load Piece',
       config: {
         objectName: 'content_piece',
-        filter: { id: '{pieceId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'piece',
       },
     },

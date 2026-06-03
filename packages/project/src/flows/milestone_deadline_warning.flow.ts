@@ -1,6 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import type * as Automation from '@objectstack/spec/automation';
+import { cel } from '@objectstack/spec';
 type Flow = Automation.Flow;
 
 /**
@@ -57,8 +58,10 @@ export const MilestoneDeadlineWarningFlow: Flow = {
       label: 'Mark Overdue as Missed',
       config: {
         objectName: 'pm_milestone',
-        recordIds: '{openMilestones.records[*].id}',
-        values: {
+        // Bulk-update: every still-open milestone whose planned date has passed.
+        // (update_record applies `fields` to all rows matching `filter`.)
+        filter: { status: { $in: ['not_started', 'in_progress'] }, planned_date: { $lt: cel`today()` } },
+        fields: {
           status: 'missed',
         },
       },

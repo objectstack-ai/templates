@@ -27,7 +27,9 @@ export const DocumentExpiringSoonFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'hr_document',
-        criteria: 'expires_at != NULL AND expires_at >= TODAY() AND expires_at <= TODAY() + 30',
+        triggerType: 'record-after-update',
+        condition:
+          'record.expires_at != null && record.expires_at >= today() && record.expires_at <= daysFromNow(30)',
       },
     },
     {
@@ -36,7 +38,7 @@ export const DocumentExpiringSoonFlow: Flow = {
       label: 'Load Document',
       config: {
         objectName: 'hr_document',
-        filter: { id: '{docId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'doc',
       },
     },

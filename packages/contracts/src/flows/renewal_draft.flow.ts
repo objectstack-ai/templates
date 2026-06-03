@@ -34,9 +34,9 @@ export const ContractRenewalDraftFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'contracts_contract',
-        criteria:
+        triggerType: 'record-after-update',
+        condition:
           'status == "active" && auto_renew == false && end_date != null && renewal_notice_days != null && end_date == daysFromNow(renewal_notice_days)',
-        criteriaDialect: 'cel',
       },
     },
     {
@@ -45,7 +45,7 @@ export const ContractRenewalDraftFlow: Flow = {
       label: 'Load Parent Contract',
       config: {
         objectName: 'contracts_contract',
-        filter: { id: '{contractId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'parent',
       },
     },
@@ -55,7 +55,7 @@ export const ContractRenewalDraftFlow: Flow = {
       label: 'Create Renewal Draft',
       config: {
         objectName: 'contracts_contract',
-        values: {
+        fields: {
           title: 'Renewal — {parent.title}',
           party: '{parent.party}',
           contract_type: '{parent.contract_type}',

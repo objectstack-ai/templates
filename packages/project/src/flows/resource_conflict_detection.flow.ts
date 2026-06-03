@@ -24,7 +24,7 @@ export const ResourceConflictDetectionFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'pm_resource',
-        triggerOn: 'create,update',
+        triggerType: 'record-after-update',
       },
     },
     {
@@ -33,7 +33,8 @@ export const ResourceConflictDetectionFlow: Flow = {
       label: 'Get Resource Record',
       config: {
         objectName: 'pm_resource',
-        recordId: '{resourceId}',
+        filter: { id: '{record.id}' },
+        outputVariable: 'resource',
       },
     },
     {

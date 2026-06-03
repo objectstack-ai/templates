@@ -34,8 +34,9 @@ export const PublicationRollupFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'content_metric',
-        criteria:
-          'ISCHANGED(views) OR ISCHANGED(clicks) OR ISCHANGED(signups) OR ISCHANGED(revenue) OR ISNEW()',
+        triggerType: 'record-after-update',
+        condition:
+          'previous.views != record.views || previous.clicks != record.clicks || previous.signups != record.signups || previous.revenue != record.revenue',
       },
     },
     {
@@ -44,7 +45,7 @@ export const PublicationRollupFlow: Flow = {
       label: 'Load Metric',
       config: {
         objectName: 'content_metric',
-        filter: { id: '{metricId}' },
+        filter: { id: '{record.id}' },
         outputVariable: 'metric',
       },
     },
@@ -71,8 +72,8 @@ export const PublicationRollupFlow: Flow = {
       label: 'Update Publication Rollups',
       config: {
         objectName: 'content_publication',
-        recordId: '{metric.publication}',
-        values: {
+        filter: { id: '{metric.publication}' },
+        fields: {
           total_views: '{pubTotals.views_sum}',
           total_clicks: '{pubTotals.clicks_sum}',
           total_signups: '{pubTotals.signups_sum}',
@@ -113,8 +114,8 @@ export const PublicationRollupFlow: Flow = {
       label: 'Update Piece Rollups',
       config: {
         objectName: 'content_piece',
-        recordId: '{publication.piece}',
-        values: {
+        filter: { id: '{publication.piece}' },
+        fields: {
           total_views: '{pieceTotals.views_sum}',
           total_clicks: '{pieceTotals.clicks_sum}',
           total_signups: '{pieceTotals.signups_sum}',

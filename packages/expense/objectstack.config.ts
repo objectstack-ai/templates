@@ -25,7 +25,7 @@ export default defineStack({
       'Starter template — employee expense & reimbursement management on ObjectStack.',
   },
 
-  requires: ['automation', 'analytics', 'auth', 'ui', 'sharing'],
+  requires: ['automation', 'triggers', 'analytics', 'auth', 'ui', 'sharing'],
 
   objects: Object.values(objects),
   views: Object.values(views),
