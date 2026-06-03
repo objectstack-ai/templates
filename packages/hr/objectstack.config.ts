@@ -21,7 +21,8 @@ export default defineStack({
     version: '0.1.0',
     type: 'app',
     name: 'HR',
-    description: 'Starter template — people directory, time-off, and document expiry on ObjectStack.',
+    description:
+      'Starter template — people directory, time-off, and document expiry on ObjectStack.',
   },
 
   // Opt-in capabilities. Foundational services (queue/job/cache/settings/

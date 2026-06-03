@@ -21,8 +21,7 @@ export default defineStack({
     version: '0.1.0',
     type: 'app',
     name: 'Contracts',
-    description:
-      'Starter template — post-signature contract lifecycle management on ObjectStack.',
+    description: 'Starter template — post-signature contract lifecycle management on ObjectStack.',
   },
 
   // Opt-in capabilities. Foundational services (queue/job/cache/settings/

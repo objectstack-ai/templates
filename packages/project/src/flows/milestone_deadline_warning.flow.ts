@@ -60,7 +60,10 @@ export const MilestoneDeadlineWarningFlow: Flow = {
         objectName: 'pm_milestone',
         // Bulk-update: every still-open milestone whose planned date has passed.
         // (update_record applies `fields` to all rows matching `filter`.)
-        filter: { status: { $in: ['not_started', 'in_progress'] }, planned_date: { $lt: cel`today()` } },
+        filter: {
+          status: { $in: ['not_started', 'in_progress'] },
+          planned_date: { $lt: cel`today()` },
+        },
         fields: {
           status: 'missed',
         },
