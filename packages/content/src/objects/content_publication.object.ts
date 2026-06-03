@@ -9,8 +9,10 @@ import { tmpl } from '@objectstack/spec';
  * entry in `piece.target_channels`).
  *
  * Metric snapshots are recorded against this row, not the piece — so a
- * blog post + LinkedIn cross-post are measured independently and roll
- * back up to the piece via the `publication_rollup` flow.
+ * blog post + LinkedIn cross-post are measured independently. The
+ * `total_*` numbers are STORED fields (seed/client-maintained); cross-object
+ * rollups via hook are unsupported in the standalone runtime — see
+ * content/src/hooks/index.ts.
  */
 export const Publication = ObjectSchema.create({
   name: 'content_publication',
@@ -54,8 +56,9 @@ export const Publication = ObjectSchema.create({
       description: 'Optional ID on the upstream system (CMS post id, LinkedIn post URN, etc.).',
     }),
 
-    // Denormalised rollups — refreshed by the publication_rollup flow whenever
-    // a metric snapshot is recorded against this publication.
+    // Denormalised totals — STORED fields (seed/client-maintained). A live
+    // rollup from metric snapshots needs a nested engine write, which is
+    // unsupported in the standalone hook runtime — see content/src/hooks/index.ts.
     total_views: Field.number({
       label: 'Views',
       scale: 0,

@@ -7,6 +7,40 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 ## [Unreleased]
 
 ### Changed
+- **Upgraded all templates to `@objectstack/* ^7.7.0` (from `^7.4.1`).** 7.6 shipped
+  ADR-0032 phase 1 (build-time + runtime expression validation); 7.7 extended the
+  build to **reject unknown `ObjectSchema` keys** (located, with a "move the logic
+  to a supported mechanism" hint). All nine templates + the `all` aggregate build
+  green and typecheck clean.
+- **`packages/hr` — moved the "employee cannot be their own manager" guard from a
+  validation rule into a lifecycle hook (`hr_employee.hook.ts`).** The rule
+  compared `record.manager == record.id`, but the implicit primary key `id` is not
+  a declared field, so the ADR-0032 build-time validator rejected it
+  (`unknown field \`id\``). The hook (`beforeInsert`/`beforeUpdate`) enforces the
+  same invariant using the record id from the hook context, where it is available.
+- **Migrated object-level `workflows: [...]` to lifecycle hooks.** `workflows` is
+  not a supported `ObjectSchema` field — it was silently stripped at build (never
+  ran). All 15 on-update field-stamping / status-transition rules across 8 objects
+  (content, contracts, helpdesk, procurement, hr, todo) now live in
+  `beforeInsert`/`beforeUpdate` hooks, with date comparisons done in JS (which also
+  sidesteps the CEL date↔timestamp gap). 7.7's stricter build now flags the old
+  shape loudly.
+- **Migrated object-level `stateMachines: {...}` to `state_machine` validation
+  rules (ADR-0020).** `stateMachines` is likewise not an `ObjectSchema` field and
+  was silently dropped — the 14 lifecycle machines were never enforced. They are
+  now `type: 'state_machine'` validations (`{ OldState: [AllowedNewStates] }`) and
+  are enforced at runtime; the orphaned `*.state.ts` files are no longer imported.
+- **Removed dead cross-object rollup hooks.** `procurement_receipt`,
+  `content_metric`/`content_publication`, and `compliance_assessment` rolled up via
+  `ctx.services.data`, which is undefined inside the hook sandbox (a *nested* engine
+  write would crash the QuickJS runtime — see `packages/expense/CHARTER.md`). Those
+  rollups silently no-op'd. The target fields (`received_amount`, content `total_*`,
+  `last_status`/`last_assessed_at`) are now documented as stored header fields,
+  matching the expense package's existing pattern.
+- **Fixed dangling user lookups: `Field.lookup('user')` → `Field.lookup('sys_user')`
+  (27 fields + view refs).** The platform user object is `sys_user`; `'user'` is not
+  a registered object, so resolving these lookups (and the seed's name-based
+  `assignee: 'admin'`) flooded `no such table: user` SQL errors at runtime.
 - Upgraded all templates to `@objectstack/* ^7.4.1` (from `^7.3.0`).
 - **Approvals migrated to the 7.4.x flow-node model (ADR-0019).** The standalone
   `ApprovalProcess` export and the stack-level `approvals:` key were removed in

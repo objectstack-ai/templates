@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { ContractStateMachine } from './contracts_contract.state';
-
 /**
  * Contract — the central record. One Contract per signed agreement (or
  * one-being-negotiated). Metadata-first: the PDF lives in sys_attachment;
@@ -90,7 +88,7 @@ export const Contract = ObjectSchema.create({
       ],
     }),
 
-    owner: Field.lookup('user', {
+    owner: Field.lookup('sys_user', {
       label: 'Internal Owner',
       group: 'core',
       description:
@@ -204,10 +202,6 @@ export const Contract = ObjectSchema.create({
     }),
   },
 
-  stateMachines: {
-    lifecycle: ContractStateMachine,
-  },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -232,6 +226,13 @@ export const Contract = ObjectSchema.create({
 
   validations: [
     {
+      type: 'state_machine',
+      name: 'contract_lifecycle',
+      field: 'status',
+      transitions: {draft:["in_review", "cancelled"], in_review:["signed", "draft", "cancelled"], signed:["active", "terminated"], active:["expired", "terminated", "active"], expired:[], terminated:[], cancelled:[]},
+      message: 'Illegal status transition.',
+    },
+    {
       name: 'end_date_after_effective_date',
       type: 'script',
       severity: 'error',
@@ -247,36 +248,7 @@ export const Contract = ObjectSchema.create({
     },
   ],
 
-  workflows: [
-    {
-      name: 'stamp_signed_date_on_sign',
-      objectName: 'contracts_contract',
-      triggerType: 'on_update',
-      criteria: P`record.status == "signed" && previous.status != "signed" && record.signed_date == null`,
-      active: true,
-      actions: [
-        { name: 'set_signed_date', type: 'field_update', field: 'signed_date', value: 'today()' },
-      ],
-    },
-    {
-      name: 'auto_activate_on_effective_date',
-      objectName: 'contracts_contract',
-      triggerType: 'on_update',
-      criteria: P`record.status == "signed" && record.effective_date != null && record.effective_date <= today()`,
-      active: true,
-      actions: [
-        { name: 'set_status_active', type: 'field_update', field: 'status', value: 'active' },
-      ],
-    },
-    {
-      name: 'auto_expire_on_end_date',
-      objectName: 'contracts_contract',
-      triggerType: 'on_update',
-      criteria: P`record.status == "active" && record.end_date != null && record.end_date < today() && record.auto_renew == false`,
-      active: true,
-      actions: [
-        { name: 'set_status_expired', type: 'field_update', field: 'status', value: 'expired' },
-      ],
-    },
-  ],
+  // signed_date stamping + the date-driven activate/expire transitions live
+  // in `contracts_contract.hook.ts`. Object-level `workflows` are not a
+  // supported 7.x ObjectSchema field.
 });

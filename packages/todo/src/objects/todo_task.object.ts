@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { TaskStateMachine } from './todo_task.state';
-
 /**
  * Task — the unit of work. Status state machine, optional assignee, optional
  * labels (multi).
@@ -64,7 +62,7 @@ export const Task = ObjectSchema.create({
       ],
     }),
 
-    assignee: Field.lookup('user', {
+    assignee: Field.lookup('sys_user', {
       label: 'Assignee',
       group: 'core',
     }),
@@ -94,10 +92,6 @@ export const Task = ObjectSchema.create({
     }),
   },
 
-  stateMachines: {
-    lifecycle: TaskStateMachine,
-  },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -120,6 +114,13 @@ export const Task = ObjectSchema.create({
 
   validations: [
     {
+      type: 'state_machine',
+      name: 'task_lifecycle',
+      field: 'status',
+      transitions: {todo:["doing", "cancelled"], doing:["done", "todo", "cancelled"], done:["todo"], cancelled:[]},
+      message: 'Illegal status transition.',
+    },
+    {
       name: 'completed_at_when_done',
       type: 'script',
       severity: 'error',
@@ -128,26 +129,6 @@ export const Task = ObjectSchema.create({
     },
   ],
 
-  workflows: [
-    {
-      name: 'stamp_started_at',
-      objectName: 'todo_task',
-      triggerType: 'on_update',
-      criteria: P`record.status == "doing" && previous.status != "doing" && record.started_at == null`,
-      active: true,
-      actions: [
-        { name: 'set_started_at', type: 'field_update', field: 'started_at', value: 'now()' },
-      ],
-    },
-    {
-      name: 'stamp_completed_at',
-      objectName: 'todo_task',
-      triggerType: 'on_update',
-      criteria: P`record.status == "done" && previous.status != "done"`,
-      active: true,
-      actions: [
-        { name: 'set_completed_at', type: 'field_update', field: 'completed_at', value: 'now()' },
-      ],
-    },
-  ],
+  // `started_at` / `completed_at` are stamped by `todo_task.hook.ts` on
+  // status entry. Object-level `workflows` are not a supported 7.x field.
 });

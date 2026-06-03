@@ -2,7 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { tmpl } from '@objectstack/spec';
-import { RiskStateMachine } from './pm_risk.state.js';
 
 /**
  * Risk — potential threats to project success.
@@ -147,15 +146,11 @@ export const Risk = ObjectSchema.create({
       group: 'response',
       description: 'What to do if risk is realized.',
     }),
-    owner: Field.lookup('user', {
+    owner: Field.lookup('sys_user', {
       label: 'Risk Owner',
       required: false,
       group: 'response',
     }),
-  },
-
-  stateMachines: {
-    lifecycle: RiskStateMachine,
   },
 
   enable: {
@@ -176,4 +171,13 @@ export const Risk = ObjectSchema.create({
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
   compactLayout: ['name', 'project', 'status', 'category', 'priority'],
+  validations: [
+    {
+      type: 'state_machine',
+      name: 'risk_lifecycle',
+      field: 'status',
+      transitions: {identified:["assessing", "closed"], assessing:["mitigating", "monitoring", "closed"], mitigating:["monitoring", "realized"], monitoring:["mitigating", "closed", "realized"], closed:[], realized:[]},
+      message: 'Illegal status transition.',
+    },
+  ],
 });

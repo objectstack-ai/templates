@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
-import { PieceStateMachine } from './content_piece.state';
-
 /**
  * Content piece — the unit of work. State machine drives the workflow;
  * everything else (publications, metrics, CTAs) hangs off this row.
@@ -90,12 +88,12 @@ export const Piece = ObjectSchema.create({
       ],
     }),
 
-    assignee: Field.lookup('user', {
+    assignee: Field.lookup('sys_user', {
       label: 'Writer',
       group: 'core',
     }),
 
-    editor: Field.lookup('user', {
+    editor: Field.lookup('sys_user', {
       label: 'Editor',
       group: 'core',
       description: 'The lead reviewing the draft.',
@@ -193,10 +191,6 @@ export const Piece = ObjectSchema.create({
     }),
   },
 
-  stateMachines: {
-    lifecycle: PieceStateMachine,
-  },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -222,6 +216,13 @@ export const Piece = ObjectSchema.create({
 
   validations: [
     {
+      type: 'state_machine',
+      name: 'content_piece_lifecycle',
+      field: 'status',
+      transitions: {backlog:["drafting", "cancelled"], drafting:["in_review", "backlog", "cancelled"], in_review:["approved", "drafting", "cancelled"], approved:["scheduled", "drafting", "cancelled"], scheduled:["published", "approved", "cancelled"], published:["archived"], archived:[], cancelled:[]},
+      message: 'Illegal status transition.',
+    },
+    {
       name: 'scheduled_requires_publish_at',
       type: 'script',
       severity: 'error',
@@ -237,46 +238,7 @@ export const Piece = ObjectSchema.create({
     },
   ],
 
-  workflows: [
-    {
-      name: 'stamp_submitted_at',
-      objectName: 'content_piece',
-      triggerType: 'on_update',
-      criteria: P`record.status == "in_review" && previous.status != "in_review"`,
-      active: true,
-      actions: [
-        { name: 'set_submitted_at', type: 'field_update', field: 'submitted_at', value: 'now()' },
-      ],
-    },
-    {
-      name: 'stamp_approved_at',
-      objectName: 'content_piece',
-      triggerType: 'on_update',
-      criteria: P`record.status == "approved" && previous.status != "approved"`,
-      active: true,
-      actions: [
-        { name: 'set_approved_at', type: 'field_update', field: 'approved_at', value: 'now()' },
-      ],
-    },
-    {
-      name: 'stamp_published_at',
-      objectName: 'content_piece',
-      triggerType: 'on_update',
-      criteria: P`record.status == "published" && previous.status != "published" && record.published_at == null`,
-      active: true,
-      actions: [
-        { name: 'set_published_at', type: 'field_update', field: 'published_at', value: 'now()' },
-      ],
-    },
-    {
-      name: 'stamp_archived_at',
-      objectName: 'content_piece',
-      triggerType: 'on_update',
-      criteria: P`record.status == "archived" && previous.status != "archived"`,
-      active: true,
-      actions: [
-        { name: 'set_archived_at', type: 'field_update', field: 'archived_at', value: 'now()' },
-      ],
-    },
-  ],
+  // Lifecycle timestamps (submitted_at / approved_at / published_at /
+  // archived_at) are stamped by `content_piece.hook.ts` on status entry.
+  // Object-level `workflows` are not a supported 7.x ObjectSchema field.
 });

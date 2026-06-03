@@ -30,3 +30,6 @@ playwright-report/
 **/trace.json
 **/trace.json.gz
 **/*.heapsnapshot
+
+# Local Claude Code tooling/session state
+.claude/

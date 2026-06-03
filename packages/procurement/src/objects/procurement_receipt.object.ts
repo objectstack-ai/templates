@@ -32,7 +32,7 @@ export const GoodsReceipt = ObjectSchema.create({
       label: 'Received At',
       required: true,
     }),
-    received_by: Field.lookup('user', { label: 'Received By' }),
+    received_by: Field.lookup('sys_user', { label: 'Received By' }),
     quality: Field.select({
       label: 'Quality',
       required: true,

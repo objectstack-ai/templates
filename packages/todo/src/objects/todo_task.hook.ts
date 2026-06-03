@@ -23,8 +23,22 @@ const taskHook: Hook = {
       input.status = 'todo';
     }
 
-    // Auto-clear started_at / completed_at when status moves backward.
     if (event === 'beforeUpdate' && previous) {
+      // Stamp audit timestamps on FORWARD status entry. (Previously dead
+      // object `workflows`; `workflows` is not a supported 7.x field.)
+      const now = new Date().toISOString();
+      if (
+        input.status === 'doing' &&
+        previous.status !== 'doing' &&
+        (input.started_at ?? previous.started_at) == null
+      ) {
+        input.started_at = now;
+      }
+      if (input.status === 'done' && previous.status !== 'done') {
+        input.completed_at = now;
+      }
+
+      // Auto-clear started_at / completed_at when status moves backward.
       if (input.status === 'todo' && previous.status !== 'todo') {
         input.started_at = null;
         input.completed_at = null;

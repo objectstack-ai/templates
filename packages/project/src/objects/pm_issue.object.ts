@@ -59,7 +59,7 @@ export const Issue = ObjectSchema.create({
         { label: 'Critical', value: 'critical', color: '#EF4444' },
       ],
     }),
-    assigned_to: Field.lookup('user', {
+    assigned_to: Field.lookup('sys_user', {
       label: 'Assigned To',
       required: false,
       group: 'core',

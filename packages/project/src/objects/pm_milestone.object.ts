@@ -59,7 +59,7 @@ export const Milestone = ObjectSchema.create({
       group: 'dates',
       description: 'Set when milestone is reached.',
     }),
-    owner: Field.lookup('user', {
+    owner: Field.lookup('sys_user', {
       label: 'Owner',
       required: false,
       group: 'core',

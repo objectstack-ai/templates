@@ -48,7 +48,7 @@ export const ContractViews = defineView({
             name: 'owner',
             label: 'New Owner',
             type: 'lookup',
-            object: 'user',
+            object: 'sys_user',
             required: true,
           },
         ],

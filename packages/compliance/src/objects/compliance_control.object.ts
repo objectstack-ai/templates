@@ -79,7 +79,7 @@ export const Control = ObjectSchema.create({
       ],
     }),
     description: Field.markdown({ label: 'Description', group: 'core' }),
-    owner: Field.lookup('user', { label: 'Control Owner', group: 'ownership' }),
+    owner: Field.lookup('sys_user', { label: 'Control Owner', group: 'ownership' }),
     review_frequency_days: Field.number({
       label: 'Review Frequency (days)',
       group: 'ownership',

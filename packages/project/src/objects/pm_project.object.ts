@@ -2,7 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { tmpl } from '@objectstack/spec';
-import { ProjectStateMachine } from './pm_project.state.js';
 
 /**
  * Project — the central object for project portfolio management.
@@ -161,12 +160,12 @@ export const Project = ObjectSchema.create({
     }),
 
     // Team
-    project_manager: Field.lookup('user', {
+    project_manager: Field.lookup('sys_user', {
       label: 'Project Manager',
       required: false,
       group: 'people',
     }),
-    sponsor: Field.lookup('user', {
+    sponsor: Field.lookup('sys_user', {
       label: 'Sponsor',
       required: false,
       group: 'people',
@@ -182,10 +181,6 @@ export const Project = ObjectSchema.create({
       max: 100,
       description: 'Calculated from completed milestones.',
     }),
-  },
-
-  stateMachines: {
-    lifecycle: ProjectStateMachine,
   },
 
   enable: {
@@ -210,4 +205,13 @@ export const Project = ObjectSchema.create({
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
   compactLayout: ['name', 'status', 'priority', 'project_manager', 'planned_end_date'],
+  validations: [
+    {
+      type: 'state_machine',
+      name: 'project_lifecycle',
+      field: 'status',
+      transitions: {planning:["active", "cancelled"], active:["at_risk", "on_hold", "completed", "cancelled"], at_risk:["active", "on_hold", "completed", "cancelled"], on_hold:["active", "cancelled"], completed:[], cancelled:[]},
+      message: 'Illegal status transition.',
+    },
+  ],
 });

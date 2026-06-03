@@ -2,8 +2,6 @@
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { F, P, tmpl } from '@objectstack/spec';
-import { TimeOffRequestStateMachine } from './hr_time_off_request.state';
-
 /**
  * Time-Off Request — vacation, sick, personal, unpaid. Goes through a
  * one-step approval (employee's manager). Sharing rule
@@ -86,8 +84,6 @@ export const TimeOffRequest = ObjectSchema.create({
     submitted_at: Field.datetime({ label: 'Submitted At', readonly: true, group: 'meta' }),
   },
 
-  stateMachines: { lifecycle: TimeOffRequestStateMachine },
-
   enable: {
     trackHistory: true,
     searchable: true,
@@ -109,6 +105,13 @@ export const TimeOffRequest = ObjectSchema.create({
 
   validations: [
     {
+      type: 'state_machine',
+      name: 'time_off_lifecycle',
+      field: 'status',
+      transitions: {draft:["submitted", "cancelled"], submitted:["approved", "rejected", "draft"], approved:["cancelled"], rejected:["draft"], cancelled:[]},
+      message: 'Illegal status transition.',
+    },
+    {
       name: 'end_after_start',
       type: 'script',
       severity: 'error',
@@ -117,26 +120,6 @@ export const TimeOffRequest = ObjectSchema.create({
     },
   ],
 
-  workflows: [
-    {
-      name: 'stamp_submitted_at',
-      objectName: 'hr_time_off_request',
-      triggerType: 'on_update',
-      criteria: P`record.status == "submitted" && previous.status != "submitted"`,
-      active: true,
-      actions: [
-        { name: 'set_submitted_at', type: 'field_update', field: 'submitted_at', value: 'now()' },
-      ],
-    },
-    {
-      name: 'stamp_decided_at',
-      objectName: 'hr_time_off_request',
-      triggerType: 'on_update',
-      criteria: P`(record.status == "approved" || record.status == "rejected") && previous.status == "submitted"`,
-      active: true,
-      actions: [
-        { name: 'set_decided_at', type: 'field_update', field: 'decided_at', value: 'now()' },
-      ],
-    },
-  ],
+  // `submitted_at` / `decided_at` are stamped by `hr_time_off_request.hook.ts`
+  // on status entry. Object-level `workflows` are not a supported 7.x field.
 });

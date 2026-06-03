@@ -3,10 +3,13 @@
 import type { Hook, HookContext } from '@objectstack/spec/data';
 
 /**
- * Piece automation hook — normalises status defaults and clears stale
- * lifecycle stamps when a piece is sent backwards through the workflow.
- * Anything time-stamping FORWARD is handled by declarative `workflows`
- * on the object itself.
+ * Piece automation hook — normalises status defaults, stamps lifecycle
+ * timestamps on FORWARD status entry, and clears stale stamps when a piece
+ * is sent backwards through the workflow.
+ *
+ * NOTE: the forward stamping previously lived in object-level `workflows`,
+ * but `workflows` is not a field on the 7.x `ObjectSchema` — it was silently
+ * dropped at build and never ran. The logic lives here now.
  */
 const pieceHook: Hook = {
   name: 'content_piece_automation',
@@ -30,6 +33,16 @@ const pieceHook: Hook = {
     }
 
     if (event === 'beforeUpdate' && previous) {
+      // Stamp lifecycle timestamps on FORWARD status entry.
+      const now = new Date().toISOString();
+      const enters = (s: string) => input.status === s && previous.status !== s;
+      if (enters('in_review')) input.submitted_at = now;
+      if (enters('approved')) input.approved_at = now;
+      if (enters('published') && (input.published_at ?? previous.published_at) == null) {
+        input.published_at = now;
+      }
+      if (enters('archived')) input.archived_at = now;
+
       // Sending in_review back to drafting → wipe submitted_at so a re-submit
       // gets a fresh timestamp.
       if (input.status === 'drafting' && previous.status === 'in_review') {
@@ -47,24 +60,34 @@ const pieceHook: Hook = {
 };
 
 /**
- * Signal hook — stamps captured_at on insert. Cheaper than a workflow:
- * insert-time stamps don't fit the `triggerType: 'on_update'` shape.
+ * Signal hook — stamps captured_at on insert and promoted_at when the signal
+ * is promoted. (The promoted_at stamp previously lived in dead object
+ * `workflows`; see the note on the piece hook above.)
  */
 const signalHook: Hook = {
   name: 'content_signal_automation',
   object: 'content_signal',
-  events: ['beforeInsert'],
+  events: ['beforeInsert', 'beforeUpdate'],
   priority: 100,
-  description: 'Stamp captured_at on signal insert.',
+  description: 'Stamp captured_at on signal insert and promoted_at on promotion.',
   handler: async (ctx: HookContext) => {
-    const { input } = ctx as HookContext & {
+    const { event, input, previous } = ctx as HookContext & {
       input: Record<string, unknown>;
+      previous?: Record<string, unknown>;
     };
-    if (!input.captured_at) {
+    if (event === 'beforeInsert' && !input.captured_at) {
       input.captured_at = new Date().toISOString();
     }
-    if (!input.status) {
+    if (event === 'beforeInsert' && !input.status) {
       input.status = 'captured';
+    }
+    if (
+      event === 'beforeUpdate' &&
+      previous &&
+      input.status === 'promoted' &&
+      previous.status !== 'promoted'
+    ) {
+      input.promoted_at = new Date().toISOString();
     }
   },
 };
