@@ -44,7 +44,9 @@ jobs:
         run: pnpm build
 
       - name: Test
-        run: pnpm -r test --if-present
+        # `--if-present` must precede the script name, otherwise pnpm forwards it
+        # to the script (`objectstack build --if-present` → "Nonexistent flag").
+        run: pnpm -r --if-present test
 
   smoke:
     name: Smoke (todo dev server)
