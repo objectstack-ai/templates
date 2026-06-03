@@ -10,8 +10,16 @@
 export const RoleHierarchy = {
   roles: [
     { name: 'helpdesk_admin', label: 'Helpdesk Admin', parentRole: null as string | null },
-    { name: 'helpdesk_manager', label: 'Support Manager', parentRole: 'helpdesk_admin' as string | null },
-    { name: 'helpdesk_agent', label: 'Support Agent', parentRole: 'helpdesk_manager' as string | null },
+    {
+      name: 'helpdesk_manager',
+      label: 'Support Manager',
+      parentRole: 'helpdesk_admin' as string | null,
+    },
+    {
+      name: 'helpdesk_agent',
+      label: 'Support Agent',
+      parentRole: 'helpdesk_manager' as string | null,
+    },
     { name: 'helpdesk_customer', label: 'Customer Portal User', parentRole: null as string | null },
   ],
 };

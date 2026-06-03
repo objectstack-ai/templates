@@ -15,15 +15,20 @@ export const en: TranslationData = {
     pm_project: {
       label: 'Project',
       pluralLabel: 'Projects',
-      description: 'A time-bound initiative with milestones, resources, and AI-powered risk prediction.',
+      description:
+        'A time-bound initiative with milestones, resources, and AI-powered risk prediction.',
       fields: {
         name: { label: 'Project Name' },
         description: { label: 'Description' },
         status: {
           label: 'Status',
           options: {
-            planning: 'Planning', active: 'Active', at_risk: 'At Risk',
-            on_hold: 'On Hold', completed: 'Completed', cancelled: 'Cancelled',
+            planning: 'Planning',
+            active: 'Active',
+            at_risk: 'At Risk',
+            on_hold: 'On Hold',
+            completed: 'Completed',
+            cancelled: 'Cancelled',
           },
         },
         priority: {
@@ -32,7 +37,12 @@ export const en: TranslationData = {
         },
         project_type: {
           label: 'Type',
-          options: { internal: 'Internal', client: 'Client', rnd: 'R&D', maintenance: 'Maintenance' },
+          options: {
+            internal: 'Internal',
+            client: 'Client',
+            rnd: 'R&D',
+            maintenance: 'Maintenance',
+          },
         },
         start_date: { label: 'Start Date' },
         planned_end_date: { label: 'Planned End Date' },
@@ -63,8 +73,10 @@ export const en: TranslationData = {
         status: {
           label: 'Status',
           options: {
-            not_started: 'Not Started', in_progress: 'In Progress',
-            completed: 'Completed', missed: 'Missed',
+            not_started: 'Not Started',
+            in_progress: 'In Progress',
+            completed: 'Completed',
+            missed: 'Missed',
           },
         },
         planned_date: { label: 'Planned Date' },
@@ -85,24 +97,44 @@ export const en: TranslationData = {
         status: {
           label: 'Status',
           options: {
-            identified: 'Identified', assessing: 'Assessing', mitigating: 'Mitigating',
-            monitoring: 'Monitoring', closed: 'Closed', realized: 'Realized',
+            identified: 'Identified',
+            assessing: 'Assessing',
+            mitigating: 'Mitigating',
+            monitoring: 'Monitoring',
+            closed: 'Closed',
+            realized: 'Realized',
           },
         },
         category: {
           label: 'Category',
           options: {
-            technical: 'Technical', resource: 'Resource', schedule: 'Schedule',
-            budget: 'Budget', external: 'External', scope: 'Scope',
+            technical: 'Technical',
+            resource: 'Resource',
+            schedule: 'Schedule',
+            budget: 'Budget',
+            external: 'External',
+            scope: 'Scope',
           },
         },
         impact: {
           label: 'Impact (Manual)',
-          options: { very_low: 'Very Low', low: 'Low', medium: 'Medium', high: 'High', very_high: 'Very High' },
+          options: {
+            very_low: 'Very Low',
+            low: 'Low',
+            medium: 'Medium',
+            high: 'High',
+            very_high: 'Very High',
+          },
         },
         likelihood: {
           label: 'Likelihood (Manual)',
-          options: { very_low: 'Very Low', low: 'Low', medium: 'Medium', high: 'High', very_high: 'Very High' },
+          options: {
+            very_low: 'Very Low',
+            low: 'Low',
+            medium: 'Medium',
+            high: 'High',
+            very_high: 'Very High',
+          },
         },
         priority: { label: 'Risk Priority (Impact × Likelihood)' },
         ai_impact_score: { label: 'AI Impact Score' },
@@ -126,8 +158,11 @@ export const en: TranslationData = {
         status: {
           label: 'Status',
           options: {
-            open: 'Open', in_progress: 'In Progress', blocked: 'Blocked',
-            resolved: 'Resolved', closed: 'Closed',
+            open: 'Open',
+            in_progress: 'In Progress',
+            blocked: 'Blocked',
+            resolved: 'Resolved',
+            closed: 'Closed',
           },
         },
         severity: {
@@ -171,7 +206,8 @@ export const en: TranslationData = {
   apps: {
     pm: {
       label: 'AI Project Management',
-      description: 'Portfolio tracking with AI risk prediction, delay forecasting, and resource-conflict detection.',
+      description:
+        'Portfolio tracking with AI risk prediction, delay forecasting, and resource-conflict detection.',
       navigation: {
         nav_projects: { label: 'Projects' },
         nav_milestones: { label: 'Milestones' },

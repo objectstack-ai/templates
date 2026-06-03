@@ -24,9 +24,7 @@ export const EditorialCalendarDashboard: Dashboard = {
   header: {
     showTitle: true,
     showDescription: true,
-    actions: [
-      { label: 'New Piece', icon: 'Plus', actionType: 'modal', actionUrl: 'create_piece' },
-    ],
+    actions: [{ label: 'New Piece', icon: 'Plus', actionType: 'modal', actionUrl: 'create_piece' }],
   },
 
   widgets: [

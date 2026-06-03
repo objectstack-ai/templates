@@ -172,7 +172,10 @@ export const zhCN: TranslationData = {
         headcount: { title: '在职人数', description: '当前在职状态的员工总数' },
         on_leave: { title: '休假中人数', description: '当前正在休假的员工' },
         pending_time_off: { title: '待审批请假', description: '等待直属上级决策的请假申请' },
-        expiring_docs: { title: '档案即将到期（30 天）', description: '到期日落在未来 30 天内的档案' },
+        expiring_docs: {
+          title: '档案即将到期（30 天）',
+          description: '到期日落在未来 30 天内的档案',
+        },
         pending_time_off_table: { title: '待处理请假申请', description: '按提交时间从旧到新排序' },
         expiring_docs_table: { title: '即将到期的档案', description: '30 天内到期的档案' },
       },

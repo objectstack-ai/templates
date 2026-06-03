@@ -13,7 +13,8 @@ import type { Dashboard } from '@objectstack/spec/ui';
 export const TodayWorkbenchDashboard: Dashboard = {
   name: 'today_workbench_dashboard',
   label: 'Today Workbench',
-  description: 'Your shift on the editorial floor: drafts in flight, what is pending review, and signals to triage.',
+  description:
+    'Your shift on the editorial floor: drafts in flight, what is pending review, and signals to triage.',
 
   columns: 12,
   gap: 4,
@@ -22,9 +23,7 @@ export const TodayWorkbenchDashboard: Dashboard = {
   header: {
     showTitle: true,
     showDescription: true,
-    actions: [
-      { label: 'New Piece', icon: 'Plus', actionType: 'modal', actionUrl: 'create_piece' },
-    ],
+    actions: [{ label: 'New Piece', icon: 'Plus', actionType: 'modal', actionUrl: 'create_piece' }],
   },
 
   widgets: [

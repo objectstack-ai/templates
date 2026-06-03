@@ -19,8 +19,7 @@ import type { Dashboard } from '@objectstack/spec/ui';
 export const ControlPostureDashboard: Dashboard = {
   name: 'control_posture_dashboard',
   label: 'Control Posture',
-  description:
-    'Pass rate, failing controls, expiring evidence, and in-flight assessments.',
+  description: 'Pass rate, failing controls, expiring evidence, and in-flight assessments.',
 
   columns: 12,
   gap: 4,
@@ -30,7 +29,12 @@ export const ControlPostureDashboard: Dashboard = {
     showTitle: true,
     showDescription: true,
     actions: [
-      { label: 'New Assessment', icon: 'Plus', actionType: 'modal', actionUrl: 'create_assessment' },
+      {
+        label: 'New Assessment',
+        icon: 'Plus',
+        actionType: 'modal',
+        actionUrl: 'create_assessment',
+      },
     ],
   },
 
@@ -93,7 +97,10 @@ export const ControlPostureDashboard: Dashboard = {
       options: {
         columns: ['code', 'title', 'framework', 'criticality', 'last_assessed_at'],
         pageSize: 10,
-        sort: [{ field: 'criticality', order: 'asc' }, { field: 'code', order: 'asc' }],
+        sort: [
+          { field: 'criticality', order: 'asc' },
+          { field: 'code', order: 'asc' },
+        ],
       },
     },
     {

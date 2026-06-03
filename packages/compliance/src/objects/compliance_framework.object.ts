@@ -12,8 +12,7 @@ export const Framework = ObjectSchema.create({
   label: 'Framework',
   pluralLabel: 'Frameworks',
   icon: 'shield-check',
-  description:
-    'A compliance standard you are certifying against (SOC 2, ISO 27001, HIPAA, etc.).',
+  description: 'A compliance standard you are certifying against (SOC 2, ISO 27001, HIPAA, etc.).',
 
   fields: {
     short_name: Field.text({
@@ -73,11 +72,7 @@ export const Framework = ObjectSchema.create({
     mru: true,
   },
 
-  indexes: [
-    { fields: ['short_name'] },
-    { fields: ['family'] },
-    { fields: ['status'] },
-  ],
+  indexes: [{ fields: ['short_name'] }, { fields: ['family'] }, { fields: ['status'] }],
 
   titleFormat: tmpl`{{record.short_name}}`,
   displayNameField: 'short_name',

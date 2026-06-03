@@ -35,9 +35,7 @@ export const AssessmentViews = defineView({
       label: 'Failed Assessments',
       data: { provider: 'object', object: 'compliance_assessment' },
       columns: ['title', 'control', 'cycle', 'assessed_at', 'remediation_due', 'assessor'],
-      filter: [
-        { field: 'status', operator: 'in', value: ['failed', 'partial'] },
-      ],
+      filter: [{ field: 'status', operator: 'in', value: ['failed', 'partial'] }],
       sort: [{ field: 'remediation_due', order: 'asc' }],
     },
 
@@ -47,9 +45,7 @@ export const AssessmentViews = defineView({
       label: 'In Progress',
       data: { provider: 'object', object: 'compliance_assessment' },
       columns: ['title', 'control', 'cycle', 'assessor'],
-      filter: [
-        { field: 'status', operator: 'equals', value: 'in_progress' },
-      ],
+      filter: [{ field: 'status', operator: 'equals', value: 'in_progress' }],
       sort: [{ field: 'cycle', order: 'desc' }],
     },
   },
@@ -71,8 +67,7 @@ export const AssessmentViews = defineView({
         ],
       },
       { label: 'Finding', columns: 1, fields: ['finding'] },
-      { label: 'Remediation', columns: 2,
-        fields: ['remediation_due', 'remediation_plan'] },
+      { label: 'Remediation', columns: 2, fields: ['remediation_due', 'remediation_plan'] },
     ],
   },
 });

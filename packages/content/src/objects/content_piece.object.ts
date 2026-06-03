@@ -219,7 +219,16 @@ export const Piece = ObjectSchema.create({
       type: 'state_machine',
       name: 'content_piece_lifecycle',
       field: 'status',
-      transitions: {backlog:["drafting", "cancelled"], drafting:["in_review", "backlog", "cancelled"], in_review:["approved", "drafting", "cancelled"], approved:["scheduled", "drafting", "cancelled"], scheduled:["published", "approved", "cancelled"], published:["archived"], archived:[], cancelled:[]},
+      transitions: {
+        backlog: ['drafting', 'cancelled'],
+        drafting: ['in_review', 'backlog', 'cancelled'],
+        in_review: ['approved', 'drafting', 'cancelled'],
+        approved: ['scheduled', 'drafting', 'cancelled'],
+        scheduled: ['published', 'approved', 'cancelled'],
+        published: ['archived'],
+        archived: [],
+        cancelled: [],
+      },
       message: 'Illegal status transition.',
     },
     {

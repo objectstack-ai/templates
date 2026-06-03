@@ -27,11 +27,7 @@ export const SLAPolicyViews = defineView({
       {
         label: 'Policy',
         columns: 2,
-        fields: [
-          { field: 'name', required: true, colSpan: 2 },
-          'applies_to_tier',
-          'is_default',
-        ],
+        fields: [{ field: 'name', required: true, colSpan: 2 }, 'applies_to_tier', 'is_default'],
       },
       {
         label: 'First Response (minutes)',

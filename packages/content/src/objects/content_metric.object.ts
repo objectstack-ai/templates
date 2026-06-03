@@ -61,11 +61,7 @@ export const Metric = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [
-    { fields: ['publication'] },
-    { fields: ['period_start'] },
-    { fields: ['period_end'] },
-  ],
+  indexes: [{ fields: ['publication'] }, { fields: ['period_start'] }, { fields: ['period_end'] }],
 
   titleFormat: tmpl`{{record.publication}} — {{record.period_start}}`,
   compactLayout: ['publication', 'period_start', 'period_end', 'views', 'signups', 'revenue'],

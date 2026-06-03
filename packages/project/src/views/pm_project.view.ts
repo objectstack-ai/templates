@@ -24,7 +24,10 @@ export const ProjectViews = defineView({
       { field: 'start_date', width: 120, sortable: true },
       { field: 'target_end_date', width: 120, sortable: true },
     ],
-    sort: [{ field: 'priority', order: 'desc' }, { field: 'health', order: 'asc' }],
+    sort: [
+      { field: 'priority', order: 'desc' },
+      { field: 'health', order: 'asc' },
+    ],
     grouping: { fields: [{ field: 'status', order: 'asc', collapsed: false }] },
     selection: { type: 'multiple' },
     pagination: { pageSize: 25, pageSizeOptions: [10, 25, 50] },

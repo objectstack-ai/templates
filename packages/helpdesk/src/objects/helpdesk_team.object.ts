@@ -43,7 +43,8 @@ export const Team = ObjectSchema.create({
     business_hours: Field.text({
       label: 'Business Hours',
       maxLength: 200,
-      description: 'Free-form e.g. "Mon–Fri 09:00–18:00 Asia/Shanghai"; fork to a structured calendar.',
+      description:
+        'Free-form e.g. "Mon–Fri 09:00–18:00 Asia/Shanghai"; fork to a structured calendar.',
     }),
   },
 

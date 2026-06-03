@@ -28,7 +28,12 @@ export const EmployeeViews = defineView({
       { name: 'all', label: 'All', view: 'all_employees', isDefault: true, pinned: true },
       { name: 'active', label: 'Active', icon: 'user-check', view: 'active_employees' },
       { name: 'on_leave', label: 'On Leave', icon: 'calendar-off', view: 'employees_on_leave' },
-      { name: 'new_hires', label: 'New Hires (30d)', icon: 'user-plus', view: 'new_hires_employees' },
+      {
+        name: 'new_hires',
+        label: 'New Hires (30d)',
+        icon: 'user-plus',
+        view: 'new_hires_employees',
+      },
       { name: 'terminated', label: 'Terminated', icon: 'user-x', view: 'terminated_employees' },
     ],
   },

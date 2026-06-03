@@ -14,9 +14,7 @@ export const Issue = ObjectSchema.create({
   icon: 'octagon-x',
   description: 'A current problem that requires resolution.',
 
-  fieldGroups: [
-    { key: 'core', label: 'Issue Details', icon: 'octagon-x', defaultExpanded: true },
-  ],
+  fieldGroups: [{ key: 'core', label: 'Issue Details', icon: 'octagon-x', defaultExpanded: true }],
 
   fields: {
     name: Field.text({
@@ -87,11 +85,7 @@ export const Issue = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [
-    { fields: ['project'] },
-    { fields: ['status'] },
-    { fields: ['severity'] },
-  ],
+  indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['severity'] }],
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',

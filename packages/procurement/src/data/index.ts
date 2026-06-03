@@ -72,7 +72,7 @@ const requests = defineDataset(PurchaseRequest, {
       request_number: 'PR-2026-0001',
       vendor: 'Cloudwell Hosting, Inc.',
       category: 'saas',
-      status: 'approved',  // → triggers PR→PO convert flow
+      status: 'approved', // → triggers PR→PO convert flow
       estimated_amount: 180000,
       needed_by: cel`daysFromNow(30)`,
       cost_center: 'ENG-INFRA',
@@ -83,7 +83,7 @@ const requests = defineDataset(PurchaseRequest, {
       request_number: 'PR-2026-0002',
       vendor: 'Dell Technologies',
       category: 'hardware',
-      status: 'submitted',  // → over $5k → triggers approval flow
+      status: 'submitted', // → over $5k → triggers approval flow
       estimated_amount: 7500,
       needed_by: cel`daysFromNow(14)`,
       cost_center: 'PEOPLE-OPS',

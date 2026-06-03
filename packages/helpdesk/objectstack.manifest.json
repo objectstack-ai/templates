@@ -12,7 +12,12 @@
   "iconUrl": "https://cdn.objectos.app/icons/helpdesk.svg",
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/helpdesk",
   "tags": ["support", "ai", "tickets", "kb"],
-  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "skills": [
+    "objectstack-platform",
+    "objectstack-data",
+    "objectstack-ui",
+    "objectstack-automation"
+  ],
   "readmePath": "README.md",
   "translations": {
     "zh-CN": {

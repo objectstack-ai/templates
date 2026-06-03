@@ -16,10 +16,4 @@ import { resources } from './resources.data.js';
  *
  * Timesheets are intentionally NOT seeded (high-volume transactional data).
  */
-export const ProjectSeedData = [
-  projects,
-  milestones,
-  risks,
-  issues,
-  resources,
-];
+export const ProjectSeedData = [projects, milestones, risks, issues, resources];

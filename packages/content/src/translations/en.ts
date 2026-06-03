@@ -134,8 +134,14 @@ export const en: TranslationData = {
       },
       _views: {
         all_signals: { label: 'All Signals', description: 'Every captured signal' },
-        my_triage_queue: { label: 'My Triage', description: 'Captured signals awaiting your decision' },
-        recently_promoted: { label: 'Recently Promoted', description: 'Signals promoted in the last 30 days' },
+        my_triage_queue: {
+          label: 'My Triage',
+          description: 'Captured signals awaiting your decision',
+        },
+        recently_promoted: {
+          label: 'Recently Promoted',
+          description: 'Signals promoted in the last 30 days',
+        },
       },
     },
 
@@ -158,7 +164,11 @@ export const en: TranslationData = {
         },
         funnel_stage: {
           label: 'Funnel Stage',
-          options: { tofu: 'Awareness (TOFU)', mofu: 'Consideration (MOFU)', bofu: 'Decision (BOFU)' },
+          options: {
+            tofu: 'Awareness (TOFU)',
+            mofu: 'Consideration (MOFU)',
+            bofu: 'Decision (BOFU)',
+          },
         },
         priority: {
           label: 'Priority',
@@ -234,12 +244,24 @@ export const en: TranslationData = {
       _views: {
         all_pieces: { label: 'All Pieces', description: 'Every piece grouped by status' },
         piece_board: { label: 'Pipeline', description: 'Kanban grouped by status' },
-        my_drafts: { label: 'My Drafts', description: 'Pieces assigned to you and not yet in review' },
+        my_drafts: {
+          label: 'My Drafts',
+          description: 'Pieces assigned to you and not yet in review',
+        },
         in_review_queue: { label: 'In Review', description: 'Pieces awaiting editorial sign-off' },
         editorial_calendar: { label: 'Calendar', description: 'Pieces by publish date' },
-        scheduled_pieces: { label: 'Scheduled', description: 'Approved pieces with a scheduled time' },
-        published_pieces: { label: 'Published (30d)', description: 'Pieces that went live in the last 30 days' },
-        top_performers: { label: 'Top Performers', description: 'Published pieces sorted by total views' },
+        scheduled_pieces: {
+          label: 'Scheduled',
+          description: 'Approved pieces with a scheduled time',
+        },
+        published_pieces: {
+          label: 'Published (30d)',
+          description: 'Pieces that went live in the last 30 days',
+        },
+        top_performers: {
+          label: 'Top Performers',
+          description: 'Published pieces sorted by total views',
+        },
       },
     },
 
@@ -261,9 +283,18 @@ export const en: TranslationData = {
         notes: { label: 'Notes' },
       },
       _views: {
-        all_publications: { label: 'All Publications', description: 'Every publication, latest first' },
-        this_week_publications: { label: 'This Week', description: 'Publications in the current week' },
-        by_channel_publications: { label: 'By Channel', description: 'Publications grouped by channel' },
+        all_publications: {
+          label: 'All Publications',
+          description: 'Every publication, latest first',
+        },
+        this_week_publications: {
+          label: 'This Week',
+          description: 'Publications in the current week',
+        },
+        by_channel_publications: {
+          label: 'By Channel',
+          description: 'Publications grouped by channel',
+        },
       },
     },
 
@@ -377,12 +408,30 @@ export const en: TranslationData = {
         capture_signal: { label: 'Capture Signal' },
       },
       widgets: {
-        my_drafts_in_flight: { title: 'My Drafts In Flight', description: 'Pieces assigned to you in drafting status' },
-        my_pieces_in_review: { title: 'My Pieces In Review', description: 'Pieces you submitted that are in review' },
-        scheduled_this_week: { title: 'Publishing This Week', description: 'Scheduled pieces with publish date this week' },
-        published_last_7d: { title: 'Published (Last 7d)', description: 'Pieces published in the last 7 days' },
-        my_pieces_table: { title: 'My Recent Pieces', description: 'Your in-flight pieces, latest activity first' },
-        signals_to_triage: { title: 'Signals to Triage', description: 'Captured signals not yet promoted or ignored' },
+        my_drafts_in_flight: {
+          title: 'My Drafts In Flight',
+          description: 'Pieces assigned to you in drafting status',
+        },
+        my_pieces_in_review: {
+          title: 'My Pieces In Review',
+          description: 'Pieces you submitted that are in review',
+        },
+        scheduled_this_week: {
+          title: 'Publishing This Week',
+          description: 'Scheduled pieces with publish date this week',
+        },
+        published_last_7d: {
+          title: 'Published (Last 7d)',
+          description: 'Pieces published in the last 7 days',
+        },
+        my_pieces_table: {
+          title: 'My Recent Pieces',
+          description: 'Your in-flight pieces, latest activity first',
+        },
+        signals_to_triage: {
+          title: 'Signals to Triage',
+          description: 'Captured signals not yet promoted or ignored',
+        },
       },
     },
     editorial_calendar_dashboard: {
@@ -394,10 +443,22 @@ export const en: TranslationData = {
       widgets: {
         pieces_scheduled: { title: 'Scheduled', description: 'Pieces in scheduled status' },
         pieces_in_review: { title: 'Awaiting Review', description: 'Pieces in review' },
-        pieces_published_30d: { title: 'Published (30d)', description: 'Pieces published in the last 30 days' },
-        pieces_overdue: { title: 'Overdue', description: 'Pieces where publish_at has passed without going live' },
-        calendar_main: { title: 'Upcoming Pieces', description: 'Pieces with publish_at in the next 30 days' },
-        publications_by_channel: { title: 'Channel Mix (Recent)', description: 'Distribution of recent publications by channel' },
+        pieces_published_30d: {
+          title: 'Published (30d)',
+          description: 'Pieces published in the last 30 days',
+        },
+        pieces_overdue: {
+          title: 'Overdue',
+          description: 'Pieces where publish_at has passed without going live',
+        },
+        calendar_main: {
+          title: 'Upcoming Pieces',
+          description: 'Pieces with publish_at in the next 30 days',
+        },
+        publications_by_channel: {
+          title: 'Channel Mix (Recent)',
+          description: 'Distribution of recent publications by channel',
+        },
       },
     },
     roi_by_channel_dashboard: {
@@ -405,13 +466,31 @@ export const en: TranslationData = {
       description: 'Exec view of return on content investment per channel.',
       actions: {},
       widgets: {
-        total_views_90d: { title: 'Total Views', description: 'Sum of total_views across all publications' },
-        total_clicks_90d: { title: 'Total Clicks', description: 'Sum of total_clicks across all publications' },
-        total_signups_90d: { title: 'Total Signups', description: 'Sum of total_signups across all publications' },
-        total_revenue_90d: { title: 'Attributed Revenue', description: 'Sum of attributed_revenue across all publications' },
-        views_by_channel_bar: { title: 'Views by Channel', description: 'Per-channel sum of views across recent publications' },
+        total_views_90d: {
+          title: 'Total Views',
+          description: 'Sum of total_views across all publications',
+        },
+        total_clicks_90d: {
+          title: 'Total Clicks',
+          description: 'Sum of total_clicks across all publications',
+        },
+        total_signups_90d: {
+          title: 'Total Signups',
+          description: 'Sum of total_signups across all publications',
+        },
+        total_revenue_90d: {
+          title: 'Attributed Revenue',
+          description: 'Sum of attributed_revenue across all publications',
+        },
+        views_by_channel_bar: {
+          title: 'Views by Channel',
+          description: 'Per-channel sum of views across recent publications',
+        },
         signups_trend: { title: 'Signups Trend (90d)', description: 'Daily signups, last 90 days' },
-        top_publications: { title: 'Top Publications (90d)', description: 'Highest-revenue publications in the last 90 days' },
+        top_publications: {
+          title: 'Top Publications (90d)',
+          description: 'Highest-revenue publications in the last 90 days',
+        },
       },
     },
   },

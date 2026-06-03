@@ -13,7 +13,8 @@ import type { Dashboard } from '@objectstack/spec/ui';
 export const ExpensesOverviewDashboard: Dashboard = {
   name: 'expenses_overview_dashboard',
   label: 'Expenses Overview',
-  description: 'Reports awaiting approval, amounts owed to employees, and spend trend by month and category.',
+  description:
+    'Reports awaiting approval, amounts owed to employees, and spend trend by month and category.',
 
   columns: 12,
   gap: 4,

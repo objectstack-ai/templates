@@ -85,7 +85,12 @@ export const KBArticle = ObjectSchema.create({
       type: 'state_machine',
       name: 'kb_article_lifecycle',
       field: 'status',
-      transitions: {draft:["review"], review:["published", "draft"], published:["archived", "draft"], archived:["draft"]},
+      transitions: {
+        draft: ['review'],
+        review: ['published', 'draft'],
+        published: ['archived', 'draft'],
+        archived: ['draft'],
+      },
       message: 'Illegal status transition.',
     },
   ],

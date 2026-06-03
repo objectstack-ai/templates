@@ -84,13 +84,10 @@ export async function suggestCta(
   ctx: SuggestCtaContext,
 ): Promise<SuggestCtaOutput> {
   const piece = await ctx.loadPiece(input.pieceId);
-  const topic = ctx.loadTopic && piece.topic
-    ? await ctx.loadTopic(String(piece.topic))
-    : undefined;
+  const topic = ctx.loadTopic && piece.topic ? await ctx.loadTopic(String(piece.topic)) : undefined;
   const targetChannelIds = (piece.target_channels as string[] | undefined) ?? [];
-  const channel = ctx.loadChannel && targetChannelIds[0]
-    ? await ctx.loadChannel(targetChannelIds[0])
-    : undefined;
+  const channel =
+    ctx.loadChannel && targetChannelIds[0] ? await ctx.loadChannel(targetChannelIds[0]) : undefined;
 
   const promptCtx = `PIECE TITLE: ${piece.title ?? ''}
 SUMMARY: ${piece.summary ?? ''}

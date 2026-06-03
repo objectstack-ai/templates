@@ -90,11 +90,7 @@ export const ExpenseLine = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [
-    { fields: ['expense_report'] },
-    { fields: ['category'] },
-    { fields: ['expense_date'] },
-  ],
+  indexes: [{ fields: ['expense_report'] }, { fields: ['category'] }, { fields: ['expense_date'] }],
 
   titleFormat: tmpl`{{record.description}}`,
   displayNameField: 'description',

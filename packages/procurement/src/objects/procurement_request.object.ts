@@ -131,7 +131,13 @@ export const PurchaseRequest = ObjectSchema.create({
       type: 'state_machine',
       name: 'pr_lifecycle',
       field: 'status',
-      transitions: {draft:["submitted"], submitted:["approved", "rejected", "draft"], approved:["converted"], rejected:["draft"], converted:[]},
+      transitions: {
+        draft: ['submitted'],
+        submitted: ['approved', 'rejected', 'draft'],
+        approved: ['converted'],
+        rejected: ['draft'],
+        converted: [],
+      },
       message: 'Illegal status transition.',
     },
     {

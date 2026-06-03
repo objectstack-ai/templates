@@ -13,8 +13,7 @@ export const Vendor = ObjectSchema.create({
   label: 'Vendor',
   pluralLabel: 'Vendors',
   icon: 'building',
-  description:
-    'A supplier you place purchase orders against. Vendor master record.',
+  description: 'A supplier you place purchase orders against. Vendor master record.',
 
   fields: {
     name: Field.text({
@@ -77,11 +76,7 @@ export const Vendor = ObjectSchema.create({
     mru: true,
   },
 
-  indexes: [
-    { fields: ['name'] },
-    { fields: ['status'] },
-    { fields: ['category'] },
-  ],
+  indexes: [{ fields: ['name'] }, { fields: ['status'] }, { fields: ['category'] }],
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',

@@ -145,7 +145,13 @@ export const ExpenseReport = ObjectSchema.create({
       type: 'state_machine',
       name: 'expense_report_lifecycle',
       field: 'status',
-      transitions: {draft:["submitted"], submitted:["approved", "rejected", "draft"], approved:["reimbursed"], rejected:["draft"], reimbursed:[]},
+      transitions: {
+        draft: ['submitted'],
+        submitted: ['approved', 'rejected', 'draft'],
+        approved: ['reimbursed'],
+        rejected: ['draft'],
+        reimbursed: [],
+      },
       message: 'Illegal status transition.',
     },
     {

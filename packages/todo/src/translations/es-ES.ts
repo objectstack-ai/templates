@@ -18,7 +18,12 @@ export const esES: TranslationData = {
         description: { label: 'Descripción' },
         status: {
           label: 'Estado',
-          options: { todo: 'Pendiente', doing: 'En curso', done: 'Completada', cancelled: 'Cancelada' },
+          options: {
+            todo: 'Pendiente',
+            doing: 'En curso',
+            done: 'Completada',
+            cancelled: 'Cancelada',
+          },
         },
         priority: {
           label: 'Prioridad',
@@ -33,10 +38,19 @@ export const esES: TranslationData = {
         is_overdue: { label: '¿Vencida?' },
       },
       _views: {
-        all_tasks: { label: 'Todas las tareas', description: 'Todas las tareas, agrupadas por estado' },
+        all_tasks: {
+          label: 'Todas las tareas',
+          description: 'Todas las tareas, agrupadas por estado',
+        },
         task_board: { label: 'Tablero de tareas', description: 'Vista kanban agrupada por estado' },
-        my_open_tasks: { label: 'Mis tareas abiertas', description: 'Tareas abiertas asignadas a ti' },
-        overdue_tasks: { label: 'Tareas vencidas', description: 'Tareas abiertas pasadas de su fecha límite' },
+        my_open_tasks: {
+          label: 'Mis tareas abiertas',
+          description: 'Tareas abiertas asignadas a ti',
+        },
+        overdue_tasks: {
+          label: 'Tareas vencidas',
+          description: 'Tareas abiertas pasadas de su fecha límite',
+        },
       },
     },
 
@@ -97,10 +111,19 @@ export const esES: TranslationData = {
         create_task: { label: 'Nueva tarea' },
       },
       widgets: {
-        my_open_tasks: { title: 'Mis tareas abiertas', description: 'Tareas asignadas a ti que siguen pendientes o en curso' },
+        my_open_tasks: {
+          title: 'Mis tareas abiertas',
+          description: 'Tareas asignadas a ti que siguen pendientes o en curso',
+        },
         my_overdue: { title: 'Vencidas', description: 'Tus tareas abiertas pasadas de fecha' },
-        done_this_week: { title: 'Completadas esta semana', description: 'Tareas completadas desde el inicio de la semana' },
-        recent_overdue_list: { title: 'Tareas vencidas', description: 'Tus tareas vencidas ordenadas de más antigua a más reciente' },
+        done_this_week: {
+          title: 'Completadas esta semana',
+          description: 'Tareas completadas desde el inicio de la semana',
+        },
+        recent_overdue_list: {
+          title: 'Tareas vencidas',
+          description: 'Tus tareas vencidas ordenadas de más antigua a más reciente',
+        },
       },
     },
   },

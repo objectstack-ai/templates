@@ -145,7 +145,14 @@ export const PurchaseOrder = ObjectSchema.create({
       type: 'state_machine',
       name: 'po_lifecycle',
       field: 'status',
-      transitions: {draft:["sent"], sent:["partial", "received", "cancelled"], partial:["received", "closed"], received:["closed"], closed:[], cancelled:[]},
+      transitions: {
+        draft: ['sent'],
+        sent: ['partial', 'received', 'cancelled'],
+        partial: ['received', 'closed'],
+        received: ['closed'],
+        closed: [],
+        cancelled: [],
+      },
       message: 'Illegal status transition.',
     },
     {

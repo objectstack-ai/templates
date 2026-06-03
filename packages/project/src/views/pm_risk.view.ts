@@ -25,7 +25,10 @@ export const RiskViews = defineView({
       { field: 'response_strategy', width: 120 },
       { field: 'response_owner', width: 140 },
     ],
-    sort: [{ field: 'priority', order: 'desc' }, { field: 'ai_impact_score', order: 'desc' }],
+    sort: [
+      { field: 'priority', order: 'desc' },
+      { field: 'ai_impact_score', order: 'desc' },
+    ],
     grouping: { fields: [{ field: 'status', order: 'asc', collapsed: false }] },
     selection: { type: 'multiple' },
     pagination: { pageSize: 50, pageSizeOptions: [25, 50, 100] },
@@ -47,7 +50,9 @@ export const RiskViews = defineView({
       type: 'grid',
       label: 'Active Risks',
       data: { provider: 'object', object: 'pm_risk' },
-      filter: [{ field: 'status', operator: 'in', value: ['identified', 'monitoring', 'mitigating'] }],
+      filter: [
+        { field: 'status', operator: 'in', value: ['identified', 'monitoring', 'mitigating'] },
+      ],
       columns: [
         { field: 'risk_id', width: 130, link: true, pinned: 'left' },
         { field: 'name', width: 280 },
@@ -93,7 +98,10 @@ export const RiskViews = defineView({
         { field: 'ai_impact_score', width: 100, align: 'right' },
       ],
       grouping: { fields: [{ field: 'project', order: 'asc', collapsed: true }] },
-      sort: [{ field: 'project', order: 'asc' }, { field: 'priority', order: 'desc' }],
+      sort: [
+        { field: 'project', order: 'asc' },
+        { field: 'priority', order: 'desc' },
+      ],
     },
   },
 });

@@ -46,8 +46,7 @@ export async function publishNow(
     );
   }
 
-  const channels =
-    input.channelIds ?? ((piece.target_channels as string[] | undefined) ?? []);
+  const channels = input.channelIds ?? (piece.target_channels as string[] | undefined) ?? [];
   if (channels.length === 0) {
     throw new Error('Piece has no target_channels and no channelIds were supplied.');
   }

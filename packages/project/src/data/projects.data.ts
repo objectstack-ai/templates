@@ -19,7 +19,8 @@ export const projects = defineDataset(Project, {
   records: [
     {
       name: 'Mobile App Redesign',
-      description: 'Complete redesign of iOS and Android apps with new brand identity and improved UX. Target Q3 launch.',
+      description:
+        'Complete redesign of iOS and Android apps with new brand identity and improved UX. Target Q3 launch.',
       status: 'active',
       priority: 'high',
       project_type: 'client',
@@ -41,7 +42,8 @@ export const projects = defineDataset(Project, {
     },
     {
       name: 'ERP System Migration',
-      description: 'Migrate legacy ERP to cloud-based solution. Complex data migration with high business risk.',
+      description:
+        'Migrate legacy ERP to cloud-based solution. Complex data migration with high business risk.',
       status: 'at_risk',
       priority: 'critical',
       project_type: 'internal',

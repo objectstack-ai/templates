@@ -49,10 +49,15 @@ export const PurchaseOrderViews = defineView({
       type: 'grid',
       label: 'Open Orders',
       data: { provider: 'object', object: 'procurement_order' },
-      columns: ['po_number', 'vendor', 'status', 'total_amount', 'received_amount', 'expected_delivery'],
-      filter: [
-        { field: 'status', operator: 'in', value: ['sent', 'partial'] },
+      columns: [
+        'po_number',
+        'vendor',
+        'status',
+        'total_amount',
+        'received_amount',
+        'expected_delivery',
       ],
+      filter: [{ field: 'status', operator: 'in', value: ['sent', 'partial'] }],
       sort: [{ field: 'expected_delivery', order: 'asc' }],
     },
 

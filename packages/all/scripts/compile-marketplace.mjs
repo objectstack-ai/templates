@@ -36,13 +36,7 @@
 // and the CLI's serve path validates with `ObjectStackDefinitionSchema` (schema
 // only), so the single-app / namespace-prefix gates correctly do not apply.
 
-import {
-  readFileSync,
-  writeFileSync,
-  mkdirSync,
-  readdirSync,
-  existsSync,
-} from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -70,11 +64,32 @@ const safeFilename = (manifestId) => `${manifestId.replace(/[^a-zA-Z0-9._-]/g, '
 // Arrays concatenated at the environment layer (mirrors `composeStacks`'
 // CONCAT_ARRAY_FIELDS, minus the singletons we de-dupe below).
 const CONCAT_FIELDS = [
-  'translations', 'objectExtensions', 'objects', 'apps', 'views', 'pages',
-  'dashboards', 'reports', 'actions', 'themes', 'flows', 'jobs',
-  'emailTemplates', 'sharingRules', 'policies', 'apis', 'webhooks', 'agents',
-  'skills', 'hooks', 'mappings', 'analyticsCubes', 'connectors', 'datasources',
-  'portals', 'data',
+  'translations',
+  'objectExtensions',
+  'objects',
+  'apps',
+  'views',
+  'pages',
+  'dashboards',
+  'reports',
+  'actions',
+  'themes',
+  'flows',
+  'jobs',
+  'emailTemplates',
+  'sharingRules',
+  'policies',
+  'apis',
+  'webhooks',
+  'agents',
+  'skills',
+  'hooks',
+  'mappings',
+  'analyticsCubes',
+  'connectors',
+  'datasources',
+  'portals',
+  'data',
 ];
 
 // Environment-level singletons keyed by `name`. Two installed apps can each ship
@@ -126,7 +141,9 @@ function installFromWorkspace() {
 function readStore(dir) {
   if (!existsSync(dir)) return [];
   const out = [];
-  for (const file of readdirSync(dir).filter((f) => f.endsWith('.json')).sort()) {
+  for (const file of readdirSync(dir)
+    .filter((f) => f.endsWith('.json'))
+    .sort()) {
     let entry;
     try {
       entry = JSON.parse(readFileSync(join(dir, file), 'utf8'));
@@ -137,7 +154,8 @@ function readStore(dir) {
     // Accept either the runtime wrapper ({ manifest: <artifact> }) or a bare
     // artifact dropped straight into the folder.
     const artifact = entry?.manifest?.objects || entry?.manifest?.apps ? entry.manifest : entry;
-    const source = artifact?.manifest?.namespace || entry?.manifestId || file.replace(/\.json$/, '');
+    const source =
+      artifact?.manifest?.namespace || entry?.manifestId || file.replace(/\.json$/, '');
     out.push({ source, artifact });
   }
   return out;
@@ -148,8 +166,12 @@ function readInstalledArtifacts() {
   const cache = readStore(INSTALLED_DIR);
   const live = readStore(LIVE_INSTALL_DIR);
   if (live.length > 0) {
-    log(`  ⓘ folding in ${live.length} live marketplace install(s) from .objectstack/installed-packages/`);
-    log('    (the runtime rehydrates that folder too — run `start` from a clean cwd to avoid double-load)');
+    log(
+      `  ⓘ folding in ${live.length} live marketplace install(s) from .objectstack/installed-packages/`,
+    );
+    log(
+      '    (the runtime rehydrates that folder too — run `start` from a clean cwd to avoid double-load)',
+    );
   }
   // De-dupe by namespace; cache wins (it's the deterministic workspace copy).
   const seen = new Set(cache.map((e) => e.source));
@@ -194,7 +216,10 @@ function compile(store) {
     for (const field of DEDUP_BY_NAME) {
       for (const item of artifact[field] ?? []) {
         if (!dedup[field].has(item.name)) dedup[field].set(item.name, item);
-        else log(`  ! ${field.slice(0, -1)} '${item.name}' from '${source}' shadowed (already installed)`);
+        else
+          log(
+            `  ! ${field.slice(0, -1)} '${item.name}' from '${source}' shadowed (already installed)`,
+          );
       }
     }
 
@@ -213,7 +238,11 @@ function compile(store) {
   if (requires.size > 0) env.requires = [...requires];
 
   supportedLocales.add(defaultLocale);
-  env.i18n = { defaultLocale, supportedLocales: [...supportedLocales], fallbackLocale: defaultLocale };
+  env.i18n = {
+    defaultLocale,
+    supportedLocales: [...supportedLocales],
+    fallbackLocale: defaultLocale,
+  };
 
   return env;
 }
@@ -237,7 +266,9 @@ mkdirSync(dirname(OUT), { recursive: true });
 writeFileSync(OUT, `${JSON.stringify(env, null, 2)}\n`);
 
 log('');
-log(`✓ Composed ${store.length} apps · ${env.objects?.length ?? 0} objects · ${env.flows?.length ?? 0} flows`);
+log(
+  `✓ Composed ${store.length} apps · ${env.objects?.length ?? 0} objects · ${env.flows?.length ?? 0} flows`,
+);
 log(`  apps: ${(env.apps ?? []).map((a) => a.name).join(', ')}`);
 log(`  installed-packages: ${INSTALLED_DIR.replace(`${PACKAGES_DIR}/`, '')}`);
 log(`  → ${OUT.replace(`${PACKAGES_DIR}/`, '')}`);

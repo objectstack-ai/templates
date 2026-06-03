@@ -27,7 +27,12 @@ export const SignalViews = defineView({
     tabs: [
       { name: 'all', label: 'All', view: 'all_signals', isDefault: true, pinned: true },
       { name: 'triage', label: 'My Triage', icon: 'inbox', view: 'my_triage_queue' },
-      { name: 'promoted', label: 'Recently Promoted', icon: 'trending-up', view: 'recently_promoted' },
+      {
+        name: 'promoted',
+        label: 'Recently Promoted',
+        icon: 'trending-up',
+        view: 'recently_promoted',
+      },
     ],
   },
 

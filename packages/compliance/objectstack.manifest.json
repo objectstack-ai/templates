@@ -13,7 +13,12 @@
   "iconUrl": "https://cdn.objectos.app/icons/compliance.svg",
   "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/compliance",
   "tags": ["compliance", "audit", "evidence", "soc2", "iso27001"],
-  "skills": ["objectstack-platform", "objectstack-data", "objectstack-ui", "objectstack-automation"],
+  "skills": [
+    "objectstack-platform",
+    "objectstack-data",
+    "objectstack-ui",
+    "objectstack-automation"
+  ],
   "readmePath": "README.md",
   "translations": {
     "zh-CN": {
@@ -23,4 +28,3 @@
     }
   }
 }
-

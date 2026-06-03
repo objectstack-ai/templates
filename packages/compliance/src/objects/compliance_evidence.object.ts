@@ -12,8 +12,7 @@ export const Evidence = ObjectSchema.create({
   label: 'Evidence',
   pluralLabel: 'Evidence',
   icon: 'paperclip',
-  description:
-    'Proof (screenshot, exported log, policy doc) that supports one or more controls.',
+  description: 'Proof (screenshot, exported log, policy doc) that supports one or more controls.',
 
   fieldGroups: [
     { key: 'core', label: 'Evidence', icon: 'paperclip' },
@@ -119,7 +118,13 @@ export const Evidence = ObjectSchema.create({
       type: 'state_machine',
       name: 'evidence_lifecycle',
       field: 'status',
-      transitions: {pending:["submitted"], submitted:["approved", "rejected"], approved:["expired"], rejected:["pending"], expired:["pending"]},
+      transitions: {
+        pending: ['submitted'],
+        submitted: ['approved', 'rejected'],
+        approved: ['expired'],
+        rejected: ['pending'],
+        expired: ['pending'],
+      },
       message: 'Illegal status transition.',
     },
     {

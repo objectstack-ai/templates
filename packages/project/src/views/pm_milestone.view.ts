@@ -29,10 +29,21 @@ export const MilestoneViews = defineView({
       allowedVisualizations: ['grid', 'timeline'],
     },
     tabs: [
-      { name: 'all', label: 'All Milestones', view: 'all_milestones', isDefault: true, pinned: true },
+      {
+        name: 'all',
+        label: 'All Milestones',
+        view: 'all_milestones',
+        isDefault: true,
+        pinned: true,
+      },
       { name: 'upcoming', label: 'Upcoming', icon: 'calendar', view: 'upcoming_milestones' },
       { name: 'at_risk', label: 'At Risk', icon: 'alert-triangle', view: 'at_risk_milestones' },
-      { name: 'critical_path', label: 'Critical Path', icon: 'zap', view: 'critical_path_milestones' },
+      {
+        name: 'critical_path',
+        label: 'Critical Path',
+        icon: 'zap',
+        view: 'critical_path_milestones',
+      },
     ],
   },
 
@@ -42,7 +53,10 @@ export const MilestoneViews = defineView({
       type: 'grid',
       label: 'Upcoming Milestones',
       data: { provider: 'object', object: 'pm_milestone' },
-      filter: [{ field: 'status', operator: 'in', value: ['not_started', 'in_progress'] }, { field: 'due_date', operator: 'not_equals', value: null }],
+      filter: [
+        { field: 'status', operator: 'in', value: ['not_started', 'in_progress'] },
+        { field: 'due_date', operator: 'not_equals', value: null },
+      ],
       columns: [
         { field: 'name', width: 280, link: true, pinned: 'left' },
         { field: 'project', width: 160 },
@@ -82,7 +96,10 @@ export const MilestoneViews = defineView({
         { field: 'due_date', width: 120 },
         { field: 'completed_at', width: 120 },
       ],
-      sort: [{ field: 'project', order: 'asc' }, { field: 'due_date', order: 'asc' }],
+      sort: [
+        { field: 'project', order: 'asc' },
+        { field: 'due_date', order: 'asc' },
+      ],
     },
   },
 });

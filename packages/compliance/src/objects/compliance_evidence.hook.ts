@@ -33,11 +33,7 @@ const evidenceHook: Hook = {
       if (user?.id) input.approved_by = user.id;
     }
 
-    if (
-      event === 'beforeUpdate' &&
-      previous &&
-      input.status === 'rejected'
-    ) {
+    if (event === 'beforeUpdate' && previous && input.status === 'rejected') {
       input.approved_by = null;
     }
   },

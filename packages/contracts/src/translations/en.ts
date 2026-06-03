@@ -76,9 +76,18 @@ export const en: TranslationData = {
       _views: {
         all_contracts: { label: 'All Contracts', description: 'Every contract, grouped by status' },
         contract_pipeline: { label: 'Contract Pipeline', description: 'Kanban grouped by status' },
-        my_contracts: { label: 'My Contracts', description: 'Contracts you own that are still open' },
-        expiring_contracts: { label: 'Expiring Soon', description: 'Active contracts ending in ≤ 60 days' },
-        pending_approval_contracts: { label: 'Pending Approval', description: 'Contracts in review awaiting approval' },
+        my_contracts: {
+          label: 'My Contracts',
+          description: 'Contracts you own that are still open',
+        },
+        expiring_contracts: {
+          label: 'Expiring Soon',
+          description: 'Active contracts ending in ≤ 60 days',
+        },
+        pending_approval_contracts: {
+          label: 'Pending Approval',
+          description: 'Contracts in review awaiting approval',
+        },
       },
     },
 
@@ -140,9 +149,18 @@ export const en: TranslationData = {
         notes: { label: 'Notes' },
       },
       _views: {
-        all_obligations: { label: 'All Obligations', description: 'Every obligation, grouped by status' },
-        my_open_obligations: { label: 'My Open Obligations', description: 'Open obligations assigned to you' },
-        overdue_obligations: { label: 'Overdue Obligations', description: 'Open obligations past due date' },
+        all_obligations: {
+          label: 'All Obligations',
+          description: 'Every obligation, grouped by status',
+        },
+        my_open_obligations: {
+          label: 'My Open Obligations',
+          description: 'Open obligations assigned to you',
+        },
+        overdue_obligations: {
+          label: 'Overdue Obligations',
+          description: 'Open obligations past due date',
+        },
       },
     },
   },
@@ -194,12 +212,30 @@ export const en: TranslationData = {
         create_contract: { label: 'New Contract' },
       },
       widgets: {
-        expiring_60: { title: 'Expiring ≤ 60 days', description: 'Active contracts with end_date within 60 days' },
-        auto_renewing_30: { title: 'Auto-Renewing ≤ 30d', description: 'Active contracts set to auto-renew in 30 days or less' },
-        pending_approval: { title: 'Pending Approval', description: 'In-review contracts above the approval threshold' },
-        active_total_value: { title: 'Active Portfolio Value', description: 'Sum of total_value across active contracts' },
-        expiring_table: { title: 'Expiring Contracts (Next 60d)', description: 'Active contracts sorted by end date — earliest first' },
-        pending_obligations: { title: 'Open Obligations', description: 'All open obligations sorted by due date' },
+        expiring_60: {
+          title: 'Expiring ≤ 60 days',
+          description: 'Active contracts with end_date within 60 days',
+        },
+        auto_renewing_30: {
+          title: 'Auto-Renewing ≤ 30d',
+          description: 'Active contracts set to auto-renew in 30 days or less',
+        },
+        pending_approval: {
+          title: 'Pending Approval',
+          description: 'In-review contracts above the approval threshold',
+        },
+        active_total_value: {
+          title: 'Active Portfolio Value',
+          description: 'Sum of total_value across active contracts',
+        },
+        expiring_table: {
+          title: 'Expiring Contracts (Next 60d)',
+          description: 'Active contracts sorted by end date — earliest first',
+        },
+        pending_obligations: {
+          title: 'Open Obligations',
+          description: 'All open obligations sorted by due date',
+        },
       },
     },
   },

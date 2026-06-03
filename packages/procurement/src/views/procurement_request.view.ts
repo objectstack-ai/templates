@@ -50,9 +50,7 @@ export const PurchaseRequestViews = defineView({
       label: 'My Requests',
       data: { provider: 'object', object: 'procurement_request' },
       columns: ['title', 'vendor', 'category', 'status', 'estimated_amount', 'needed_by'],
-      filter: [
-        { field: 'requester', operator: 'equals', value: '{current_user_id}' },
-      ],
+      filter: [{ field: 'requester', operator: 'equals', value: '{current_user_id}' }],
       sort: [{ field: 'needed_by', order: 'asc' }],
     },
 

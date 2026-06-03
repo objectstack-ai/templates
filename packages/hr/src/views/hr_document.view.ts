@@ -24,7 +24,12 @@ export const EmployeeDocumentViews = defineView({
     appearance: { allowedVisualizations: ['grid'] },
     tabs: [
       { name: 'all', label: 'All', view: 'all_documents', isDefault: true, pinned: true },
-      { name: 'expiring', label: 'Expiring Soon', icon: 'alert-triangle', view: 'expiring_documents' },
+      {
+        name: 'expiring',
+        label: 'Expiring Soon',
+        icon: 'alert-triangle',
+        view: 'expiring_documents',
+      },
       { name: 'expired', label: 'Expired', icon: 'x-circle', view: 'expired_documents' },
     ],
   },
