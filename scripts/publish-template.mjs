@@ -164,7 +164,10 @@ async function postJson(path, body) {
     } catch (err) {
       clearTimeout(timer);
       lastErr = err;
-      const reason = err?.name === 'AbortError' ? `timeout after ${TIMEOUT_MS}ms` : (err?.message ?? String(err));
+      const reason =
+        err?.name === 'AbortError'
+          ? `timeout after ${TIMEOUT_MS}ms`
+          : (err?.message ?? String(err));
       if (attempt < MAX_ATTEMPTS) {
         log(`  ↻ ${path} → ${reason}, retry ${attempt}/${MAX_ATTEMPTS - 1}…`);
         await sleep(backoffMs(attempt));
@@ -175,7 +178,11 @@ async function postJson(path, body) {
       return { ok: false, status: 0, json: { error: `request failed: ${reason}` } };
     }
   }
-  return { ok: false, status: 0, json: { error: `request failed: ${lastErr?.message ?? 'unknown'}` } };
+  return {
+    ok: false,
+    status: 0,
+    json: { error: `request failed: ${lastErr?.message ?? 'unknown'}` },
+  };
 }
 
 function sleep(ms) {
