@@ -123,22 +123,76 @@ async function postJson(path, body) {
       json: { success: true, data: { id: 'dry-run', created: true } },
     };
   }
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${OS_CLOUD_API_KEY}`,
-    },
-    body: JSON.stringify(body),
-  });
-  const text = await res.text();
-  let json;
-  try {
-    json = JSON.parse(text);
-  } catch {
-    json = { raw: text };
+  // Per-request timeout + retry. The control plane is a singleton that can be
+  // cold (it isn't kept warm), so the first heavy POST after idle can take far
+  // longer than undici's default 5-min headers timeout — which previously threw
+  // and killed the whole run. We use an explicit AbortController timeout and
+  // retry transient failures (timeout / network / 5xx). 4xx (incl. 409) returns
+  // immediately — those are deterministic, not worth retrying.
+  const TIMEOUT_MS = Number(process.env.PUBLISH_TIMEOUT_MS ?? 240_000);
+  const MAX_ATTEMPTS = Number(process.env.PUBLISH_RETRIES ?? 4);
+  let lastErr;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    const ac = new AbortController();
+    const timer = setTimeout(() => ac.abort(), TIMEOUT_MS);
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${OS_CLOUD_API_KEY}`,
+        },
+        body: JSON.stringify(body),
+        signal: ac.signal,
+      });
+      clearTimeout(timer);
+      const text = await res.text();
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch {
+        json = { raw: text };
+      }
+      // Retry server errors (5xx) — a cold/overloaded singleton often 502/503s
+      // before it warms up. Client errors (4xx) are returned as-is.
+      if (res.status >= 500 && attempt < MAX_ATTEMPTS) {
+        log(`  ↻ ${path} → ${res.status}, retry ${attempt}/${MAX_ATTEMPTS - 1}…`);
+        await sleep(backoffMs(attempt));
+        continue;
+      }
+      return { ok: res.ok, status: res.status, json };
+    } catch (err) {
+      clearTimeout(timer);
+      lastErr = err;
+      const reason =
+        err?.name === 'AbortError'
+          ? `timeout after ${TIMEOUT_MS}ms`
+          : (err?.message ?? String(err));
+      if (attempt < MAX_ATTEMPTS) {
+        log(`  ↻ ${path} → ${reason}, retry ${attempt}/${MAX_ATTEMPTS - 1}…`);
+        await sleep(backoffMs(attempt));
+        continue;
+      }
+      // Exhausted retries — surface a structured failure, don't throw (so one
+      // stuck template doesn't kill the whole run).
+      return { ok: false, status: 0, json: { error: `request failed: ${reason}` } };
+    }
   }
-  return { ok: res.ok, status: res.status, json };
+  return {
+    ok: false,
+    status: 0,
+    json: { error: `request failed: ${lastErr?.message ?? 'unknown'}` },
+  };
+}
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+// Backoff with a cap: 3s, 6s, 12s, 24s, 30s… — gives a cold singleton time to
+// spin up between attempts.
+function backoffMs(attempt) {
+  return Math.min(3000 * 2 ** (attempt - 1), 30_000);
 }
 
 /**
@@ -235,12 +289,23 @@ async function main() {
   if (DRY_RUN) log('DRY_RUN=1 — no HTTP calls will be made.');
 
   const results = { created: 0, updated: 0, skipped: 0, failed: 0 };
+  const failures = [];
   for (const t of templates) {
-    const r = await publishOne(t);
+    // One template's failure must NOT abort the others — publish is per-package
+    // and idempotent, so we attempt every template and report at the end.
+    let r;
+    try {
+      r = await publishOne(t);
+    } catch (err) {
+      log(`  ✗ ${t.pkg.name} threw: ${err?.message ?? err}`);
+      r = 'failed';
+    }
     results[r] = (results[r] ?? 0) + 1;
+    if (r === 'failed') failures.push(t.pkg.name);
   }
   log('\n── Summary ──');
   log(JSON.stringify(results, null, 2));
+  if (failures.length) log(`Failed: ${failures.join(', ')}`);
   process.exit(results.failed > 0 ? 1 : 0);
 }
 
