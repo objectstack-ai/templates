@@ -1,0 +1,67 @@
+name: Publish to marketplace (production)
+
+# Publishes the template packages to the PRODUCTION marketplace
+# (https://cloud.objectos.ai). Target URL is hard-coded; the credential is the
+# production-only secret `OS_CLOUD_API_KEY_PRODUCTION` (set once at the ORG
+# level), fully separate from the staging key.
+#
+# MANUAL ONLY — there is intentionally no `release`/`push` trigger. Production
+# is a deliberate promotion step: cut to staging first, verify, then dispatch
+# this.
+on:
+  workflow_dispatch:
+    inputs:
+      templates:
+        description: 'Comma-separated package names to publish (empty = all)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry-run (print payloads, no HTTP)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: publish-marketplace-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Build + publish templates → production
+    runs-on: ubuntu-latest
+    # Only run on the canonical repo, never on forks.
+    if: github.repository == 'objectstack-ai/templates'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all templates
+        run: pnpm -r build
+
+      - name: Resolve template filter
+        id: filter
+        run: echo "filter=${{ inputs.templates }}" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to PRODUCTION marketplace
+        env:
+          OS_CLOUD_URL: https://cloud.objectos.ai
+          # Distinct, production-only key — set once as an ORG-level secret,
+          # fully separate from the staging key. A staging dispatch can never
+          # carry the prod credential and vice-versa.
+          OS_CLOUD_API_KEY: ${{ secrets.OS_CLOUD_API_KEY_PRODUCTION }}
+          PUBLISH_TEMPLATES: ${{ steps.filter.outputs.filter }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: node scripts/publish-template.mjs

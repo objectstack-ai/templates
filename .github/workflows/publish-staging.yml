@@ -1,17 +1,15 @@
-name: Publish to marketplace
+name: Publish to marketplace (staging)
 
-# Trigger ONLY on explicit intent — never on plain push to main.
+# Publishes the template packages to the STAGING marketplace
+# (https://cloud.objectos.app). Target URL is hard-coded — there is no
+# ambiguous `vars.OS_CLOUD_URL`, so a dispatch can never accidentally hit
+# production. The credential is the staging-only secret
+# `OS_CLOUD_API_KEY_STAGING` (set once at the ORG level — no per-repo config).
 #
-#   1. Manual dispatch — from Actions UI, with optional template filter +
-#      dry-run toggle. Use this for normal releases.
-#   2. GitHub Release published — tag like `todo-v0.2.0` or a multi-template
-#      release. The workflow filters via the tag name (if it looks like
-#      `<template>-v<semver>`) or just publishes whatever has a bumped
-#      version (the cloud side is idempotent — 409 on unchanged versions).
-#
-# Auto-publish on every push to main was intentionally removed: most pushes
-# touch unrelated code, versions don't bump in lockstep with commits, and a
-# bad publish lands on every user instantly.
+# Triggers:
+#   1. Manual dispatch — normal releases, with optional template filter + dry-run.
+#   2. GitHub Release published — auto-publish to staging (cloud is idempotent —
+#      409 on unchanged versions). Production is a separate, manual-only workflow.
 on:
   workflow_dispatch:
     inputs:
@@ -27,9 +25,7 @@ on:
     types: [published]
 
 concurrency:
-  group: publish-marketplace
-  # Don't cancel in-flight publishes — they're idempotent but a partial run
-  # is preferable to a cancelled one (you'd retry the next dispatch anyway).
+  group: publish-marketplace-staging
   cancel-in-progress: false
 
 permissions:
@@ -37,10 +33,9 @@ permissions:
 
 jobs:
   publish:
-    name: Build + publish templates
+    name: Build + publish templates → staging
     runs-on: ubuntu-latest
-    # Only run on the canonical repo, never on forks (where
-    # OS_CLOUD_API_KEY is unavailable). Adjust to your org slug.
+    # Only run on the canonical repo, never on forks.
     if: github.repository == 'objectstack-ai/templates'
     steps:
       - uses: actions/checkout@v4
@@ -63,8 +58,8 @@ jobs:
       - name: Resolve template filter from release tag
         id: filter
         # If the tag looks like `<name>-v<semver>` (e.g. todo-v0.2.0), narrow
-        # the publish to just that template. Otherwise leave the filter
-        # empty so all templates are evaluated (each one is idempotent).
+        # the publish to just that template. Otherwise leave the filter empty
+        # so all templates are evaluated (each one is idempotent).
         run: |
           FILTER="${{ inputs.templates }}"
           if [ -z "$FILTER" ] && [ "${{ github.event_name }}" = "release" ]; then
@@ -76,10 +71,13 @@ jobs:
           fi
           echo "filter=$FILTER" >> "$GITHUB_OUTPUT"
 
-      - name: Publish to marketplace
+      - name: Publish to STAGING marketplace
         env:
-          OS_CLOUD_URL: ${{ vars.OS_CLOUD_URL }}
-          OS_CLOUD_API_KEY: ${{ secrets.OS_CLOUD_API_KEY }}
+          OS_CLOUD_URL: https://cloud.objectos.app
+          # Distinct, staging-only key — set once as an ORG-level secret so
+          # every repo's staging publish shares it (no per-repo / per-environment
+          # setup). Keeps staging credentials fully separate from production.
+          OS_CLOUD_API_KEY: ${{ secrets.OS_CLOUD_API_KEY_STAGING }}
           PUBLISH_TEMPLATES: ${{ steps.filter.outputs.filter }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
         run: node scripts/publish-template.mjs
