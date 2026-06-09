@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Competitor } from '../objects/content_competitor.object';
 import { Channel } from '../objects/content_channel.object';
@@ -11,6 +11,13 @@ import { Piece } from '../objects/content_piece.object';
 import { Publication } from '../objects/content_publication.object';
 import { Metric } from '../objects/content_metric.object';
 import { Cta } from '../objects/content_cta.object';
+
+// @objectstack 8.0.1: `defineSeed` types lookup/master_detail fields as
+// `string | null` and has no `multiple: true`-aware overload yet, so a
+// multi-value lookup seeded with an array fails typecheck. `multiRef` keeps
+// the array value (correct at runtime) while satisfying the field type.
+const multiRef = (ids: string[]): string => ids as unknown as string;
+
 
 /**
  * Seed data — realistic editorial workload covering the full template
@@ -31,7 +38,7 @@ import { Cta } from '../objects/content_cta.object';
  * changing the seed call sites.
  */
 
-const competitors = defineDataset(Competitor, {
+const competitors = defineSeed(Competitor, {
   mode: 'upsert',
   externalId: 'name',
   records: [
@@ -77,7 +84,7 @@ const competitors = defineDataset(Competitor, {
   ],
 });
 
-const channels = defineDataset(Channel, {
+const channels = defineSeed(Channel, {
   mode: 'upsert',
   externalId: 'name',
   records: [
@@ -124,7 +131,7 @@ const channels = defineDataset(Channel, {
   ],
 });
 
-const templates = defineDataset(ContentTemplate, {
+const templates = defineSeed(ContentTemplate, {
   mode: 'upsert',
   externalId: 'name',
   records: [
@@ -158,7 +165,7 @@ const templates = defineDataset(ContentTemplate, {
   ],
 });
 
-const signals = defineDataset(Signal, {
+const signals = defineSeed(Signal, {
   mode: 'upsert',
   externalId: 'headline',
   records: [
@@ -285,7 +292,7 @@ const signals = defineDataset(Signal, {
   ],
 });
 
-const topics = defineDataset(Topic, {
+const topics = defineSeed(Topic, {
   mode: 'upsert',
   externalId: 'title',
   records: [
@@ -377,7 +384,7 @@ const topics = defineDataset(Topic, {
   ],
 });
 
-const pieces = defineDataset(Piece, {
+const pieces = defineSeed(Piece, {
   mode: 'upsert',
   externalId: 'title',
   records: [
@@ -388,7 +395,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'backlog',
       format: 'long_form',
-      target_channels: ['Company Blog'],
+      target_channels: multiRef(['Company Blog']),
       summary: 'Side-by-side feature comparison with honest "they win here" sections.',
       tags: 'comparison, seo',
     },
@@ -399,7 +406,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'backlog',
       format: 'long_form',
-      target_channels: ['Company Blog'],
+      target_channels: multiRef(['Company Blog']),
       tags: 'ops, culture',
     },
     {
@@ -409,7 +416,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'backlog',
       format: 'listicle',
-      target_channels: ['Company Blog', 'Weekly Newsletter'],
+      target_channels: multiRef(['Company Blog', 'Weekly Newsletter']),
       tags: 'design, opinion',
     },
     {
@@ -419,7 +426,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'drafting',
       format: 'long_form',
-      target_channels: ['Company Blog'],
+      target_channels: multiRef(['Company Blog']),
       word_count_target: 1800,
       body_outline:
         '# The marketing metrics dashboard we actually use\n\n## What we track\n## What we stopped tracking\n## The dashboard itself\n## CTA',
@@ -433,7 +440,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'drafting',
       format: 'long_form',
-      target_channels: ['Company Blog'],
+      target_channels: multiRef(['Company Blog']),
       word_count_target: 600,
       body_outline:
         '# Picking the right region\n\n## A 30-second decision tree\n## One-line per region\n## What changes if you guess wrong\n## CTA',
@@ -446,7 +453,7 @@ const pieces = defineDataset(Piece, {
       template: 'Customer Story',
       status: 'drafting',
       format: 'case_study',
-      target_channels: ['Company Blog', 'LinkedIn Company Page'],
+      target_channels: multiRef(['Company Blog', 'LinkedIn Company Page']),
       word_count_target: 1200,
       tags: 'case-study, enterprise',
     },
@@ -457,7 +464,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'in_review',
       format: 'long_form',
-      target_channels: ['Company Blog'],
+      target_channels: multiRef(['Company Blog']),
       word_count_target: 1500,
       body_outline:
         '# How our SOC 2 program actually works\n\n## What SOC 2 actually requires\n## How we operationalised it\n## Where to find our report\n## CTA — book a security review',
@@ -472,7 +479,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'in_review',
       format: 'long_form',
-      target_channels: ['Company Blog', 'Weekly Newsletter'],
+      target_channels: multiRef(['Company Blog', 'Weekly Newsletter']),
       word_count_target: 2200,
       submitted_at: cel`daysAgo(1)`,
       summary: 'Real numbers, real runbook. Six-month bill, what we cut, what we kept.',
@@ -485,7 +492,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'approved',
       format: 'long_form',
-      target_channels: ['Company Blog'],
+      target_channels: multiRef(['Company Blog']),
       word_count_target: 500,
       submitted_at: cel`daysAgo(4)`,
       approved_at: cel`daysAgo(2)`,
@@ -498,7 +505,7 @@ const pieces = defineDataset(Piece, {
       template: 'Weekly Newsletter Issue',
       status: 'scheduled',
       format: 'newsletter',
-      target_channels: ['Weekly Newsletter'],
+      target_channels: multiRef(['Weekly Newsletter']),
       publish_at: cel`daysFromNow(2)`,
       submitted_at: cel`daysAgo(5)`,
       approved_at: cel`daysAgo(3)`,
@@ -512,7 +519,7 @@ const pieces = defineDataset(Piece, {
       template: 'Weekly Newsletter Issue',
       status: 'scheduled',
       format: 'newsletter',
-      target_channels: ['Weekly Newsletter'],
+      target_channels: multiRef(['Weekly Newsletter']),
       publish_at: cel`daysFromNow(9)`,
       submitted_at: cel`daysAgo(2)`,
       approved_at: cel`daysAgo(1)`,
@@ -526,7 +533,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'published',
       format: 'long_form',
-      target_channels: ['Company Blog', 'LinkedIn Company Page'],
+      target_channels: multiRef(['Company Blog', 'LinkedIn Company Page']),
       publish_at: cel`daysAgo(8)`,
       submitted_at: cel`daysAgo(14)`,
       approved_at: cel`daysAgo(10)`,
@@ -542,7 +549,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'published',
       format: 'long_form',
-      target_channels: ['Company Blog'],
+      target_channels: multiRef(['Company Blog']),
       publish_at: cel`daysAgo(22)`,
       submitted_at: cel`daysAgo(28)`,
       approved_at: cel`daysAgo(24)`,
@@ -557,7 +564,7 @@ const pieces = defineDataset(Piece, {
       template: 'Long-Form Article',
       status: 'archived',
       format: 'long_form',
-      target_channels: ['Company Blog'],
+      target_channels: multiRef(['Company Blog']),
       publish_at: cel`daysAgo(160)`,
       submitted_at: cel`daysAgo(170)`,
       approved_at: cel`daysAgo(165)`,
@@ -570,7 +577,7 @@ const pieces = defineDataset(Piece, {
   ],
 });
 
-const publications = defineDataset(Publication, {
+const publications = defineSeed(Publication, {
   mode: 'upsert',
   externalId: 'public_url',
   records: [
@@ -624,7 +631,7 @@ const publications = defineDataset(Publication, {
 // 6 weekly snapshots per recent publication, 3 monthly snapshots for the
 // archived one. Each row is one period; the publication_rollup flow keeps
 // totals in sync (the publication.total_* above is a starting denormal).
-const metrics = defineDataset(Metric, {
+const metrics = defineSeed(Metric, {
   mode: 'upsert',
   externalId: 'note',
   records: [
@@ -682,7 +689,7 @@ const metrics = defineDataset(Metric, {
   ],
 });
 
-const ctas = defineDataset(Cta, {
+const ctas = defineSeed(Cta, {
   mode: 'upsert',
   externalId: 'variant',
   records: [

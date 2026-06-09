@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { Risk } from '../objects/pm_risk.object.js';
 
 /**
@@ -8,14 +8,14 @@ import { Risk } from '../objects/pm_risk.object.js';
  * Includes AI-scored risks with mitigation plans.
  * `project` references the parent project by its `name` externalId.
  */
-export const risks = defineDataset(Risk, {
+export const risks = defineSeed(Risk, {
   mode: 'upsert',
   externalId: 'name',
   records: [
     {
       name: 'Backend team overallocation',
       description: 'Backend engineers are split across 3 concurrent projects, risking delays.',
-      project: { name: 'ERP System Migration' },
+      project: 'ERP System Migration',
       status: 'mitigating',
       category: 'resource',
       impact: 'high',
@@ -29,7 +29,7 @@ export const risks = defineDataset(Risk, {
     {
       name: 'LLM vendor pricing uncertainty',
       description: 'LLM API costs may exceed budget at scale.',
-      project: { name: 'AI Chatbot MVP' },
+      project: 'AI Chatbot MVP',
       status: 'identified',
       category: 'budget',
       impact: 'medium',
@@ -43,7 +43,7 @@ export const risks = defineDataset(Risk, {
     {
       name: 'Data integrity during migration',
       description: 'Risk of data loss or corruption during ERP cutover.',
-      project: { name: 'ERP System Migration' },
+      project: 'ERP System Migration',
       status: 'assessing',
       category: 'technical',
       impact: 'very_high',

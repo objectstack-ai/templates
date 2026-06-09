@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Framework } from '../objects/compliance_framework.object';
 import { Control } from '../objects/compliance_control.object';
@@ -15,7 +15,7 @@ import { Assessment } from '../objects/compliance_assessment.object';
  *   • 5 assessments covering planned / in_progress / passed / failed / partial
  */
 
-const frameworks = defineDataset(Framework, {
+const frameworks = defineSeed(Framework, {
   mode: 'upsert',
   externalId: 'short_name',
   records: [
@@ -47,7 +47,7 @@ const frameworks = defineDataset(Framework, {
   ],
 });
 
-const controls = defineDataset(Control, {
+const controls = defineSeed(Control, {
   mode: 'upsert',
   externalId: 'code',
   records: [
@@ -120,7 +120,7 @@ const controls = defineDataset(Control, {
   ],
 });
 
-const evidence = defineDataset(Evidence, {
+const evidence = defineSeed(Evidence, {
   mode: 'upsert',
   externalId: 'title',
   records: [
@@ -186,7 +186,7 @@ const evidence = defineDataset(Evidence, {
   ],
 });
 
-const assessments = defineDataset(Assessment, {
+const assessments = defineSeed(Assessment, {
   mode: 'upsert',
   externalId: 'title',
   records: [

@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Project } from '../objects/pm_project.object.js';
 
@@ -11,9 +11,9 @@ import { Project } from '../objects/pm_project.object.js';
  *   • AI Chatbot MVP - planning phase
  *
  * `name` is the externalId — it is also used by milestones / risks / issues /
- * resources to reference their parent project via `{ name: '…' }`.
+ * resources to reference their parent project via `'…'`.
  */
-export const projects = defineDataset(Project, {
+export const projects = defineSeed(Project, {
   mode: 'upsert',
   externalId: 'name',
   records: [

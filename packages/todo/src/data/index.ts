@@ -1,9 +1,16 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Task } from '../objects/todo_task.object';
 import { Label } from '../objects/todo_label.object';
+
+// @objectstack 8.0.1: `defineSeed` types lookup/master_detail fields as
+// `string | null` and has no `multiple: true`-aware overload yet, so a
+// multi-value lookup seeded with an array fails typecheck. `multiRef` keeps
+// the array value (correct at runtime) while satisfying the field type.
+const multiRef = (ids: string[]): string => ids as unknown as string;
+
 
 /**
  * Seed data — realistic, business-like task content covering the full
@@ -21,7 +28,7 @@ import { Label } from '../objects/todo_label.object';
  *               – 4 completed within the last 30 days
  */
 
-const labels = defineDataset(Label, {
+const labels = defineSeed(Label, {
   mode: 'upsert',
   externalId: 'name',
   records: [
@@ -36,7 +43,7 @@ const labels = defineDataset(Label, {
   ],
 });
 
-const tasks = defineDataset(Task, {
+const tasks = defineSeed(Task, {
   mode: 'upsert',
   externalId: 'subject',
   records: [
@@ -47,7 +54,7 @@ const tasks = defineDataset(Task, {
       estimate_hours: 4,
       due_date: cel`daysAgo(20)`,
       completed_at: cel`daysAgo(15)`,
-      labels: ['performance'],
+      labels: multiRef(['performance']),
     },
     {
       subject: 'Design new pricing page mockups',
@@ -55,7 +62,7 @@ const tasks = defineDataset(Task, {
       priority: 'high',
       estimate_hours: 12,
       due_date: cel`daysFromNow(7)`,
-      labels: ['feature', 'design'],
+      labels: multiRef(['feature', 'design']),
     },
     {
       subject: 'Fix mobile nav drawer animation',
@@ -63,7 +70,7 @@ const tasks = defineDataset(Task, {
       priority: 'urgent',
       estimate_hours: 3,
       due_date: cel`daysAgo(2)`, // overdue
-      labels: ['bug'],
+      labels: multiRef(['bug']),
     },
     {
       subject: 'Replace hero illustration with brand-refresh artwork',
@@ -71,7 +78,7 @@ const tasks = defineDataset(Task, {
       priority: 'normal',
       estimate_hours: 2,
       due_date: cel`daysFromNow(14)`,
-      labels: ['design'],
+      labels: multiRef(['design']),
     },
     {
       subject: 'Add cookie-consent banner (GDPR)',
@@ -80,7 +87,7 @@ const tasks = defineDataset(Task, {
       estimate_hours: 6,
       due_date: cel`daysAgo(10)`,
       completed_at: cel`daysAgo(8)`,
-      labels: ['security', 'feature'],
+      labels: multiRef(['security', 'feature']),
     },
     {
       subject: 'Implement offline-first task cache',
@@ -88,7 +95,7 @@ const tasks = defineDataset(Task, {
       priority: 'high',
       estimate_hours: 32,
       due_date: cel`daysFromNow(10)`,
-      labels: ['feature'],
+      labels: multiRef(['feature']),
     },
     {
       subject: 'Wire up push notifications',
@@ -96,7 +103,7 @@ const tasks = defineDataset(Task, {
       priority: 'normal',
       estimate_hours: 8,
       due_date: cel`daysFromNow(18)`,
-      labels: ['feature'],
+      labels: multiRef(['feature']),
     },
     {
       subject: 'Crash on cold-start when no network',
@@ -104,7 +111,7 @@ const tasks = defineDataset(Task, {
       priority: 'urgent',
       estimate_hours: 6,
       due_date: cel`daysAgo(1)`, // overdue
-      labels: ['bug'],
+      labels: multiRef(['bug']),
     },
     {
       subject: 'Reproduce biometric prompt bug',
@@ -112,7 +119,7 @@ const tasks = defineDataset(Task, {
       priority: 'high',
       estimate_hours: 4,
       due_date: cel`daysFromNow(3)`,
-      labels: ['bug', 'security'],
+      labels: multiRef(['bug', 'security']),
     },
     {
       subject: 'Localize onboarding flow (de / fr / ja)',
@@ -120,7 +127,7 @@ const tasks = defineDataset(Task, {
       priority: 'normal',
       estimate_hours: 16,
       due_date: cel`daysFromNow(28)`,
-      labels: ['feature'],
+      labels: multiRef(['feature']),
     },
     {
       subject: 'Drop legacy iOS support and bump min SDK',
@@ -128,7 +135,7 @@ const tasks = defineDataset(Task, {
       priority: 'low',
       estimate_hours: 2,
       due_date: cel`daysAgo(7)`,
-      labels: ['chore'],
+      labels: multiRef(['chore']),
     },
     {
       subject: 'Rotate signing keys for service-to-service JWTs',
@@ -136,7 +143,7 @@ const tasks = defineDataset(Task, {
       priority: 'urgent',
       estimate_hours: 4,
       due_date: cel`daysAgo(3)`, // overdue
-      labels: ['security'],
+      labels: multiRef(['security']),
     },
     {
       subject: 'Document rate-limit headers in developer portal',
@@ -144,7 +151,7 @@ const tasks = defineDataset(Task, {
       priority: 'normal',
       estimate_hours: 3,
       due_date: cel`daysFromNow(30)`,
-      labels: ['docs'],
+      labels: multiRef(['docs']),
     },
     {
       subject: 'Investigate p99 latency spike on /v1/search',
@@ -152,7 +159,7 @@ const tasks = defineDataset(Task, {
       priority: 'high',
       estimate_hours: 8,
       due_date: cel`daysFromNow(5)`,
-      labels: ['performance', 'blocked'],
+      labels: multiRef(['performance', 'blocked']),
     },
     {
       subject: 'Decommission v0 endpoints',
@@ -161,7 +168,7 @@ const tasks = defineDataset(Task, {
       estimate_hours: 6,
       due_date: cel`daysAgo(25)`,
       completed_at: cel`daysAgo(22)`,
-      labels: ['chore'],
+      labels: multiRef(['chore']),
     },
     {
       subject: 'Archive Q1 launch assets',
@@ -169,7 +176,7 @@ const tasks = defineDataset(Task, {
       priority: 'low',
       estimate_hours: 1,
       due_date: cel`daysFromNow(14)`,
-      labels: ['chore'],
+      labels: multiRef(['chore']),
     },
   ],
 });

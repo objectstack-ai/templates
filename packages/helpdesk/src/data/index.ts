@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Customer } from '../objects/helpdesk_customer.object';
 import { Team } from '../objects/helpdesk_team.object';
@@ -20,7 +20,7 @@ import { Message } from '../objects/helpdesk_message.object';
  *   • 8 messages (inbound, outbound, AI-drafted, internal note)
  */
 
-const teams = defineDataset(Team, {
+const teams = defineSeed(Team, {
   mode: 'upsert',
   externalId: 'code',
   records: [
@@ -48,7 +48,7 @@ const teams = defineDataset(Team, {
   ],
 });
 
-const slaPolicies = defineDataset(SLAPolicy, {
+const slaPolicies = defineSeed(SLAPolicy, {
   mode: 'upsert',
   externalId: 'name',
   records: [
@@ -109,7 +109,7 @@ const slaPolicies = defineDataset(SLAPolicy, {
   ],
 });
 
-const customers = defineDataset(Customer, {
+const customers = defineSeed(Customer, {
   mode: 'upsert',
   externalId: 'email',
   records: [
@@ -164,7 +164,7 @@ const customers = defineDataset(Customer, {
   ],
 });
 
-const kbArticles = defineDataset(KBArticle, {
+const kbArticles = defineSeed(KBArticle, {
   mode: 'upsert',
   externalId: 'slug',
   records: [
@@ -240,7 +240,7 @@ const kbArticles = defineDataset(KBArticle, {
   ],
 });
 
-const tickets = defineDataset(Ticket, {
+const tickets = defineSeed(Ticket, {
   mode: 'upsert',
   externalId: 'ticket_number',
   records: [
@@ -481,7 +481,7 @@ const tickets = defineDataset(Ticket, {
   ],
 });
 
-const messages = defineDataset(Message, {
+const messages = defineSeed(Message, {
   mode: 'upsert',
   externalId: 'name',
   records: [

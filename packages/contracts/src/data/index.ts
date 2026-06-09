@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Party } from '../objects/contracts_party.object';
 import { Contract } from '../objects/contracts_contract.object';
@@ -22,7 +22,7 @@ import { Obligation } from '../objects/contracts_obligation.object';
  *   OBLIGATIONS 6
  */
 
-const parties = defineDataset(Party, {
+const parties = defineSeed(Party, {
   mode: 'upsert',
   externalId: 'legal_name',
   records: [
@@ -59,7 +59,7 @@ const parties = defineDataset(Party, {
   ],
 });
 
-const contracts = defineDataset(Contract, {
+const contracts = defineSeed(Contract, {
   mode: 'upsert',
   externalId: 'title',
   records: [
@@ -151,7 +151,7 @@ const contracts = defineDataset(Contract, {
   ],
 });
 
-const obligations = defineDataset(Obligation, {
+const obligations = defineSeed(Obligation, {
   mode: 'upsert',
   externalId: 'summary',
   records: [
