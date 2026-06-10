@@ -71,6 +71,7 @@ const CONCAT_FIELDS = [
   'views',
   'pages',
   'dashboards',
+  'datasets',
   'reports',
   'actions',
   'themes',
