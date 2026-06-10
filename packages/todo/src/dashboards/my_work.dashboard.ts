@@ -29,6 +29,7 @@ export const MyWorkDashboard: Dashboard = {
   widgets: [
     {
       id: 'my_open_tasks',
+      dataset: 'todo_task_metrics', values: ['task_count'],
       title: 'My Open Tasks',
       type: 'metric',
       object: 'todo_task',
@@ -40,6 +41,7 @@ export const MyWorkDashboard: Dashboard = {
     },
     {
       id: 'my_overdue',
+      dataset: 'todo_task_metrics', values: ['task_count'],
       title: 'Overdue',
       type: 'metric',
       object: 'todo_task',
@@ -55,6 +57,7 @@ export const MyWorkDashboard: Dashboard = {
     },
     {
       id: 'done_this_week',
+      dataset: 'todo_task_metrics', values: ['task_count'],
       title: 'Done This Week',
       type: 'metric',
       object: 'todo_task',
@@ -71,6 +74,7 @@ export const MyWorkDashboard: Dashboard = {
     },
     {
       id: 'recent_overdue_list',
+      dataset: 'todo_task_metrics', values: ['task_count'],
       title: 'Overdue Tasks',
       type: 'table',
       object: 'todo_task',
@@ -88,6 +92,7 @@ export const MyWorkDashboard: Dashboard = {
     },
     {
       id: 'throughput_by_week',
+      dataset: 'todo_task_metrics', dimensions: ['completed_at'], values: ['task_count'],
       title: 'My Throughput by Week (last 12 weeks)',
       type: 'line',
       object: 'todo_task',

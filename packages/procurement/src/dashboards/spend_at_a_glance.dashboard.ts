@@ -35,6 +35,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
   widgets: [
     {
       id: 'awaiting_approval',
+      dataset: 'procurement_request_metrics', values: ['request_count'],
       title: 'PRs Awaiting Approval',
       type: 'metric',
       object: 'procurement_request',
@@ -46,6 +47,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
     },
     {
       id: 'open_pos',
+      dataset: 'procurement_order_metrics', values: ['order_count'],
       title: 'Open Purchase Orders',
       type: 'metric',
       object: 'procurement_order',
@@ -57,6 +59,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
     },
     {
       id: 'overdue_pos',
+      dataset: 'procurement_order_metrics', values: ['order_count'],
       title: 'Overdue Deliveries',
       type: 'metric',
       object: 'procurement_order',
@@ -71,6 +74,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
     },
     {
       id: 'open_commitment',
+      dataset: 'procurement_order_metrics', values: ['sum_total_amount'],
       title: 'Open Commitment ($)',
       type: 'metric',
       object: 'procurement_order',
@@ -83,6 +87,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
     },
     {
       id: 'pending_requests_table',
+      dataset: 'procurement_request_metrics', values: ['request_count'],
       title: 'Requests Awaiting Approval',
       type: 'table',
       object: 'procurement_request',
@@ -97,6 +102,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
     },
     {
       id: 'open_pos_table',
+      dataset: 'procurement_order_metrics', values: ['order_count'],
       title: 'Open Purchase Orders',
       type: 'table',
       object: 'procurement_order',
@@ -111,6 +117,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
     },
     {
       id: 'po_value_by_month',
+      dataset: 'procurement_order_metrics', dimensions: ['order_date'], values: ['sum_total_amount'],
       title: 'PO Value by Month (last 12 months)',
       type: 'line',
       object: 'procurement_order',

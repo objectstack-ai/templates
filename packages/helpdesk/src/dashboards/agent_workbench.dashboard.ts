@@ -30,6 +30,7 @@ export const AgentWorkbenchDashboard: Dashboard = {
   widgets: [
     {
       id: 'my_open',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'My Open Tickets',
       type: 'metric',
       object: 'helpdesk_ticket',
@@ -44,6 +45,7 @@ export const AgentWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'breaching_resolution',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'SLA Breaching',
       type: 'metric',
       object: 'helpdesk_ticket',
@@ -58,6 +60,7 @@ export const AgentWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'angry',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'Angry Customers',
       type: 'metric',
       object: 'helpdesk_ticket',
@@ -72,6 +75,7 @@ export const AgentWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'awaiting_triage',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'Awaiting Triage',
       type: 'metric',
       object: 'helpdesk_ticket',
@@ -84,6 +88,7 @@ export const AgentWorkbenchDashboard: Dashboard = {
 
     {
       id: 'my_queue_table',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'My Queue (Priority Sorted)',
       type: 'table',
       object: 'helpdesk_ticket',
@@ -101,6 +106,7 @@ export const AgentWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'breaching_table',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'SLA Breaches',
       type: 'table',
       object: 'helpdesk_ticket',

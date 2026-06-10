@@ -26,6 +26,7 @@ export const ManagerOverviewDashboard: Dashboard = {
   widgets: [
     {
       id: 'total_open',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'Open Tickets',
       type: 'metric',
       object: 'helpdesk_ticket',
@@ -37,6 +38,7 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'breaching_overview',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'SLA Breaching',
       type: 'metric',
       object: 'helpdesk_ticket',
@@ -51,6 +53,7 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'escalated',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'Escalated',
       type: 'metric',
       object: 'helpdesk_ticket',
@@ -62,6 +65,7 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'avg_csat',
+      dataset: 'ticket_metrics', values: ['avg_csat'],
       title: 'Avg CSAT',
       type: 'metric',
       object: 'helpdesk_ticket',
@@ -79,6 +83,7 @@ export const ManagerOverviewDashboard: Dashboard = {
 
     {
       id: 'tickets_by_status',
+      dataset: 'ticket_metrics', dimensions: ['status'], values: ['ticket_count'],
       title: 'Tickets by Status',
       type: 'bar',
       object: 'helpdesk_ticket',
@@ -88,6 +93,7 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'tickets_by_sentiment',
+      dataset: 'ticket_metrics', dimensions: ['ai_sentiment'], values: ['ticket_count'],
       title: 'Sentiment Distribution',
       type: 'pie',
       object: 'helpdesk_ticket',
@@ -99,6 +105,7 @@ export const ManagerOverviewDashboard: Dashboard = {
 
     {
       id: 'tickets_by_category',
+      dataset: 'ticket_metrics', dimensions: ['ai_category'], values: ['ticket_count'],
       title: 'AI Category Mix',
       type: 'bar',
       object: 'helpdesk_ticket',
@@ -108,6 +115,7 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'tickets_by_channel',
+      dataset: 'ticket_metrics', dimensions: ['channel'], values: ['ticket_count'],
       title: 'Volume by Channel',
       type: 'bar',
       object: 'helpdesk_ticket',
@@ -118,6 +126,7 @@ export const ManagerOverviewDashboard: Dashboard = {
 
     {
       id: 'recent_escalated',
+      dataset: 'ticket_metrics', values: ['ticket_count'],
       title: 'Recently Escalated',
       type: 'table',
       object: 'helpdesk_ticket',
@@ -140,6 +149,7 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'resolutions_by_day',
+      dataset: 'ticket_metrics', dimensions: ['resolved_at'], values: ['ticket_count'],
       title: 'Resolutions by Day (last 30 days)',
       type: 'line',
       object: 'helpdesk_ticket',

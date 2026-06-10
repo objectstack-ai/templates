@@ -32,6 +32,7 @@ export const HrAdminDashboard: Dashboard = {
   widgets: [
     {
       id: 'headcount',
+      dataset: 'hr_employee_metrics', values: ['employee_count'],
       title: 'Active Headcount',
       type: 'metric',
       object: 'hr_employee',
@@ -43,6 +44,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'on_leave',
+      dataset: 'hr_employee_metrics', values: ['employee_count'],
       title: 'On Leave',
       type: 'metric',
       object: 'hr_employee',
@@ -54,6 +56,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'new_hires_30d',
+      dataset: 'hr_employee_metrics', values: ['employee_count'],
       title: 'New Hires (30d)',
       type: 'metric',
       object: 'hr_employee',
@@ -66,6 +69,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'pending_time_off',
+      dataset: 'hr_time_off_request_metrics', values: ['request_count'],
       title: 'My Pending Approvals',
       type: 'metric',
       object: 'hr_time_off_request',
@@ -77,6 +81,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'expiring_docs',
+      dataset: 'hr_document_metrics', values: ['document_count'],
       title: 'Documents Expiring (30d)',
       type: 'metric',
       object: 'hr_document',
@@ -90,6 +95,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'expired_docs',
+      dataset: 'hr_document_metrics', values: ['document_count'],
       title: 'Already Expired',
       type: 'metric',
       object: 'hr_document',
@@ -101,6 +107,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'headcount_by_dept',
+      dataset: 'hr_employee_metrics', dimensions: ['department'], values: ['employee_count'],
       title: 'Headcount by Department',
       type: 'bar',
       object: 'hr_employee',
@@ -111,6 +118,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'ooo_today',
+      dataset: 'hr_time_off_request_metrics', values: ['request_count'],
       title: 'Out of Office Today',
       type: 'table',
       object: 'hr_time_off_request',
@@ -129,6 +137,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'pending_time_off_table',
+      dataset: 'hr_time_off_request_metrics', values: ['request_count'],
       title: 'My Pending Time-Off Requests',
       type: 'table',
       object: 'hr_time_off_request',
@@ -143,6 +152,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'expiring_docs_table',
+      dataset: 'hr_document_metrics', values: ['document_count'],
       title: 'Documents Expiring Soon',
       type: 'table',
       object: 'hr_document',
@@ -157,6 +167,7 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'hires_by_month',
+      dataset: 'hr_employee_metrics', dimensions: ['hire_date'], values: ['employee_count'],
       title: 'Hires by Month (last 12 months)',
       type: 'line',
       object: 'hr_employee',

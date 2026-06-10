@@ -31,6 +31,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
   widgets: [
     {
       id: 'awaiting_approval',
+      dataset: 'expense_report_metrics', values: ['report_count'],
       title: 'Awaiting Approval',
       type: 'metric',
       object: 'expense_report',
@@ -42,6 +43,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'awaiting_reimbursement',
+      dataset: 'expense_report_metrics', values: ['report_count'],
       title: 'To Reimburse',
       type: 'metric',
       object: 'expense_report',
@@ -53,6 +55,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'owed_amount',
+      dataset: 'expense_report_metrics', values: ['sum_total_amount'],
       title: 'Owed to Employees ($)',
       type: 'metric',
       object: 'expense_report',
@@ -65,6 +68,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'reimbursed_total',
+      dataset: 'expense_report_metrics', values: ['sum_total_amount'],
       title: 'Reimbursed ($)',
       type: 'metric',
       object: 'expense_report',
@@ -77,6 +81,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'pending_reports_table',
+      dataset: 'expense_report_metrics', values: ['report_count'],
       title: 'Reports Awaiting Approval',
       type: 'table',
       object: 'expense_report',
@@ -91,6 +96,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'to_reimburse_table',
+      dataset: 'expense_report_metrics', values: ['report_count'],
       title: 'Approved — To Reimburse',
       type: 'table',
       object: 'expense_report',
@@ -105,6 +111,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'spend_by_category',
+      dataset: 'expense_line_metrics', dimensions: ['category'], values: ['sum_amount'],
       title: 'Spend by Category',
       type: 'bar',
       object: 'expense_line',
@@ -122,6 +129,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'spend_by_month',
+      dataset: 'expense_report_metrics', dimensions: ['reimbursed_at'], values: ['sum_total_amount'],
       title: 'Reimbursed by Month (last 12 months)',
       type: 'line',
       object: 'expense_report',
