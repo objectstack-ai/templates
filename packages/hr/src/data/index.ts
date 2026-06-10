@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Department } from '../objects/hr_department.object';
 import { Employee } from '../objects/hr_employee.object';
@@ -16,7 +16,7 @@ import { EmployeeDocument } from '../objects/hr_document.object';
  *   • 5 documents: valid / expiring soon (within 30d) / expired
  */
 
-const departments = defineDataset(Department, {
+const departments = defineSeed(Department, {
   mode: 'upsert',
   externalId: 'name',
   records: [
@@ -32,7 +32,7 @@ const departments = defineDataset(Department, {
   ],
 });
 
-const employees = defineDataset(Employee, {
+const employees = defineSeed(Employee, {
   mode: 'upsert',
   externalId: 'work_email',
   records: [
@@ -134,7 +134,7 @@ const employees = defineDataset(Employee, {
   ],
 });
 
-const timeOff = defineDataset(TimeOffRequest, {
+const timeOff = defineSeed(TimeOffRequest, {
   mode: 'upsert',
   externalId: 'employee',
   records: [
@@ -189,7 +189,7 @@ const timeOff = defineDataset(TimeOffRequest, {
   ],
 });
 
-const documents = defineDataset(EmployeeDocument, {
+const documents = defineSeed(EmployeeDocument, {
   mode: 'upsert',
   externalId: 'name',
   records: [

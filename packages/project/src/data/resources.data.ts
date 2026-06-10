@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Resource } from '../objects/pm_resource.object.js';
 
@@ -12,28 +12,28 @@ import { Resource } from '../objects/pm_resource.object.js';
  * The `role` text field carries the human-readable allocation label instead.
  * `project` references the parent project by its `name` externalId.
  */
-export const resources = defineDataset(Resource, {
+export const resources = defineSeed(Resource, {
   mode: 'upsert',
   externalId: 'role',
   records: [
     // Mobile App Redesign
     {
       role: 'Project Manager — Mobile App Redesign',
-      project: { name: 'Mobile App Redesign' },
+      project: 'Mobile App Redesign',
       allocated_hours_per_week: 20,
       start_date: cel`daysAgo(45)`,
       end_date: cel`daysFromNow(75)`,
     },
     {
       role: 'iOS Developer — Mobile App Redesign',
-      project: { name: 'Mobile App Redesign' },
+      project: 'Mobile App Redesign',
       allocated_hours_per_week: 40,
       start_date: cel`daysAgo(30)`,
       end_date: cel`daysFromNow(75)`,
     },
     {
       role: 'UI Designer — Mobile App Redesign',
-      project: { name: 'Mobile App Redesign' },
+      project: 'Mobile App Redesign',
       allocated_hours_per_week: 32,
       start_date: cel`daysAgo(45)`,
       end_date: cel`daysFromNow(60)`,
@@ -41,28 +41,28 @@ export const resources = defineDataset(Resource, {
     // ERP System Migration
     {
       role: 'Project Manager — ERP System Migration',
-      project: { name: 'ERP System Migration' },
+      project: 'ERP System Migration',
       allocated_hours_per_week: 40,
       start_date: cel`daysAgo(90)`,
       end_date: cel`daysFromNow(30)`,
     },
     {
       role: 'SAP Consultant — ERP System Migration',
-      project: { name: 'ERP System Migration' },
+      project: 'ERP System Migration',
       allocated_hours_per_week: 40,
       start_date: cel`daysAgo(75)`,
       end_date: cel`daysFromNow(45)`,
     },
     {
       role: 'Data Analyst — ERP System Migration',
-      project: { name: 'ERP System Migration' },
+      project: 'ERP System Migration',
       allocated_hours_per_week: 40,
       start_date: cel`daysAgo(60)`,
       end_date: cel`daysFromNow(30)`,
     },
     {
       role: 'QA Engineer — ERP System Migration',
-      project: { name: 'ERP System Migration' },
+      project: 'ERP System Migration',
       allocated_hours_per_week: 32,
       start_date: cel`daysAgo(30)`,
       end_date: cel`daysFromNow(30)`,
@@ -70,21 +70,21 @@ export const resources = defineDataset(Resource, {
     // AI Chatbot MVP
     {
       role: 'Project Manager — AI Chatbot MVP',
-      project: { name: 'AI Chatbot MVP' },
+      project: 'AI Chatbot MVP',
       allocated_hours_per_week: 16,
       start_date: cel`daysFromNow(7)`,
       end_date: cel`daysFromNow(97)`,
     },
     {
       role: 'ML Engineer — AI Chatbot MVP',
-      project: { name: 'AI Chatbot MVP' },
+      project: 'AI Chatbot MVP',
       allocated_hours_per_week: 40,
       start_date: cel`daysFromNow(7)`,
       end_date: cel`daysFromNow(97)`,
     },
     {
       role: 'Backend Developer — AI Chatbot MVP',
-      project: { name: 'AI Chatbot MVP' },
+      project: 'AI Chatbot MVP',
       allocated_hours_per_week: 32,
       start_date: cel`daysFromNow(14)`,
       end_date: cel`daysFromNow(97)`,

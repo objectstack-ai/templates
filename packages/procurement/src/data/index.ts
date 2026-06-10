@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { Vendor } from '../objects/procurement_vendor.object';
 import { PurchaseRequest } from '../objects/procurement_request.object';
@@ -15,7 +15,7 @@ import { GoodsReceipt } from '../objects/procurement_receipt.object';
  *   • 3 receipts demonstrating 3-way-match rollup
  */
 
-const vendors = defineDataset(Vendor, {
+const vendors = defineSeed(Vendor, {
   mode: 'upsert',
   externalId: 'name',
   records: [
@@ -63,7 +63,7 @@ const vendors = defineDataset(Vendor, {
   ],
 });
 
-const requests = defineDataset(PurchaseRequest, {
+const requests = defineSeed(PurchaseRequest, {
   mode: 'upsert',
   externalId: 'title',
   records: [
@@ -124,7 +124,7 @@ const requests = defineDataset(PurchaseRequest, {
   ],
 });
 
-const orders = defineDataset(PurchaseOrder, {
+const orders = defineSeed(PurchaseOrder, {
   mode: 'upsert',
   externalId: 'po_number',
   records: [
@@ -176,7 +176,7 @@ const orders = defineDataset(PurchaseOrder, {
   ],
 });
 
-const receipts = defineDataset(GoodsReceipt, {
+const receipts = defineSeed(GoodsReceipt, {
   mode: 'upsert',
   externalId: 'receipt_number',
   records: [

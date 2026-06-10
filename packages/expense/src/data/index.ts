@@ -1,6 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
-import { defineDataset } from '@objectstack/spec/data';
+import { defineSeed } from '@objectstack/spec/data';
 import { cel } from '@objectstack/spec';
 import { ExpenseCategory } from '../objects/expense_category.object';
 import { ExpenseReport } from '../objects/expense_report.object';
@@ -16,7 +16,7 @@ import { ExpenseLine } from '../objects/expense_line.object';
  * relying on the line rollup hook (hooks fire on user edits, not seeds).
  */
 
-const categories = defineDataset(ExpenseCategory, {
+const categories = defineSeed(ExpenseCategory, {
   mode: 'upsert',
   externalId: 'code',
   records: [
@@ -53,7 +53,7 @@ const categories = defineDataset(ExpenseCategory, {
   ],
 });
 
-const reports = defineDataset(ExpenseReport, {
+const reports = defineSeed(ExpenseReport, {
   mode: 'upsert',
   externalId: 'report_number',
   records: [
@@ -126,7 +126,7 @@ const reports = defineDataset(ExpenseReport, {
   ],
 });
 
-const lines = defineDataset(ExpenseLine, {
+const lines = defineSeed(ExpenseLine, {
   mode: 'upsert',
   externalId: 'description',
   records: [
