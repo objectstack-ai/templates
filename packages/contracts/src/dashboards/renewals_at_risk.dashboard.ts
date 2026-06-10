@@ -33,6 +33,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
   widgets: [
     {
       id: 'expiring_60',
+      dataset: 'contracts_contract_metrics', values: ['contract_count'],
       title: 'Expiring ≤ 60 days',
       type: 'metric',
       object: 'contracts_contract',
@@ -50,6 +51,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
     },
     {
       id: 'auto_renewing_30',
+      dataset: 'contracts_contract_metrics', values: ['contract_count'],
       title: 'Auto-Renewing ≤ 30d',
       type: 'metric',
       object: 'contracts_contract',
@@ -65,6 +67,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
     },
     {
       id: 'pending_approval',
+      dataset: 'contracts_contract_metrics', values: ['contract_count'],
       title: 'Pending Approval',
       type: 'metric',
       object: 'contracts_contract',
@@ -79,6 +82,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
     },
     {
       id: 'active_total_value',
+      dataset: 'contracts_contract_metrics', values: ['sum_total_value'],
       title: 'Active Portfolio Value',
       type: 'metric',
       object: 'contracts_contract',
@@ -91,6 +95,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
     },
     {
       id: 'expiring_table',
+      dataset: 'contracts_contract_metrics', values: ['contract_count'],
       title: 'Expiring Contracts (Next 60d)',
       type: 'table',
       object: 'contracts_contract',
@@ -112,6 +117,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
     },
     {
       id: 'pending_obligations',
+      dataset: 'contracts_obligation_metrics', values: ['obligation_count'],
       title: 'Open Obligations',
       type: 'table',
       object: 'contracts_obligation',
@@ -126,6 +132,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
     },
     {
       id: 'signed_by_month',
+      dataset: 'contracts_contract_metrics', dimensions: ['signed_date'], values: ['contract_count'],
       title: 'Contracts Signed by Month (last 12 months)',
       type: 'line',
       object: 'contracts_contract',
