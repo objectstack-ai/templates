@@ -106,6 +106,15 @@ export const HrAdminDashboard: Dashboard = {
       values: ['employee_count'],
       title: 'Headcount by Department',
       type: 'bar',
+      chartConfig: {
+        type: 'bar',
+        xAxis: { field: 'department', showGridLines: false, logarithmic: false },
+        yAxis: [
+          { field: 'employee_count', format: '0,0', showGridLines: true, logarithmic: false },
+        ],
+        showLegend: false,
+        showDataLabels: false,
+      },
       filter: { status: { $ne: 'terminated' } },
       layout: { x: 0, y: 4, w: 6, h: 4 },
     },
@@ -125,7 +134,9 @@ export const HrAdminDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'hire_date', format: '%b %Y', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [
+          { field: 'employee_count', format: '0,0', showGridLines: true, logarithmic: false },
+        ],
         showLegend: true,
         showDataLabels: false,
       },
