@@ -29,7 +29,8 @@ export const TodayWorkbenchDashboard: Dashboard = {
   widgets: [
     {
       id: 'my_drafts_in_flight',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'My Drafts',
       type: 'metric',
       filter: {
@@ -42,7 +43,8 @@ export const TodayWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'my_pieces_in_review',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'In Review',
       type: 'metric',
       filter: {
@@ -55,7 +57,8 @@ export const TodayWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'scheduled_this_week',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'Scheduled This Week',
       type: 'metric',
       filter: {
@@ -68,7 +71,8 @@ export const TodayWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'published_last_7d',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'Published Last 7d',
       type: 'metric',
       filter: {
@@ -83,7 +87,8 @@ export const TodayWorkbenchDashboard: Dashboard = {
 
     {
       id: 'my_pieces_table',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'Pieces I own (or unassigned), not done',
       type: 'table',
       filter: {
@@ -100,7 +105,8 @@ export const TodayWorkbenchDashboard: Dashboard = {
 
     {
       id: 'signals_to_triage',
-      dataset: 'content_signal_metrics', values: ['signal_count'],
+      dataset: 'content_signal_metrics',
+      values: ['signal_count'],
       title: 'Signals to Triage',
       type: 'table',
       filter: { status: 'captured' },

@@ -8,7 +8,13 @@ export const ContractsContractDataset = defineDataset({
   label: 'contracts_contract metrics',
   object: 'contracts_contract',
   dimensions: [
-    { name: 'signed_date', label: 'signed_date', field: 'signed_date', type: 'date', dateGranularity: 'month' },
+    {
+      name: 'signed_date',
+      label: 'signed_date',
+      field: 'signed_date',
+      type: 'date',
+      dateGranularity: 'month',
+    },
   ],
   measures: [
     { name: 'contract_count', label: 'contract_count', aggregate: 'count' },

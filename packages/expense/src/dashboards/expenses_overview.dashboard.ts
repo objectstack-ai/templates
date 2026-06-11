@@ -31,7 +31,8 @@ export const ExpensesOverviewDashboard: Dashboard = {
   widgets: [
     {
       id: 'awaiting_approval',
-      dataset: 'expense_report_metrics', values: ['report_count'],
+      dataset: 'expense_report_metrics',
+      values: ['report_count'],
       title: 'Awaiting Approval',
       type: 'metric',
       filter: { status: 'submitted' },
@@ -41,7 +42,8 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'awaiting_reimbursement',
-      dataset: 'expense_report_metrics', values: ['report_count'],
+      dataset: 'expense_report_metrics',
+      values: ['report_count'],
       title: 'To Reimburse',
       type: 'metric',
       filter: { status: 'approved' },
@@ -51,7 +53,8 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'owed_amount',
-      dataset: 'expense_report_metrics', values: ['sum_total_amount'],
+      dataset: 'expense_report_metrics',
+      values: ['sum_total_amount'],
       title: 'Owed to Employees ($)',
       type: 'metric',
       filter: { status: 'approved' },
@@ -61,7 +64,8 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'reimbursed_total',
-      dataset: 'expense_report_metrics', values: ['sum_total_amount'],
+      dataset: 'expense_report_metrics',
+      values: ['sum_total_amount'],
       title: 'Reimbursed ($)',
       type: 'metric',
       filter: { status: 'reimbursed' },
@@ -71,7 +75,8 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'pending_reports_table',
-      dataset: 'expense_report_metrics', values: ['report_count'],
+      dataset: 'expense_report_metrics',
+      values: ['report_count'],
       title: 'Reports Awaiting Approval',
       type: 'table',
       filter: { status: 'submitted' },
@@ -84,7 +89,8 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'to_reimburse_table',
-      dataset: 'expense_report_metrics', values: ['report_count'],
+      dataset: 'expense_report_metrics',
+      values: ['report_count'],
       title: 'Approved — To Reimburse',
       type: 'table',
       filter: { status: 'approved' },
@@ -97,7 +103,9 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'spend_by_category',
-      dataset: 'expense_line_metrics', dimensions: ['category'], values: ['sum_amount'],
+      dataset: 'expense_line_metrics',
+      dimensions: ['category'],
+      values: ['sum_amount'],
       title: 'Spend by Category',
       type: 'bar',
       layout: { x: 0, y: 7, w: 5, h: 5 },
@@ -111,7 +119,9 @@ export const ExpensesOverviewDashboard: Dashboard = {
     },
     {
       id: 'spend_by_month',
-      dataset: 'expense_report_metrics', dimensions: ['reimbursed_at'], values: ['sum_total_amount'],
+      dataset: 'expense_report_metrics',
+      dimensions: ['reimbursed_at'],
+      values: ['sum_total_amount'],
       title: 'Reimbursed by Month (last 12 months)',
       type: 'line',
       filter: { reimbursed_at: { $gte: '{12_months_ago}' } },

@@ -8,7 +8,5 @@ export const ProcurementRequestDataset = defineDataset({
   label: 'procurement_request metrics',
   object: 'procurement_request',
   dimensions: [],
-  measures: [
-    { name: 'request_count', label: 'request_count', aggregate: 'count' },
-  ],
+  measures: [{ name: 'request_count', label: 'request_count', aggregate: 'count' }],
 });

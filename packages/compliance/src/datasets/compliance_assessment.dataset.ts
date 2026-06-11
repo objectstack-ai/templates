@@ -8,9 +8,13 @@ export const ComplianceAssessmentDataset = defineDataset({
   label: 'compliance_assessment metrics',
   object: 'compliance_assessment',
   dimensions: [
-    { name: 'assessed_at', label: 'assessed_at', field: 'assessed_at', type: 'date', dateGranularity: 'month' },
+    {
+      name: 'assessed_at',
+      label: 'assessed_at',
+      field: 'assessed_at',
+      type: 'date',
+      dateGranularity: 'month',
+    },
   ],
-  measures: [
-    { name: 'assessment_count', label: 'assessment_count', aggregate: 'count' },
-  ],
+  measures: [{ name: 'assessment_count', label: 'assessment_count', aggregate: 'count' }],
 });

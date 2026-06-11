@@ -18,7 +18,6 @@ import { Cta } from '../objects/content_cta.object';
 // the array value (correct at runtime) while satisfying the field type.
 const multiRef = (ids: string[]): string => ids as unknown as string;
 
-
 /**
  * Seed data — realistic editorial workload covering the full template
  * surface. Datasets load in dependency order:

@@ -26,7 +26,8 @@ export const ManagerOverviewDashboard: Dashboard = {
   widgets: [
     {
       id: 'total_open',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'Open Tickets',
       type: 'metric',
       filter: { status: { $nin: ['closed', 'resolved'] } },
@@ -36,7 +37,8 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'breaching_overview',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'SLA Breaching',
       type: 'metric',
       filter: {
@@ -49,7 +51,8 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'escalated',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'Escalated',
       type: 'metric',
       filter: { status: 'escalated' },
@@ -59,7 +62,8 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'avg_csat',
-      dataset: 'ticket_metrics', values: ['avg_csat'],
+      dataset: 'ticket_metrics',
+      values: ['avg_csat'],
       title: 'Avg CSAT',
       type: 'metric',
       filter: {
@@ -74,14 +78,18 @@ export const ManagerOverviewDashboard: Dashboard = {
 
     {
       id: 'tickets_by_status',
-      dataset: 'ticket_metrics', dimensions: ['status'], values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      dimensions: ['status'],
+      values: ['ticket_count'],
       title: 'Tickets by Status',
       type: 'bar',
       layout: { x: 0, y: 2, w: 6, h: 4 },
     },
     {
       id: 'tickets_by_sentiment',
-      dataset: 'ticket_metrics', dimensions: ['ai_sentiment'], values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      dimensions: ['ai_sentiment'],
+      values: ['ticket_count'],
       title: 'Sentiment Distribution',
       type: 'pie',
       filter: { status: { $nin: ['closed'] } },
@@ -90,14 +98,18 @@ export const ManagerOverviewDashboard: Dashboard = {
 
     {
       id: 'tickets_by_category',
-      dataset: 'ticket_metrics', dimensions: ['ai_category'], values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      dimensions: ['ai_category'],
+      values: ['ticket_count'],
       title: 'AI Category Mix',
       type: 'bar',
       layout: { x: 0, y: 6, w: 6, h: 4 },
     },
     {
       id: 'tickets_by_channel',
-      dataset: 'ticket_metrics', dimensions: ['channel'], values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      dimensions: ['channel'],
+      values: ['ticket_count'],
       title: 'Volume by Channel',
       type: 'bar',
       layout: { x: 6, y: 6, w: 6, h: 4 },
@@ -105,7 +117,8 @@ export const ManagerOverviewDashboard: Dashboard = {
 
     {
       id: 'recent_escalated',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'Recently Escalated',
       type: 'table',
       filter: { status: 'escalated' },
@@ -126,7 +139,9 @@ export const ManagerOverviewDashboard: Dashboard = {
     },
     {
       id: 'resolutions_by_day',
-      dataset: 'ticket_metrics', dimensions: ['resolved_at'], values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      dimensions: ['resolved_at'],
+      values: ['ticket_count'],
       title: 'Resolutions by Day (last 30 days)',
       type: 'line',
       filter: {

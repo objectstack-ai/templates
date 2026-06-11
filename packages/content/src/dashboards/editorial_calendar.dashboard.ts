@@ -30,7 +30,8 @@ export const EditorialCalendarDashboard: Dashboard = {
   widgets: [
     {
       id: 'pieces_scheduled',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'Pieces Scheduled (30d)',
       type: 'metric',
       filter: {
@@ -43,7 +44,8 @@ export const EditorialCalendarDashboard: Dashboard = {
     },
     {
       id: 'pieces_in_review',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'Awaiting Approval',
       type: 'metric',
       filter: { status: 'in_review' },
@@ -53,7 +55,8 @@ export const EditorialCalendarDashboard: Dashboard = {
     },
     {
       id: 'pieces_published_30d',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'Published (30d)',
       type: 'metric',
       filter: {
@@ -67,7 +70,8 @@ export const EditorialCalendarDashboard: Dashboard = {
     },
     {
       id: 'pieces_overdue',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'Overdue',
       type: 'metric',
       filter: {
@@ -81,7 +85,8 @@ export const EditorialCalendarDashboard: Dashboard = {
 
     {
       id: 'calendar_main',
-      dataset: 'content_piece_metrics', values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      values: ['piece_count'],
       title: 'Upcoming Calendar',
       type: 'table',
       filter: {
@@ -97,7 +102,9 @@ export const EditorialCalendarDashboard: Dashboard = {
     },
     {
       id: 'publications_by_channel',
-      dataset: 'content_publication_metrics', dimensions: ['channel'], values: ['publication_count'],
+      dataset: 'content_publication_metrics',
+      dimensions: ['channel'],
+      values: ['publication_count'],
       title: 'Publications by Channel (30d)',
       type: 'pie',
       filter: { published_at: { $gte: '{last_month_start}' } },
@@ -106,7 +113,9 @@ export const EditorialCalendarDashboard: Dashboard = {
     },
     {
       id: 'published_by_month',
-      dataset: 'content_piece_metrics', dimensions: ['published_at'], values: ['piece_count'],
+      dataset: 'content_piece_metrics',
+      dimensions: ['published_at'],
+      values: ['piece_count'],
       title: 'Published Pieces by Month (last 12 months)',
       type: 'line',
       filter: {

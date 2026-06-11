@@ -8,7 +8,5 @@ export const ContractsObligationDataset = defineDataset({
   label: 'contracts_obligation metrics',
   object: 'contracts_obligation',
   dimensions: [],
-  measures: [
-    { name: 'obligation_count', label: 'obligation_count', aggregate: 'count' },
-  ],
+  measures: [{ name: 'obligation_count', label: 'obligation_count', aggregate: 'count' }],
 });
