@@ -25,12 +25,25 @@ export const ObligationViews = defineView({
     exportOptions: ['csv', 'xlsx'],
     tabs: [
       { name: 'all', label: 'All', view: 'all_obligations', isDefault: true, pinned: true },
+      { name: 'open', label: 'Open', icon: 'circle-dot', view: 'open_obligations' },
       { name: 'mine_open', label: 'My Open', icon: 'user', view: 'my_open_obligations' },
       { name: 'overdue', label: 'Overdue', icon: 'clock', view: 'overdue_obligations' },
     ],
   },
 
   listViews: {
+    // Pending (open) obligations — surfaces the former `pending_obligations`
+    // dashboard table as an object-bound ListView (ADR-0017).
+    open_obligations: {
+      name: 'open_obligations',
+      type: 'grid',
+      label: 'Open Obligations',
+      data: { provider: 'object', object: 'contracts_obligation' },
+      columns: ['summary', 'due_date', 'amount'],
+      filter: [{ field: 'status', operator: 'equals', value: 'open' }],
+      sort: [{ field: 'due_date', order: 'asc' }],
+    },
+
     my_open_obligations: {
       name: 'my_open_obligations',
       type: 'grid',

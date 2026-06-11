@@ -69,23 +69,8 @@ export const MyWorkDashboard: Dashboard = {
       layout: { x: 8, y: 0, w: 4, h: 2 },
       options: { icon: 'Trophy', format: '0,0' },
     },
-    {
-      id: 'recent_overdue_list',
-      dataset: 'todo_task_metrics',
-      values: ['task_count'],
-      title: 'Overdue Tasks',
-      type: 'table',
-      filter: {
-        assignee: '{current_user_id}',
-        status: { $in: ['todo', 'doing'] },
-        due_date: { $lt: '{today}' },
-      },
-      layout: { x: 0, y: 2, w: 12, h: 4 },
-      options: {
-        columns: ['subject', 'priority', 'labels', 'due_date'],
-        pageSize: 10,
-      },
-    },
+    // Record listing moved to an object-bound ListView (ADR-0017): the former
+    // `recent_overdue_list` is the Tasks "Overdue" tab (overdue_tasks view).
     {
       id: 'throughput_by_week',
       dataset: 'todo_task_metrics',

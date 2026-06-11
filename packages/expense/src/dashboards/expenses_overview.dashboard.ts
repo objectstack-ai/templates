@@ -73,34 +73,10 @@ export const ExpensesOverviewDashboard: Dashboard = {
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'CheckCircle', format: '$0,0' },
     },
-    {
-      id: 'pending_reports_table',
-      dataset: 'expense_report_metrics',
-      values: ['report_count'],
-      title: 'Reports Awaiting Approval',
-      type: 'table',
-      filter: { status: 'submitted' },
-      layout: { x: 0, y: 2, w: 8, h: 5 },
-      options: {
-        columns: ['title', 'requester', 'total_amount', 'cost_center', 'submitted_at'],
-        pageSize: 10,
-        sort: [{ field: 'total_amount', order: 'desc' }],
-      },
-    },
-    {
-      id: 'to_reimburse_table',
-      dataset: 'expense_report_metrics',
-      values: ['report_count'],
-      title: 'Approved — To Reimburse',
-      type: 'table',
-      filter: { status: 'approved' },
-      layout: { x: 8, y: 2, w: 4, h: 5 },
-      options: {
-        columns: ['title', 'requester', 'total_amount'],
-        pageSize: 10,
-        sort: [{ field: 'approved_at', order: 'asc' }],
-      },
-    },
+    // Record listings moved to object-bound ListViews (ADR-0017): the former
+    // `pending_reports_table` / `to_reimburse_table` now live on the Reports
+    // object as the "Awaiting Approval" / "To Reimburse" tabs. The metric
+    // widgets above keep the at-a-glance counts on this dashboard.
     {
       id: 'spend_by_category',
       dataset: 'expense_line_metrics',

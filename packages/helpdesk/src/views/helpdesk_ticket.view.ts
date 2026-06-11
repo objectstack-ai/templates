@@ -37,7 +37,9 @@ export const TicketViews = defineView({
         icon: 'alert-triangle',
         view: 'breaching_tickets',
       },
+      { name: 'escalated', label: 'Escalated', icon: 'trending-up', view: 'escalated_tickets' },
       { name: 'angry', label: 'Angry', icon: 'flame', view: 'angry_tickets' },
+      { name: 'my_queue', label: 'My Queue', icon: 'user', view: 'my_queue' },
     ],
   },
 
@@ -75,6 +77,26 @@ export const TicketViews = defineView({
           value: ['new', 'triaged', 'in_progress', 'waiting_customer', 'escalated'],
         },
       ],
+      sort: [{ field: 'priority', order: 'desc' }],
+    },
+
+    // Escalated tickets — surfaces the former `recent_escalated` dashboard
+    // table as an object-bound ListView (ADR-0017).
+    escalated_tickets: {
+      name: 'escalated_tickets',
+      type: 'grid',
+      label: 'Escalated',
+      data: { provider: 'object', object: 'helpdesk_ticket' },
+      columns: [
+        'ticket_number',
+        'name',
+        'customer',
+        'team',
+        'assignee',
+        'ai_sentiment',
+        'priority',
+      ],
+      filter: [{ field: 'status', operator: 'equals', value: 'escalated' }],
       sort: [{ field: 'priority', order: 'desc' }],
     },
 

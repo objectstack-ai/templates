@@ -80,34 +80,9 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'TrendingUp', format: '$0,0' },
     },
-    {
-      id: 'pending_requests_table',
-      dataset: 'procurement_request_metrics',
-      values: ['request_count'],
-      title: 'Requests Awaiting Approval',
-      type: 'table',
-      filter: { status: 'submitted' },
-      layout: { x: 0, y: 2, w: 8, h: 5 },
-      options: {
-        columns: ['title', 'vendor', 'category', 'estimated_amount', 'needed_by'],
-        pageSize: 10,
-        sort: [{ field: 'estimated_amount', order: 'desc' }],
-      },
-    },
-    {
-      id: 'open_pos_table',
-      dataset: 'procurement_order_metrics',
-      values: ['order_count'],
-      title: 'Open Purchase Orders',
-      type: 'table',
-      filter: { status: { $in: ['sent', 'partial'] } },
-      layout: { x: 8, y: 2, w: 4, h: 5 },
-      options: {
-        columns: ['po_number', 'vendor', 'total_amount', 'expected_delivery'],
-        pageSize: 10,
-        sort: [{ field: 'expected_delivery', order: 'asc' }],
-      },
-    },
+    // Record listings moved to object-bound ListViews (ADR-0017): `pending_requests_table`
+    // is the Requests "Awaiting Approval" tab; `open_pos_table` is the Orders "Open" tab.
+    // KPI widgets above keep the counts here.
     {
       id: 'po_value_by_month',
       dataset: 'procurement_order_metrics',

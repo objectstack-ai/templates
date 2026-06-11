@@ -83,23 +83,8 @@ export const EditorialCalendarDashboard: Dashboard = {
       options: { icon: 'AlertTriangle', format: '0,0' },
     },
 
-    {
-      id: 'calendar_main',
-      dataset: 'content_piece_metrics',
-      values: ['piece_count'],
-      title: 'Upcoming Calendar',
-      type: 'table',
-      filter: {
-        status: { $in: ['approved', 'scheduled', 'published'] },
-        publish_at: { $gte: '{last_month_start}' },
-      },
-      layout: { x: 0, y: 2, w: 8, h: 6 },
-      options: {
-        columns: ['title', 'status', 'format', 'target_channels', 'publish_at'],
-        pageSize: 25,
-        sort: [{ field: 'publish_at', order: 'asc' }],
-      },
-    },
+    // Record listing moved to an object-bound ListView (ADR-0017): the former
+    // `calendar_main` is the Pieces "Calendar" tab (editorial_calendar view).
     {
       id: 'publications_by_channel',
       dataset: 'content_publication_metrics',

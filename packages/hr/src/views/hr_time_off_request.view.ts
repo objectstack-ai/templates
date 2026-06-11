@@ -34,11 +34,28 @@ export const TimeOffRequestViews = defineView({
       },
       { name: 'pipeline', label: 'Approval Pipeline', icon: 'columns', view: 'time_off_pipeline' },
       { name: 'approved', label: 'Approved', icon: 'check', view: 'approved_time_off' },
+      { name: 'ooo_today', label: 'Out Today', icon: 'plane', view: 'out_of_office_today' },
       { name: 'all', label: 'All', view: 'all_time_off' },
     ],
   },
 
   listViews: {
+    // Out of office today — surfaces the former `ooo_today` dashboard table as
+    // an object-bound ListView (ADR-0017): approved leave spanning today.
+    out_of_office_today: {
+      name: 'out_of_office_today',
+      type: 'grid',
+      label: 'Out of Office Today',
+      data: { provider: 'object', object: 'hr_time_off_request' },
+      columns: ['employee', 'leave_type', 'start_date', 'end_date'],
+      filter: [
+        { field: 'status', operator: 'equals', value: 'approved' },
+        { field: 'start_date', operator: 'lte', value: '{today}' },
+        { field: 'end_date', operator: 'gte', value: '{today}' },
+      ],
+      sort: [{ field: 'end_date', order: 'asc' }],
+    },
+
     time_off_pipeline: {
       name: 'time_off_pipeline',
       type: 'kanban',

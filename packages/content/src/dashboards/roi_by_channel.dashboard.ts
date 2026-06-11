@@ -110,27 +110,8 @@ export const RoiByChannelDashboard: Dashboard = {
       layout: { x: 6, y: 2, w: 6, h: 5 },
     },
 
-    {
-      id: 'top_publications',
-      dataset: 'content_publication_metrics',
-      values: ['publication_count'],
-      title: 'Top 10 Publications by Signups',
-      type: 'table',
-
-      layout: { x: 0, y: 7, w: 12, h: 5 },
-      options: {
-        columns: [
-          'piece',
-          'channel',
-          'published_at',
-          'total_views',
-          'total_clicks',
-          'total_signups',
-          'total_revenue',
-        ],
-        pageSize: 10,
-        sort: [{ field: 'total_signups', order: 'desc' }],
-      },
-    },
+    // Record listing moved to an object-bound ListView (ADR-0017): the former
+    // `top_publications` is the Publications "Top Performers" tab
+    // (top_publications view, sorted by signups).
   ],
 };

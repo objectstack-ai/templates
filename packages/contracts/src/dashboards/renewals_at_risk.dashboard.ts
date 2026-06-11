@@ -88,41 +88,9 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'TrendingUp', format: '$0,0' },
     },
-    {
-      id: 'expiring_table',
-      dataset: 'contracts_contract_metrics',
-      values: ['contract_count'],
-      title: 'Expiring Contracts (Next 60d)',
-      type: 'table',
-      // Only `{today}` is resolved client-side by the data endpoint; tokens
-      // like `{60_days_from_now}` only work inside the analytics service.
-      // We sort ascending by end_date and rely on pageSize to cap the list
-      // to the nearest renewals.
-      filter: {
-        status: 'active',
-        end_date: { $gte: '{today}' },
-      },
-      layout: { x: 0, y: 2, w: 8, h: 5 },
-      options: {
-        columns: ['title', 'contract_type', 'end_date', 'auto_renew', 'total_value'],
-        pageSize: 10,
-        sort: [{ field: 'end_date', order: 'asc' }],
-      },
-    },
-    {
-      id: 'pending_obligations',
-      dataset: 'contracts_obligation_metrics',
-      values: ['obligation_count'],
-      title: 'Open Obligations',
-      type: 'table',
-      filter: { status: 'open' },
-      layout: { x: 8, y: 2, w: 4, h: 5 },
-      options: {
-        columns: ['summary', 'due_date', 'amount'],
-        pageSize: 10,
-        sort: [{ field: 'due_date', order: 'asc' }],
-      },
-    },
+    // Record listings moved to object-bound ListViews (ADR-0017): the former
+    // `expiring_table` is the Contracts "Expiring ≤ 60d" tab; `pending_obligations`
+    // is the Obligations "Open" tab. KPI widgets above keep the counts here.
     {
       id: 'signed_by_month',
       dataset: 'contracts_contract_metrics',

@@ -85,37 +85,8 @@ export const TodayWorkbenchDashboard: Dashboard = {
       options: { icon: 'Send', format: '0,0' },
     },
 
-    {
-      id: 'my_pieces_table',
-      dataset: 'content_piece_metrics',
-      values: ['piece_count'],
-      title: 'Pieces I own (or unassigned), not done',
-      type: 'table',
-      filter: {
-        $or: [{ assignee: '{current_user_id}' }, { assignee: null }],
-        status: { $in: ['backlog', 'drafting', 'in_review', 'approved', 'scheduled'] },
-      },
-      layout: { x: 0, y: 2, w: 7, h: 5 },
-      options: {
-        columns: ['title', 'status', 'format', 'publish_at'],
-        pageSize: 10,
-        sort: [{ field: 'publish_at', order: 'asc' }],
-      },
-    },
-
-    {
-      id: 'signals_to_triage',
-      dataset: 'content_signal_metrics',
-      values: ['signal_count'],
-      title: 'Signals to Triage',
-      type: 'table',
-      filter: { status: 'captured' },
-      layout: { x: 7, y: 2, w: 5, h: 5 },
-      options: {
-        columns: ['headline', 'source_kind', 'impact', 'captured_at'],
-        pageSize: 10,
-        sort: [{ field: 'impact', order: 'desc' }],
-      },
-    },
+    // Record listings moved to object-bound ListViews (ADR-0017): `my_pieces_table`
+    // is covered by the Pieces "My Drafts" tab; `signals_to_triage` is the Signals
+    // "My Triage" tab (my_triage_queue, status=captured).
   ],
 };

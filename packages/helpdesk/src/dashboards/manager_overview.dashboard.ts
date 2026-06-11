@@ -115,28 +115,8 @@ export const ManagerOverviewDashboard: Dashboard = {
       layout: { x: 6, y: 6, w: 6, h: 4 },
     },
 
-    {
-      id: 'recent_escalated',
-      dataset: 'ticket_metrics',
-      values: ['ticket_count'],
-      title: 'Recently Escalated',
-      type: 'table',
-      filter: { status: 'escalated' },
-      layout: { x: 0, y: 10, w: 12, h: 5 },
-      options: {
-        columns: [
-          'ticket_number',
-          'name',
-          'customer',
-          'team',
-          'assignee',
-          'ai_sentiment',
-          'priority',
-        ],
-        pageSize: 10,
-        sort: [{ field: 'priority', order: 'desc' }],
-      },
-    },
+    // Record listing moved to an object-bound ListView (ADR-0017): the former
+    // `recent_escalated` is the Tickets "Escalated" tab (escalated_tickets view).
     {
       id: 'resolutions_by_day',
       dataset: 'ticket_metrics',

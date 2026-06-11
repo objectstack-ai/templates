@@ -27,12 +27,32 @@ export const PublicationViews = defineView({
     exportOptions: ['csv', 'xlsx'],
     tabs: [
       { name: 'all', label: 'All', view: 'all_publications', isDefault: true, pinned: true },
+      { name: 'top', label: 'Top Performers', icon: 'trophy', view: 'top_publications' },
       { name: 'week', label: 'This Week', icon: 'calendar', view: 'this_week_publications' },
       { name: 'by_channel', label: 'By Channel', icon: 'layers', view: 'by_channel_publications' },
     ],
   },
 
   listViews: {
+    // Top publications by signups — surfaces the former `top_publications`
+    // dashboard table as an object-bound ListView (ADR-0017).
+    top_publications: {
+      name: 'top_publications',
+      type: 'grid',
+      label: 'Top Performers',
+      data: { provider: 'object', object: 'content_publication' },
+      columns: [
+        'piece',
+        'channel',
+        'published_at',
+        'total_views',
+        'total_clicks',
+        'total_signups',
+        'total_revenue',
+      ],
+      sort: [{ field: 'total_signups', order: 'desc' }],
+    },
+
     this_week_publications: {
       name: 'this_week_publications',
       type: 'grid',
