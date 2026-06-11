@@ -88,7 +88,7 @@ export const ExpensesOverviewDashboard: Dashboard = {
       chartConfig: {
         type: 'bar',
         xAxis: { field: 'category', showGridLines: false, logarithmic: false },
-        yAxis: [{ field: 'amount', format: '$0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [{ field: 'sum_amount', format: '$0,0', showGridLines: true, logarithmic: false }],
         showLegend: false,
         showDataLabels: false,
       },
@@ -105,7 +105,9 @@ export const ExpensesOverviewDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'reimbursed_at', format: '%b %Y', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'total_amount', format: '$0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [
+          { field: 'sum_total_amount', format: '$0,0', showGridLines: true, logarithmic: false },
+        ],
         showLegend: true,
         showDataLabels: false,
       },

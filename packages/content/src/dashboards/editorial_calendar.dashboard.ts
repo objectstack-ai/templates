@@ -92,6 +92,13 @@ export const EditorialCalendarDashboard: Dashboard = {
       values: ['publication_count'],
       title: 'Publications by Channel (30d)',
       type: 'pie',
+      chartConfig: {
+        type: 'pie',
+        xAxis: { field: 'channel', showGridLines: false, logarithmic: false },
+        yAxis: [{ field: 'publication_count', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
       filter: { published_at: { $gte: '{last_month_start}' } },
       layout: { x: 8, y: 2, w: 4, h: 6 },
       options: { donut: true, legend: 'right' },
@@ -111,7 +118,7 @@ export const EditorialCalendarDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'published_at', format: '%b %Y', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [{ field: 'piece_count', format: '0,0', showGridLines: true, logarithmic: false }],
         showLegend: true,
         showDataLabels: false,
       },

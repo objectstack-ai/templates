@@ -87,7 +87,7 @@ export const MyWorkDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'completed_at', format: '%b %d', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [{ field: 'task_count', format: '0,0', showGridLines: true, logarithmic: false }],
         showLegend: true,
         showDataLabels: false,
       },

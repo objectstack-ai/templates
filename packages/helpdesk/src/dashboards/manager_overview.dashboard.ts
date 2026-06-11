@@ -83,6 +83,13 @@ export const ManagerOverviewDashboard: Dashboard = {
       values: ['ticket_count'],
       title: 'Tickets by Status',
       type: 'bar',
+      chartConfig: {
+        type: 'bar',
+        xAxis: { field: 'status', showGridLines: false, logarithmic: false },
+        yAxis: [{ field: 'ticket_count', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: false,
+        showDataLabels: false,
+      },
       layout: { x: 0, y: 2, w: 6, h: 4 },
     },
     {
@@ -92,6 +99,13 @@ export const ManagerOverviewDashboard: Dashboard = {
       values: ['ticket_count'],
       title: 'Sentiment Distribution',
       type: 'pie',
+      chartConfig: {
+        type: 'pie',
+        xAxis: { field: 'ai_sentiment', showGridLines: false, logarithmic: false },
+        yAxis: [{ field: 'ticket_count', showGridLines: true, logarithmic: false }],
+        showLegend: true,
+        showDataLabels: false,
+      },
       filter: { status: { $nin: ['closed'] } },
       layout: { x: 6, y: 2, w: 6, h: 4 },
     },
@@ -103,6 +117,13 @@ export const ManagerOverviewDashboard: Dashboard = {
       values: ['ticket_count'],
       title: 'AI Category Mix',
       type: 'bar',
+      chartConfig: {
+        type: 'bar',
+        xAxis: { field: 'ai_category', showGridLines: false, logarithmic: false },
+        yAxis: [{ field: 'ticket_count', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: false,
+        showDataLabels: false,
+      },
       layout: { x: 0, y: 6, w: 6, h: 4 },
     },
     {
@@ -112,6 +133,13 @@ export const ManagerOverviewDashboard: Dashboard = {
       values: ['ticket_count'],
       title: 'Volume by Channel',
       type: 'bar',
+      chartConfig: {
+        type: 'bar',
+        xAxis: { field: 'channel', showGridLines: false, logarithmic: false },
+        yAxis: [{ field: 'ticket_count', format: '0,0', showGridLines: true, logarithmic: false }],
+        showLegend: false,
+        showDataLabels: false,
+      },
       layout: { x: 6, y: 6, w: 6, h: 4 },
     },
 
@@ -132,7 +160,7 @@ export const ManagerOverviewDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'resolved_at', format: '%b %d', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [{ field: 'ticket_count', format: '0,0', showGridLines: true, logarithmic: false }],
         showLegend: true,
         showDataLabels: false,
       },

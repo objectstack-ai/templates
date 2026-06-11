@@ -95,7 +95,9 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'order_date', format: '%b %Y', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'total_amount', format: '$0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [
+          { field: 'sum_total_amount', format: '$0,0', showGridLines: true, logarithmic: false },
+        ],
         showLegend: true,
         showDataLabels: false,
       },

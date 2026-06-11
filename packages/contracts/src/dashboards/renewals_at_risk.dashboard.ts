@@ -103,7 +103,9 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'signed_date', format: '%b %Y', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [
+          { field: 'contract_count', format: '0,0', showGridLines: true, logarithmic: false },
+        ],
         showLegend: true,
         showDataLabels: false,
       },

@@ -104,7 +104,9 @@ export const ControlPostureDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'assessed_at', format: '%b %Y', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'value', format: '0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [
+          { field: 'assessment_count', format: '0,0', showGridLines: true, logarithmic: false },
+        ],
         showLegend: true,
         showDataLabels: false,
       },

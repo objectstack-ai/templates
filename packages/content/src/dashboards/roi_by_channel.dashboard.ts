@@ -86,6 +86,15 @@ export const RoiByChannelDashboard: Dashboard = {
       values: ['sum_total_views'],
       title: 'Views by Channel (90d)',
       type: 'bar',
+      chartConfig: {
+        type: 'bar',
+        xAxis: { field: 'channel', showGridLines: false, logarithmic: false },
+        yAxis: [
+          { field: 'sum_total_views', format: '0,0', showGridLines: true, logarithmic: false },
+        ],
+        showLegend: false,
+        showDataLabels: false,
+      },
       filter: { published_at: { $gte: '{90_days_ago}' } },
       compareTo: 'previousPeriod',
       layout: { x: 0, y: 2, w: 6, h: 5 },
@@ -103,7 +112,7 @@ export const RoiByChannelDashboard: Dashboard = {
       chartConfig: {
         type: 'line',
         xAxis: { field: 'period_start', format: '%b %d', showGridLines: true, logarithmic: false },
-        yAxis: [{ field: 'signups', format: '0,0', showGridLines: true, logarithmic: false }],
+        yAxis: [{ field: 'sum_signups', format: '0,0', showGridLines: true, logarithmic: false }],
         showLegend: true,
         showDataLabels: false,
       },
