@@ -7,6 +7,7 @@ import { defineView } from '@objectstack/spec/ui';
  *
  *   • all_pieces            — default grid, grouped by status
  *   • piece_board           — kanban auto-derived from status select
+ *   • my_pieces             — assignee = me AND status in active pipeline (see note)
  *   • my_drafts             — assignee = me AND status in (backlog, drafting)
  *   • in_review_queue       — status = in_review (lead's queue)
  *   • editorial_calendar    — calendar view on publish_at
@@ -42,6 +43,7 @@ export const PieceViews = defineView({
     },
     tabs: [
       { name: 'all', label: 'All Pieces', view: 'all_pieces', isDefault: true, pinned: true },
+      { name: 'my_pieces', label: 'My Pieces', icon: 'user', view: 'my_pieces' },
       { name: 'my_drafts', label: 'My Drafts', icon: 'pen-tool', view: 'my_drafts' },
       { name: 'in_review', label: 'In Review', icon: 'check-circle', view: 'in_review_queue' },
       { name: 'calendar', label: 'Calendar', icon: 'calendar', view: 'editorial_calendar' },
@@ -107,6 +109,44 @@ export const PieceViews = defineView({
       filter: [
         { field: 'assignee', operator: 'equals', value: '{current_user_id}' },
         { field: 'status', operator: 'in', value: ['backlog', 'drafting'] },
+      ],
+      sort: [{ field: 'publish_at', order: 'asc' }],
+    },
+
+    // My Pieces — faithful migration of the former `my_pieces_table` dashboard
+    // widget (ADR-0017): the writer's full active queue across every in-flight
+    // status, sorted by publish date.
+    //
+    // INTENDED semantics of the original widget were:
+    //   (assignee == me OR assignee IS NULL)
+    //   AND status IN (backlog, drafting, in_review, approved, scheduled)
+    // i.e. pieces assigned to me PLUS unclaimed pieces I could pick up.
+    //
+    // LIMITATION — the OR branch cannot be expressed. ListView `filter` is a
+    // flat array of { field, operator, value } rules combined with AND only;
+    // ViewFilterRule is `additionalProperties: false` (no nested and/or group)
+    // and the spec exposes no disjunction operator (confirmed against
+    // @objectstack/spec 9.0.0: json-schema/ui/ViewFilterRule.json and the
+    // view.zod filter type). There is therefore no supported way to union
+    // "assignee == me" with "assignee IS NULL" inside a single view.
+    //
+    // FAITHFUL DEGRADATION — we keep the dominant intent (the pieces that are
+    // actually mine) and drop the unassigned-pickup branch. This matches the
+    // repo convention already used by `my_drafts` (assignee == current user).
+    // The status set is reproduced exactly.
+    my_pieces: {
+      name: 'my_pieces',
+      type: 'grid',
+      label: 'My Pieces',
+      data: { provider: 'object', object: 'content_piece' },
+      columns: ['title', 'status', 'format', 'publish_at'],
+      filter: [
+        { field: 'assignee', operator: 'equals', value: '{current_user_id}' },
+        {
+          field: 'status',
+          operator: 'in',
+          value: ['backlog', 'drafting', 'in_review', 'approved', 'scheduled'],
+        },
       ],
       sort: [{ field: 'publish_at', order: 'asc' }],
     },

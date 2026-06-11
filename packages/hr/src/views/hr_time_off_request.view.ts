@@ -32,6 +32,12 @@ export const TimeOffRequestViews = defineView({
         isDefault: true,
         pinned: true,
       },
+      {
+        name: 'my_approvals',
+        label: 'Awaiting My Approval',
+        icon: 'user-check',
+        view: 'my_pending_approvals',
+      },
       { name: 'pipeline', label: 'Approval Pipeline', icon: 'columns', view: 'time_off_pipeline' },
       { name: 'approved', label: 'Approved', icon: 'check', view: 'approved_time_off' },
       { name: 'ooo_today', label: 'Out Today', icon: 'plane', view: 'out_of_office_today' },
@@ -75,6 +81,26 @@ export const TimeOffRequestViews = defineView({
       columns: ['employee', 'leave_type', 'start_date', 'end_date', 'days', 'submitted_at'],
       filter: [{ field: 'status', operator: 'equals', value: 'submitted' }],
       sort: [{ field: 'submitted_at', order: 'asc' }],
+    },
+
+    // Awaiting My Approval — faithful migration of the former
+    // `pending_time_off_table` dashboard widget (ADR-0017): submitted requests
+    // where the current user is the named approver. Unlike `pending_time_off`
+    // (every submitted request), this is scoped to the rows *I* must act on.
+    //
+    // The semantics are pure AND and therefore fully expressible:
+    //   status == 'submitted' AND approver == current user.
+    my_pending_approvals: {
+      name: 'my_pending_approvals',
+      type: 'grid',
+      label: 'Awaiting My Approval',
+      data: { provider: 'object', object: 'hr_time_off_request' },
+      columns: ['employee', 'leave_type', 'start_date', 'end_date', 'days', 'submitted_at'],
+      filter: [
+        { field: 'status', operator: 'equals', value: 'submitted' },
+        { field: 'approver', operator: 'equals', value: '{current_user_id}' },
+      ],
+      sort: [{ field: 'start_date', order: 'asc' }],
     },
     approved_time_off: {
       name: 'approved_time_off',
