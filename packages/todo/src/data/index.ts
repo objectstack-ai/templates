@@ -11,7 +11,6 @@ import { Label } from '../objects/todo_label.object';
 // the array value (correct at runtime) while satisfying the field type.
 const multiRef = (ids: string[]): string => ids as unknown as string;
 
-
 /**
  * Seed data — realistic, business-like task content covering the full
  * surface of the template:

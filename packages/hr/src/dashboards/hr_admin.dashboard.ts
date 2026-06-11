@@ -32,7 +32,8 @@ export const HrAdminDashboard: Dashboard = {
   widgets: [
     {
       id: 'headcount',
-      dataset: 'hr_employee_metrics', values: ['employee_count'],
+      dataset: 'hr_employee_metrics',
+      values: ['employee_count'],
       title: 'Active Headcount',
       type: 'metric',
       filter: { status: 'active' },
@@ -42,7 +43,8 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'on_leave',
-      dataset: 'hr_employee_metrics', values: ['employee_count'],
+      dataset: 'hr_employee_metrics',
+      values: ['employee_count'],
       title: 'On Leave',
       type: 'metric',
       filter: { status: 'on_leave' },
@@ -52,7 +54,8 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'new_hires_30d',
-      dataset: 'hr_employee_metrics', values: ['employee_count'],
+      dataset: 'hr_employee_metrics',
+      values: ['employee_count'],
       title: 'New Hires (30d)',
       type: 'metric',
       filter: { hire_date: { $gte: '{30_days_ago}' }, status: { $ne: 'terminated' } },
@@ -63,7 +66,8 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'pending_time_off',
-      dataset: 'hr_time_off_request_metrics', values: ['request_count'],
+      dataset: 'hr_time_off_request_metrics',
+      values: ['request_count'],
       title: 'My Pending Approvals',
       type: 'metric',
       filter: { status: 'submitted', approver: '{current_user_id}' },
@@ -73,7 +77,8 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'expiring_docs',
-      dataset: 'hr_document_metrics', values: ['document_count'],
+      dataset: 'hr_document_metrics',
+      values: ['document_count'],
       title: 'Documents Expiring (30d)',
       type: 'metric',
       filter: {
@@ -85,7 +90,8 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'expired_docs',
-      dataset: 'hr_document_metrics', values: ['document_count'],
+      dataset: 'hr_document_metrics',
+      values: ['document_count'],
       title: 'Already Expired',
       type: 'metric',
       filter: { expires_at: { $lt: '{today}' } },
@@ -95,7 +101,9 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'headcount_by_dept',
-      dataset: 'hr_employee_metrics', dimensions: ['department'], values: ['employee_count'],
+      dataset: 'hr_employee_metrics',
+      dimensions: ['department'],
+      values: ['employee_count'],
       title: 'Headcount by Department',
       type: 'bar',
       filter: { status: { $ne: 'terminated' } },
@@ -103,7 +111,8 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'ooo_today',
-      dataset: 'hr_time_off_request_metrics', values: ['request_count'],
+      dataset: 'hr_time_off_request_metrics',
+      values: ['request_count'],
       title: 'Out of Office Today',
       type: 'table',
       filter: {
@@ -120,7 +129,8 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'pending_time_off_table',
-      dataset: 'hr_time_off_request_metrics', values: ['request_count'],
+      dataset: 'hr_time_off_request_metrics',
+      values: ['request_count'],
       title: 'My Pending Time-Off Requests',
       type: 'table',
       filter: { status: 'submitted', approver: '{current_user_id}' },
@@ -133,7 +143,8 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'expiring_docs_table',
-      dataset: 'hr_document_metrics', values: ['document_count'],
+      dataset: 'hr_document_metrics',
+      values: ['document_count'],
       title: 'Documents Expiring Soon',
       type: 'table',
       filter: { expires_at: { $gte: '{today}', $lte: '{today+30}' } },
@@ -146,7 +157,9 @@ export const HrAdminDashboard: Dashboard = {
     },
     {
       id: 'hires_by_month',
-      dataset: 'hr_employee_metrics', dimensions: ['hire_date'], values: ['employee_count'],
+      dataset: 'hr_employee_metrics',
+      dimensions: ['hire_date'],
+      values: ['employee_count'],
       title: 'Hires by Month (last 12 months)',
       type: 'line',
       filter: { hire_date: { $gte: '{12_months_ago}' } },

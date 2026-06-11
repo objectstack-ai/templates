@@ -8,10 +8,21 @@ export const ExpenseReportDataset = defineDataset({
   label: 'expense_report metrics',
   object: 'expense_report',
   dimensions: [
-    { name: 'reimbursed_at', label: 'reimbursed_at', field: 'reimbursed_at', type: 'date', dateGranularity: 'month' },
+    {
+      name: 'reimbursed_at',
+      label: 'reimbursed_at',
+      field: 'reimbursed_at',
+      type: 'date',
+      dateGranularity: 'month',
+    },
   ],
   measures: [
     { name: 'report_count', label: 'report_count', aggregate: 'count' },
-    { name: 'sum_total_amount', label: 'sum_total_amount', aggregate: 'sum', field: 'total_amount' },
+    {
+      name: 'sum_total_amount',
+      label: 'sum_total_amount',
+      aggregate: 'sum',
+      field: 'total_amount',
+    },
   ],
 });

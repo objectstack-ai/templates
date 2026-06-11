@@ -8,9 +8,13 @@ export const ContentMetricDataset = defineDataset({
   label: 'content_metric metrics',
   object: 'content_metric',
   dimensions: [
-    { name: 'period_start', label: 'period_start', field: 'period_start', type: 'date', dateGranularity: 'week' },
+    {
+      name: 'period_start',
+      label: 'period_start',
+      field: 'period_start',
+      type: 'date',
+      dateGranularity: 'week',
+    },
   ],
-  measures: [
-    { name: 'sum_signups', label: 'sum_signups', aggregate: 'sum', field: 'signups' },
-  ],
+  measures: [{ name: 'sum_signups', label: 'sum_signups', aggregate: 'sum', field: 'signups' }],
 });

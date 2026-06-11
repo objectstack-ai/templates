@@ -32,7 +32,8 @@ export const RoiByChannelDashboard: Dashboard = {
   widgets: [
     {
       id: 'total_views_90d',
-      dataset: 'content_publication_metrics', values: ['sum_total_views'],
+      dataset: 'content_publication_metrics',
+      values: ['sum_total_views'],
       title: 'Views (90d)',
       type: 'metric',
       filter: { published_at: { $gte: '{90_days_ago}' } },
@@ -43,7 +44,8 @@ export const RoiByChannelDashboard: Dashboard = {
     },
     {
       id: 'total_clicks_90d',
-      dataset: 'content_publication_metrics', values: ['sum_total_clicks'],
+      dataset: 'content_publication_metrics',
+      values: ['sum_total_clicks'],
       title: 'Clicks (90d)',
       type: 'metric',
       filter: { published_at: { $gte: '{90_days_ago}' } },
@@ -54,7 +56,8 @@ export const RoiByChannelDashboard: Dashboard = {
     },
     {
       id: 'total_signups_90d',
-      dataset: 'content_publication_metrics', values: ['sum_total_signups'],
+      dataset: 'content_publication_metrics',
+      values: ['sum_total_signups'],
       title: 'Signups (90d)',
       type: 'metric',
       filter: { published_at: { $gte: '{90_days_ago}' } },
@@ -65,7 +68,8 @@ export const RoiByChannelDashboard: Dashboard = {
     },
     {
       id: 'total_revenue_90d',
-      dataset: 'content_publication_metrics', values: ['sum_total_revenue'],
+      dataset: 'content_publication_metrics',
+      values: ['sum_total_revenue'],
       title: 'Attributed Revenue (90d)',
       type: 'metric',
       filter: { published_at: { $gte: '{90_days_ago}' } },
@@ -77,7 +81,9 @@ export const RoiByChannelDashboard: Dashboard = {
 
     {
       id: 'views_by_channel_bar',
-      dataset: 'content_publication_metrics', dimensions: ['channel'], values: ['sum_total_views'],
+      dataset: 'content_publication_metrics',
+      dimensions: ['channel'],
+      values: ['sum_total_views'],
       title: 'Views by Channel (90d)',
       type: 'bar',
       filter: { published_at: { $gte: '{90_days_ago}' } },
@@ -87,7 +93,9 @@ export const RoiByChannelDashboard: Dashboard = {
     },
     {
       id: 'signups_trend',
-      dataset: 'content_metric_metrics', dimensions: ['period_start'], values: ['sum_signups'],
+      dataset: 'content_metric_metrics',
+      dimensions: ['period_start'],
+      values: ['sum_signups'],
       title: 'Signups by Week (90d)',
       type: 'line',
       filter: { period_start: { $gte: '{last_quarter_start}' } },
@@ -104,7 +112,8 @@ export const RoiByChannelDashboard: Dashboard = {
 
     {
       id: 'top_publications',
-      dataset: 'content_publication_metrics', values: ['publication_count'],
+      dataset: 'content_publication_metrics',
+      values: ['publication_count'],
       title: 'Top 10 Publications by Signups',
       type: 'table',
 

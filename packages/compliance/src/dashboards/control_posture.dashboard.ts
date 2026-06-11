@@ -41,7 +41,8 @@ export const ControlPostureDashboard: Dashboard = {
   widgets: [
     {
       id: 'passing_controls',
-      dataset: 'compliance_control_metrics', values: ['control_count'],
+      dataset: 'compliance_control_metrics',
+      values: ['control_count'],
       title: 'Controls Passing',
       type: 'metric',
       filter: { last_status: 'passed' },
@@ -51,7 +52,8 @@ export const ControlPostureDashboard: Dashboard = {
     },
     {
       id: 'failing_controls',
-      dataset: 'compliance_control_metrics', values: ['control_count'],
+      dataset: 'compliance_control_metrics',
+      values: ['control_count'],
       title: 'Failing or Partial',
       type: 'metric',
       filter: { last_status: { $in: ['failed', 'partial'] } },
@@ -61,7 +63,8 @@ export const ControlPostureDashboard: Dashboard = {
     },
     {
       id: 'expiring_evidence',
-      dataset: 'compliance_evidence_metrics', values: ['evidence_count'],
+      dataset: 'compliance_evidence_metrics',
+      values: ['evidence_count'],
       title: 'Evidence Expiring ≤ 30d',
       type: 'metric',
       filter: {
@@ -74,7 +77,8 @@ export const ControlPostureDashboard: Dashboard = {
     },
     {
       id: 'in_progress_assessments',
-      dataset: 'compliance_assessment_metrics', values: ['assessment_count'],
+      dataset: 'compliance_assessment_metrics',
+      values: ['assessment_count'],
       title: 'Assessments In Progress',
       type: 'metric',
       filter: { status: 'in_progress' },
@@ -84,7 +88,8 @@ export const ControlPostureDashboard: Dashboard = {
     },
     {
       id: 'failing_table',
-      dataset: 'compliance_control_metrics', values: ['control_count'],
+      dataset: 'compliance_control_metrics',
+      values: ['control_count'],
       title: 'Failing Controls (Action Required)',
       type: 'table',
       filter: { last_status: { $in: ['failed', 'partial'] } },
@@ -100,7 +105,8 @@ export const ControlPostureDashboard: Dashboard = {
     },
     {
       id: 'expiring_evidence_table',
-      dataset: 'compliance_evidence_metrics', values: ['evidence_count'],
+      dataset: 'compliance_evidence_metrics',
+      values: ['evidence_count'],
       title: 'Evidence Expiring Soon',
       type: 'table',
       filter: {
@@ -116,7 +122,9 @@ export const ControlPostureDashboard: Dashboard = {
     },
     {
       id: 'assessments_by_month',
-      dataset: 'compliance_assessment_metrics', dimensions: ['assessed_at'], values: ['assessment_count'],
+      dataset: 'compliance_assessment_metrics',
+      dimensions: ['assessed_at'],
+      values: ['assessment_count'],
       title: 'Assessments Completed by Month (last 12 months)',
       type: 'line',
       filter: {

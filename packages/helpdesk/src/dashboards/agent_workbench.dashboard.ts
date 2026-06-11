@@ -30,7 +30,8 @@ export const AgentWorkbenchDashboard: Dashboard = {
   widgets: [
     {
       id: 'my_open',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'My Open Tickets',
       type: 'metric',
       filter: {
@@ -43,7 +44,8 @@ export const AgentWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'breaching_resolution',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'SLA Breaching',
       type: 'metric',
       filter: {
@@ -56,7 +58,8 @@ export const AgentWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'angry',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'Angry Customers',
       type: 'metric',
       filter: {
@@ -69,7 +72,8 @@ export const AgentWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'awaiting_triage',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'Awaiting Triage',
       type: 'metric',
       filter: { status: 'new' },
@@ -80,7 +84,8 @@ export const AgentWorkbenchDashboard: Dashboard = {
 
     {
       id: 'my_queue_table',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'My Queue (Priority Sorted)',
       type: 'table',
       filter: {
@@ -96,7 +101,8 @@ export const AgentWorkbenchDashboard: Dashboard = {
     },
     {
       id: 'breaching_table',
-      dataset: 'ticket_metrics', values: ['ticket_count'],
+      dataset: 'ticket_metrics',
+      values: ['ticket_count'],
       title: 'SLA Breaches',
       type: 'table',
       filter: {

@@ -18,7 +18,13 @@ export const TicketDataset = defineDataset({
     { name: 'ai_category', label: 'AI Category', field: 'ai_category', type: 'string' },
     { name: 'ai_sentiment', label: 'AI Sentiment', field: 'ai_sentiment', type: 'string' },
     { name: 'priority', label: 'Priority', field: 'priority', type: 'string' },
-    { name: 'resolved_at', label: 'Resolved At', field: 'resolved_at', type: 'date', dateGranularity: 'day' },
+    {
+      name: 'resolved_at',
+      label: 'Resolved At',
+      field: 'resolved_at',
+      type: 'date',
+      dateGranularity: 'day',
+    },
   ],
   measures: [
     { name: 'ticket_count', label: 'Tickets', aggregate: 'count' },
