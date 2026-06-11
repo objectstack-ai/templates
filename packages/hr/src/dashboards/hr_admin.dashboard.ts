@@ -8,7 +8,7 @@ import type { Dashboard } from '@objectstack/spec/ui';
  *
  * Trend overlay: "New Hires (30d)" carries `compareTo: 'previousPeriod'`
  * (this 30d vs. prior 30d) so the HR admin lands on a hiring-velocity
- * delta. The new "Hires by Month" line uses `categoryGranularity:
+ * delta. The new "Hires by Month" line uses `dateGranularity:
  * 'month'` + `compareTo: 'previousYear'` to expose YoY hiring patterns
  * — the question every comp-cycle planning meeting opens with.
  */
@@ -35,9 +35,7 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_employee_metrics', values: ['employee_count'],
       title: 'Active Headcount',
       type: 'metric',
-      object: 'hr_employee',
       filter: { status: 'active' },
-      aggregate: 'count',
       colorVariant: 'blue',
       layout: { x: 0, y: 0, w: 3, h: 2 },
       options: { icon: 'Users', format: '0,0' },
@@ -47,9 +45,7 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_employee_metrics', values: ['employee_count'],
       title: 'On Leave',
       type: 'metric',
-      object: 'hr_employee',
       filter: { status: 'on_leave' },
-      aggregate: 'count',
       colorVariant: 'warning',
       layout: { x: 3, y: 0, w: 3, h: 2 },
       options: { icon: 'CalendarOff', format: '0,0' },
@@ -59,9 +55,7 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_employee_metrics', values: ['employee_count'],
       title: 'New Hires (30d)',
       type: 'metric',
-      object: 'hr_employee',
       filter: { hire_date: { $gte: '{30_days_ago}' }, status: { $ne: 'terminated' } },
-      aggregate: 'count',
       compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 6, y: 0, w: 3, h: 2 },
@@ -72,9 +66,7 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_time_off_request_metrics', values: ['request_count'],
       title: 'My Pending Approvals',
       type: 'metric',
-      object: 'hr_time_off_request',
       filter: { status: 'submitted', approver: '{current_user_id}' },
-      aggregate: 'count',
       colorVariant: 'warning',
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'Clock', format: '0,0' },
@@ -84,11 +76,9 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_document_metrics', values: ['document_count'],
       title: 'Documents Expiring (30d)',
       type: 'metric',
-      object: 'hr_document',
       filter: {
         expires_at: { $gte: '{today}', $lte: '{today+30}' },
       },
-      aggregate: 'count',
       colorVariant: 'warning',
       layout: { x: 0, y: 2, w: 3, h: 2 },
       options: { icon: 'AlertTriangle', format: '0,0' },
@@ -98,9 +88,7 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_document_metrics', values: ['document_count'],
       title: 'Already Expired',
       type: 'metric',
-      object: 'hr_document',
       filter: { expires_at: { $lt: '{today}' } },
-      aggregate: 'count',
       colorVariant: 'danger',
       layout: { x: 3, y: 2, w: 3, h: 2 },
       options: { icon: 'XCircle', format: '0,0' },
@@ -110,10 +98,7 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_employee_metrics', dimensions: ['department'], values: ['employee_count'],
       title: 'Headcount by Department',
       type: 'bar',
-      object: 'hr_employee',
       filter: { status: { $ne: 'terminated' } },
-      aggregate: 'count',
-      categoryField: 'department',
       layout: { x: 0, y: 4, w: 6, h: 4 },
     },
     {
@@ -121,8 +106,6 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_time_off_request_metrics', values: ['request_count'],
       title: 'Out of Office Today',
       type: 'table',
-      object: 'hr_time_off_request',
-      aggregate: 'count',
       filter: {
         status: 'approved',
         start_date: { $lte: '{today}' },
@@ -140,8 +123,6 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_time_off_request_metrics', values: ['request_count'],
       title: 'My Pending Time-Off Requests',
       type: 'table',
-      object: 'hr_time_off_request',
-      aggregate: 'count',
       filter: { status: 'submitted', approver: '{current_user_id}' },
       layout: { x: 0, y: 8, w: 8, h: 5 },
       options: {
@@ -155,8 +136,6 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_document_metrics', values: ['document_count'],
       title: 'Documents Expiring Soon',
       type: 'table',
-      object: 'hr_document',
-      aggregate: 'count',
       filter: { expires_at: { $gte: '{today}', $lte: '{today+30}' } },
       layout: { x: 8, y: 8, w: 4, h: 5 },
       options: {
@@ -170,11 +149,7 @@ export const HrAdminDashboard: Dashboard = {
       dataset: 'hr_employee_metrics', dimensions: ['hire_date'], values: ['employee_count'],
       title: 'Hires by Month (last 12 months)',
       type: 'line',
-      object: 'hr_employee',
       filter: { hire_date: { $gte: '{12_months_ago}' } },
-      aggregate: 'count',
-      categoryField: 'hire_date',
-      categoryGranularity: 'month',
       compareTo: 'previousYear',
       chartConfig: {
         type: 'line',

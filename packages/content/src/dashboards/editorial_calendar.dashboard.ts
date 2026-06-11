@@ -9,7 +9,7 @@ import type { Dashboard } from '@objectstack/spec/ui';
  * Trend overlay: the "Published (30d)" KPI carries `compareTo:
  * 'previousPeriod'` so the lead sees a delta vs. the prior 30 days —
  * the question they get asked at every weekly. The new monthly trend
- * line also overlays the previous year (`categoryGranularity: 'month'`
+ * line also overlays the previous year (`dateGranularity: 'month'`
  * + `compareTo: 'previousYear'`) to spot seasonality.
  */
 export const EditorialCalendarDashboard: Dashboard = {
@@ -33,12 +33,10 @@ export const EditorialCalendarDashboard: Dashboard = {
       dataset: 'content_piece_metrics', values: ['piece_count'],
       title: 'Pieces Scheduled (30d)',
       type: 'metric',
-      object: 'content_piece',
       filter: {
         status: 'scheduled',
         publish_at: { $gte: '{today}', $lte: '{30_days_from_now}' },
       },
-      aggregate: 'count',
       colorVariant: 'blue',
       layout: { x: 0, y: 0, w: 3, h: 2 },
       options: { icon: 'Calendar', format: '0,0' },
@@ -48,9 +46,7 @@ export const EditorialCalendarDashboard: Dashboard = {
       dataset: 'content_piece_metrics', values: ['piece_count'],
       title: 'Awaiting Approval',
       type: 'metric',
-      object: 'content_piece',
       filter: { status: 'in_review' },
-      aggregate: 'count',
       colorVariant: 'warning',
       layout: { x: 3, y: 0, w: 3, h: 2 },
       options: { icon: 'CheckCircle', format: '0,0' },
@@ -60,12 +56,10 @@ export const EditorialCalendarDashboard: Dashboard = {
       dataset: 'content_piece_metrics', values: ['piece_count'],
       title: 'Published (30d)',
       type: 'metric',
-      object: 'content_piece',
       filter: {
         status: 'published',
         published_at: { $gte: '{last_month_start}' },
       },
-      aggregate: 'count',
       compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 6, y: 0, w: 3, h: 2 },
@@ -76,12 +70,10 @@ export const EditorialCalendarDashboard: Dashboard = {
       dataset: 'content_piece_metrics', values: ['piece_count'],
       title: 'Overdue',
       type: 'metric',
-      object: 'content_piece',
       filter: {
         status: { $in: ['scheduled', 'approved', 'in_review', 'drafting'] },
         publish_at: { $lt: '{today}' },
       },
-      aggregate: 'count',
       colorVariant: 'danger',
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'AlertTriangle', format: '0,0' },
@@ -92,8 +84,6 @@ export const EditorialCalendarDashboard: Dashboard = {
       dataset: 'content_piece_metrics', values: ['piece_count'],
       title: 'Upcoming Calendar',
       type: 'table',
-      object: 'content_piece',
-      aggregate: 'count',
       filter: {
         status: { $in: ['approved', 'scheduled', 'published'] },
         publish_at: { $gte: '{last_month_start}' },
@@ -110,10 +100,7 @@ export const EditorialCalendarDashboard: Dashboard = {
       dataset: 'content_publication_metrics', dimensions: ['channel'], values: ['publication_count'],
       title: 'Publications by Channel (30d)',
       type: 'pie',
-      object: 'content_publication',
       filter: { published_at: { $gte: '{last_month_start}' } },
-      aggregate: 'count',
-      categoryField: 'channel',
       layout: { x: 8, y: 2, w: 4, h: 6 },
       options: { donut: true, legend: 'right' },
     },
@@ -122,14 +109,10 @@ export const EditorialCalendarDashboard: Dashboard = {
       dataset: 'content_piece_metrics', dimensions: ['published_at'], values: ['piece_count'],
       title: 'Published Pieces by Month (last 12 months)',
       type: 'line',
-      object: 'content_piece',
       filter: {
         status: 'published',
         published_at: { $gte: '{12_months_ago}' },
       },
-      aggregate: 'count',
-      categoryField: 'published_at',
-      categoryGranularity: 'month',
       compareTo: 'previousYear',
       chartConfig: {
         type: 'line',

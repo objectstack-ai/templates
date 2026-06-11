@@ -8,7 +8,7 @@ export const ProcurementOrderDataset = defineDataset({
   label: 'procurement_order metrics',
   object: 'procurement_order',
   dimensions: [
-    { name: 'order_date', label: 'order_date', field: 'order_date', type: 'date' },
+    { name: 'order_date', label: 'order_date', field: 'order_date', type: 'date', dateGranularity: 'month' },
   ],
   measures: [
     { name: 'order_count', label: 'order_count', aggregate: 'count' },

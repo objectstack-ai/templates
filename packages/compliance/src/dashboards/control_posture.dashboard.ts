@@ -10,7 +10,7 @@ import type { Dashboard } from '@objectstack/spec/ui';
  *  • assessments in flight
  *
  * Trend overlay: the new "Assessments by Month" line chart uses
- * `categoryGranularity: 'month'` + `compareTo: 'previousYear'` so the
+ * `dateGranularity: 'month'` + `compareTo: 'previousYear'` so the
  * compliance lead can see whether assessment cadence is keeping pace with
  * the prior year — the question audit committees ask first.
  *
@@ -44,9 +44,7 @@ export const ControlPostureDashboard: Dashboard = {
       dataset: 'compliance_control_metrics', values: ['control_count'],
       title: 'Controls Passing',
       type: 'metric',
-      object: 'compliance_control',
       filter: { last_status: 'passed' },
-      aggregate: 'count',
       colorVariant: 'success',
       layout: { x: 0, y: 0, w: 3, h: 2 },
       options: { icon: 'ShieldCheck', format: '0,0' },
@@ -56,9 +54,7 @@ export const ControlPostureDashboard: Dashboard = {
       dataset: 'compliance_control_metrics', values: ['control_count'],
       title: 'Failing or Partial',
       type: 'metric',
-      object: 'compliance_control',
       filter: { last_status: { $in: ['failed', 'partial'] } },
-      aggregate: 'count',
       colorVariant: 'danger',
       layout: { x: 3, y: 0, w: 3, h: 2 },
       options: { icon: 'AlertTriangle', format: '0,0' },
@@ -68,12 +64,10 @@ export const ControlPostureDashboard: Dashboard = {
       dataset: 'compliance_evidence_metrics', values: ['evidence_count'],
       title: 'Evidence Expiring ≤ 30d',
       type: 'metric',
-      object: 'compliance_evidence',
       filter: {
         status: 'approved',
         expires_on: { $gte: '{today}', $lte: '{30_days_from_now}' },
       },
-      aggregate: 'count',
       colorVariant: 'warning',
       layout: { x: 6, y: 0, w: 3, h: 2 },
       options: { icon: 'Clock', format: '0,0' },
@@ -83,9 +77,7 @@ export const ControlPostureDashboard: Dashboard = {
       dataset: 'compliance_assessment_metrics', values: ['assessment_count'],
       title: 'Assessments In Progress',
       type: 'metric',
-      object: 'compliance_assessment',
       filter: { status: 'in_progress' },
-      aggregate: 'count',
       colorVariant: 'blue',
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'ClipboardCheck', format: '0,0' },
@@ -95,8 +87,6 @@ export const ControlPostureDashboard: Dashboard = {
       dataset: 'compliance_control_metrics', values: ['control_count'],
       title: 'Failing Controls (Action Required)',
       type: 'table',
-      object: 'compliance_control',
-      aggregate: 'count',
       filter: { last_status: { $in: ['failed', 'partial'] } },
       layout: { x: 0, y: 2, w: 8, h: 5 },
       options: {
@@ -113,8 +103,6 @@ export const ControlPostureDashboard: Dashboard = {
       dataset: 'compliance_evidence_metrics', values: ['evidence_count'],
       title: 'Evidence Expiring Soon',
       type: 'table',
-      object: 'compliance_evidence',
-      aggregate: 'count',
       filter: {
         status: 'approved',
         expires_on: { $gte: '{today}' },
@@ -131,14 +119,10 @@ export const ControlPostureDashboard: Dashboard = {
       dataset: 'compliance_assessment_metrics', dimensions: ['assessed_at'], values: ['assessment_count'],
       title: 'Assessments Completed by Month (last 12 months)',
       type: 'line',
-      object: 'compliance_assessment',
       filter: {
         status: 'complete',
         assessed_at: { $gte: '{12_months_ago}' },
       },
-      aggregate: 'count',
-      categoryField: 'assessed_at',
-      categoryGranularity: 'month',
       compareTo: 'previousYear',
       chartConfig: {
         type: 'line',

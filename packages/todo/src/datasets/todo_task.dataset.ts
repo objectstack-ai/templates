@@ -8,7 +8,7 @@ export const TodoTaskDataset = defineDataset({
   label: 'todo_task metrics',
   object: 'todo_task',
   dimensions: [
-    { name: 'completed_at', label: 'completed_at', field: 'completed_at', type: 'date' },
+    { name: 'completed_at', label: 'completed_at', field: 'completed_at', type: 'date', dateGranularity: 'week' },
   ],
   measures: [
     { name: 'task_count', label: 'task_count', aggregate: 'count' },

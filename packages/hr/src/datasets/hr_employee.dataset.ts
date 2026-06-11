@@ -9,7 +9,7 @@ export const HrEmployeeDataset = defineDataset({
   object: 'hr_employee',
   dimensions: [
     { name: 'department', label: 'department', field: 'department', type: 'string' },
-    { name: 'hire_date', label: 'hire_date', field: 'hire_date', type: 'date' },
+    { name: 'hire_date', label: 'hire_date', field: 'hire_date', type: 'date', dateGranularity: 'month' },
   ],
   measures: [
     { name: 'employee_count', label: 'employee_count', aggregate: 'count' },

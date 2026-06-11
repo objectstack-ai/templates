@@ -8,7 +8,7 @@ import type { Dashboard } from '@objectstack/spec/ui';
  *
  * Trend overlay: "Done This Week" carries `compareTo: 'previousPeriod'`
  * (week-over-week delta) and a new weekly throughput line uses
- * `categoryGranularity: 'week'` + `compareTo: 'previousPeriod'` so each
+ * `dateGranularity: 'week'` + `compareTo: 'previousPeriod'` so each
  * person sees their personal throughput vs. the prior 12 weeks.
  */
 export const MyWorkDashboard: Dashboard = {
@@ -32,9 +32,7 @@ export const MyWorkDashboard: Dashboard = {
       dataset: 'todo_task_metrics', values: ['task_count'],
       title: 'My Open Tasks',
       type: 'metric',
-      object: 'todo_task',
       filter: { assignee: '{current_user_id}', status: { $in: ['todo', 'doing'] } },
-      aggregate: 'count',
       colorVariant: 'blue',
       layout: { x: 0, y: 0, w: 4, h: 2 },
       options: { icon: 'CheckSquare', format: '0,0' },
@@ -44,13 +42,11 @@ export const MyWorkDashboard: Dashboard = {
       dataset: 'todo_task_metrics', values: ['task_count'],
       title: 'Overdue',
       type: 'metric',
-      object: 'todo_task',
       filter: {
         assignee: '{current_user_id}',
         status: { $in: ['todo', 'doing'] },
         due_date: { $lt: '{today}' },
       },
-      aggregate: 'count',
       colorVariant: 'danger',
       layout: { x: 4, y: 0, w: 4, h: 2 },
       options: { icon: 'AlertTriangle', format: '0,0' },
@@ -60,13 +56,11 @@ export const MyWorkDashboard: Dashboard = {
       dataset: 'todo_task_metrics', values: ['task_count'],
       title: 'Done This Week',
       type: 'metric',
-      object: 'todo_task',
       filter: {
         assignee: '{current_user_id}',
         status: 'done',
         completed_at: { $gte: '{week_start}' },
       },
-      aggregate: 'count',
       compareTo: 'previousPeriod',
       colorVariant: 'success',
       layout: { x: 8, y: 0, w: 4, h: 2 },
@@ -77,8 +71,6 @@ export const MyWorkDashboard: Dashboard = {
       dataset: 'todo_task_metrics', values: ['task_count'],
       title: 'Overdue Tasks',
       type: 'table',
-      object: 'todo_task',
-      aggregate: 'count',
       filter: {
         assignee: '{current_user_id}',
         status: { $in: ['todo', 'doing'] },
@@ -95,15 +87,11 @@ export const MyWorkDashboard: Dashboard = {
       dataset: 'todo_task_metrics', dimensions: ['completed_at'], values: ['task_count'],
       title: 'My Throughput by Week (last 12 weeks)',
       type: 'line',
-      object: 'todo_task',
       filter: {
         assignee: '{current_user_id}',
         status: 'done',
         completed_at: { $gte: '{12_weeks_ago}' },
       },
-      aggregate: 'count',
-      categoryField: 'completed_at',
-      categoryGranularity: 'week',
       compareTo: 'previousPeriod',
       chartConfig: {
         type: 'line',
