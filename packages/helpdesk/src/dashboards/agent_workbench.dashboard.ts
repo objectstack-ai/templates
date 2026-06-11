@@ -82,39 +82,8 @@ export const AgentWorkbenchDashboard: Dashboard = {
       options: { icon: 'Sparkles', format: '0,0' },
     },
 
-    {
-      id: 'my_queue_table',
-      dataset: 'ticket_metrics',
-      values: ['ticket_count'],
-      title: 'My Queue (Priority Sorted)',
-      type: 'table',
-      filter: {
-        assignee: '{currentUser}',
-        status: { $nin: ['closed', 'resolved'] },
-      },
-      layout: { x: 0, y: 2, w: 8, h: 5 },
-      options: {
-        columns: ['ticket_number', 'name', 'priority', 'ai_sentiment', 'first_response_due_at'],
-        pageSize: 10,
-        sort: [{ field: 'priority', order: 'desc' }],
-      },
-    },
-    {
-      id: 'breaching_table',
-      dataset: 'ticket_metrics',
-      values: ['ticket_count'],
-      title: 'SLA Breaches',
-      type: 'table',
-      filter: {
-        status: { $nin: ['closed', 'resolved'] },
-        resolution_due_at: { $lt: '{today}' },
-      },
-      layout: { x: 8, y: 2, w: 4, h: 5 },
-      options: {
-        columns: ['ticket_number', 'priority', 'resolution_due_at'],
-        pageSize: 10,
-        sort: [{ field: 'resolution_due_at', order: 'asc' }],
-      },
-    },
+    // Record listings moved to object-bound ListViews (ADR-0017): `my_queue_table`
+    // is the Tickets "My Queue" tab (my_queue view); `breaching_table` is the
+    // Tickets "Breaching SLA" tab. KPI widgets above keep the counts here.
   ],
 };

@@ -109,52 +109,10 @@ export const HrAdminDashboard: Dashboard = {
       filter: { status: { $ne: 'terminated' } },
       layout: { x: 0, y: 4, w: 6, h: 4 },
     },
-    {
-      id: 'ooo_today',
-      dataset: 'hr_time_off_request_metrics',
-      values: ['request_count'],
-      title: 'Out of Office Today',
-      type: 'table',
-      filter: {
-        status: 'approved',
-        start_date: { $lte: '{today}' },
-        end_date: { $gte: '{today}' },
-      },
-      layout: { x: 6, y: 4, w: 6, h: 4 },
-      options: {
-        columns: ['employee', 'leave_type', 'start_date', 'end_date'],
-        pageSize: 10,
-        sort: [{ field: 'end_date', order: 'asc' }],
-      },
-    },
-    {
-      id: 'pending_time_off_table',
-      dataset: 'hr_time_off_request_metrics',
-      values: ['request_count'],
-      title: 'My Pending Time-Off Requests',
-      type: 'table',
-      filter: { status: 'submitted', approver: '{current_user_id}' },
-      layout: { x: 0, y: 8, w: 8, h: 5 },
-      options: {
-        columns: ['employee', 'leave_type', 'start_date', 'end_date', 'days', 'submitted_at'],
-        pageSize: 10,
-        sort: [{ field: 'start_date', order: 'asc' }],
-      },
-    },
-    {
-      id: 'expiring_docs_table',
-      dataset: 'hr_document_metrics',
-      values: ['document_count'],
-      title: 'Documents Expiring Soon',
-      type: 'table',
-      filter: { expires_at: { $gte: '{today}', $lte: '{today+30}' } },
-      layout: { x: 8, y: 8, w: 4, h: 5 },
-      options: {
-        columns: ['name', 'employee', 'doc_type', 'expires_at'],
-        pageSize: 10,
-        sort: [{ field: 'expires_at', order: 'asc' }],
-      },
-    },
+    // Record listings moved to object-bound ListViews (ADR-0017): `ooo_today`
+    // is the Time-Off "Out Today" tab (out_of_office_today view); `pending_time_off_table`
+    // is the Time-Off "Pending" tab; `expiring_docs_table` is the Documents
+    // "Expiring ≤ 30d" tab. KPI widgets above keep the counts here.
     {
       id: 'hires_by_month',
       dataset: 'hr_employee_metrics',

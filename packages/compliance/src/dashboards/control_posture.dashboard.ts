@@ -86,40 +86,9 @@ export const ControlPostureDashboard: Dashboard = {
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'ClipboardCheck', format: '0,0' },
     },
-    {
-      id: 'failing_table',
-      dataset: 'compliance_control_metrics',
-      values: ['control_count'],
-      title: 'Failing Controls (Action Required)',
-      type: 'table',
-      filter: { last_status: { $in: ['failed', 'partial'] } },
-      layout: { x: 0, y: 2, w: 8, h: 5 },
-      options: {
-        columns: ['code', 'title', 'framework', 'criticality', 'last_assessed_at'],
-        pageSize: 10,
-        sort: [
-          { field: 'criticality', order: 'asc' },
-          { field: 'code', order: 'asc' },
-        ],
-      },
-    },
-    {
-      id: 'expiring_evidence_table',
-      dataset: 'compliance_evidence_metrics',
-      values: ['evidence_count'],
-      title: 'Evidence Expiring Soon',
-      type: 'table',
-      filter: {
-        status: 'approved',
-        expires_on: { $gte: '{today}' },
-      },
-      layout: { x: 8, y: 2, w: 4, h: 5 },
-      options: {
-        columns: ['title', 'control', 'expires_on'],
-        pageSize: 10,
-        sort: [{ field: 'expires_on', order: 'asc' }],
-      },
-    },
+    // Record listings moved to object-bound ListViews (ADR-0017): `failing_table`
+    // is the Controls "Failing" tab; `expiring_evidence_table` is the Evidence
+    // "Expiring ≤ 30d" tab. KPI widgets above keep the counts here.
     {
       id: 'assessments_by_month',
       dataset: 'compliance_assessment_metrics',
