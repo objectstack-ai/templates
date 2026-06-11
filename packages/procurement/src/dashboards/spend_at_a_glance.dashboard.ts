@@ -8,7 +8,7 @@ import type { Dashboard } from '@objectstack/spec/ui';
  * spend totals so the buying team has a single pane of glass.
  *
  * Trend overlay: the new "PO Value by Month" line chart uses
- * `categoryGranularity: 'month'` + `compareTo: 'previousYear'` so the
+ * `dateGranularity: 'month'` + `compareTo: 'previousYear'` so the
  * buying team can see whether monthly commitment is up vs. the same
  * month last year — the conversation the CFO opens every QBR with.
  *
@@ -38,9 +38,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       dataset: 'procurement_request_metrics', values: ['request_count'],
       title: 'PRs Awaiting Approval',
       type: 'metric',
-      object: 'procurement_request',
       filter: { status: 'submitted', estimated_amount: { $gte: 5000 } },
-      aggregate: 'count',
       colorVariant: 'warning',
       layout: { x: 0, y: 0, w: 3, h: 2 },
       options: { icon: 'Clock', format: '0,0' },
@@ -50,9 +48,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       dataset: 'procurement_order_metrics', values: ['order_count'],
       title: 'Open Purchase Orders',
       type: 'metric',
-      object: 'procurement_order',
       filter: { status: { $in: ['sent', 'partial'] } },
-      aggregate: 'count',
       colorVariant: 'blue',
       layout: { x: 3, y: 0, w: 3, h: 2 },
       options: { icon: 'FileCheck', format: '0,0' },
@@ -62,12 +58,10 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       dataset: 'procurement_order_metrics', values: ['order_count'],
       title: 'Overdue Deliveries',
       type: 'metric',
-      object: 'procurement_order',
       filter: {
         status: { $in: ['sent', 'partial'] },
         expected_delivery: { $lt: '{today}' },
       },
-      aggregate: 'count',
       colorVariant: 'danger',
       layout: { x: 6, y: 0, w: 3, h: 2 },
       options: { icon: 'AlertTriangle', format: '0,0' },
@@ -77,10 +71,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       dataset: 'procurement_order_metrics', values: ['sum_total_amount'],
       title: 'Open Commitment ($)',
       type: 'metric',
-      object: 'procurement_order',
       filter: { status: { $in: ['sent', 'partial'] } },
-      aggregate: 'sum',
-      valueField: 'total_amount',
       colorVariant: 'success',
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'TrendingUp', format: '$0,0' },
@@ -90,8 +81,6 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       dataset: 'procurement_request_metrics', values: ['request_count'],
       title: 'Requests Awaiting Approval',
       type: 'table',
-      object: 'procurement_request',
-      aggregate: 'count',
       filter: { status: 'submitted' },
       layout: { x: 0, y: 2, w: 8, h: 5 },
       options: {
@@ -105,8 +94,6 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       dataset: 'procurement_order_metrics', values: ['order_count'],
       title: 'Open Purchase Orders',
       type: 'table',
-      object: 'procurement_order',
-      aggregate: 'count',
       filter: { status: { $in: ['sent', 'partial'] } },
       layout: { x: 8, y: 2, w: 4, h: 5 },
       options: {
@@ -120,12 +107,7 @@ export const SpendAtAGlanceDashboard: Dashboard = {
       dataset: 'procurement_order_metrics', dimensions: ['order_date'], values: ['sum_total_amount'],
       title: 'PO Value by Month (last 12 months)',
       type: 'line',
-      object: 'procurement_order',
       filter: { order_date: { $gte: '{12_months_ago}' } },
-      aggregate: 'sum',
-      valueField: 'total_amount',
-      categoryField: 'order_date',
-      categoryGranularity: 'month',
       compareTo: 'previousYear',
       chartConfig: {
         type: 'line',

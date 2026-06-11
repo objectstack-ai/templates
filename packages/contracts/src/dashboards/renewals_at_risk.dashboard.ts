@@ -9,7 +9,7 @@ import type { Dashboard } from '@objectstack/spec/ui';
  * Trend overlay: the "Contracts Signed by Month" line includes a YoY
  * (`compareTo: 'previousYear'`) overlay rendered as a muted dashed series
  * so the GC can see whether new-business velocity is up or down vs. the
- * same month last year. Server-side date bucketing (`categoryGranularity:
+ * same month last year. Server-side date bucketing (`dateGranularity:
  * 'month'`) avoids the one-row-per-signed_date spike that would otherwise
  * flatten the chart.
  */
@@ -36,7 +36,6 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       dataset: 'contracts_contract_metrics', values: ['contract_count'],
       title: 'Expiring ≤ 60 days',
       type: 'metric',
-      object: 'contracts_contract',
       // NOTE: filter on base fields only — formula fields (`is_expiring_soon`,
       // `approval_required`) are not queryable by the analytics service in
       // spec 5.2. Recompute the boundary in MongoDB-style filters instead.
@@ -44,7 +43,6 @@ export const RenewalsAtRiskDashboard: Dashboard = {
         status: 'active',
         end_date: { $gte: '{today}', $lte: '{60_days_from_now}' },
       },
-      aggregate: 'count',
       colorVariant: 'warning',
       layout: { x: 0, y: 0, w: 3, h: 2 },
       options: { icon: 'Clock', format: '0,0' },
@@ -54,13 +52,11 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       dataset: 'contracts_contract_metrics', values: ['contract_count'],
       title: 'Auto-Renewing ≤ 30d',
       type: 'metric',
-      object: 'contracts_contract',
       filter: {
         status: 'active',
         auto_renew: true,
         end_date: { $gte: '{today}', $lte: '{30_days_from_now}' },
       },
-      aggregate: 'count',
       colorVariant: 'danger',
       layout: { x: 3, y: 0, w: 3, h: 2 },
       options: { icon: 'AlertTriangle', format: '0,0' },
@@ -70,12 +66,10 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       dataset: 'contracts_contract_metrics', values: ['contract_count'],
       title: 'Pending Approval',
       type: 'metric',
-      object: 'contracts_contract',
       filter: {
         status: 'in_review',
         total_value: { $gte: 50000 },
       },
-      aggregate: 'count',
       colorVariant: 'blue',
       layout: { x: 6, y: 0, w: 3, h: 2 },
       options: { icon: 'CheckCircle', format: '0,0' },
@@ -85,10 +79,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       dataset: 'contracts_contract_metrics', values: ['sum_total_value'],
       title: 'Active Portfolio Value',
       type: 'metric',
-      object: 'contracts_contract',
       filter: { status: 'active' },
-      aggregate: 'sum',
-      valueField: 'total_value',
       colorVariant: 'success',
       layout: { x: 9, y: 0, w: 3, h: 2 },
       options: { icon: 'TrendingUp', format: '$0,0' },
@@ -98,8 +89,6 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       dataset: 'contracts_contract_metrics', values: ['contract_count'],
       title: 'Expiring Contracts (Next 60d)',
       type: 'table',
-      object: 'contracts_contract',
-      aggregate: 'count',
       // Only `{today}` is resolved client-side by the data endpoint; tokens
       // like `{60_days_from_now}` only work inside the analytics service.
       // We sort ascending by end_date and rely on pageSize to cap the list
@@ -120,8 +109,6 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       dataset: 'contracts_obligation_metrics', values: ['obligation_count'],
       title: 'Open Obligations',
       type: 'table',
-      object: 'contracts_obligation',
-      aggregate: 'count',
       filter: { status: 'open' },
       layout: { x: 8, y: 2, w: 4, h: 5 },
       options: {
@@ -135,11 +122,7 @@ export const RenewalsAtRiskDashboard: Dashboard = {
       dataset: 'contracts_contract_metrics', dimensions: ['signed_date'], values: ['contract_count'],
       title: 'Contracts Signed by Month (last 12 months)',
       type: 'line',
-      object: 'contracts_contract',
       filter: { signed_date: { $gte: '{12_months_ago}' } },
-      aggregate: 'count',
-      categoryField: 'signed_date',
-      categoryGranularity: 'month',
       compareTo: 'previousYear',
       chartConfig: {
         type: 'line',
