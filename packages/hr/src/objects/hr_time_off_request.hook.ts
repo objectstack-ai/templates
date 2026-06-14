@@ -3,9 +3,11 @@
 import type { Hook, HookContext } from '@objectstack/spec/data';
 
 /**
- * Time-off automation hook — derives the approver from the employee's
- * manager on submit, and clears decision metadata when a request returns
- * to draft.
+ * Time-off automation hook — stamps lifecycle timestamps and clears decision
+ * metadata when a request returns to draft. The approver is routed to the
+ * employee's manager by `time_off_submitted.flow.ts` (which already resolves
+ * the manager to notify), not here — a hook can't do that cross-object read
+ * safely in the standalone sandbox.
  */
 const timeOffHook: Hook = {
   name: 'hr_time_off_automation',

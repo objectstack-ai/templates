@@ -68,7 +68,14 @@ export const zhCN: TranslationData = {
         employee: { label: '员工' },
         leave_type: {
           label: '假期类型',
-          options: { vacation: '年假', sick: '病假', personal: '事假', unpaid: '无薪假' },
+          options: {
+            vacation: '年假',
+            sick: '病假',
+            personal: '事假',
+            parental: '育儿假',
+            bereavement: '丧假',
+            unpaid: '无薪假',
+          },
         },
         start_date: { label: '开始日期' },
         end_date: { label: '结束日期' },
@@ -118,6 +125,7 @@ export const zhCN: TranslationData = {
         expires_at: { label: '到期日期' },
         is_expiring_soon: { label: '即将到期？' },
         is_expired: { label: '已过期？' },
+        expiry_status: { label: '到期状态' },
         notes: { label: '备注' },
       },
       _views: {
