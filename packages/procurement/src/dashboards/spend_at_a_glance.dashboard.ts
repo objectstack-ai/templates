@@ -101,7 +101,25 @@ export const SpendAtAGlanceDashboard: Dashboard = {
         showLegend: true,
         showDataLabels: false,
       },
-      layout: { x: 0, y: 7, w: 12, h: 5 },
+      layout: { x: 0, y: 7, w: 7, h: 5 },
+    },
+    {
+      id: 'top_vendors_by_spend',
+      dataset: 'procurement_order_metrics',
+      dimensions: ['vendor'],
+      values: ['sum_total_amount'],
+      title: 'Top Vendors by Spend',
+      type: 'bar',
+      chartConfig: {
+        type: 'bar',
+        xAxis: { field: 'vendor', showGridLines: false, logarithmic: false },
+        yAxis: [
+          { field: 'sum_total_amount', format: '$0,0', showGridLines: true, logarithmic: false },
+        ],
+        showLegend: false,
+        showDataLabels: false,
+      },
+      layout: { x: 7, y: 7, w: 5, h: 5 },
     },
   ],
 };

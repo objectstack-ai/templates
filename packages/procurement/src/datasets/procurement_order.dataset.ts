@@ -15,6 +15,8 @@ export const ProcurementOrderDataset = defineDataset({
       type: 'date',
       dateGranularity: 'month',
     },
+    { name: 'vendor', label: 'vendor', field: 'vendor', type: 'string' },
+    { name: 'status', label: 'status', field: 'status', type: 'string' },
   ],
   measures: [
     { name: 'order_count', label: 'order_count', aggregate: 'count' },

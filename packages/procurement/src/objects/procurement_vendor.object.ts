@@ -59,6 +59,20 @@ export const Vendor = ObjectSchema.create({
         { label: 'Upfront', value: 'upfront' },
       ],
     }),
+    risk_tier: Field.select({
+      label: 'Risk Tier',
+      description: 'Supplier risk rating — drives review cadence and approval scrutiny.',
+      options: [
+        { label: 'Low', value: 'low', color: '#10B981', default: true },
+        { label: 'Medium', value: 'medium', color: '#F59E0B' },
+        { label: 'High', value: 'high', color: '#EF4444' },
+      ],
+    }),
+    is_preferred: Field.boolean({
+      label: 'Preferred Vendor',
+      defaultValue: false,
+      description: 'Preferred suppliers should be favoured when sourcing.',
+    }),
     country: Field.text({ label: 'Country', maxLength: 80 }),
     website: Field.text({ label: 'Website', maxLength: 200 }),
     primary_contact_name: Field.text({ label: 'Primary Contact', maxLength: 120 }),
@@ -80,5 +94,5 @@ export const Vendor = ObjectSchema.create({
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
-  compactLayout: ['name', 'vendor_code', 'category', 'status'],
+  compactLayout: ['name', 'vendor_code', 'category', 'status', 'risk_tier', 'is_preferred'],
 });

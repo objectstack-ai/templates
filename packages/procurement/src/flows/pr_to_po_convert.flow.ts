@@ -56,6 +56,7 @@ export const PRToPOConvertFlow: Flow = {
           owner: '{pr.requester}',
           total_amount: '{pr.estimated_amount}',
           received_amount: 0,
+          cost_center: '{pr.cost_center}',
           order_date: 'today()',
           expected_delivery: '{pr.needed_by}',
           notes:
