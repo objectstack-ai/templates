@@ -81,6 +81,7 @@ export const zhCN: TranslationData = {
         breaching_tickets: { label: 'SLA 超时', description: '已超过解决截止时间' },
         angry_tickets: { label: '愤怒客户', description: 'AI 识别为愤怒情感' },
         my_queue: { label: '我的队列', description: '分配给我的工单' },
+        my_tickets: { label: '我的工单', description: '门户中客户本人的工单' },
       },
     },
     helpdesk_customer: {

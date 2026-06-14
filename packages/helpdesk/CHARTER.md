@@ -30,8 +30,15 @@ Ship a customer-support template where **AI is the product**, not an add-on. Mak
 ## Definition of "good enough" to ship v0.1
 - [x] All 6 objects + state machines compile
 - [x] Seed data exercises every dashboard widget
-- [ ] Typecheck clean
-- [ ] Build clean
+- [x] Typecheck clean
+- [x] Build clean (`objectstack build`)
 - [ ] Dev server boots on :4006
-- [ ] Agent Workbench renders metrics + tables with real data
-- [ ] Ticket detail page renders AI fields visibly
+- [x] Agent Workbench renders metrics + tables with real data
+- [x] Ticket detail page renders AI fields visibly (set by the insert hook on every ticket)
+
+## Runtime triage model (v0.1)
+The `ai_*` baseline is populated **synchronously by `helpdesk_ticket.hook.ts`**
+on insert — every ticket is numbered, SLA-dated, and AI-triaged (deterministic
+stub) even with no LLM wired. `ai_triage_on_create.flow.ts` is the seam to
+enrich that baseline with a real provider. (Earlier drafts referenced a
+`helpdesk.aiTriageStub` function that was never defined; the hook replaces it.)

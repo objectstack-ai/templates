@@ -89,6 +89,10 @@ export const en: TranslationData = {
         },
         angry_tickets: { label: 'Angry Customers', description: 'AI detected angry sentiment' },
         my_queue: { label: 'My Queue', description: 'Tickets assigned to me' },
+        my_tickets: {
+          label: 'My Tickets',
+          description: 'Portal view of the customer’s own tickets',
+        },
       },
     },
     helpdesk_customer: {
