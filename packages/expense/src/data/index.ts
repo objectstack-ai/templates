@@ -8,12 +8,13 @@ import { ExpenseLine } from '../objects/expense_line.object';
 
 /**
  * Seed data — covers the full template surface:
- *   • 6 categories with soft per-transaction limits
+ *   • 8 categories with soft per-transaction limits (incl. Mileage, Telecom)
  *   • 5 reports spanning every lifecycle state + the approval threshold
  *   • 13 lines whose amounts match each report's total_amount
  *
- * Report totals are set explicitly so seeding stays consistent without
- * relying on the line rollup hook (hooks fire on user edits, not seeds).
+ * Report totals are set explicitly because `total_amount` is a stored header
+ * field maintained at the top level — there is no line rollup hook (a nested
+ * parent write from a line hook crashes the sandbox; see CHARTER.md).
  */
 
 const categories = defineSeed(ExpenseCategory, {
@@ -48,6 +49,14 @@ const categories = defineSeed(ExpenseCategory, {
       code: 'SOFTWARE',
       gl_account: '6600',
       per_txn_limit: 1000,
+      active: true,
+    },
+    { name: 'Mileage', code: 'MILEAGE', gl_account: '6440', per_txn_limit: 500, active: true },
+    {
+      name: 'Telecom / Phone',
+      code: 'TELECOM',
+      gl_account: '6700',
+      per_txn_limit: 150,
       active: true,
     },
   ],

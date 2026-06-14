@@ -5,8 +5,12 @@ import { P, F, tmpl } from '@objectstack/spec';
 
 /**
  * Expense Line — one out-of-pocket item on a report (a meal, a flight, a
- * taxi). Lines belong to exactly one `expense_report`; their `amount`
- * rolls up into `expense_report.total_amount` via the line hook.
+ * taxi). Lines belong to exactly one `expense_report`. Their `amount`
+ * contributes to `expense_report.total_amount`, but that header total is a
+ * STORED field maintained at the top level (client/seed) — NOT a rollup hook:
+ * a nested `update` of the parent from a line hook re-enters the QuickJS
+ * sandbox and crashes the runtime. See CHARTER.md ("Rollup vs. lifecycle
+ * hooks").
  *
  * Policy in v0 is deliberately light: a fixed receipt-required threshold
  * (`needs_receipt` ≥ 75) plus the category's soft per-transaction limit.
@@ -67,6 +71,13 @@ export const ExpenseLine = ObjectSchema.create({
         { label: 'Personal — Other', value: 'personal_other' },
       ],
     }),
+    reimbursable: Field.boolean({
+      label: 'Reimbursable',
+      defaultValue: true,
+      group: 'detail',
+      description:
+        'Uncheck for personal / non-reimbursable items. The reimbursable header total should exclude these (maintained client-side; not a hook rollup).',
+    }),
     needs_receipt: Field.formula({
       label: 'Receipt Required',
       group: 'receipt',
@@ -94,7 +105,7 @@ export const ExpenseLine = ObjectSchema.create({
 
   titleFormat: tmpl`{{record.description}}`,
   displayNameField: 'description',
-  compactLayout: ['description', 'category', 'amount', 'expense_date', 'merchant'],
+  compactLayout: ['description', 'category', 'amount', 'reimbursable', 'expense_date', 'merchant'],
 
   validations: [
     {

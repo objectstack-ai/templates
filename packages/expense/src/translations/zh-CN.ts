@@ -86,6 +86,7 @@ export const zhCN: TranslationData = {
           label: '支付方式',
           options: { personal_card: '个人卡', cash: '现金', personal_other: '个人 — 其他' },
         },
+        reimbursable: { label: '可报销' },
         needs_receipt: { label: '需要票据' },
         receipt_attached: { label: '已附票据' },
         notes: { label: '备注' },
