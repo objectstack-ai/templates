@@ -48,6 +48,17 @@ export const TimeOffSubmittedFlow: Flow = {
       },
     },
     {
+      id: 'route_to_manager',
+      type: 'update_record',
+      label: 'Route to Manager',
+      config: {
+        objectName: 'hr_time_off_request',
+        filter: { id: '{record.id}' },
+        // Record the approver so the "My Pending Approvals" surfaces resolve.
+        fields: { approver: '{emp.manager}' },
+      },
+    },
+    {
       id: 'notify_manager',
       type: 'notify',
       label: 'Notify Manager',
@@ -64,7 +75,8 @@ export const TimeOffSubmittedFlow: Flow = {
   edges: [
     { id: 'e1', source: 'start', target: 'get_request', type: 'default' },
     { id: 'e2', source: 'get_request', target: 'get_employee', type: 'default' },
-    { id: 'e3', source: 'get_employee', target: 'notify_manager', type: 'default' },
-    { id: 'e4', source: 'notify_manager', target: 'end', type: 'default' },
+    { id: 'e3', source: 'get_employee', target: 'route_to_manager', type: 'default' },
+    { id: 'e4', source: 'route_to_manager', target: 'notify_manager', type: 'default' },
+    { id: 'e5', source: 'notify_manager', target: 'end', type: 'default' },
   ],
 };

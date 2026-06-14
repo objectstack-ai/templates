@@ -20,7 +20,7 @@ It is the minimum HR backbone a 20–200-person company actually uses on day one
 | Self-referential relationship | `hr_employee.manager_id → hr_employee` |
 | Hierarchy object | `hr_department.parent_id → hr_department` |
 | State machine + approval | `hr_time_off_request`: draft → submitted → approved/rejected |
-| Field-level sensitivity | `hr_employee` salary / contract fields visible only to HR + self |
+| Field-level sensitivity | `hr_employee` salary / contract fields visible to HR Admins only (the `hr_employee` profile denies them). Self-visibility ("see my own comp, not a peer's") needs a row-aware field predicate and is a documented fork — do not claim it ships. |
 | Sharing rule | time-off request rows visible only to requester + approval chain |
 | Expiry-driven flow | `hr_document.expires_at` triggers reminder 30 days out |
 | Profiles | `hr_employee` (self-service) vs `hr_admin` (full access) |

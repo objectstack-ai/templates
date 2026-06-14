@@ -53,6 +53,11 @@ export const EmployeeDocument = ObjectSchema.create({
       label: 'Expired?',
       expression: F`record.expires_at != null && record.expires_at < today()`,
     }),
+    expiry_status: Field.formula({
+      label: 'Expiry Status',
+      description: 'Single severity band for sorting/colour-coding the document list.',
+      expression: F`record.expires_at == null ? "none" : (record.expires_at < today() ? "expired" : (record.expires_at <= (today() + 30) ? "expiring_30d" : (record.expires_at <= (today() + 60) ? "expiring_60d" : "valid")))`,
+    }),
     notes: Field.markdown({ label: 'Notes' }),
   },
 
@@ -70,5 +75,5 @@ export const EmployeeDocument = ObjectSchema.create({
   indexes: [{ fields: ['employee'] }, { fields: ['doc_type'] }, { fields: ['expires_at'] }],
 
   titleFormat: tmpl`{{record.name}}`,
-  compactLayout: ['name', 'employee', 'doc_type', 'expires_at'],
+  compactLayout: ['name', 'employee', 'doc_type', 'expires_at', 'expiry_status'],
 });

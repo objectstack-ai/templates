@@ -36,6 +36,8 @@ export const TimeOffRequest = ObjectSchema.create({
         { label: 'Vacation', value: 'vacation', color: '#3B82F6', default: true },
         { label: 'Sick', value: 'sick', color: '#EF4444' },
         { label: 'Personal', value: 'personal', color: '#8B5CF6' },
+        { label: 'Parental', value: 'parental', color: '#06B6D4' },
+        { label: 'Bereavement', value: 'bereavement', color: '#475569' },
         { label: 'Unpaid', value: 'unpaid', color: '#6B7280' },
       ],
     }),

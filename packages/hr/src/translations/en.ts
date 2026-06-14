@@ -73,7 +73,14 @@ export const en: TranslationData = {
         employee: { label: 'Employee' },
         leave_type: {
           label: 'Leave Type',
-          options: { vacation: 'Vacation', sick: 'Sick', personal: 'Personal', unpaid: 'Unpaid' },
+          options: {
+            vacation: 'Vacation',
+            sick: 'Sick',
+            personal: 'Personal',
+            parental: 'Parental',
+            bereavement: 'Bereavement',
+            unpaid: 'Unpaid',
+          },
         },
         start_date: { label: 'Start Date' },
         end_date: { label: 'End Date' },
@@ -126,6 +133,7 @@ export const en: TranslationData = {
         expires_at: { label: 'Expires At' },
         is_expiring_soon: { label: 'Expiring Soon?' },
         is_expired: { label: 'Expired?' },
+        expiry_status: { label: 'Expiry Status' },
         notes: { label: 'Notes' },
       },
       _views: {
