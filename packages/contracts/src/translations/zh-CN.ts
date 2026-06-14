@@ -46,6 +46,10 @@ export const zhCN: TranslationData = {
         },
         owner: { label: '内部负责人' },
         total_value: { label: '合同金额' },
+        currency: {
+          label: '币种',
+          options: { USD: '美元', EUR: '欧元', GBP: '英镑', CNY: '人民币', JPY: '日元' },
+        },
         payment_terms: {
           label: '付款条件',
           options: {
@@ -63,9 +67,21 @@ export const zhCN: TranslationData = {
         signed_date: { label: '签署日期' },
         auto_renew: { label: '自动续约' },
         renewal_notice_days: { label: '续约通知期 (天)' },
+        renewal_decision: {
+          label: '续约决定',
+          options: {
+            pending: '待定',
+            renew: '续约',
+            renegotiate: '重新谈判',
+            terminate: '到期终止',
+          },
+        },
+        renewal_decision_due: { label: '决定截止日' },
         is_expiring_soon: { label: '60 天内到期' },
         is_auto_renewing_soon: { label: '30 天内自动续约' },
         approval_required: { label: '需审批' },
+        approver: { label: '审批人' },
+        approved_at: { label: '审批时间' },
         extracted_clauses: { label: 'AI 抽取条款' },
         extraction_confidence: { label: '抽取置信度' },
         extracted_at: { label: '抽取时间' },

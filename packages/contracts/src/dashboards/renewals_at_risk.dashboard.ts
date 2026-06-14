@@ -109,7 +109,26 @@ export const RenewalsAtRiskDashboard: Dashboard = {
         showLegend: true,
         showDataLabels: false,
       },
-      layout: { x: 0, y: 7, w: 12, h: 5 },
+      layout: { x: 0, y: 7, w: 7, h: 5 },
+    },
+    {
+      id: 'exposure_by_counterparty',
+      dataset: 'contracts_contract_metrics',
+      dimensions: ['party'],
+      values: ['sum_total_value'],
+      title: 'Active Exposure by Counterparty',
+      type: 'bar',
+      filter: { status: 'active' },
+      chartConfig: {
+        type: 'bar',
+        xAxis: { field: 'party', showGridLines: false, logarithmic: false },
+        yAxis: [
+          { field: 'sum_total_value', format: '$0,0', showGridLines: true, logarithmic: false },
+        ],
+        showLegend: false,
+        showDataLabels: false,
+      },
+      layout: { x: 7, y: 7, w: 5, h: 5 },
     },
   ],
 };

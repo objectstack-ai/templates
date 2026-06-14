@@ -77,6 +77,16 @@ const contractHook: Hook = {
       }
     }
 
+    // Stamp approved_at the moment an approver is first recorded.
+    const prevApprover = previous?.approver ?? null;
+    if (input.approver != null && prevApprover == null && input.approved_at == null) {
+      input.approved_at = new Date().toISOString();
+    }
+    // Clear the stamp if the approver is removed.
+    if (event === 'beforeUpdate' && input.approver === null) {
+      input.approved_at = null;
+    }
+
     // Auto-renew sanity: zero notice days are nonsensical; default 30.
     if (input.auto_renew === true && input.renewal_notice_days == null) {
       input.renewal_notice_days = 30;
