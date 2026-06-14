@@ -61,11 +61,11 @@ These exist so the template stays a **template**, not a half-finished product:
 
 | Metric | Cap | Rationale |
 |---|---|---|
-| Business objects | ≤ 4 (`party`, `contract`, `obligation`, `contract_party_link`) | Readable in one sitting |
-| Total `.ts` LOC under `src/` | ≤ 2,500 | Same |
-| Locales | 1 (`en`) | Forkable starting point |
-| Dashboards | 1 | "Renewals at risk" |
-| Flows | ≤ 3 | Renewal alert + signed → create obligations + assigned notify |
+| Business objects | ≤ 4 (`party`, `contract`, `obligation`; a `contract_party_link` junction for multi-party deals remains a documented fork) | Readable in one sitting |
+| Total `.ts` LOC under `src/` | ≤ 3,000 | Raised 2,500→3,000 (2026-06) for approval enforcement, currency, renewal-decision capture, the signed→obligations flow, and the exposure-by-counterparty widget. |
+| Locales | 2 (`en`, `zh-CN`) | zh-CN ships repo-wide (PR #13); en remains the forkable base |
+| Dashboards | 1 | "Renewals at risk" (now incl. exposure-by-counterparty) |
+| Flows | ≤ 4 | Renewal alert + renewal draft + signed→obligations + obligation overdue. Raised 3→4 to ship the charter's promised signed→obligations flow. |
 | AI actions | 1 | `extract_terms` — others belong in user forks |
 | Permission sets | 2 | `contract_owner` + `legal_admin` |
 | Sharing rules | 0 at v0 | Profiles + roles cover the demo; rules are a fork extension |

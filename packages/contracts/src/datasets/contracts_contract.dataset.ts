@@ -15,6 +15,8 @@ export const ContractsContractDataset = defineDataset({
       type: 'date',
       dateGranularity: 'month',
     },
+    { name: 'party', label: 'party', field: 'party', type: 'string' },
+    { name: 'contract_type', label: 'contract_type', field: 'contract_type', type: 'string' },
   ],
   measures: [
     { name: 'contract_count', label: 'contract_count', aggregate: 'count' },

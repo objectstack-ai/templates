@@ -100,7 +100,20 @@ export const Contract = ObjectSchema.create({
       label: 'Total Value',
       group: 'commercial',
       min: 0,
-      description: 'Annualised if recurring; total if one-off. Currency: USD (override per-fork).',
+      description: 'Annualised if recurring; total if one-off. Denominated in `currency`.',
+    }),
+
+    currency: Field.select({
+      label: 'Currency',
+      group: 'commercial',
+      description: 'ISO-4217 currency of total_value. Populated by extract_terms when detectable.',
+      options: [
+        { label: 'USD', value: 'USD', default: true },
+        { label: 'EUR', value: 'EUR' },
+        { label: 'GBP', value: 'GBP' },
+        { label: 'CNY', value: 'CNY' },
+        { label: 'JPY', value: 'JPY' },
+      ],
     }),
 
     payment_terms: Field.select({
@@ -137,6 +150,22 @@ export const Contract = ObjectSchema.create({
       description:
         'Days before end_date by which we must notify to cancel. Drives alert lead time.',
     }),
+    renewal_decision: Field.select({
+      label: 'Renewal Decision',
+      group: 'renewal',
+      description: 'The team’s decision for this term — closes the renewal loop.',
+      options: [
+        { label: 'Pending', value: 'pending', color: '#94A3B8', default: true },
+        { label: 'Renew', value: 'renew', color: '#10B981' },
+        { label: 'Renegotiate', value: 'renegotiate', color: '#F59E0B' },
+        { label: 'Let Expire / Terminate', value: 'terminate', color: '#EF4444' },
+      ],
+    }),
+    renewal_decision_due: Field.date({
+      label: 'Decision Due',
+      group: 'renewal',
+      description: 'When the renew/terminate call must be made (usually end_date − notice).',
+    }),
 
     // Derived signals
     //
@@ -163,6 +192,19 @@ export const Contract = ObjectSchema.create({
       label: 'Approval Required',
       group: 'commercial',
       expression: F`record.total_value != null && record.total_value >= 50000`,
+    }),
+
+    approver: Field.lookup('sys_user', {
+      label: 'Approver',
+      group: 'commercial',
+      description:
+        'Who signed off the commercials. Required before a ≥ $50k contract can move to "signed".',
+    }),
+    approved_at: Field.datetime({
+      label: 'Approved At',
+      group: 'commercial',
+      readonly: true,
+      description: 'Stamped by the hook when an approver is recorded.',
     }),
 
     // AI-extracted (rewritten by extract_terms.action.ts)
@@ -255,6 +297,17 @@ export const Contract = ObjectSchema.create({
       severity: 'error',
       message: 'Status "signed" requires a signed_date.',
       condition: P`record.status == "signed" && record.signed_date == null`,
+    },
+    {
+      // Warning (not error): surfaces the missing sign-off on the form without
+      // blocking data loads (seed can't set a real `approver` user) or wedging
+      // the lifecycle. Hard, routed enforcement is a fork onto the native
+      // approval engine — see CHARTER "approvals".
+      name: 'high_value_requires_approver_before_signing',
+      type: 'script',
+      severity: 'warning',
+      message: 'Contracts of $50k or more should record an approver before signing.',
+      condition: P`record.total_value != null && record.total_value >= 50000 && record.approver == null && (record.status == "signed" || record.status == "active")`,
     },
   ],
 

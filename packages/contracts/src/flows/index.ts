@@ -2,6 +2,12 @@
 
 import { ContractRenewalAlertFlow } from './renewal_alert.flow';
 import { ContractRenewalDraftFlow } from './renewal_draft.flow';
+import { ContractSignedObligationsFlow } from './signed_obligations.flow';
 import { ObligationOverdueFlow } from './obligation_overdue.flow';
 
-export const allFlows = [ContractRenewalAlertFlow, ContractRenewalDraftFlow, ObligationOverdueFlow];
+export const allFlows = [
+  ContractRenewalAlertFlow,
+  ContractRenewalDraftFlow,
+  ContractSignedObligationsFlow,
+  ObligationOverdueFlow,
+];

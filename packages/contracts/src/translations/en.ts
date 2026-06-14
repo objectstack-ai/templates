@@ -47,6 +47,10 @@ export const en: TranslationData = {
         },
         owner: { label: 'Internal Owner' },
         total_value: { label: 'Total Value' },
+        currency: {
+          label: 'Currency',
+          options: { USD: 'USD', EUR: 'EUR', GBP: 'GBP', CNY: 'CNY', JPY: 'JPY' },
+        },
         payment_terms: {
           label: 'Payment Terms',
           options: {
@@ -64,9 +68,21 @@ export const en: TranslationData = {
         signed_date: { label: 'Signed Date' },
         auto_renew: { label: 'Auto-Renew' },
         renewal_notice_days: { label: 'Renewal Notice (days)' },
+        renewal_decision: {
+          label: 'Renewal Decision',
+          options: {
+            pending: 'Pending',
+            renew: 'Renew',
+            renegotiate: 'Renegotiate',
+            terminate: 'Let Expire / Terminate',
+          },
+        },
+        renewal_decision_due: { label: 'Decision Due' },
         is_expiring_soon: { label: 'Expiring ≤ 60 days' },
         is_auto_renewing_soon: { label: 'Auto-Renewing ≤ 30 days' },
         approval_required: { label: 'Approval Required' },
+        approver: { label: 'Approver' },
+        approved_at: { label: 'Approved At' },
         extracted_clauses: { label: 'Extracted Clauses' },
         extraction_confidence: { label: 'Extraction Confidence' },
         extracted_at: { label: 'Extracted At' },
