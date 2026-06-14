@@ -9,9 +9,14 @@ type Flow = Automation.Flow;
  * the parent `content_piece` so its dashboard/widget filters don't have
  * to join.
  *
- * Triggered on metric insert/update. The flow reads all metric rows for
- * the snapshot's publication, sums them, then writes back denormalised
- * totals on both the publication and (via a second step) the piece.
+ * Triggered when a metric snapshot is **created** — metric rows are
+ * append-only weekly snapshots (see `record_metric_snapshot.action.ts`,
+ * which inserts a new row each period), so the rollup must fire on insert.
+ * (The earlier `record-after-update` trigger never fired on the real
+ * recording path, so publication/piece totals only matched in seed data.)
+ * The flow reads all metric rows for the snapshot's publication, sums them,
+ * then writes back denormalised totals on both the publication and (via a
+ * second step) the piece.
  *
  * Why denormalised: the analytics service in spec 5.2 doesn't allow
  * filtered SUM(child.*) from a parent list view. Storing totals on the
@@ -22,7 +27,7 @@ export const PublicationRollupFlow: Flow = {
   name: 'content_publication_rollup',
   label: 'Roll Up Metrics to Publication & Piece',
   description:
-    'On metric snapshot insert/update, refresh the publication.total_* and piece.total_* denormalised fields.',
+    'On metric snapshot create, refresh the publication.total_* and piece.total_* denormalised fields.',
   type: 'record_change',
 
   variables: [{ name: 'metricId', type: 'text', isInput: true, isOutput: false }],
@@ -34,9 +39,7 @@ export const PublicationRollupFlow: Flow = {
       label: 'Start',
       config: {
         objectName: 'content_metric',
-        triggerType: 'record-after-update',
-        condition:
-          'previous.views != record.views || previous.clicks != record.clicks || previous.signups != record.signups || previous.revenue != record.revenue',
+        triggerType: 'record-after-create',
       },
     },
     {

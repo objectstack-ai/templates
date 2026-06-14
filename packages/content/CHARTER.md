@@ -65,7 +65,7 @@ These exist so the template stays a **template**, not a half-finished product:
 | Total `.ts` LOC under `src/` | ≤ 6,000 | Readable in a half-day sitting |
 | Locales | 2 (`en`, `zh-CN`) | Proves multi-locale without becoming a translation project |
 | Dashboards | 3 | Today / Calendar / ROI — each shows a distinct widget class |
-| Flows | ≤ 4 | Event-driven only (no cron in spec v6); time-based work ships as record actions |
+| Flows | ≤ 5 | Event-driven only (no cron in spec v6); time-based work ships as record actions. Cap raised 4→5 (2026-06): the package already ships five distinct event-driven flows — signal→topic promotion, CTA default, publish approval, publication rollup, and lifecycle notifications (the latter was renamed from `stamp_lifecycle_timestamps` once timestamp-stamping moved into the piece hook). |
 | State machines | 2 | piece + signal |
 | Approval processes | 1 | publish gate |
 | Sharing rules | 1 | topic-scoped |
