@@ -24,6 +24,12 @@ export const AssessmentViews = defineView({
     tabs: [
       { name: 'all', label: 'All', view: 'all_assessments', isDefault: true, pinned: true },
       { name: 'failed', label: 'Failed', icon: 'alert-triangle', view: 'failed_assessments' },
+      {
+        name: 'open_remediations',
+        label: 'Open Remediations',
+        icon: 'wrench',
+        view: 'open_remediations',
+      },
       { name: 'in_progress', label: 'In Progress', icon: 'play', view: 'in_progress_assessments' },
     ],
   },
@@ -36,6 +42,16 @@ export const AssessmentViews = defineView({
       data: { provider: 'object', object: 'compliance_assessment' },
       columns: ['title', 'control', 'cycle', 'assessed_at', 'remediation_due', 'assessor'],
       filter: [{ field: 'status', operator: 'in', value: ['failed', 'partial'] }],
+      sort: [{ field: 'remediation_due', order: 'asc' }],
+    },
+
+    open_remediations: {
+      name: 'open_remediations',
+      type: 'grid',
+      label: 'Open Remediations',
+      data: { provider: 'object', object: 'compliance_assessment' },
+      columns: ['title', 'control', 'remediation_status', 'remediation_due', 'assessor'],
+      filter: [{ field: 'remediation_status', operator: 'in', value: ['open', 'in_progress'] }],
       sort: [{ field: 'remediation_due', order: 'asc' }],
     },
 
@@ -67,7 +83,15 @@ export const AssessmentViews = defineView({
         ],
       },
       { label: 'Finding', columns: 1, fields: ['finding'] },
-      { label: 'Remediation', columns: 2, fields: ['remediation_due', 'remediation_plan'] },
+      {
+        label: 'Remediation',
+        columns: 2,
+        fields: [
+          'remediation_status',
+          'remediation_due',
+          { field: 'remediation_plan', colSpan: 2 },
+        ],
+      },
     ],
   },
 });
