@@ -133,6 +133,27 @@ export const Piece = ObjectSchema.create({
       group: 'body',
     }),
 
+    // SEO — the pre-publish checklist these teams actually track.
+    seo_title: Field.text({
+      label: 'SEO Title',
+      maxLength: 70,
+      group: 'body',
+      description: 'Title tag (≤ 60–70 chars). Falls back to the piece title if blank.',
+    }),
+    meta_description: Field.text({
+      label: 'Meta Description',
+      maxLength: 160,
+      group: 'body',
+      description: 'Search-result snippet (≤ 160 chars).',
+    }),
+    primary_keyword: Field.text({
+      label: 'Primary Keyword',
+      maxLength: 120,
+      searchable: true,
+      group: 'body',
+      description: 'The target query this piece is optimised to rank for.',
+    }),
+
     // Lifecycle stamps
     submitted_at: Field.datetime({ label: 'Submitted At', readonly: true, group: 'planning' }),
     approved_at: Field.datetime({ label: 'Approved At', readonly: true, group: 'planning' }),
