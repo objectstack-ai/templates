@@ -92,6 +92,18 @@ export const PurchaseOrder = ObjectSchema.create({
       group: 'commercial',
       expression: F`record.received_amount != null && record.total_amount != null && record.received_amount >= record.total_amount`,
     }),
+    match_status: Field.formula({
+      label: 'Match Status',
+      group: 'commercial',
+      description: 'PO↔receipt match: awaiting (nothing in), partial, or matched (fully received).',
+      expression: F`record.total_amount != null && record.received_amount != null && record.received_amount >= record.total_amount ? "matched" : (record.received_amount != null && record.received_amount > 0 ? "partial" : "awaiting")`,
+    }),
+    cost_center: Field.text({
+      label: 'Cost Center',
+      maxLength: 60,
+      group: 'commercial',
+      description: 'Carried from the originating PR so spend can be reported by cost center.',
+    }),
     order_date: Field.date({
       label: 'Order Date',
       required: true,
@@ -138,7 +150,14 @@ export const PurchaseOrder = ObjectSchema.create({
   ],
 
   titleFormat: tmpl`{{record.po_number}}`,
-  compactLayout: ['po_number', 'vendor', 'total_amount', 'status', 'expected_delivery'],
+  compactLayout: [
+    'po_number',
+    'vendor',
+    'total_amount',
+    'status',
+    'match_status',
+    'expected_delivery',
+  ],
 
   validations: [
     {

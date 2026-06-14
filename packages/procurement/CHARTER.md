@@ -28,7 +28,7 @@ portals — those remain pluggable.
 | State-machine driven lifecycle | PR `draft→submitted→approved→converted` |
 | Threshold-based approval routing | `pr_approval_required.flow` fires at ≥ $5k |
 | Auto-record-creation flow | `pr_to_po_convert.flow` drafts the PO |
-| 3-way-match rollup | `procurement_receipt.hook.ts` updates PO.received_amount |
+| 2-way match signal | PO `match_status` formula (awaiting / partial / matched) from `received_amount` vs `total_amount`. `received_amount` is a stored header field maintained at the top level (client/seed) — a cross-object rollup hook from receipts would re-enter the QuickJS sandbox and crash, so it is NOT done in-hook (see `src/hooks/index.ts`). Full PO↔receipt↔invoice 3-way match is a fork. |
 | Scheduler-driven alerts | `po_overdue.flow` flags missed deliveries |
 | Internationalization | English + 简体中文 ship out of the box |
 | Realistic seed data | 4 vendors, 5 PRs, 4 POs, 3 receipts covering all states |
