@@ -96,8 +96,10 @@ export const ControlPostureDashboard: Dashboard = {
       values: ['assessment_count'],
       title: 'Assessments Completed by Month (last 12 months)',
       type: 'line',
+      // "Completed" = any concluded assessment. There is no `complete` status;
+      // the real terminal results are passed / partial / failed.
       filter: {
-        status: 'complete',
+        status: { $in: ['passed', 'partial', 'failed'] },
         assessed_at: { $gte: '{12_months_ago}' },
       },
       compareTo: 'previousYear',

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, tmpl } from '@objectstack/spec';
+import { P, F, tmpl } from '@objectstack/spec';
 /**
  * Assessment — a discrete test of a control. Each control should have
  * one per `review_frequency_days`. Result rolls up onto Control.last_status.
@@ -52,7 +52,22 @@ export const Assessment = ObjectSchema.create({
       label: 'Remediation Plan',
       description: 'Required when status is failed or partial.',
     }),
+    remediation_status: Field.select({
+      label: 'Remediation Status',
+      description: 'Tracks the fix for a failed/partial finding to closure.',
+      options: [
+        { label: 'Open', value: 'open', color: '#EF4444' },
+        { label: 'In Progress', value: 'in_progress', color: '#F59E0B' },
+        { label: 'Resolved', value: 'resolved', color: '#10B981' },
+        { label: 'Risk Accepted', value: 'risk_accepted', color: '#6B7280' },
+      ],
+    }),
     remediation_due: Field.date({ label: 'Remediation Due' }),
+    is_remediation_overdue: Field.formula({
+      label: 'Remediation Overdue',
+      description: 'Past the remediation due date and not yet resolved / risk-accepted.',
+      expression: F`record.remediation_due != null && record.remediation_due < today() && record.remediation_status != "resolved" && record.remediation_status != "risk_accepted"`,
+    }),
   },
 
   enable: {
@@ -74,7 +89,7 @@ export const Assessment = ObjectSchema.create({
   ],
 
   titleFormat: tmpl`{{record.title}}`,
-  compactLayout: ['title', 'control', 'status', 'cycle', 'assessed_at'],
+  compactLayout: ['title', 'control', 'status', 'remediation_status', 'cycle', 'assessed_at'],
 
   validations: [
     {

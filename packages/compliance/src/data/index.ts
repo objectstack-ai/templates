@@ -44,6 +44,14 @@ const frameworks = defineSeed(Framework, {
       version: '2016',
       status: 'active',
     },
+    {
+      short_name: 'HIPAA',
+      full_name: 'HIPAA Security Rule — 45 CFR Part 164 Subpart C',
+      family: 'hipaa',
+      version: '2013',
+      status: 'active',
+      next_audit_date: cel`daysFromNow(210)`,
+    },
   ],
 });
 
@@ -116,6 +124,29 @@ const controls = defineSeed(Control, {
       last_assessed_at: cel`daysAgo(200)`,
       description:
         'Appropriate technical & organisational measures to ensure security of personal data. Past review-frequency window.',
+    },
+    {
+      code: '164.308(a)(1)',
+      title: 'Security Management Process',
+      framework: 'HIPAA',
+      category: 'risk',
+      criticality: 'high',
+      last_status: 'passed',
+      review_frequency_days: 365,
+      last_assessed_at: cel`daysAgo(40)`,
+      description:
+        'Implement policies to prevent, detect, contain, and correct security violations (risk analysis + risk management).',
+    },
+    {
+      code: '164.312(a)(1)',
+      title: 'Access Control (ePHI)',
+      framework: 'HIPAA',
+      category: 'access',
+      criticality: 'high',
+      last_status: 'not_tested',
+      review_frequency_days: 180,
+      description:
+        'Technical policies allowing only authorized persons to access electronic protected health information.',
     },
   ],
 });
@@ -206,6 +237,7 @@ const assessments = defineSeed(Assessment, {
       status: 'failed',
       finding: 'Two high-severity CVEs open past 30-day SLA on edge servers.',
       remediation_plan: 'Patch edge servers in next maintenance window (2026-04-15).',
+      remediation_status: 'open',
       remediation_due: cel`daysFromNow(14)`,
     },
     {
@@ -216,6 +248,7 @@ const assessments = defineSeed(Assessment, {
       status: 'partial',
       finding: '3 of 25 PRs sampled lacked documented reviewer.',
       remediation_plan: 'Enforce required-reviewer via repo settings; re-test in Q2.',
+      remediation_status: 'in_progress',
       remediation_due: cel`daysFromNow(30)`,
     },
     {
