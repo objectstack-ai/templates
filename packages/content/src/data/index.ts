@@ -12,11 +12,10 @@ import { Publication } from '../objects/content_publication.object';
 import { Metric } from '../objects/content_metric.object';
 import { Cta } from '../objects/content_cta.object';
 
-// @objectstack 8.0.1: `defineSeed` types lookup/master_detail fields as
-// `string | null` and has no `multiple: true`-aware overload yet, so a
-// multi-value lookup seeded with an array fails typecheck. `multiRef` keeps
-// the array value (correct at runtime) while satisfying the field type.
-const multiRef = (ids: string[]): string => ids as unknown as string;
+// `target_channels` is a `multiple: true` lookup, but the v9 seed loader
+// resolves a single natural-key string per reference — an array value is
+// silently dropped at load (the column ends up null). Seed the primary channel
+// here; additional channels can be added per piece via the UI / API.
 
 /**
  * Seed data — realistic editorial workload covering the full template
@@ -394,7 +393,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'backlog',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog']),
+      target_channels: 'Company Blog',
       summary: 'Side-by-side feature comparison with honest "they win here" sections.',
       tags: 'comparison, seo',
     },
@@ -405,7 +404,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'backlog',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog']),
+      target_channels: 'Company Blog',
       tags: 'ops, culture',
     },
     {
@@ -415,7 +414,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'backlog',
       format: 'listicle',
-      target_channels: multiRef(['Company Blog', 'Weekly Newsletter']),
+      target_channels: 'Company Blog',
       tags: 'design, opinion',
     },
     {
@@ -425,7 +424,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'drafting',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog']),
+      target_channels: 'Company Blog',
       word_count_target: 1800,
       body_outline:
         '# The marketing metrics dashboard we actually use\n\n## What we track\n## What we stopped tracking\n## The dashboard itself\n## CTA',
@@ -439,7 +438,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'drafting',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog']),
+      target_channels: 'Company Blog',
       word_count_target: 600,
       body_outline:
         '# Picking the right region\n\n## A 30-second decision tree\n## One-line per region\n## What changes if you guess wrong\n## CTA',
@@ -452,7 +451,7 @@ const pieces = defineSeed(Piece, {
       template: 'Customer Story',
       status: 'drafting',
       format: 'case_study',
-      target_channels: multiRef(['Company Blog', 'LinkedIn Company Page']),
+      target_channels: 'Company Blog',
       word_count_target: 1200,
       tags: 'case-study, enterprise',
     },
@@ -463,7 +462,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'in_review',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog']),
+      target_channels: 'Company Blog',
       word_count_target: 1500,
       body_outline:
         '# How our SOC 2 program actually works\n\n## What SOC 2 actually requires\n## How we operationalised it\n## Where to find our report\n## CTA — book a security review',
@@ -478,7 +477,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'in_review',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog', 'Weekly Newsletter']),
+      target_channels: 'Company Blog',
       word_count_target: 2200,
       submitted_at: cel`daysAgo(1)`,
       summary: 'Real numbers, real runbook. Six-month bill, what we cut, what we kept.',
@@ -491,7 +490,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'approved',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog']),
+      target_channels: 'Company Blog',
       word_count_target: 500,
       submitted_at: cel`daysAgo(4)`,
       approved_at: cel`daysAgo(2)`,
@@ -504,7 +503,7 @@ const pieces = defineSeed(Piece, {
       template: 'Weekly Newsletter Issue',
       status: 'scheduled',
       format: 'newsletter',
-      target_channels: multiRef(['Weekly Newsletter']),
+      target_channels: 'Weekly Newsletter',
       publish_at: cel`daysFromNow(2)`,
       submitted_at: cel`daysAgo(5)`,
       approved_at: cel`daysAgo(3)`,
@@ -518,7 +517,7 @@ const pieces = defineSeed(Piece, {
       template: 'Weekly Newsletter Issue',
       status: 'scheduled',
       format: 'newsletter',
-      target_channels: multiRef(['Weekly Newsletter']),
+      target_channels: 'Weekly Newsletter',
       publish_at: cel`daysFromNow(9)`,
       submitted_at: cel`daysAgo(2)`,
       approved_at: cel`daysAgo(1)`,
@@ -532,7 +531,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'published',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog', 'LinkedIn Company Page']),
+      target_channels: 'Company Blog',
       publish_at: cel`daysAgo(8)`,
       submitted_at: cel`daysAgo(14)`,
       approved_at: cel`daysAgo(10)`,
@@ -548,7 +547,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'published',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog']),
+      target_channels: 'Company Blog',
       publish_at: cel`daysAgo(22)`,
       submitted_at: cel`daysAgo(28)`,
       approved_at: cel`daysAgo(24)`,
@@ -563,7 +562,7 @@ const pieces = defineSeed(Piece, {
       template: 'Long-Form Article',
       status: 'archived',
       format: 'long_form',
-      target_channels: multiRef(['Company Blog']),
+      target_channels: 'Company Blog',
       publish_at: cel`daysAgo(160)`,
       submitted_at: cel`daysAgo(170)`,
       approved_at: cel`daysAgo(165)`,
