@@ -5,11 +5,10 @@ import { cel } from '@objectstack/spec';
 import { Task } from '../objects/todo_task.object';
 import { Label } from '../objects/todo_label.object';
 
-// @objectstack 8.0.1: `defineSeed` types lookup/master_detail fields as
-// `string | null` and has no `multiple: true`-aware overload yet, so a
-// multi-value lookup seeded with an array fails typecheck. `multiRef` keeps
-// the array value (correct at runtime) while satisfying the field type.
-const multiRef = (ids: string[]): string => ids as unknown as string;
+// `labels` is a `multiple: true` lookup, but the v9 seed loader resolves a
+// single natural-key string per reference — an array value is silently dropped
+// at load (the column ends up null). Seed the primary label here; additional
+// labels can be added per task via the UI / API.
 
 /**
  * Seed data — realistic, business-like task content covering the full
@@ -53,7 +52,7 @@ const tasks = defineSeed(Task, {
       estimate_hours: 4,
       due_date: cel`daysAgo(20)`,
       completed_at: cel`daysAgo(15)`,
-      labels: multiRef(['performance']),
+      labels: 'performance',
     },
     {
       subject: 'Design new pricing page mockups',
@@ -61,7 +60,7 @@ const tasks = defineSeed(Task, {
       priority: 'high',
       estimate_hours: 12,
       due_date: cel`daysFromNow(7)`,
-      labels: multiRef(['feature', 'design']),
+      labels: 'feature',
     },
     {
       subject: 'Fix mobile nav drawer animation',
@@ -69,7 +68,7 @@ const tasks = defineSeed(Task, {
       priority: 'urgent',
       estimate_hours: 3,
       due_date: cel`daysAgo(2)`, // overdue
-      labels: multiRef(['bug']),
+      labels: 'bug',
     },
     {
       subject: 'Replace hero illustration with brand-refresh artwork',
@@ -77,7 +76,7 @@ const tasks = defineSeed(Task, {
       priority: 'normal',
       estimate_hours: 2,
       due_date: cel`daysFromNow(14)`,
-      labels: multiRef(['design']),
+      labels: 'design',
     },
     {
       subject: 'Add cookie-consent banner (GDPR)',
@@ -86,7 +85,7 @@ const tasks = defineSeed(Task, {
       estimate_hours: 6,
       due_date: cel`daysAgo(10)`,
       completed_at: cel`daysAgo(8)`,
-      labels: multiRef(['security', 'feature']),
+      labels: 'security',
     },
     {
       subject: 'Implement offline-first task cache',
@@ -94,7 +93,7 @@ const tasks = defineSeed(Task, {
       priority: 'high',
       estimate_hours: 32,
       due_date: cel`daysFromNow(10)`,
-      labels: multiRef(['feature']),
+      labels: 'feature',
     },
     {
       subject: 'Wire up push notifications',
@@ -102,7 +101,7 @@ const tasks = defineSeed(Task, {
       priority: 'normal',
       estimate_hours: 8,
       due_date: cel`daysFromNow(18)`,
-      labels: multiRef(['feature']),
+      labels: 'feature',
     },
     {
       subject: 'Crash on cold-start when no network',
@@ -110,7 +109,7 @@ const tasks = defineSeed(Task, {
       priority: 'urgent',
       estimate_hours: 6,
       due_date: cel`daysAgo(1)`, // overdue
-      labels: multiRef(['bug']),
+      labels: 'bug',
     },
     {
       subject: 'Reproduce biometric prompt bug',
@@ -118,7 +117,7 @@ const tasks = defineSeed(Task, {
       priority: 'high',
       estimate_hours: 4,
       due_date: cel`daysFromNow(3)`,
-      labels: multiRef(['bug', 'security']),
+      labels: 'bug',
     },
     {
       subject: 'Localize onboarding flow (de / fr / ja)',
@@ -126,7 +125,7 @@ const tasks = defineSeed(Task, {
       priority: 'normal',
       estimate_hours: 16,
       due_date: cel`daysFromNow(28)`,
-      labels: multiRef(['feature']),
+      labels: 'feature',
     },
     {
       subject: 'Drop legacy iOS support and bump min SDK',
@@ -134,7 +133,7 @@ const tasks = defineSeed(Task, {
       priority: 'low',
       estimate_hours: 2,
       due_date: cel`daysAgo(7)`,
-      labels: multiRef(['chore']),
+      labels: 'chore',
     },
     {
       subject: 'Rotate signing keys for service-to-service JWTs',
@@ -142,7 +141,7 @@ const tasks = defineSeed(Task, {
       priority: 'urgent',
       estimate_hours: 4,
       due_date: cel`daysAgo(3)`, // overdue
-      labels: multiRef(['security']),
+      labels: 'security',
     },
     {
       subject: 'Document rate-limit headers in developer portal',
@@ -150,7 +149,7 @@ const tasks = defineSeed(Task, {
       priority: 'normal',
       estimate_hours: 3,
       due_date: cel`daysFromNow(30)`,
-      labels: multiRef(['docs']),
+      labels: 'docs',
     },
     {
       subject: 'Investigate p99 latency spike on /v1/search',
@@ -158,7 +157,7 @@ const tasks = defineSeed(Task, {
       priority: 'high',
       estimate_hours: 8,
       due_date: cel`daysFromNow(5)`,
-      labels: multiRef(['performance', 'blocked']),
+      labels: 'performance',
     },
     {
       subject: 'Decommission v0 endpoints',
@@ -167,7 +166,7 @@ const tasks = defineSeed(Task, {
       estimate_hours: 6,
       due_date: cel`daysAgo(25)`,
       completed_at: cel`daysAgo(22)`,
-      labels: multiRef(['chore']),
+      labels: 'chore',
     },
     {
       subject: 'Archive Q1 launch assets',
@@ -175,7 +174,7 @@ const tasks = defineSeed(Task, {
       priority: 'low',
       estimate_hours: 1,
       due_date: cel`daysFromNow(14)`,
-      labels: multiRef(['chore']),
+      labels: 'chore',
     },
   ],
 });
