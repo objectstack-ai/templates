@@ -110,10 +110,6 @@ export const en: TranslationData = {
           title: 'Done This Week',
           description: 'Tasks you completed since the start of the week',
         },
-        recent_overdue_list: {
-          title: 'Overdue Tasks',
-          description: 'Your open tasks past their due date, sorted by oldest first',
-        },
       },
     },
   },

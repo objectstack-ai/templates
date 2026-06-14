@@ -120,10 +120,6 @@ export const esES: TranslationData = {
           title: 'Completadas esta semana',
           description: 'Tareas completadas desde el inicio de la semana',
         },
-        recent_overdue_list: {
-          title: 'Tareas vencidas',
-          description: 'Tus tareas vencidas ordenadas de más antigua a más reciente',
-        },
       },
     },
   },

@@ -109,10 +109,6 @@ export const jaJP: TranslationData = {
         },
         my_overdue: { title: '期限超過', description: '期限を過ぎた自分の未完了タスク' },
         done_this_week: { title: '今週の完了', description: '今週の始めから完了したタスク' },
-        recent_overdue_list: {
-          title: '期限超過タスク',
-          description: '古い順にソートされた期限超過タスク',
-        },
       },
     },
   },
