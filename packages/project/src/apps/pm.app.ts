@@ -49,5 +49,26 @@ export const ProjectApp = App.create({
       label: 'Resources',
       icon: 'users',
     },
+    {
+      id: 'nav_timesheets',
+      type: 'object',
+      objectName: 'pm_timesheet',
+      label: 'Timesheets',
+      icon: 'clock',
+    },
+    {
+      id: 'nav_pmo_overview',
+      type: 'dashboard',
+      dashboardName: 'pmo_overview_dashboard',
+      label: 'PMO Overview',
+      icon: 'layout-dashboard',
+    },
+    {
+      id: 'nav_pm_workbench',
+      type: 'dashboard',
+      dashboardName: 'pm_workbench_dashboard',
+      label: 'PM Workbench',
+      icon: 'gauge',
+    },
   ],
 });

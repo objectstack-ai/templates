@@ -64,6 +64,13 @@ export const Milestone = ObjectSchema.create({
       required: false,
       group: 'core',
     }),
+    is_critical_path: Field.boolean({
+      label: 'On Critical Path',
+      required: false,
+      group: 'core',
+      defaultValue: false,
+      description: 'Slipping this milestone slips the whole project.',
+    }),
     deliverables: Field.text({
       label: 'Deliverables',
       required: false,
@@ -86,5 +93,5 @@ export const Milestone = ObjectSchema.create({
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
-  compactLayout: ['name', 'project', 'status', 'planned_date', 'actual_date'],
+  compactLayout: ['name', 'project', 'status', 'is_critical_path', 'planned_date', 'actual_date'],
 });

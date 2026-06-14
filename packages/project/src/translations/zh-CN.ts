@@ -17,6 +17,7 @@ export const zhCN: TranslationData = {
       pluralLabel: '项目',
       description: '有明确周期的项目，包含里程碑、资源与 AI 风险预测。',
       fields: {
+        code: { label: '项目编号' },
         name: { label: '项目名称' },
         description: { label: '描述' },
         status: {
@@ -37,6 +38,10 @@ export const zhCN: TranslationData = {
         project_type: {
           label: '类型',
           options: { internal: '内部', client: '客户', rnd: '研发', maintenance: '维护' },
+        },
+        health: {
+          label: '健康度',
+          options: { on_track: '正常', at_risk: '存在风险', off_track: '偏离轨道' },
         },
         start_date: { label: '开始日期' },
         planned_end_date: { label: '计划结束日期' },
@@ -76,6 +81,7 @@ export const zhCN: TranslationData = {
         planned_date: { label: '计划日期' },
         actual_date: { label: '实际日期' },
         owner: { label: '负责人' },
+        is_critical_path: { label: '关键路径' },
         deliverables: { label: '交付物' },
       },
       _views: { all_milestones: { label: '全部里程碑' } },
@@ -85,6 +91,7 @@ export const zhCN: TranslationData = {
       pluralLabel: '风险',
       description: '可能影响项目交付的潜在威胁或不确定性。',
       fields: {
+        risk_id: { label: '风险编号' },
         name: { label: '风险名称' },
         description: { label: '描述' },
         project: { label: '所属项目' },
@@ -123,6 +130,10 @@ export const zhCN: TranslationData = {
         ai_likelihood: { label: 'AI 可能性' },
         ai_mitigation_suggestion: { label: 'AI 缓解建议' },
         ai_similar_risks: { label: 'AI 相似历史风险' },
+        response_strategy: {
+          label: '应对策略',
+          options: { avoid: '规避', mitigate: '缓解', transfer: '转移', accept: '接受' },
+        },
         mitigation_plan: { label: '缓解计划' },
         contingency_plan: { label: '应急计划' },
         owner: { label: '风险负责人' },
@@ -134,9 +145,14 @@ export const zhCN: TranslationData = {
       pluralLabel: '问题',
       description: '当前需要解决的问题。',
       fields: {
+        issue_number: { label: '问题编号' },
         name: { label: '问题标题' },
         description: { label: '描述' },
         project: { label: '所属项目' },
+        type: {
+          label: '类型',
+          options: { bug: '缺陷', blocker: '阻塞', task: '任务', question: '疑问', other: '其他' },
+        },
         status: {
           label: '状态',
           options: {
@@ -154,6 +170,8 @@ export const zhCN: TranslationData = {
         assigned_to: { label: '分配给' },
         related_risk: { label: '关联风险' },
         resolution: { label: '解决方案' },
+        reported_at: { label: '报告时间' },
+        resolved_at: { label: '解决时间' },
       },
       _views: { all_issues: { label: '全部问题' } },
     },
@@ -195,6 +213,9 @@ export const zhCN: TranslationData = {
         nav_risks: { label: '风险' },
         nav_issues: { label: '问题' },
         nav_resources: { label: '资源' },
+        nav_timesheets: { label: '工时' },
+        nav_pmo_overview: { label: 'PMO 总览' },
+        nav_pm_workbench: { label: '项目经理工作台' },
       },
     },
   },

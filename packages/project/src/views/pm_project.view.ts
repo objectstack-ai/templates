@@ -22,7 +22,7 @@ export const ProjectViews = defineView({
       { field: 'ai_risk_score', width: 110, align: 'right', sortable: true },
       { field: 'project_manager', width: 160 },
       { field: 'start_date', width: 120, sortable: true },
-      { field: 'target_end_date', width: 120, sortable: true },
+      { field: 'planned_end_date', width: 130, sortable: true },
     ],
     sort: [
       { field: 'priority', order: 'desc' },

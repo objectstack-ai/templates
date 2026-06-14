@@ -17,6 +17,15 @@ export const Issue = ObjectSchema.create({
   fieldGroups: [{ key: 'core', label: 'Issue Details', icon: 'octagon-x', defaultExpanded: true }],
 
   fields: {
+    issue_number: Field.text({
+      label: 'Issue Number',
+      required: false,
+      readonly: true,
+      maxLength: 20,
+      searchable: true,
+      group: 'core',
+      description: 'Short code (ISS-NNN), auto-assigned on create.',
+    }),
     name: Field.text({
       label: 'Issue Title',
       required: true,
@@ -33,6 +42,18 @@ export const Issue = ObjectSchema.create({
       label: 'Project',
       required: true,
       group: 'core',
+    }),
+    type: Field.select({
+      label: 'Type',
+      required: true,
+      group: 'core',
+      options: [
+        { label: 'Bug', value: 'bug', color: '#EF4444', default: true },
+        { label: 'Blocker', value: 'blocker', color: '#DC2626' },
+        { label: 'Task', value: 'task', color: '#3B82F6' },
+        { label: 'Question', value: 'question', color: '#8B5CF6' },
+        { label: 'Other', value: 'other', color: '#94A3B8' },
+      ],
     }),
     status: Field.select({
       label: 'Status',
@@ -74,6 +95,20 @@ export const Issue = ObjectSchema.create({
       group: 'core',
       description: 'How the issue was resolved.',
     }),
+    reported_at: Field.datetime({
+      label: 'Reported At',
+      required: false,
+      readonly: true,
+      group: 'core',
+      description: 'When the issue was raised (stamped on create).',
+    }),
+    resolved_at: Field.datetime({
+      label: 'Resolved At',
+      required: false,
+      readonly: true,
+      group: 'core',
+      description: 'When the issue moved to resolved/closed (stamped by hook).',
+    }),
   },
 
   enable: {
@@ -85,9 +120,14 @@ export const Issue = ObjectSchema.create({
     trash: true,
   },
 
-  indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['severity'] }],
+  indexes: [
+    { fields: ['project'] },
+    { fields: ['status'] },
+    { fields: ['severity'] },
+    { fields: ['type'] },
+  ],
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
-  compactLayout: ['name', 'project', 'status', 'severity', 'assigned_to'],
+  compactLayout: ['issue_number', 'name', 'project', 'type', 'status', 'severity', 'assigned_to'],
 });

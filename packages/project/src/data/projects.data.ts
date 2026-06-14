@@ -19,6 +19,8 @@ export const projects = defineSeed(Project, {
   records: [
     {
       name: 'Mobile App Redesign',
+      code: 'PRJ-001',
+      health: 'on_track',
       description:
         'Complete redesign of iOS and Android apps with new brand identity and improved UX. Target Q3 launch.',
       status: 'active',
@@ -42,6 +44,8 @@ export const projects = defineSeed(Project, {
     },
     {
       name: 'ERP System Migration',
+      code: 'PRJ-002',
+      health: 'off_track',
       description:
         'Migrate legacy ERP to cloud-based solution. Complex data migration with high business risk.',
       status: 'at_risk',
@@ -63,6 +67,8 @@ export const projects = defineSeed(Project, {
     },
     {
       name: 'AI Chatbot MVP',
+      code: 'PRJ-003',
+      health: 'on_track',
       description: 'Build customer service AI chatbot MVP with LLM integration.',
       status: 'planning',
       priority: 'medium',
