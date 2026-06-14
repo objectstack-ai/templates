@@ -4,8 +4,10 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F, tmpl } from '@objectstack/spec';
 /**
  * Expense Report — the reimbursement claim an employee submits. It is a
- * header over one or more `expense_line` rows; `total_amount` is rolled up
- * from those lines by the `expense_line` afterInsert/Update/Delete hook.
+ * header over one or more `expense_line` rows. `total_amount` is a STORED
+ * header field maintained at the top level (client/seed), NOT a line-hook
+ * rollup: a nested parent `update` from a line hook crashes the QuickJS
+ * sandbox. See CHARTER.md ("Rollup vs. lifecycle hooks").
  *
  * Approval is threshold-driven: `approval_required` flips true when
  * `total_amount >= 1000`. Below that, a manager can still approve, but the
@@ -84,7 +86,8 @@ export const ExpenseReport = ObjectSchema.create({
       group: 'financial',
       min: 0,
       defaultValue: 0,
-      description: 'Sum of line amounts. Maintained by the line rollup hook.',
+      description:
+        'Sum of line amounts. Stored header field maintained client-side/seed (not a line rollup hook — that crashes the sandbox; see object docstring).',
     }),
     approval_required: Field.formula({
       label: 'Approval Required',

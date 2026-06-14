@@ -10,6 +10,10 @@ type Flow = Automation.Flow;
  * and suspends the run until the expense-manager decides. It then resumes down
  * its `approve` or `reject` out-edge.
  *
+ * Amount-tiered routing: the manager signs off first; claims ≥ $1,000 then
+ * escalate to a finance-director second sign-off before final approval. Smaller
+ * claims are approved on the manager's decision alone.
+ *
  *   approve → status = approved, notify the employee
  *   reject  → status = rejected, notify the employee to fix and resubmit
  *
@@ -42,6 +46,28 @@ export const ExpenseApprovalFlow: Flow = {
       label: 'Manager Sign-off',
       config: {
         approvers: [{ type: 'role', value: 'expense_manager' }],
+        behavior: 'first_response',
+        lockRecord: true,
+        escalation: {
+          enabled: true,
+          timeoutHours: 72,
+          action: 'notify',
+          notifySubmitter: true,
+        },
+      },
+    },
+    {
+      id: 'needs_director',
+      type: 'decision',
+      label: 'Large Claim (≥ $1,000)?',
+      config: { condition: 'record.total_amount >= 1000', conditionDialect: 'cel' },
+    },
+    {
+      id: 'director_signoff',
+      type: 'approval',
+      label: 'Finance Director Sign-off',
+      config: {
+        approvers: [{ type: 'role', value: 'expense_director' }],
         behavior: 'first_response',
         lockRecord: true,
         escalation: {
@@ -102,9 +128,40 @@ export const ExpenseApprovalFlow: Flow = {
     {
       id: 'e2',
       source: 'manager_signoff',
+      target: 'needs_director',
+      type: 'conditional',
+      label: 'approve',
+    },
+    // Manager-approved: large claims escalate to the finance director; small
+    // claims are approved outright.
+    {
+      id: 'e2a',
+      source: 'needs_director',
+      target: 'director_signoff',
+      type: 'conditional',
+      condition: 'record.total_amount >= 1000',
+      label: '≥ $1,000',
+    },
+    {
+      id: 'e2b',
+      source: 'needs_director',
+      target: 'set_approved',
+      isDefault: true,
+      label: 'within manager limit',
+    },
+    {
+      id: 'e2c',
+      source: 'director_signoff',
       target: 'set_approved',
       type: 'conditional',
       label: 'approve',
+    },
+    {
+      id: 'e2d',
+      source: 'director_signoff',
+      target: 'set_rejected',
+      type: 'conditional',
+      label: 'reject',
     },
     { id: 'e3', source: 'set_approved', target: 'notify_approved', type: 'default' },
     { id: 'e4', source: 'notify_approved', target: 'end', type: 'default' },

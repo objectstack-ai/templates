@@ -101,6 +101,7 @@ export const en: TranslationData = {
             personal_other: 'Personal — Other',
           },
         },
+        reimbursable: { label: 'Reimbursable' },
         needs_receipt: { label: 'Receipt Required' },
         receipt_attached: { label: 'Receipt Attached' },
         notes: { label: 'Notes' },
