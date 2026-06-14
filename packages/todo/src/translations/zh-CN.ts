@@ -100,7 +100,6 @@ export const zhCN: TranslationData = {
         my_open_tasks: { title: '我的进行中任务', description: '分配给你的待办或进行中任务' },
         my_overdue: { title: '逾期', description: '已超过截止日期的进行中任务' },
         done_this_week: { title: '本周完成', description: '本周以来你完成的任务' },
-        recent_overdue_list: { title: '逾期任务', description: '按最久优先排序的逾期任务列表' },
       },
     },
   },

@@ -128,6 +128,15 @@ export const Task = ObjectSchema.create({
       message: 'completed_at is set automatically when status becomes done.',
       condition: P`record.status != "done" && record.completed_at != null`,
     },
+    {
+      // Urgent work needs a deadline. (The `due_date_required_for_urgent`
+      // message already shipped in translations; this is the missing rule.)
+      name: 'due_date_required_for_urgent',
+      type: 'script',
+      severity: 'error',
+      message: 'Urgent tasks must have a due date.',
+      condition: P`record.priority == "urgent" && record.due_date == null && record.status != "done" && record.status != "cancelled"`,
+    },
   ],
 
   // `started_at` / `completed_at` are stamped by `todo_task.hook.ts` on

@@ -4,9 +4,17 @@ import type * as Automation from '@objectstack/spec/automation';
 type Flow = Automation.Flow;
 
 /**
- * Overdue notification — fires when a task crosses its due date while still
- * open. Sends an in-app notification + email to the assignee via the
- * platform's notification/email services (no per-app email infra).
+ * Overdue notification — fires when a task *enters* the overdue-and-open state
+ * (a past due date is set, or an overdue task is reopened to todo/doing). The
+ * `previous.*` delta guard makes it fire ONCE on that transition instead of on
+ * every subsequent edit of an already-overdue task — otherwise any field change
+ * re-spams the assignee.
+ *
+ * Limitation: a task that crosses its due date purely by time passing produces
+ * no update event, so this event-driven flow won't catch it. For unattended
+ * "it's now overdue" detection, fork this into a scheduled flow that scans open
+ * past-due tasks daily. Sends an in-app notification + email via the platform's
+ * notification/email services (no per-app email infra).
  */
 export const TaskOverdueFlow: Flow = {
   name: 'todo_task_overdue_notify',
@@ -24,7 +32,10 @@ export const TaskOverdueFlow: Flow = {
       config: {
         objectName: 'todo_task',
         triggerType: 'record-after-update',
-        condition: "record.due_date < today() && record.status in ['todo', 'doing']",
+        // Fire only on the transition INTO overdue-and-open (delta guard),
+        // not on every edit of an already-overdue task.
+        condition:
+          "record.due_date != null && record.due_date < today() && record.status in ['todo', 'doing'] && (previous.due_date == null || previous.due_date >= today() || !(previous.status in ['todo', 'doing']))",
       },
     },
     {
