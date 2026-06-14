@@ -54,12 +54,12 @@ All AI fields are **optional** and populated by flows calling external LLM/ML se
 - Timesheet granularity: daily or weekly? (Choose: daily for accuracy)
 
 ## Definition of Done (v0.1)
-- [ ] All 6 objects compile with validation
-- [ ] State machines define clear transitions
-- [ ] 3 flows have stub AI nodes with comment placeholders
-- [ ] PMO dashboard shows risk distribution + project health
-- [ ] Seed data includes 3 projects (planning, active, at_risk)
-- [ ] Typecheck + build clean
+- [x] All 6 objects compile with validation
+- [x] State machines define clear transitions
+- [x] 3 flows have stub AI nodes with comment placeholders
+- [x] PMO dashboard shows risk distribution + project health
+- [x] Seed data includes 3 projects (planning, active, at_risk)
+- [x] Typecheck + build clean (`tsc --noEmit` + `objectstack build`)
 - [ ] Dev server boots on :4010
 - [ ] README targets end users, not contributors
 
@@ -67,10 +67,19 @@ All AI fields are **optional** and populated by flows calling external LLM/ML se
 | Dimension | Cap | Actual |
 |---|---|---|
 | Objects | 6 | 6 |
-| LOC (`src/`) | 2500 | TBD |
+| LOC (`src/`) | 3500 | 3248 |
 | Flows | 3 | 3 |
 | Dashboards | 2 | 2 |
 | State machines | 2 | 2 |
 | Profiles | 2 | 2 |
 
 If you need to exceed a limit, document the justification in this charter first.
+
+> **LOC cap raised 2500 → 3500 (2026-06).** The original 2500 budget predated
+> the artifacts this charter already promised but never shipped: the two
+> dashboards (PMO Overview + PM Workbench) and their datasets, the two
+> permission profiles (`viewer` + `project_manager`) and role hierarchy, the
+> resource/timesheet list views, and the hooks that derive `code`, `health`,
+> risk `priority`, and issue numbers/timestamps. Delivering the promised v0.1
+> surface — not new scope — pushed `src/` to ~3.2k LOC. The object/flow/
+> dashboard/state-machine/profile caps are unchanged.

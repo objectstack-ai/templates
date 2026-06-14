@@ -22,6 +22,15 @@ export const Risk = ObjectSchema.create({
   ],
 
   fields: {
+    risk_id: Field.text({
+      label: 'Risk ID',
+      required: false,
+      readonly: true,
+      maxLength: 20,
+      searchable: true,
+      group: 'core',
+      description: 'Short code (RISK-NNN), auto-assigned on create.',
+    }),
     name: Field.text({
       label: 'Risk Title',
       required: true,
@@ -134,6 +143,18 @@ export const Risk = ObjectSchema.create({
     }),
 
     // Response Plan
+    response_strategy: Field.select({
+      label: 'Response Strategy',
+      required: false,
+      group: 'response',
+      description: 'PMBOK risk response: avoid, mitigate, transfer, or accept.',
+      options: [
+        { label: 'Avoid', value: 'avoid', color: '#10B981' },
+        { label: 'Mitigate', value: 'mitigate', color: '#3B82F6', default: true },
+        { label: 'Transfer', value: 'transfer', color: '#8B5CF6' },
+        { label: 'Accept', value: 'accept', color: '#94A3B8' },
+      ],
+    }),
     mitigation_plan: Field.markdown({
       label: 'Mitigation Plan',
       required: false,
@@ -166,7 +187,7 @@ export const Risk = ObjectSchema.create({
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
-  compactLayout: ['name', 'project', 'status', 'category', 'priority'],
+  compactLayout: ['risk_id', 'name', 'project', 'status', 'category', 'priority'],
   validations: [
     {
       type: 'state_machine',

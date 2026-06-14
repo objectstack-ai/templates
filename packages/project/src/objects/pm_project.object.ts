@@ -29,6 +29,15 @@ export const Project = ObjectSchema.create({
   ],
 
   fields: {
+    code: Field.text({
+      label: 'Project Code',
+      required: false,
+      readonly: true,
+      maxLength: 20,
+      searchable: true,
+      group: 'core',
+      description: 'Short human-readable code (PRJ-NNN), auto-assigned on create.',
+    }),
     name: Field.text({
       label: 'Project Name',
       required: true,
@@ -76,6 +85,18 @@ export const Project = ObjectSchema.create({
         { label: 'Client', value: 'client' },
         { label: 'R&D', value: 'rnd' },
         { label: 'Maintenance', value: 'maintenance' },
+      ],
+    }),
+    health: Field.select({
+      label: 'Health',
+      required: false,
+      readonly: true,
+      group: 'core',
+      description: 'RAG status auto-derived from AI risk score and schedule by the project hook.',
+      options: [
+        { label: 'On Track', value: 'on_track', color: '#10B981', default: true },
+        { label: 'At Risk', value: 'at_risk', color: '#F59E0B' },
+        { label: 'Off Track', value: 'off_track', color: '#EF4444' },
       ],
     }),
 
@@ -156,7 +177,9 @@ export const Project = ObjectSchema.create({
       label: 'Actual Cost',
       required: false,
       group: 'budget',
-      description: 'Rolled up from timesheets and expenses.',
+      description:
+        'Cost to date. Maintained by seed/client or an out-of-sandbox worker — NOT a live ' +
+        'hook rollup (a nested write from a timesheet hook crashes the QuickJS sandbox).',
     }),
 
     // Team
@@ -179,7 +202,9 @@ export const Project = ObjectSchema.create({
       group: 'core',
       min: 0,
       max: 100,
-      description: 'Calculated from completed milestones.',
+      description:
+        'Share of completed milestones. Maintained by seed/client (not a live hook ' +
+        'rollup — see actual_cost note).',
     }),
   },
 
@@ -204,7 +229,15 @@ export const Project = ObjectSchema.create({
 
   titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
-  compactLayout: ['name', 'status', 'priority', 'project_manager', 'planned_end_date'],
+  compactLayout: [
+    'code',
+    'name',
+    'status',
+    'health',
+    'priority',
+    'project_manager',
+    'planned_end_date',
+  ],
   validations: [
     {
       type: 'state_machine',

@@ -18,6 +18,7 @@ export const en: TranslationData = {
       description:
         'A time-bound initiative with milestones, resources, and AI-powered risk prediction.',
       fields: {
+        code: { label: 'Project Code' },
         name: { label: 'Project Name' },
         description: { label: 'Description' },
         status: {
@@ -43,6 +44,10 @@ export const en: TranslationData = {
             rnd: 'R&D',
             maintenance: 'Maintenance',
           },
+        },
+        health: {
+          label: 'Health',
+          options: { on_track: 'On Track', at_risk: 'At Risk', off_track: 'Off Track' },
         },
         start_date: { label: 'Start Date' },
         planned_end_date: { label: 'Planned End Date' },
@@ -82,6 +87,7 @@ export const en: TranslationData = {
         planned_date: { label: 'Planned Date' },
         actual_date: { label: 'Actual Date' },
         owner: { label: 'Owner' },
+        is_critical_path: { label: 'On Critical Path' },
         deliverables: { label: 'Deliverables' },
       },
       _views: { all_milestones: { label: 'All Milestones' } },
@@ -91,6 +97,7 @@ export const en: TranslationData = {
       pluralLabel: 'Risks',
       description: 'A potential threat or uncertainty that could impact project delivery.',
       fields: {
+        risk_id: { label: 'Risk ID' },
         name: { label: 'Risk Title' },
         description: { label: 'Description' },
         project: { label: 'Project' },
@@ -141,6 +148,15 @@ export const en: TranslationData = {
         ai_likelihood: { label: 'AI Likelihood' },
         ai_mitigation_suggestion: { label: 'AI Mitigation Suggestion' },
         ai_similar_risks: { label: 'AI Similar Past Risks' },
+        response_strategy: {
+          label: 'Response Strategy',
+          options: {
+            avoid: 'Avoid',
+            mitigate: 'Mitigate',
+            transfer: 'Transfer',
+            accept: 'Accept',
+          },
+        },
         mitigation_plan: { label: 'Mitigation Plan' },
         contingency_plan: { label: 'Contingency Plan' },
         owner: { label: 'Risk Owner' },
@@ -152,9 +168,20 @@ export const en: TranslationData = {
       pluralLabel: 'Issues',
       description: 'A current problem that requires resolution.',
       fields: {
+        issue_number: { label: 'Issue Number' },
         name: { label: 'Issue Title' },
         description: { label: 'Description' },
         project: { label: 'Project' },
+        type: {
+          label: 'Type',
+          options: {
+            bug: 'Bug',
+            blocker: 'Blocker',
+            task: 'Task',
+            question: 'Question',
+            other: 'Other',
+          },
+        },
         status: {
           label: 'Status',
           options: {
@@ -172,6 +199,8 @@ export const en: TranslationData = {
         assigned_to: { label: 'Assigned To' },
         related_risk: { label: 'Related Risk' },
         resolution: { label: 'Resolution' },
+        reported_at: { label: 'Reported At' },
+        resolved_at: { label: 'Resolved At' },
       },
       _views: { all_issues: { label: 'All Issues' } },
     },
@@ -214,6 +243,9 @@ export const en: TranslationData = {
         nav_risks: { label: 'Risks' },
         nav_issues: { label: 'Issues' },
         nav_resources: { label: 'Resources' },
+        nav_timesheets: { label: 'Timesheets' },
+        nav_pmo_overview: { label: 'PMO Overview' },
+        nav_pm_workbench: { label: 'PM Workbench' },
       },
     },
   },

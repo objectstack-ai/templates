@@ -16,11 +16,11 @@ export const MilestoneViews = defineView({
       { field: 'project', width: 160, sortable: true },
       { field: 'status', width: 120, sortable: true },
       { field: 'is_critical_path', width: 120, align: 'center', sortable: true },
-      { field: 'due_date', width: 120, sortable: true },
-      { field: 'completed_at', width: 120, sortable: true },
+      { field: 'planned_date', width: 120, sortable: true },
+      { field: 'actual_date', width: 120, sortable: true },
       { field: 'deliverables', width: 300 },
     ],
-    sort: [{ field: 'due_date', order: 'asc' }],
+    sort: [{ field: 'planned_date', order: 'asc' }],
     grouping: { fields: [{ field: 'project', order: 'asc', collapsed: false }] },
     selection: { type: 'multiple' },
     pagination: { pageSize: 50, pageSizeOptions: [25, 50, 100] },
@@ -55,16 +55,16 @@ export const MilestoneViews = defineView({
       data: { provider: 'object', object: 'pm_milestone' },
       filter: [
         { field: 'status', operator: 'in', value: ['not_started', 'in_progress'] },
-        { field: 'due_date', operator: 'not_equals', value: null },
+        { field: 'planned_date', operator: 'not_equals', value: null },
       ],
       columns: [
         { field: 'name', width: 280, link: true, pinned: 'left' },
         { field: 'project', width: 160 },
         { field: 'status', width: 120 },
-        { field: 'due_date', width: 120 },
+        { field: 'planned_date', width: 120 },
         { field: 'is_critical_path', width: 120, align: 'center' },
       ],
-      sort: [{ field: 'due_date', order: 'asc' }],
+      sort: [{ field: 'planned_date', order: 'asc' }],
     },
 
     at_risk_milestones: {
@@ -72,15 +72,19 @@ export const MilestoneViews = defineView({
       type: 'grid',
       label: 'At Risk Milestones',
       data: { provider: 'object', object: 'pm_milestone' },
-      filter: [{ field: 'status', operator: 'equals', value: 'at_risk' }],
+      // "At risk" = still open but the planned date is already in the past.
+      filter: [
+        { field: 'status', operator: 'in', value: ['not_started', 'in_progress'] },
+        { field: 'planned_date', operator: 'less_than', value: '{today}' },
+      ],
       columns: [
         { field: 'name', width: 280, link: true, pinned: 'left' },
         { field: 'project', width: 160 },
-        { field: 'due_date', width: 120 },
+        { field: 'planned_date', width: 120 },
         { field: 'is_critical_path', width: 120, align: 'center' },
         { field: 'deliverables', width: 300 },
       ],
-      sort: [{ field: 'due_date', order: 'asc' }],
+      sort: [{ field: 'planned_date', order: 'asc' }],
     },
 
     critical_path_milestones: {
@@ -93,12 +97,12 @@ export const MilestoneViews = defineView({
         { field: 'name', width: 280, link: true, pinned: 'left' },
         { field: 'project', width: 160 },
         { field: 'status', width: 120 },
-        { field: 'due_date', width: 120 },
-        { field: 'completed_at', width: 120 },
+        { field: 'planned_date', width: 120 },
+        { field: 'actual_date', width: 120 },
       ],
       sort: [
         { field: 'project', order: 'asc' },
-        { field: 'due_date', order: 'asc' },
+        { field: 'planned_date', order: 'asc' },
       ],
     },
   },
