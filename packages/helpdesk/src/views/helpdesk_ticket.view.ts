@@ -152,6 +152,19 @@ export const TicketViews = defineView({
       ],
       sort: [{ field: 'priority', order: 'desc' }],
     },
+
+    // Customer-facing list used by the help-center portal. The magic-link bind
+    // attributes a portal user to their `customer` record; the helpdesk_customer
+    // profile (viewAllRecords: false) further scopes rows to the user's own.
+    my_tickets: {
+      name: 'my_tickets',
+      type: 'grid',
+      label: 'My Tickets',
+      data: { provider: 'object', object: 'helpdesk_ticket' },
+      columns: ['ticket_number', 'name', 'status', 'priority', 'first_response_due_at'],
+      filter: [{ field: 'customer', operator: 'equals', value: '{currentUser}' }],
+      sort: [{ field: 'status', order: 'asc' }],
+    },
   },
 
   form: {

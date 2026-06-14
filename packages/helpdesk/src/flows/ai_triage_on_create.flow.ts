@@ -6,23 +6,18 @@ type Flow = Automation.Flow;
 /**
  * AI Triage On Create — runs when a ticket is created (status == "new").
  *
- * In this template the AI step is a **stub** that sets sensible defaults:
- *   - ai_category = "other"
- *   - ai_sentiment = "neutral"
- *   - ai_priority_suggestion = priority (echoed)
- *   - ai_language = customer.locale (or "en")
- *   - ai_summary = first 280 chars of description
- *   - ai_suggested_reply = templated acknowledgement
- *   - ai_suggested_kb_ids = []
- *   - ai_confidence = 0.5
- *   - ai_triage_at = now()
+ * The deterministic AI baseline (ai_summary / ai_category / ai_sentiment /
+ * ai_priority_suggestion / ai_language / ai_confidence / ai_triage_at) is set
+ * synchronously by `helpdesk_ticket.hook.ts` on insert, so every ticket has
+ * populated `ai_*` fields even with no LLM wired up. This flow is the seam for
+ * **richer** triage and routing on top of that baseline.
  *
  * To plug in a real LLM (OpenAI / Anthropic / Bedrock / Azure / 通义 / 文心):
- *   1. Replace the `ai_triage` script node body with an HTTP call to your
- *      provider (use platform `services.http` or a custom hook).
- *   2. Map provider output to the same fields — schema doesn't change.
- *   3. Adjust the `criteria` / `set_status_triaged` thresholds for
- *      auto-triage vs human-triage routing (we use ai_confidence ≥ 0.6).
+ *   1. Add a `script` node before `set_status_triaged` that calls your provider
+ *      (platform `services.http`) and updates the ticket with the response —
+ *      same field shapes, so dashboards / automations / analytics don't change.
+ *   2. Gate `set_status_triaged` on a confidence threshold (e.g. ≥ 0.6) to
+ *      route low-confidence tickets to a human triage queue instead.
  *
  * After triage, the flow advances status: new → triaged.
  */
@@ -46,20 +41,8 @@ export const AITriageOnCreateFlow: Flow = {
         condition: 'status == "new"',
       },
     },
-    {
-      id: 'ai_triage',
-      type: 'script',
-      label: 'AI Triage (STUB — replace with LLM call)',
-      config: {
-        // Stub: defaults that look reasonable on a fresh seed.
-        // Production: call your LLM provider here, return structured JSON.
-        actionType: 'invoke_function',
-        functionName: 'helpdesk.aiTriageStub',
-        inputs: { ticketId: '{ticketId}' },
-        // The stub function (or your LLM wrapper) is expected to update
-        // the ticket record directly with ai_* fields.
-      },
-    },
+    // NOTE: the ai_* baseline is set by helpdesk_ticket.hook.ts on insert.
+    // Insert your LLM `script` node here (see the file header) to enrich it.
     {
       id: 'set_status_triaged',
       type: 'update_record',
@@ -74,8 +57,7 @@ export const AITriageOnCreateFlow: Flow = {
   ],
 
   edges: [
-    { id: 'e1', source: 'start', target: 'ai_triage', type: 'default' },
-    { id: 'e2', source: 'ai_triage', target: 'set_status_triaged', type: 'default' },
-    { id: 'e3', source: 'set_status_triaged', target: 'end', type: 'default' },
+    { id: 'e1', source: 'start', target: 'set_status_triaged', type: 'default' },
+    { id: 'e2', source: 'set_status_triaged', target: 'end', type: 'default' },
   ],
 };

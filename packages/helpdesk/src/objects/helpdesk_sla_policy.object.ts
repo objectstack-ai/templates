@@ -5,8 +5,10 @@ import { tmpl } from '@objectstack/spec';
 
 /**
  * SLA Policy — first-response and resolution targets in minutes, per priority.
- * The `ai_triage_on_create` flow stamps `first_response_due_at` and
- * `resolution_due_at` on the ticket using the policy attached to its tier.
+ * `helpdesk_ticket.hook.ts` stamps `first_response_due_at` and
+ * `resolution_due_at` on insert using these per-priority minutes (the hook
+ * ships the same defaults inline to stay payload-only; a fork can read the
+ * customer's tier-matched policy here instead).
  *
  * Keeping minutes-per-priority as scalar fields (not a JSON map) so they're
  * filterable / chart-able. In a fork add business-hours calendar awareness.

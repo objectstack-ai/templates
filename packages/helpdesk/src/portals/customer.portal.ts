@@ -72,7 +72,7 @@ export const HelpdeskCustomerPortal = definePortal({
       },
       {
         path: '/kb',
-        viewRef: 'helpdesk_kb_article.published_list',
+        viewRef: 'helpdesk_kb_article.published_articles',
         rateLimit: { rule: '100/hour/ip', scope: 'ip' },
       },
     ],
@@ -103,7 +103,7 @@ export const HelpdeskCustomerPortal = definePortal({
       label: 'Knowledge Base',
       icon: 'book-open',
       order: 3,
-      viewRef: 'helpdesk_kb_article.published_list',
+      viewRef: 'helpdesk_kb_article.published_articles',
     },
   ],
 
