@@ -101,9 +101,17 @@ const DEDUP_BY_NAME = ['roles', 'permissions'];
 const log = (msg) => process.stdout.write(`${msg}\n`);
 
 /**
- * `install` — populate `.objectstack/installed-packages/` from the workspace
- * templates, in the runtime's wrapper format. No-op for templates already
- * present (so a real marketplace install is never clobbered).
+ * `install` — populate `.objectstack/marketplace-packages/` from the workspace
+ * templates, in the runtime's wrapper format.
+ *
+ * The workspace template is the source of truth for its own manifestId, so we
+ * ALWAYS refresh its cache entry from the current `dist/objectstack.json`.
+ * Earlier this skipped any entry that already existed, which silently served a
+ * STALE artifact after `pnpm -r build` (e.g. dashboards in the pre-ADR-0021
+ * `object`/`aggregate` shape that newer runtimes reject) — the compile would
+ * never pick up rebuilt templates. Genuine marketplace-UI installs are NOT in
+ * the workspace loop (they live under a different id with no workspace `dist`),
+ * so refreshing here never clobbers them.
  */
 function installFromWorkspace() {
   mkdirSync(INSTALLED_DIR, { recursive: true });
@@ -118,10 +126,7 @@ function installFromWorkspace() {
     const artifact = JSON.parse(readFileSync(artifactPath, 'utf8'));
     const manifestId = artifact?.manifest?.id ?? `app.objectstack.template.${name}`;
     const dest = join(INSTALLED_DIR, safeFilename(manifestId));
-    if (existsSync(dest)) {
-      installed.push(`${name} (already installed)`);
-      continue;
-    }
+    const refreshed = existsSync(dest);
     const entry = {
       packageId: manifestId,
       versionId: artifact?.manifest?.version ?? '0.0.0',
@@ -133,7 +138,7 @@ function installFromWorkspace() {
       withSampleData: false,
     };
     writeFileSync(dest, `${JSON.stringify(entry, null, 2)}\n`, 'utf8');
-    installed.push(name);
+    installed.push(refreshed ? `${name} (refreshed)` : name);
   }
   return installed;
 }

@@ -18,23 +18,13 @@ import type { Hook, HookContext } from '@objectstack/spec/data';
  *     `ai_triage_on_create.flow.ts` for richer triage; the field shapes stay.
  *
  * beforeUpdate stamps `resolved_at` when a ticket reaches the resolved status.
+ *
+ * IMPORTANT — the handler runs body-only in the QuickJS sandbox, so the SLA
+ * minute maps are defined INSIDE the handler. Module-scope consts are not in
+ * scope at runtime and throw ReferenceError when referenced (only bites tickets
+ * created without pre-set SLA fields — e.g. from the UI/portal; seed rows
+ * pre-fill them and skip the lookup).
  */
-
-// First-response / resolution targets in minutes, mirroring the SLA policy
-// defaults. Keyed by ticket priority.
-const FIRST_RESPONSE_MIN: Record<string, number> = {
-  low: 1440,
-  normal: 480,
-  high: 120,
-  urgent: 30,
-};
-const RESOLUTION_MIN: Record<string, number> = {
-  low: 10080,
-  normal: 2880,
-  high: 1440,
-  urgent: 240,
-};
-
 const ticketHook: Hook = {
   name: 'helpdesk_ticket_automation',
   object: 'helpdesk_ticket',
@@ -45,6 +35,21 @@ const ticketHook: Hook = {
     const { event, input, previous } = ctx as HookContext & {
       input: Record<string, unknown>;
       previous?: Record<string, unknown>;
+    };
+
+    // First-response / resolution targets in minutes (mirror the SLA policy
+    // defaults), keyed by ticket priority.
+    const FIRST_RESPONSE_MIN: Record<string, number> = {
+      low: 1440,
+      normal: 480,
+      high: 120,
+      urgent: 30,
+    };
+    const RESOLUTION_MIN: Record<string, number> = {
+      low: 10080,
+      normal: 2880,
+      high: 1440,
+      urgent: 240,
     };
 
     if (event === 'beforeInsert') {

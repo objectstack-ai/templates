@@ -17,28 +17,13 @@ import type { Hook, HookContext } from '@objectstack/spec/data';
  * process. That is why `progress_percent` / `actual_cost` (which would need a
  * cross-object rollup from milestones / timesheets) are stored fields kept in
  * sync by seed/client, not by this hook.
+ *
+ * IMPORTANT — the handler runs **body-only** in the QuickJS sandbox: only the
+ * function body ships, so module-scope helpers are NOT in scope at runtime.
+ * `deriveHealth` is therefore defined INSIDE the handler. (A top-level helper
+ * threw `ReferenceError: deriveHealth is not defined` and silently failed every
+ * insert — caught in runtime testing, not by the build.)
  */
-function deriveHealth(
-  status: unknown,
-  riskScore: unknown,
-  plannedEnd: unknown,
-  actualEnd: unknown,
-): 'on_track' | 'at_risk' | 'off_track' {
-  if (status === 'completed' || status === 'cancelled') return 'on_track';
-
-  // Past planned end and not finished → off track.
-  if (typeof plannedEnd === 'string' && !actualEnd) {
-    const due = Date.parse(plannedEnd);
-    if (!Number.isNaN(due) && due < Date.now()) return 'off_track';
-  }
-
-  const score = typeof riskScore === 'number' ? riskScore : Number(riskScore);
-  if (!Number.isNaN(score) && score >= 70) return 'off_track';
-  if (status === 'at_risk') return 'at_risk';
-  if (!Number.isNaN(score) && score >= 40) return 'at_risk';
-  return 'on_track';
-}
-
 const projectHook: Hook = {
   name: 'pm_project_automation',
   object: 'pm_project',
@@ -49,6 +34,24 @@ const projectHook: Hook = {
     const { event, input, previous } = ctx as HookContext & {
       input: Record<string, unknown>;
       previous?: Record<string, unknown>;
+    };
+
+    const deriveHealth = (
+      status: unknown,
+      riskScore: unknown,
+      plannedEnd: unknown,
+      actualEnd: unknown,
+    ): 'on_track' | 'at_risk' | 'off_track' => {
+      if (status === 'completed' || status === 'cancelled') return 'on_track';
+      if (typeof plannedEnd === 'string' && !actualEnd) {
+        const due = Date.parse(plannedEnd);
+        if (!Number.isNaN(due) && due < Date.now()) return 'off_track';
+      }
+      const score = typeof riskScore === 'number' ? riskScore : Number(riskScore);
+      if (!Number.isNaN(score) && score >= 70) return 'off_track';
+      if (status === 'at_risk') return 'at_risk';
+      if (!Number.isNaN(score) && score >= 40) return 'at_risk';
+      return 'on_track';
     };
 
     if (event === 'beforeInsert') {
