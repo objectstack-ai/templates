@@ -9,15 +9,11 @@ import type { Hook, HookContext } from '@objectstack/spec/data';
  * risk register's sort and the "Critical" tab. It is computed here from the
  * manual impact/likelihood selects so the readonly number always reflects them.
  * Payload-only mutation — no nested writes (see pm_project.hook.ts).
+ *
+ * The handler runs body-only in the QuickJS sandbox, so the impact/likelihood
+ * scale map is defined INSIDE the handler — a module-scope const is not in
+ * scope at runtime and would throw ReferenceError on every insert.
  */
-const SCALE: Record<string, number> = {
-  very_low: 1,
-  low: 2,
-  medium: 3,
-  high: 4,
-  very_high: 5,
-};
-
 const riskHook: Hook = {
   name: 'pm_risk_automation',
   object: 'pm_risk',
@@ -28,6 +24,14 @@ const riskHook: Hook = {
     const { event, input, previous } = ctx as HookContext & {
       input: Record<string, unknown>;
       previous?: Record<string, unknown>;
+    };
+
+    const SCALE: Record<string, number> = {
+      very_low: 1,
+      low: 2,
+      medium: 3,
+      high: 4,
+      very_high: 5,
     };
 
     if (event === 'beforeInsert' && !input.risk_id) {
