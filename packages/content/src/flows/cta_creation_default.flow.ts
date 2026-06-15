@@ -28,7 +28,13 @@ export const CtaCreationDefaultFlow: Flow = {
       config: {
         objectName: 'content_piece',
         triggerType: 'record-after-create',
-        condition: '!isBlank(record.target_channels)',
+        // Supported operator (`!= null`) instead of isBlank(), which the
+        // runtime condition dialect does not evaluate. NOTE: `target_channels`
+        // is a multi-lookup (junction table), so it is not present on the
+        // after-create record row the condition sees — this flow therefore
+        // still won't fire until a fork promotes the channel link onto the
+        // piece or triggers off the junction. Single-channel forks work today.
+        condition: 'record.target_channels != null',
       },
     },
     {

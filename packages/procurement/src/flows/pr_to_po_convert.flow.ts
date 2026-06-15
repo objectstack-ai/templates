@@ -57,7 +57,11 @@ export const PRToPOConvertFlow: Flow = {
           total_amount: '{pr.estimated_amount}',
           received_amount: 0,
           cost_center: '{pr.cost_center}',
-          order_date: 'today()',
+          // order_date is intentionally left unset on the draft PO — the buyer
+          // sets it when sending (enforced by `sent_requires_order_date`). A
+          // literal 'today()' string is not a valid date and the runtime's
+          // date validation rejects it, which previously aborted the whole
+          // PR→PO conversion.
           expected_delivery: '{pr.needed_by}',
           notes:
             'Auto-generated from PR {pr.request_number} ({pr.title}). Review line items before sending.',
