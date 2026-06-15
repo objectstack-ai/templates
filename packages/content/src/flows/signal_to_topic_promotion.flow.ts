@@ -28,7 +28,10 @@ export const SignalToTopicPromotionFlow: Flow = {
       config: {
         objectName: 'content_signal',
         triggerType: 'record-after-update',
-        condition: 'status == "promoted" && PRIOR(status) != "promoted"',
+        // Use `previous.status` (the proven record-change idiom) — PRIOR() is
+        // not evaluated by the runtime condition dialect, which silently
+        // skipped this flow so promotions never created a topic.
+        condition: 'status == "promoted" && previous.status != "promoted"',
       },
     },
     {

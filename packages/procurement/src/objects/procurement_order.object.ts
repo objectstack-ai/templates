@@ -106,8 +106,10 @@ export const PurchaseOrder = ObjectSchema.create({
     }),
     order_date: Field.date({
       label: 'Order Date',
-      required: true,
+      required: false,
       group: 'fulfillment',
+      description:
+        'Set when the PO is sent to the vendor. Not required on a draft (a PR→PO conversion creates a draft without one); the `sent_requires_order_date` validation enforces it at send time.',
     }),
     expected_delivery: Field.date({
       label: 'Expected Delivery',
