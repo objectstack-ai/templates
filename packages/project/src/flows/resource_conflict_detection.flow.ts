@@ -92,7 +92,7 @@ export const ResourceConflictDetectionFlow: Flow = {
       config: {
         to: '{affectedProjects[*].project_manager}',
         message:
-          'Resource conflict: {{resource.person.name}} is allocated {{totalHours}} hours/week across multiple projects.',
+          'Resource conflict: {resource.person.name} is allocated {totalHours} hours/week across multiple projects.',
       },
     },
     {
