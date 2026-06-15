@@ -100,7 +100,7 @@ export const DailyAIRiskAssessmentFlow: Flow = {
       label: 'Notify PMO of High Risk',
       config: {
         to: 'pmo_team',
-        message: 'Project {{project.name}} has high risk score: {{project.ai_risk_score}}',
+        message: 'Project {project.name} has high risk score: {project.ai_risk_score}',
       },
     },
     {

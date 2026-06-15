@@ -75,7 +75,7 @@ export const MilestoneDeadlineWarningFlow: Flow = {
       label: 'Escalate to PMO',
       config: {
         to: 'pmo_team',
-        message: 'OVERDUE: Milestone "{{milestone.name}}" in project {{milestone.project.name}}',
+        message: 'OVERDUE: Milestone "{milestone.name}" in project {milestone.project.name}',
       },
     },
     {
