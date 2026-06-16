@@ -1,42 +1,61 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import type * as Automation from '@objectstack/spec/automation';
+import { cel } from '@objectstack/spec';
 type Flow = Automation.Flow;
 
 /**
- * Expense Approval Overdue — when a report has been sitting in "submitted"
- * for 3 days without a decision, nudge the approver pool. The daily
- * scheduler re-evaluates the criteria so it fires once the boundary is
- * crossed (submitted_at == 3 days ago).
+ * Expense Approval Overdue — nudges the expense-manager role about every report
+ * that has waited 3+ days in `submitted` without a decision.
+ *
+ * Why a SCHEDULED flow, not record-change (#1874): "has waited 3 days" is time-
+ * relative. A record-change trigger only fires on row mutation, so a report
+ * left untouched would never cross the boundary. The daily schedule re-evaluates
+ * against `daysAgo(3)`.
+ *
+ * Idempotency is declarative via status: the query is scoped to
+ * `status == 'submitted'`, so a report drops out the moment it is approved or
+ * rejected. (Still-pending reports are re-escalated daily on purpose.)
  */
 export const ExpenseApprovalOverdueFlow: Flow = {
   name: 'expense_report_approval_overdue',
   label: 'Escalate Stale Pending Approvals',
   description:
-    'When a submitted report has waited 3 days for approval, re-notify the expense-manager role.',
-  type: 'record_change',
+    'Daily scheduled job: re-notifies the expense-manager role about reports that have waited 3+ days for approval.',
+  type: 'schedule',
 
-  variables: [{ name: 'reportId', type: 'text', isInput: true, isOutput: false }],
+  variables: [],
 
   nodes: [
     {
       id: 'start',
       type: 'start',
-      label: 'Start',
+      label: 'Start (Scheduled)',
       config: {
-        objectName: 'expense_report',
-        triggerType: 'record-after-update',
-        condition: 'status == "submitted" && submitted_at != null && submitted_at == daysAgo(3)',
+        schedule: 'cron:0 9 * * *', // Daily at 9am
       },
     },
     {
-      id: 'get_report',
+      id: 'query_stale',
       type: 'get_record',
-      label: 'Load Report',
+      label: 'Find Stale Pending Reports',
       config: {
         objectName: 'expense_report',
-        filter: { id: '{record.id}' },
-        outputVariable: 'report',
+        filter: {
+          status: 'submitted',
+          submitted_at: { $lte: cel`daysAgo(3)` },
+        },
+        limit: 500,
+        outputVariable: 'staleReports',
+      },
+    },
+    {
+      id: 'foreach_report',
+      type: 'loop',
+      label: 'For Each Stale Report',
+      config: {
+        collection: '{staleReports.records}',
+        iteratorVar: 'report',
       },
     },
     {
@@ -46,16 +65,19 @@ export const ExpenseApprovalOverdueFlow: Flow = {
       config: {
         recipients: ['role:expense_manager'],
         title: 'Still pending: {report.title}',
-        body: 'Report "{report.title}" ({report.total_amount}) has awaited approval for 3 days. Please review.',
+        body: 'Report "{report.title}" ({report.total_amount}) has awaited approval for 3+ days. Please review.',
         actionUrl: '/objects/expense_report/{report.id}',
       },
     },
-    { id: 'end', type: 'end', label: 'End' },
+    { id: 'end_loop', type: 'end', label: 'End Loop Iteration' },
+    { id: 'end', type: 'end', label: 'End Flow' },
   ],
 
   edges: [
-    { id: 'e1', source: 'start', target: 'get_report', type: 'default' },
-    { id: 'e2', source: 'get_report', target: 'escalate', type: 'default' },
-    { id: 'e3', source: 'escalate', target: 'end', type: 'default' },
+    { id: 'e1', source: 'start', target: 'query_stale', type: 'default' },
+    { id: 'e2', source: 'query_stale', target: 'foreach_report', type: 'default' },
+    { id: 'e3', source: 'foreach_report', target: 'escalate', type: 'default' },
+    { id: 'e4', source: 'escalate', target: 'end_loop', type: 'default' },
+    { id: 'e5', source: 'end_loop', target: 'end', type: 'default' },
   ],
 };

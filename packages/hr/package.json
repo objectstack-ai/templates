@@ -19,17 +19,17 @@
     "test:qa": "node ../../scripts/run-qa.mjs --url http://localhost:4009 --file qa/business-workflow.test.json"
   },
   "dependencies": {
-    "@objectstack/account": "^9.5.1",
-    "@objectstack/cli": "^9.5.1",
-    "@objectstack/driver-memory": "^9.5.1",
-    "@objectstack/driver-sql": "^9.5.1",
-    "@objectstack/driver-sqlite-wasm": "^9.5.1",
-    "@objectstack/metadata": "^9.5.1",
-    "@objectstack/objectql": "^9.5.1",
-    "@objectstack/runtime": "^9.5.1",
-    "@objectstack/service-analytics": "^9.5.1",
-    "@objectstack/service-automation": "^9.5.1",
-    "@objectstack/spec": "^9.5.1",
+    "@objectstack/account": "^9.7.0",
+    "@objectstack/cli": "^9.7.0",
+    "@objectstack/driver-memory": "^9.7.0",
+    "@objectstack/driver-sql": "^9.7.0",
+    "@objectstack/driver-sqlite-wasm": "^9.7.0",
+    "@objectstack/metadata": "^9.7.0",
+    "@objectstack/objectql": "^9.7.0",
+    "@objectstack/runtime": "^9.7.0",
+    "@objectstack/service-analytics": "^9.7.0",
+    "@objectstack/service-automation": "^9.7.0",
+    "@objectstack/spec": "^9.7.0",
     "sql.js": "^1.14.1"
   },
   "optionalDependencies": {

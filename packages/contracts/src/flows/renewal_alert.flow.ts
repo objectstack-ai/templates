@@ -1,49 +1,66 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import type * as Automation from '@objectstack/spec/automation';
+import { cel } from '@objectstack/spec';
 type Flow = Automation.Flow;
 
 /**
- * Renewal alert — fires when an active contract reaches the T-60 / T-30 / T-7
- * day mark before its `end_date`. Notifies the contract owner so they can
- * decide to renegotiate or terminate before auto-renew kicks in.
+ * Renewal alert — notifies the contract owner at T-60 / T-30 / T-7 days before
+ * an active contract's `end_date`, so auto-renewal does not happen by accident.
  *
- * Why CEL `end_date == daysFromNow(N)` instead of a `days_until_expiry`
- * formula field: the CEL stdlib shipped with @objectstack/formula 5.2 does
- * not include `daysBetween`, so an "exact days remaining" derived integer is
- * not expressible as a formula. The platform scheduler re-evaluates the
- * criteria daily, so equality against `daysFromNow(N)` flips true on
- * exactly the right day.
+ * Why this is a SCHEDULED flow, not record-change (#1874):
+ * a `record_change` trigger only fires when the contract row is mutated. A
+ * contract sitting untouched will sail past T-60 / T-30 / T-7 without any update
+ * event, so a record-change trigger with `end_date == daysFromNow(N)` would
+ * (almost) never fire on the right day — it only matched if someone happened to
+ * edit the contract that exact day. Time-relative criteria belong on a daily
+ * SCHEDULE that QUERIES the population, not on a record-change trigger.
+ *
+ * The daily job selects active contracts whose `end_date` lands on one of the
+ * three alert days and notifies each owner. `end_date` is a `date` field; the
+ * `$in` set uses `daysFromNow(N)` to preserve the original T-N alert tiers.
+ * (If the engine's date/timestamp equality proves too strict in practice, widen
+ * each tier to a one-day range and de-dupe with a `last_alert_tier` guard.)
  */
 export const ContractRenewalAlertFlow: Flow = {
   name: 'contracts_contract_renewal_alert',
   label: 'Alert Owner About Upcoming Renewal',
   description:
-    'Notifies the contract owner at T-60, T-30, and T-7 days before end_date so auto-renewal does not happen by accident.',
-  type: 'record_change',
+    'Daily scheduled job: notifies the contract owner at T-60, T-30, and T-7 days before end_date so auto-renewal does not happen by accident.',
+  type: 'schedule',
 
-  variables: [{ name: 'contractId', type: 'text', isInput: true, isOutput: false }],
+  variables: [],
 
   nodes: [
     {
       id: 'start',
       type: 'start',
-      label: 'Start',
+      label: 'Start (Scheduled)',
       config: {
-        objectName: 'contracts_contract',
-        triggerType: 'record-after-update',
-        condition:
-          'status == "active" && end_date != null && (end_date == daysFromNow(60) || end_date == daysFromNow(30) || end_date == daysFromNow(7))',
+        schedule: 'cron:0 9 * * *', // Daily at 9am
       },
     },
     {
-      id: 'get_contract',
+      id: 'query_due',
       type: 'get_record',
-      label: 'Get Contract',
+      label: 'Find Contracts Hitting an Alert Day',
       config: {
         objectName: 'contracts_contract',
-        filter: { id: '{record.id}' },
-        outputVariable: 'contractRecord',
+        filter: {
+          status: 'active',
+          end_date: { $in: [cel`daysFromNow(60)`, cel`daysFromNow(30)`, cel`daysFromNow(7)`] },
+        },
+        limit: 500,
+        outputVariable: 'dueContracts',
+      },
+    },
+    {
+      id: 'foreach_contract',
+      type: 'loop',
+      label: 'For Each Due Contract',
+      config: {
+        collection: '{dueContracts.records}',
+        iteratorVar: 'contract',
       },
     },
     {
@@ -51,10 +68,10 @@ export const ContractRenewalAlertFlow: Flow = {
       type: 'notify',
       label: 'Notify Owner',
       config: {
-        recipients: ['{contractRecord.owner}'],
-        title: 'Contract renewing soon: {contractRecord.title}',
-        body: 'Contract "{contractRecord.title}" with {contractRecord.party} reaches its end_date on {contractRecord.end_date}. Auto-renew is {contractRecord.auto_renew}. Review now.',
-        actionUrl: '/objects/contracts_contract/{contractRecord.id}',
+        recipients: ['{contract.owner}'],
+        title: 'Contract renewing soon: {contract.title}',
+        body: 'Contract "{contract.title}" with {contract.party} reaches its end_date on {contract.end_date}. Auto-renew is {contract.auto_renew}. Review now.',
+        actionUrl: '/objects/contracts_contract/{contract.id}',
       },
     },
     {
@@ -63,19 +80,22 @@ export const ContractRenewalAlertFlow: Flow = {
       label: 'Email Owner',
       config: {
         channels: ['email'],
-        recipients: ['{contractRecord.owner.email}'],
-        title: 'Contract renewing soon: {contractRecord.title}',
-        body: 'Contract "{contractRecord.title}" with {contractRecord.party} reaches its end_date on {contractRecord.end_date}. Auto-renew is {contractRecord.auto_renew}.',
-        actionUrl: '/objects/contracts_contract/{contractRecord.id}',
+        recipients: ['{contract.owner.email}'],
+        title: 'Contract renewing soon: {contract.title}',
+        body: 'Contract "{contract.title}" with {contract.party} reaches its end_date on {contract.end_date}. Auto-renew is {contract.auto_renew}.',
+        actionUrl: '/objects/contracts_contract/{contract.id}',
       },
     },
-    { id: 'end', type: 'end', label: 'End' },
+    { id: 'end_loop', type: 'end', label: 'End Loop Iteration' },
+    { id: 'end', type: 'end', label: 'End Flow' },
   ],
 
   edges: [
-    { id: 'e1', source: 'start', target: 'get_contract', type: 'default' },
-    { id: 'e2', source: 'get_contract', target: 'notify', type: 'default' },
-    { id: 'e3', source: 'notify', target: 'email', type: 'default' },
-    { id: 'e4', source: 'email', target: 'end', type: 'default' },
+    { id: 'e1', source: 'start', target: 'query_due', type: 'default' },
+    { id: 'e2', source: 'query_due', target: 'foreach_contract', type: 'default' },
+    { id: 'e3', source: 'foreach_contract', target: 'notify', type: 'default' },
+    { id: 'e4', source: 'notify', target: 'email', type: 'default' },
+    { id: 'e5', source: 'email', target: 'end_loop', type: 'default' },
+    { id: 'e6', source: 'end_loop', target: 'end', type: 'default' },
   ],
 };
