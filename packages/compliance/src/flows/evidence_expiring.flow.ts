@@ -21,7 +21,8 @@ type Flow = Automation.Flow;
 export const EvidenceExpiringFlow: Flow = {
   name: 'compliance_evidence_expiring',
   label: 'Alert When Evidence Expiring',
-  description: 'Daily scheduled job: notifies the evidence collector at T-30 and T-7 days before expires_on.',
+  description:
+    'Daily scheduled job: notifies the evidence collector at T-30 and T-7 days before expires_on.',
   type: 'schedule',
 
   variables: [],

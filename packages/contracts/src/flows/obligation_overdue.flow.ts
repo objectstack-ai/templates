@@ -20,7 +20,8 @@ type Flow = Automation.Flow;
 export const ObligationOverdueFlow: Flow = {
   name: 'contracts_obligation_overdue_notify',
   label: 'Notify Assignee When Obligation Overdue',
-  description: 'Daily scheduled job: notifies the assignee of every open obligation past its due date.',
+  description:
+    'Daily scheduled job: notifies the assignee of every open obligation past its due date.',
   type: 'schedule',
 
   variables: [],

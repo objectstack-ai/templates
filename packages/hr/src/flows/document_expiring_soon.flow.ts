@@ -20,7 +20,8 @@ type Flow = Automation.Flow;
 export const DocumentExpiringSoonFlow: Flow = {
   name: 'hr_document_expiring_soon',
   label: 'Alert When Document Expires Within 30 Days',
-  description: 'Daily scheduled job: when an employee document reaches T-30 days before expiry, notify HR.',
+  description:
+    'Daily scheduled job: when an employee document reaches T-30 days before expiry, notify HR.',
   type: 'schedule',
 
   variables: [],
