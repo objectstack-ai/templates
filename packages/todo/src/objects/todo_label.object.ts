@@ -23,7 +23,6 @@ export const Label = ObjectSchema.create({
     }),
     color: Field.color({
       label: 'Color',
-      colorFormat: 'hex',
       defaultValue: '#3B82F6',
     }),
     description: Field.text({ label: 'Description', maxLength: 200 }),
