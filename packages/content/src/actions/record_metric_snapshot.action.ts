@@ -2,9 +2,10 @@
 
 /**
  * record_metric_snapshot — manual action on a `content_publication`.
- * Inserts a `content_metric` row for the supplied period; the
- * `publication_rollup` flow then refreshes denormalised totals on the
- * publication and parent piece.
+ * Inserts a `content_metric` row for the supplied period. The denormalised
+ * totals on the publication and parent piece are native `Field.summary`
+ * roll-ups (#1870) — the engine recomputes them automatically when this metric
+ * row is inserted; no follow-up flow/action step is needed.
  *
  * Reflects how teams actually measure: copy/paste from GA / Mixpanel /
  * Stripe weekly, not a real-time stream.

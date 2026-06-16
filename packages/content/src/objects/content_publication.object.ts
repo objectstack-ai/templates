@@ -56,43 +56,37 @@ export const Publication = ObjectSchema.create({
       description: 'Optional ID on the upstream system (CMS post id, LinkedIn post URN, etc.).',
     }),
 
-    // Denormalised totals — STORED fields (seed/client-maintained). A live
-    // rollup from metric snapshots needs a nested engine write, which is
-    // unsupported in the standalone hook runtime — see content/src/hooks/index.ts.
-    total_views: Field.number({
+    // Denormalised totals — native roll-up summaries (#1870). The engine
+    // recomputes these server-side whenever a child `content_metric` row is
+    // inserted/updated/deleted (FK `content_metric.publication` auto-detected).
+    // This replaces the old `publication_rollup` flow, whose script-node
+    // "aggregations" never ran (the automation engine has no aggregate node) —
+    // and a hook can't do it either (nested cross-object write is unsupported in
+    // the standalone QuickJS runtime; see content/src/hooks/index.ts).
+    total_views: Field.summary({
       label: 'Views',
-      scale: 0,
-      min: 0,
-      readonly: true,
       group: 'rollups',
-      defaultValue: 0,
+      summaryOperations: { object: 'content_metric', field: 'views', function: 'sum' },
     }),
-    total_clicks: Field.number({
+    total_clicks: Field.summary({
       label: 'Clicks',
-      scale: 0,
-      min: 0,
-      readonly: true,
       group: 'rollups',
-      defaultValue: 0,
+      summaryOperations: { object: 'content_metric', field: 'clicks', function: 'sum' },
     }),
-    total_signups: Field.number({
+    total_signups: Field.summary({
       label: 'Signups',
-      scale: 0,
-      min: 0,
-      readonly: true,
       group: 'rollups',
-      defaultValue: 0,
+      summaryOperations: { object: 'content_metric', field: 'signups', function: 'sum' },
     }),
-    total_revenue: Field.currency({
+    total_revenue: Field.summary({
       label: 'Attributed Revenue',
-      readonly: true,
       group: 'rollups',
-      defaultValue: 0,
+      summaryOperations: { object: 'content_metric', field: 'revenue', function: 'sum' },
     }),
-    last_metric_at: Field.datetime({
+    last_metric_at: Field.summary({
       label: 'Last Snapshot',
-      readonly: true,
       group: 'rollups',
+      summaryOperations: { object: 'content_metric', field: 'period_end', function: 'max' },
     }),
 
     notes: Field.markdown({ label: 'Notes', group: 'meta' }),

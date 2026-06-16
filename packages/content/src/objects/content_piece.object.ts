@@ -160,36 +160,29 @@ export const Piece = ObjectSchema.create({
     published_at: Field.datetime({ label: 'Published At', readonly: true, group: 'planning' }),
     archived_at: Field.datetime({ label: 'Archived At', readonly: true, group: 'planning' }),
 
-    // Denormalised performance rollups (kept in sync by publication_rollup flow)
-    total_views: Field.number({
+    // Denormalised performance rollups — native roll-up summaries (#1870),
+    // recomputed server-side as child `content_publication` rows change (FK
+    // `content_publication.piece` auto-detected). Sums each publication's own
+    // rolled-up totals up to the piece. Replaces the broken publication_rollup flow.
+    total_views: Field.summary({
       label: 'Views',
-      scale: 0,
-      min: 0,
-      readonly: true,
       group: 'rollups',
-      defaultValue: 0,
+      summaryOperations: { object: 'content_publication', field: 'total_views', function: 'sum' },
     }),
-    total_clicks: Field.number({
+    total_clicks: Field.summary({
       label: 'Clicks',
-      scale: 0,
-      min: 0,
-      readonly: true,
       group: 'rollups',
-      defaultValue: 0,
+      summaryOperations: { object: 'content_publication', field: 'total_clicks', function: 'sum' },
     }),
-    total_signups: Field.number({
+    total_signups: Field.summary({
       label: 'Signups',
-      scale: 0,
-      min: 0,
-      readonly: true,
       group: 'rollups',
-      defaultValue: 0,
+      summaryOperations: { object: 'content_publication', field: 'total_signups', function: 'sum' },
     }),
-    total_revenue: Field.currency({
+    total_revenue: Field.summary({
       label: 'Attributed Revenue',
-      readonly: true,
       group: 'rollups',
-      defaultValue: 0,
+      summaryOperations: { object: 'content_publication', field: 'total_revenue', function: 'sum' },
     }),
 
     // Derived signals

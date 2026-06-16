@@ -1,42 +1,51 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import type * as Automation from '@objectstack/spec/automation';
+import { cel } from '@objectstack/spec';
 type Flow = Automation.Flow;
 
 /**
- * Auto-Close Resolved — if a ticket has been in `resolved` for 7 days without
- * customer reply, close it. Scheduler re-evaluates daily.
+ * Auto-Close Resolved — closes any ticket that has been in `resolved` for 7+
+ * days with no further customer reply.
  *
- * The `daysAgo(7)` CEL helper is supported; we compare resolved_at (a
- * datetime) to today minus 7 days. If the underlying CEL doesn't accept
- * datetime-vs-date comparison, replace with a date-cast helper in your fork.
+ * Why a SCHEDULED flow, not record-change (#1874): "has been resolved for 7
+ * days" is time-relative. A record-change trigger only fires when the row is
+ * mutated, so a resolved-and-forgotten ticket would never cross the boundary.
+ * A daily schedule re-evaluates the population against `daysAgo(7)`.
+ *
+ * Idempotency is the status transition itself: the bulk update only matches
+ * `status == 'resolved'`, and closing flips it to `closed`, so it cannot match
+ * twice. No loop / no guard field needed.
  */
 export const AutoCloseResolvedFlow: Flow = {
   name: 'helpdesk_auto_close_resolved',
   label: 'Auto-Close Long-Resolved Tickets',
   description: 'Close tickets that have been resolved for 7 days with no further customer reply.',
-  type: 'record_change',
+  type: 'schedule',
 
-  variables: [{ name: 'ticketId', type: 'text', isInput: true, isOutput: false }],
+  variables: [],
 
   nodes: [
     {
       id: 'start',
       type: 'start',
-      label: 'Start',
+      label: 'Start (Scheduled)',
       config: {
-        objectName: 'helpdesk_ticket',
-        triggerType: 'record-after-update',
-        condition: 'status == "resolved" && resolved_at != null && resolved_at <= daysAgo(7)',
+        schedule: 'cron:0 1 * * *', // Daily at 1am
       },
     },
     {
       id: 'close',
       type: 'update_record',
-      label: 'Mark Closed',
+      label: 'Close Long-Resolved Tickets',
       config: {
         objectName: 'helpdesk_ticket',
-        filter: { id: '{record.id}' },
+        // Bulk update: every still-resolved ticket whose resolved_at is 7+ days
+        // old. The status flip is the idempotency guard.
+        filter: {
+          status: 'resolved',
+          resolved_at: { $lte: cel`daysAgo(7)` },
+        },
         fields: { status: 'closed' },
       },
     },

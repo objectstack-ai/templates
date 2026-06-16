@@ -1,55 +1,60 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import type * as Automation from '@objectstack/spec/automation';
+import { cel } from '@objectstack/spec';
 type Flow = Automation.Flow;
 
 /**
- * Document expiry reminder — fires when a document's `expires_at` falls
- * within 30 days. Notifies HR (role:hr_admin) plus the owning employee's
- * login user.
+ * Document expiry reminder — alerts HR (and the owning employee) when an
+ * employee document reaches T-30 days before its `expires_at`.
  *
- * In a real deployment you'd run this as a scheduled scan; this template
- * keeps it as a `record_change` flow that re-checks on every document
- * touch so the seed data demonstrates it without extra cron infra.
+ * Why a SCHEDULED flow, not record-change (#1874): "expires within 30 days" is
+ * time-relative. A record-change trigger only fires on document touch, so an
+ * untouched document would sail past the threshold. The daily schedule selects
+ * documents landing on the T-30 day instead.
+ *
+ * Fires once, in the one-day window `[daysFromNow(30), daysFromNow(31))` —
+ * a range, not an exact `== daysFromNow(30)`: `expires_at` carries a time
+ * component, so two independently-computed timestamps never compare equal,
+ * whereas the abutting 24h windows tile the timeline so a document falls in
+ * exactly one — idempotent by construction (no guard field).
  */
 export const DocumentExpiringSoonFlow: Flow = {
   name: 'hr_document_expiring_soon',
   label: 'Alert When Document Expires Within 30 Days',
-  description: 'When an employee document is due to expire within 30 days, notify HR.',
-  type: 'record_change',
+  description:
+    'Daily scheduled job: when an employee document reaches T-30 days before expiry, notify HR.',
+  type: 'schedule',
 
-  variables: [{ name: 'docId', type: 'text', isInput: true, isOutput: false }],
+  variables: [],
 
   nodes: [
     {
       id: 'start',
       type: 'start',
-      label: 'Start',
+      label: 'Start (Scheduled)',
       config: {
-        objectName: 'hr_document',
-        triggerType: 'record-after-update',
-        condition:
-          'record.expires_at != null && record.expires_at >= today() && record.expires_at <= daysFromNow(30)',
+        schedule: 'cron:0 9 * * *', // Daily at 9am
       },
     },
     {
-      id: 'get_doc',
+      id: 'query_expiring',
       type: 'get_record',
-      label: 'Load Document',
+      label: 'Find Documents Hitting T-30',
       config: {
         objectName: 'hr_document',
-        filter: { id: '{record.id}' },
-        outputVariable: 'doc',
+        filter: { expires_at: { $gte: cel`daysFromNow(30)`, $lt: cel`daysFromNow(31)` } },
+        limit: 500,
+        outputVariable: 'expiringDocs',
       },
     },
     {
-      id: 'get_employee',
-      type: 'get_record',
-      label: 'Load Employee',
+      id: 'foreach_doc',
+      type: 'loop',
+      label: 'For Each Expiring Document',
       config: {
-        objectName: 'hr_employee',
-        filter: { id: '{doc.employee}' },
-        outputVariable: 'emp',
+        collection: '{expiringDocs.records}',
+        iteratorVar: 'doc',
       },
     },
     {
@@ -57,19 +62,21 @@ export const DocumentExpiringSoonFlow: Flow = {
       type: 'notify',
       label: 'Notify HR',
       config: {
-        recipients: ['role:hr_admin', '{emp.user}'],
+        recipients: ['role:hr_admin', '{doc.employee.user}'],
         title: 'Document expiring: {doc.name}',
-        body: '{doc.name} ({doc.doc_type}) for {emp.full_name} expires {doc.expires_at}.',
+        body: '{doc.name} ({doc.doc_type}) for {doc.employee.full_name} expires {doc.expires_at}.',
         actionUrl: '/objects/hr_document/{doc.id}',
       },
     },
-    { id: 'end', type: 'end', label: 'End' },
+    { id: 'end_loop', type: 'end', label: 'End Loop Iteration' },
+    { id: 'end', type: 'end', label: 'End Flow' },
   ],
 
   edges: [
-    { id: 'e1', source: 'start', target: 'get_doc', type: 'default' },
-    { id: 'e2', source: 'get_doc', target: 'get_employee', type: 'default' },
-    { id: 'e3', source: 'get_employee', target: 'notify_hr', type: 'default' },
-    { id: 'e4', source: 'notify_hr', target: 'end', type: 'default' },
+    { id: 'e1', source: 'start', target: 'query_expiring', type: 'default' },
+    { id: 'e2', source: 'query_expiring', target: 'foreach_doc', type: 'default' },
+    { id: 'e3', source: 'foreach_doc', target: 'notify_hr', type: 'default' },
+    { id: 'e4', source: 'notify_hr', target: 'end_loop', type: 'default' },
+    { id: 'e5', source: 'end_loop', target: 'end', type: 'default' },
   ],
 };
