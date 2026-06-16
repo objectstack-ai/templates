@@ -29,7 +29,9 @@ export const StampLifecycleTimestampsFlow: Flow = {
       config: {
         objectName: 'content_piece',
         triggerType: 'record-after-update',
-        condition: 'ISCHANGED(status)',
+        // "status changed" — ObjectStack has no ISCHANGED(); compare to the
+        // pre-update row exposed as `previous` in record-change conditions.
+        condition: 'status != previous.status',
       },
     },
     {
