@@ -13,9 +13,11 @@ type Flow = Automation.Flow;
  * untouched document would sail past the threshold. The daily schedule selects
  * documents landing on the T-30 day instead.
  *
- * Fires once, on the day `expires_at` is exactly 30 days out — idempotent by
- * construction (no guard field). NOTE: `daysFromNow(30)` is a timestamp; if your
- * engine's date/timestamp equality is too strict, widen to a one-day range.
+ * Fires once, in the one-day window `[daysFromNow(30), daysFromNow(31))` —
+ * a range, not an exact `== daysFromNow(30)`: `expires_at` carries a time
+ * component, so two independently-computed timestamps never compare equal,
+ * whereas the abutting 24h windows tile the timeline so a document falls in
+ * exactly one — idempotent by construction (no guard field).
  */
 export const DocumentExpiringSoonFlow: Flow = {
   name: 'hr_document_expiring_soon',
@@ -41,7 +43,7 @@ export const DocumentExpiringSoonFlow: Flow = {
       label: 'Find Documents Hitting T-30',
       config: {
         objectName: 'hr_document',
-        filter: { expires_at: cel`daysFromNow(30)` },
+        filter: { expires_at: { $gte: cel`daysFromNow(30)`, $lt: cel`daysFromNow(31)` } },
         limit: 500,
         outputVariable: 'expiringDocs',
       },

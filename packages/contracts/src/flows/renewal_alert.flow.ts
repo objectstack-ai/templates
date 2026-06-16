@@ -17,10 +17,12 @@ type Flow = Automation.Flow;
  * SCHEDULE that QUERIES the population, not on a record-change trigger.
  *
  * The daily job selects active contracts whose `end_date` lands on one of the
- * three alert days and notifies each owner. `end_date` is a `date` field; the
- * `$in` set uses `daysFromNow(N)` to preserve the original T-N alert tiers.
- * (If the engine's date/timestamp equality proves too strict in practice, widen
- * each tier to a one-day range and de-dupe with a `last_alert_tier` guard.)
+ * three alert days and notifies each owner. Each tier is a one-day window
+ * `[daysFromNow(N), daysFromNow(N+1))` rather than an exact `== daysFromNow(N)`:
+ * `end_date` carries a time component, so two independently-computed timestamps
+ * never compare equal, whereas the abutting 24h windows tile the timeline so a
+ * contract falls in exactly one window — fires once per tier, idempotent by
+ * construction (no guard field).
  */
 export const ContractRenewalAlertFlow: Flow = {
   name: 'contracts_contract_renewal_alert',
@@ -48,7 +50,11 @@ export const ContractRenewalAlertFlow: Flow = {
         objectName: 'contracts_contract',
         filter: {
           status: 'active',
-          end_date: { $in: [cel`daysFromNow(60)`, cel`daysFromNow(30)`, cel`daysFromNow(7)`] },
+          $or: [
+            { end_date: { $gte: cel`daysFromNow(7)`, $lt: cel`daysFromNow(8)` } },
+            { end_date: { $gte: cel`daysFromNow(30)`, $lt: cel`daysFromNow(31)` } },
+            { end_date: { $gte: cel`daysFromNow(60)`, $lt: cel`daysFromNow(61)` } },
+          ],
         },
         limit: 500,
         outputVariable: 'dueContracts',

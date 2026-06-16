@@ -13,10 +13,11 @@ type Flow = Automation.Flow;
  * almost never fire on the right day. The daily schedule selects the records
  * landing on an alert day instead.
  *
- * The `expires_on` (date) `$in` set uses `daysFromNow(N)` to hit each tier on
- * exactly one calendar day — idempotent by construction (no guard field). NOTE:
- * `daysFromNow(N)` is a timestamp; if your engine's date/timestamp equality is
- * too strict, widen each tier to a one-day range.
+ * Each tier is a one-day window `[daysFromNow(N), daysFromNow(N+1))` rather than
+ * an exact `== daysFromNow(N)`: `expires_on` carries a time component, so two
+ * independently-computed timestamps never compare equal, whereas the abutting
+ * 24h windows tile the timeline so a record falls in exactly one — fires once
+ * per tier, idempotent by construction (no guard field).
  */
 export const EvidenceExpiringFlow: Flow = {
   name: 'compliance_evidence_expiring',
@@ -44,7 +45,10 @@ export const EvidenceExpiringFlow: Flow = {
         objectName: 'compliance_evidence',
         filter: {
           status: 'approved',
-          expires_on: { $in: [cel`daysFromNow(30)`, cel`daysFromNow(7)`] },
+          $or: [
+            { expires_on: { $gte: cel`daysFromNow(7)`, $lt: cel`daysFromNow(8)` } },
+            { expires_on: { $gte: cel`daysFromNow(30)`, $lt: cel`daysFromNow(31)` } },
+          ],
         },
         limit: 500,
         outputVariable: 'expiringEvidence',
