@@ -157,7 +157,9 @@ export const Piece = ObjectSchema.create({
     // Lifecycle stamps
     submitted_at: Field.datetime({ label: 'Submitted At', readonly: true, group: 'planning' }),
     approved_at: Field.datetime({ label: 'Approved At', readonly: true, group: 'planning' }),
-    published_at: Field.datetime({ label: 'Published At', readonly: true, group: 'planning' }),
+    // `date` (not `datetime`): the published-by-month chart filters `published_at
+    // >= {12_months_ago}`, which only matches an ISO-date-string column. See AGENTS.md.
+    published_at: Field.date({ label: 'Published At', readonly: true, group: 'planning' }),
     archived_at: Field.datetime({ label: 'Archived At', readonly: true, group: 'planning' }),
 
     // Denormalised performance rollups — native roll-up summaries (#1870),

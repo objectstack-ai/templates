@@ -47,6 +47,19 @@ and confirm `Server is ready` + `seeded on empty DB` + zero `ERROR` log lines.
   is *omitted entirely* from the payload (they do on update / explicit null).
   A field with a `defaultValue` is always present, so its rules fire on insert.
   (Platform: framework#1871.)
+- **Dashboard time-series on a `datetime` field render empty.** The analytics
+  dataset executor binds dashboard date tokens (`{12_months_ago}`, `{today}`,
+  `{N_weeks_ago}`, …) as **ISO date strings** (`"2025-06-18"`). A `Field.date`
+  column stores ISO text, so `col >= '2025-06-18'` matches; a `Field.datetime`
+  column stores an **integer epoch** (e.g. `1780012800000`), and in SQLite an
+  INTEGER always sorts *before* any TEXT, so `epoch >= 'YYYY-MM-DD'` is **always
+  false** → the chart/KPI silently shows "No rows" even though the data exists
+  and the un-filtered cube returns it. Use **`Field.date`** for any field a
+  dashboard filters or groups by a date token (chart x-axes, "last N months"
+  filters). Keep `datetime` only where sub-day precision is load-bearing (e.g.
+  `helpdesk_ticket.resolved_at`, used by SLA-resolution timing) — those charts
+  stay empty until the platform binds epoch for datetime columns. (Platform:
+  framework — analytics date-token vs datetime-column type mismatch.)
 
 ## Running the `all` env locally (for runtime/UI testing)
 

@@ -44,7 +44,10 @@ export const Publication = ObjectSchema.create({
       group: 'core',
       description: 'Where the live thing lives. The CMS integration seam.',
     }),
-    published_at: Field.datetime({
+    // `date` (not `datetime`): the ROI dashboard filters `published_at >=
+    // {90_days_ago}`, which only matches an ISO-date-string column — a datetime
+    // epoch column never matches the analytics ISO-string date tokens. See AGENTS.md.
+    published_at: Field.date({
       label: 'Published At',
       required: true,
       group: 'core',

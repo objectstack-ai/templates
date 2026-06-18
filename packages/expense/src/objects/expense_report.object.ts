@@ -101,7 +101,9 @@ export const ExpenseReport = ObjectSchema.create({
     }),
     approved_at: Field.datetime({ label: 'Approved At', group: 'financial' }),
 
-    reimbursed_at: Field.datetime({ label: 'Reimbursed At', group: 'reimbursement' }),
+    // `date` (not `datetime`): the spend-by-month chart filters `reimbursed_at >=
+    // {12_months_ago}`, which only matches an ISO-date-string column. See AGENTS.md.
+    reimbursed_at: Field.date({ label: 'Reimbursed At', group: 'reimbursement' }),
     payment_method: Field.select({
       label: 'Payment Method',
       group: 'reimbursement',

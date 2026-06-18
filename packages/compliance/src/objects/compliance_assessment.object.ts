@@ -29,7 +29,11 @@ export const Assessment = ObjectSchema.create({
       maxLength: 40,
       description: 'e.g. "2026-Q1" — groups assessments for reporting.',
     }),
-    assessed_at: Field.datetime({
+    // `date` (not `datetime`): assessments are reported at day granularity, and
+    // dashboard time-series filters (`assessed_at >= {N_months_ago}`) only match
+    // when the column stores an ISO date string — a `datetime` epoch column never
+    // matches the analytics layer's ISO-string date tokens in SQLite. See AGENTS.md.
+    assessed_at: Field.date({
       label: 'Assessed At',
     }),
     assessor: Field.lookup('sys_user', { label: 'Assessor' }),
