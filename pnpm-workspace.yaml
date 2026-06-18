@@ -113,6 +113,7 @@ minimumReleaseAgeExclude:
   - '@objectstack/trigger-schedule@9.8.0'
   - '@objectstack/types'
   - '@objectstack/types@9.7.0'
+  - '@objectstack/cloud-connection@9.9.1'
 # pnpm 10 no longer reads `pnpm.onlyBuiltDependencies` from package.json — it
 # must live here. These deps have native/postinstall build steps.
 onlyBuiltDependencies:
