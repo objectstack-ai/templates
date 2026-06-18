@@ -232,6 +232,35 @@ export const en: TranslationData = {
     },
   },
 
+  dashboards: {
+    pmo_overview_dashboard: {
+      label: 'PMO Overview',
+      description:
+        'Portfolio health: active vs at-risk vs off-track projects, risk by category, budget by status.',
+      actions: { create_project: { label: 'New Project' } },
+      widgets: {
+        active_projects: { title: 'Active Projects' },
+        at_risk_projects: { title: 'At Risk' },
+        off_track_projects: { title: 'Off Track' },
+        avg_risk_score: { title: 'Avg AI Risk Score' },
+        projects_by_health: { title: 'Projects by Health' },
+        risk_by_category: { title: 'Open Risks by Category' },
+        budget_by_status: { title: 'Planned Budget by Status' },
+      },
+    },
+    pm_workbench_dashboard: {
+      label: 'PM Workbench',
+      description: 'Delivery pipeline by stage, project mix by type, and risk by lifecycle stage.',
+      widgets: {
+        wb_planning: { title: 'In Planning' },
+        wb_active: { title: 'Active' },
+        wb_completed: { title: 'Completed' },
+        wb_open_risks: { title: 'Open Risks' },
+        wb_projects_by_type: { title: 'Projects by Type' },
+        wb_risks_by_status: { title: 'Risks by Stage' },
+      },
+    },
+  },
   apps: {
     pm: {
       label: 'AI Project Management',

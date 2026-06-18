@@ -236,6 +236,8 @@ export const en: TranslationData = {
           title: 'Open Purchase Orders',
           description: 'Open POs sorted by expected delivery',
         },
+        po_value_by_month: { title: 'PO Value by Month (last 12 months)' },
+        top_vendors_by_spend: { title: 'Top Vendors by Spend' },
       },
     },
   },
