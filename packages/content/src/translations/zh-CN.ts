@@ -400,6 +400,7 @@ export const zhCN: TranslationData = {
           title: '渠道分布(近期)',
           description: '按渠道统计的近期发布记录',
         },
+        published_by_month: { title: '按月发布数（近 12 个月）' },
       },
     },
     roi_by_channel_dashboard: {

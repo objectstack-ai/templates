@@ -462,6 +462,7 @@ export const en: TranslationData = {
           title: 'Channel Mix (Recent)',
           description: 'Distribution of recent publications by channel',
         },
+        published_by_month: { title: 'Published Pieces by Month (last 12 months)' },
       },
     },
     roi_by_channel_dashboard: {

@@ -110,6 +110,7 @@ export const en: TranslationData = {
           title: 'Done This Week',
           description: 'Tasks you completed since the start of the week',
         },
+        throughput_by_week: { title: 'My Throughput by Week (last 12 weeks)' },
       },
     },
   },

@@ -218,6 +218,8 @@ export const zhCN: TranslationData = {
           description: '按到期日升序排列的生效合同',
         },
         pending_obligations: { title: '待办义务', description: '所有按到期日排序的待办义务' },
+        signed_by_month: { title: '按月签约数（近 12 个月）' },
+        exposure_by_counterparty: { title: '按交易对手的在效敞口' },
       },
     },
   },

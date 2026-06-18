@@ -210,10 +210,17 @@ export const zhCN: TranslationData = {
       description: '通过率、未通过控制项、即将过期的佐证以及进行中的评估。',
       actions: { create_assessment: { label: '新建评估' } },
       widgets: {
-        passing_controls: { title: '通过的控制项' },
-        failing_controls: { title: '未通过或部分通过' },
-        expiring_evidence: { title: '30 天内到期佐证' },
-        in_progress_assessments: { title: '进行中评估' },
+        passing_controls: { title: '通过的控制项', description: '最近一次评估通过的控制项' },
+        failing_controls: {
+          title: '未通过或部分通过',
+          description: '最近一次评估未通过或部分通过的控制项',
+        },
+        expiring_evidence: {
+          title: '30 天内到期佐证',
+          description: '将在 30 天内到期的已批准佐证',
+        },
+        in_progress_assessments: { title: '进行中评估', description: '当前正在进行的评估' },
+        assessments_by_month: { title: '按月完成的评估（近 12 个月）' },
       },
     },
   },

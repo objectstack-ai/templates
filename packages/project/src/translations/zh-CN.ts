@@ -203,6 +203,34 @@ export const zhCN: TranslationData = {
     },
   },
 
+  dashboards: {
+    pmo_overview_dashboard: {
+      label: 'PMO 总览',
+      description: '组合健康度：进行中 / 存在风险 / 偏离轨道的项目、按类别的风险与按状态的预算。',
+      actions: { create_project: { label: '新建项目' } },
+      widgets: {
+        active_projects: { title: '进行中项目' },
+        at_risk_projects: { title: '存在风险' },
+        off_track_projects: { title: '偏离轨道' },
+        avg_risk_score: { title: '平均 AI 风险评分' },
+        projects_by_health: { title: '按健康度的项目' },
+        risk_by_category: { title: '按类别的未关闭风险' },
+        budget_by_status: { title: '按状态的计划预算' },
+      },
+    },
+    pm_workbench_dashboard: {
+      label: '项目经理工作台',
+      description: '按阶段的交付管道、按类型的项目构成，以及按生命周期阶段的风险。',
+      widgets: {
+        wb_planning: { title: '规划中' },
+        wb_active: { title: '进行中' },
+        wb_completed: { title: '已完成' },
+        wb_open_risks: { title: '未关闭风险' },
+        wb_projects_by_type: { title: '按类型的项目' },
+        wb_risks_by_status: { title: '按阶段的风险' },
+      },
+    },
+  },
   apps: {
     pm: {
       label: 'AI 项目管理',

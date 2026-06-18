@@ -252,6 +252,8 @@ export const en: TranslationData = {
           title: 'Open Obligations',
           description: 'All open obligations sorted by due date',
         },
+        signed_by_month: { title: 'Contracts Signed by Month (last 12 months)' },
+        exposure_by_counterparty: { title: 'Active Exposure by Counterparty' },
       },
     },
   },

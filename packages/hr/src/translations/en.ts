@@ -209,6 +209,12 @@ export const en: TranslationData = {
           title: 'Documents Expiring Soon',
           description: 'Documents expiring within 30 days',
         },
+        expired_docs: {
+          title: 'Already Expired',
+          description: 'Documents already past their expiry date',
+        },
+        headcount_by_dept: { title: 'Headcount by Department' },
+        hires_by_month: { title: 'Hires by Month (last 12 months)' },
       },
     },
   },

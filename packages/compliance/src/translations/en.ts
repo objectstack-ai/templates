@@ -240,6 +240,7 @@ export const en: TranslationData = {
           title: 'Assessments In Progress',
           description: 'Assessments currently being conducted',
         },
+        assessments_by_month: { title: 'Assessments Completed by Month (last 12 months)' },
       },
     },
   },
