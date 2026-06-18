@@ -18,17 +18,17 @@
     "test": "objectstack build"
   },
   "dependencies": {
-    "@objectstack/account": "^9.8.0",
-    "@objectstack/cli": "^9.8.0",
-    "@objectstack/driver-memory": "^9.8.0",
-    "@objectstack/driver-sql": "^9.8.0",
-    "@objectstack/driver-sqlite-wasm": "^9.8.0",
-    "@objectstack/metadata": "^9.8.0",
-    "@objectstack/objectql": "^9.8.0",
-    "@objectstack/runtime": "^9.8.0",
-    "@objectstack/service-analytics": "^9.8.0",
-    "@objectstack/service-automation": "^9.8.0",
-    "@objectstack/spec": "^9.8.0",
+    "@objectstack/account": "^9.9.1",
+    "@objectstack/cli": "^9.9.1",
+    "@objectstack/driver-memory": "^9.9.1",
+    "@objectstack/driver-sql": "^9.9.1",
+    "@objectstack/driver-sqlite-wasm": "^9.9.1",
+    "@objectstack/metadata": "^9.9.1",
+    "@objectstack/objectql": "^9.9.1",
+    "@objectstack/runtime": "^9.9.1",
+    "@objectstack/service-analytics": "^9.9.1",
+    "@objectstack/service-automation": "^9.9.1",
+    "@objectstack/spec": "^9.9.1",
     "sql.js": "^1.14.1"
   },
   "optionalDependencies": {
