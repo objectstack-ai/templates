@@ -76,7 +76,10 @@ export const Task = ObjectSchema.create({
     // Planning
     due_date: Field.date({ label: 'Due Date', group: 'planning' }),
     started_at: Field.datetime({ label: 'Started At', readonly: true, group: 'planning' }),
-    completed_at: Field.datetime({ label: 'Completed At', readonly: true, group: 'planning' }),
+    // `date` (not `datetime`): the throughput chart filters `completed_at >=
+    // {12_weeks_ago}`, which only matches an ISO-date-string column — a datetime
+    // epoch column never matches the analytics ISO-string date tokens. See AGENTS.md.
+    completed_at: Field.date({ label: 'Completed At', readonly: true, group: 'planning' }),
     estimate_hours: Field.number({
       label: 'Estimate (hours)',
       scale: 2,
