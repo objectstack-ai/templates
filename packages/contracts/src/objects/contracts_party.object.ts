@@ -10,7 +10,7 @@ import { tmpl } from '@objectstack/spec';
  *
  * Polymorphic platform features (free):
  *   - sys_attachment (parent_object = "contracts_party", parent_id = "{id}")
- *   - sys_activity / sys_audit_log via enable.activities/trackHistory
+ *   - sys_audit_log  (per-field via Field.trackHistory, plugin-audit / ADR-0052)
  */
 export const Party = ObjectSchema.create({
   name: 'contracts_party',
@@ -81,12 +81,8 @@ export const Party = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
-    files: true,
-    feeds: true,
-    activities: true,
     trash: true,
     mru: true,
   },

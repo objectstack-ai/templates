@@ -11,5 +11,5 @@ export const RiskDataset = defineDataset({
     { name: 'category', label: 'category', field: 'category', type: 'string' },
     { name: 'status', label: 'status', field: 'status', type: 'string' },
   ],
-  measures: [{ name: 'risk_count', label: 'risk_count', aggregate: 'count' }],
+  measures: [{ name: 'risk_count', label: 'Risks', aggregate: 'count' }],
 });

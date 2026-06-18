@@ -8,5 +8,5 @@ export const HrDocumentDataset = defineDataset({
   label: 'hr_document metrics',
   object: 'hr_document',
   dimensions: [],
-  measures: [{ name: 'document_count', label: 'document_count', aggregate: 'count' }],
+  measures: [{ name: 'document_count', label: 'Documents', aggregate: 'count' }],
 });

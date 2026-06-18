@@ -66,7 +66,6 @@ export const Channel = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
     trash: true,

@@ -19,7 +19,7 @@ export const ContractsContractDataset = defineDataset({
     { name: 'contract_type', label: 'contract_type', field: 'contract_type', type: 'string' },
   ],
   measures: [
-    { name: 'contract_count', label: 'contract_count', aggregate: 'count' },
-    { name: 'sum_total_value', label: 'sum_total_value', aggregate: 'sum', field: 'total_value' },
+    { name: 'contract_count', label: 'Contracts', aggregate: 'count' },
+    { name: 'sum_total_value', label: 'Total Value', aggregate: 'sum', field: 'total_value' },
   ],
 });

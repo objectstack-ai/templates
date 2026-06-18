@@ -9,7 +9,7 @@ import { F, tmpl } from '@objectstack/spec';
  * notifies HR 30 days before expiry.
  *
  * File binary data is stored via the platform's polymorphic `sys_attachment`
- * surface (enable.files = true). The fields here are metadata only.
+ * surface (sys_attachment). The fields here are metadata only.
  */
 export const EmployeeDocument = ObjectSchema.create({
   name: 'hr_document',
@@ -62,12 +62,8 @@ export const EmployeeDocument = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
-    files: true,
-    feeds: true,
-    activities: true,
     trash: true,
     mru: true,
   },

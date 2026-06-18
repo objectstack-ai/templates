@@ -16,5 +16,5 @@ export const ContentMetricDataset = defineDataset({
       dateGranularity: 'week',
     },
   ],
-  measures: [{ name: 'sum_signups', label: 'sum_signups', aggregate: 'sum', field: 'signups' }],
+  measures: [{ name: 'sum_signups', label: 'Signups', aggregate: 'sum', field: 'signups' }],
 });

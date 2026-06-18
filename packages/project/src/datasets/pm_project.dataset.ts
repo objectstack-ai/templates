@@ -14,14 +14,14 @@ export const ProjectDataset = defineDataset({
     { name: 'project_type', label: 'project_type', field: 'project_type', type: 'string' },
   ],
   measures: [
-    { name: 'project_count', label: 'project_count', aggregate: 'count' },
-    { name: 'avg_risk_score', label: 'avg_risk_score', aggregate: 'avg', field: 'ai_risk_score' },
+    { name: 'project_count', label: 'Projects', aggregate: 'count' },
+    { name: 'avg_risk_score', label: 'Avg Risk Score', aggregate: 'avg', field: 'ai_risk_score' },
     {
       name: 'sum_planned_budget',
       label: 'sum_planned_budget',
       aggregate: 'sum',
       field: 'planned_budget',
     },
-    { name: 'sum_actual_cost', label: 'sum_actual_cost', aggregate: 'sum', field: 'actual_cost' },
+    { name: 'sum_actual_cost', label: 'Actual Cost', aggregate: 'sum', field: 'actual_cost' },
   ],
 });

@@ -8,5 +8,5 @@ export const HrTimeOffRequestDataset = defineDataset({
   label: 'hr_time_off_request metrics',
   object: 'hr_time_off_request',
   dimensions: [],
-  measures: [{ name: 'request_count', label: 'request_count', aggregate: 'count' }],
+  measures: [{ name: 'request_count', label: 'Requests', aggregate: 'count' }],
 });

@@ -93,11 +93,8 @@ export const ExpenseLine = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
-    files: true,
-    feeds: true,
     trash: true,
   },
 

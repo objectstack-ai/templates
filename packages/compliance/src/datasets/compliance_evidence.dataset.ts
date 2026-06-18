@@ -8,5 +8,5 @@ export const ComplianceEvidenceDataset = defineDataset({
   label: 'compliance_evidence metrics',
   object: 'compliance_evidence',
   dimensions: [],
-  measures: [{ name: 'evidence_count', label: 'evidence_count', aggregate: 'count' }],
+  measures: [{ name: 'evidence_count', label: 'Evidence', aggregate: 'count' }],
 });

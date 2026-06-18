@@ -17,5 +17,5 @@ export const HrEmployeeDataset = defineDataset({
       dateGranularity: 'month',
     },
   ],
-  measures: [{ name: 'employee_count', label: 'employee_count', aggregate: 'count' }],
+  measures: [{ name: 'employee_count', label: 'Employees', aggregate: 'count' }],
 });
