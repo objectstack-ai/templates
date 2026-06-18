@@ -53,10 +53,7 @@ export const Message = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     apiEnabled: true,
-    files: true,
-    feeds: true,
     trash: true,
   },
 

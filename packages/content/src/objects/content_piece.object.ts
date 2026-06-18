@@ -14,7 +14,7 @@ import { P, F, tmpl } from '@objectstack/spec';
  * Polymorphic platform features:
  *   - sys_comment    (thread_id = "content_piece:{id}")
  *   - sys_attachment (parent_object = "content_piece", parent_id = "{id}")
- *   - sys_activity / sys_audit_log via enable.feeds/trackHistory
+ *   - sys_audit_log  (per-field via Field.trackHistory, plugin-audit / ADR-0052)
  */
 export const Piece = ObjectSchema.create({
   name: 'content_piece',
@@ -206,12 +206,8 @@ export const Piece = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
-    files: true,
-    feeds: true,
-    activities: true,
     trash: true,
     mru: true,
   },
@@ -253,10 +249,17 @@ export const Piece = ObjectSchema.create({
       condition: P`record.status == "scheduled" && record.publish_at == null`,
     },
     {
+      // `assignee` is an OPTIONAL sys_user lookup. Seed/import/automation paths
+      // legitimately create in-review pieces without a resolvable user
+      // reference (lookup seeds resolve by natural-key string; there is no
+      // seed-time user to point at), so this is a soft data-quality signal —
+      // surfaced in the UI — rather than a hard insert blocker. (9.9.x now
+      // evaluates `== null` rules on insert, which is why error-severity here
+      // rejected the seeded in-review pieces and cascaded to their CTAs.)
       name: 'in_review_requires_assignee',
       type: 'script',
-      severity: 'error',
-      message: 'In-review pieces must have a writer assigned.',
+      severity: 'warning',
+      message: 'In-review pieces should have a writer assigned.',
       condition: P`record.status == "in_review" && record.assignee == null`,
     },
   ],

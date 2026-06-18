@@ -16,5 +16,5 @@ export const ComplianceAssessmentDataset = defineDataset({
       dateGranularity: 'month',
     },
   ],
-  measures: [{ name: 'assessment_count', label: 'assessment_count', aggregate: 'count' }],
+  measures: [{ name: 'assessment_count', label: 'Assessments', aggregate: 'count' }],
 });

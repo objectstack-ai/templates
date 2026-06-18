@@ -57,7 +57,6 @@ export const Timesheet = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: false, // high volume, skip history
     searchable: false,
     apiEnabled: true,
     trash: true,

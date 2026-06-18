@@ -17,7 +17,7 @@ export const ExpenseReportDataset = defineDataset({
     },
   ],
   measures: [
-    { name: 'report_count', label: 'report_count', aggregate: 'count' },
+    { name: 'report_count', label: 'Reports', aggregate: 'count' },
     {
       name: 'sum_total_amount',
       label: 'sum_total_amount',

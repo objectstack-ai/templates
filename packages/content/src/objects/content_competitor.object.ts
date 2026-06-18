@@ -52,11 +52,8 @@ export const Competitor = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
-    feeds: true,
-    activities: true,
     trash: true,
     mru: true,
   },

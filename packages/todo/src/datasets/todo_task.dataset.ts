@@ -16,5 +16,5 @@ export const TodoTaskDataset = defineDataset({
       dateGranularity: 'week',
     },
   ],
-  measures: [{ name: 'task_count', label: 'task_count', aggregate: 'count' }],
+  measures: [{ name: 'task_count', label: 'Tasks', aggregate: 'count' }],
 });

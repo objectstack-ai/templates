@@ -9,7 +9,7 @@ import { P, F, tmpl } from '@objectstack/spec';
  * Polymorphic platform features come for free:
  *   - sys_comment    (thread_id = "todo_task:{id}")
  *   - sys_attachment (parent_object = "todo_task", parent_id = "{id}")
- *   - sys_activity / sys_audit_log (auto when enable.feeds/trackHistory = true)
+ *   - sys_audit_log  (per-field via Field.trackHistory, plugin-audit / ADR-0052)
  */
 export const Task = ObjectSchema.create({
   name: 'todo_task',
@@ -93,12 +93,8 @@ export const Task = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
-    files: true,
-    feeds: true,
-    activities: true,
     trash: true,
     mru: true,
   },

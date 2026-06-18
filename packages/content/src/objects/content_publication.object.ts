@@ -93,10 +93,7 @@ export const Publication = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     apiEnabled: true,
-    feeds: true,
-    activities: true,
     trash: true,
     mru: true,
   },

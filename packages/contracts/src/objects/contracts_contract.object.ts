@@ -14,7 +14,7 @@ import { P, F, tmpl } from '@objectstack/spec';
  * Polymorphic platform features (free):
  *   - sys_comment    (thread_id = "contracts_contract:{id}")
  *   - sys_attachment (parent_object = "contracts_contract", parent_id = "{id}")
- *   - sys_activity / sys_audit_log (auto via enable.feeds/trackHistory)
+ *   - sys_audit_log  (per-field via Field.trackHistory, plugin-audit / ADR-0052)
  */
 export const Contract = ObjectSchema.create({
   name: 'contracts_contract',
@@ -22,7 +22,7 @@ export const Contract = ObjectSchema.create({
   pluralLabel: 'Contracts',
   icon: 'file-text',
   description:
-    'A signed (or being-negotiated) agreement with one counterparty. PDF upload is provisioned via `enable.files: true` (sys_attachment polymorphic storage); the extract_terms action consumes that PDF to auto-fill metadata.',
+    'A signed (or being-negotiated) agreement with one counterparty. PDF upload uses the polymorphic sys_attachment storage; the extract_terms action consumes that PDF to auto-fill metadata.',
 
   fieldGroups: [
     { key: 'core', label: 'Contract', icon: 'file-text' },
@@ -247,12 +247,8 @@ export const Contract = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
-    files: true,
-    feeds: true,
-    activities: true,
     trash: true,
     mru: true,
   },

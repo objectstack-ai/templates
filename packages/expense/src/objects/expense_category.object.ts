@@ -50,10 +50,8 @@ export const ExpenseCategory = ObjectSchema.create({
   },
 
   enable: {
-    trackHistory: true,
     searchable: true,
     apiEnabled: true,
-    feeds: true,
     trash: true,
     mru: true,
   },

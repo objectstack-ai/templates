@@ -9,8 +9,8 @@ export const ContentPublicationDataset = defineDataset({
   object: 'content_publication',
   dimensions: [{ name: 'channel', label: 'channel', field: 'channel', type: 'string' }],
   measures: [
-    { name: 'publication_count', label: 'publication_count', aggregate: 'count' },
-    { name: 'sum_total_views', label: 'sum_total_views', aggregate: 'sum', field: 'total_views' },
+    { name: 'publication_count', label: 'Publications', aggregate: 'count' },
+    { name: 'sum_total_views', label: 'Total Views', aggregate: 'sum', field: 'total_views' },
     {
       name: 'sum_total_clicks',
       label: 'sum_total_clicks',

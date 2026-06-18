@@ -8,5 +8,5 @@ export const ExpenseLineDataset = defineDataset({
   label: 'expense_line metrics',
   object: 'expense_line',
   dimensions: [{ name: 'category', label: 'category', field: 'category', type: 'string' }],
-  measures: [{ name: 'sum_amount', label: 'sum_amount', aggregate: 'sum', field: 'amount' }],
+  measures: [{ name: 'sum_amount', label: 'Amount', aggregate: 'sum', field: 'amount' }],
 });

@@ -19,7 +19,7 @@ export const ProcurementOrderDataset = defineDataset({
     { name: 'status', label: 'status', field: 'status', type: 'string' },
   ],
   measures: [
-    { name: 'order_count', label: 'order_count', aggregate: 'count' },
+    { name: 'order_count', label: 'Orders', aggregate: 'count' },
     {
       name: 'sum_total_amount',
       label: 'sum_total_amount',

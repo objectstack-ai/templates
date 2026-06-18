@@ -16,5 +16,5 @@ export const ContentPieceDataset = defineDataset({
       dateGranularity: 'month',
     },
   ],
-  measures: [{ name: 'piece_count', label: 'piece_count', aggregate: 'count' }],
+  measures: [{ name: 'piece_count', label: 'Pieces', aggregate: 'count' }],
 });

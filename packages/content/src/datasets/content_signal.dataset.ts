@@ -8,5 +8,5 @@ export const ContentSignalDataset = defineDataset({
   label: 'content_signal metrics',
   object: 'content_signal',
   dimensions: [],
-  measures: [{ name: 'signal_count', label: 'signal_count', aggregate: 'count' }],
+  measures: [{ name: 'signal_count', label: 'Signals', aggregate: 'count' }],
 });
