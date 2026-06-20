@@ -22,20 +22,20 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       sql.js:
         specifier: ^1.14.1
         version: 1.14.1
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/compliance:
     dependencies:
@@ -44,7 +44,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -53,7 +53,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -62,7 +62,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -81,8 +81,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/content:
     dependencies:
@@ -91,7 +91,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -100,7 +100,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -109,7 +109,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -128,8 +128,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/contracts:
     dependencies:
@@ -138,7 +138,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -147,7 +147,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -156,7 +156,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -175,8 +175,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/expense:
     dependencies:
@@ -185,7 +185,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -194,7 +194,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -203,7 +203,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -222,8 +222,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/helpdesk:
     dependencies:
@@ -232,7 +232,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -241,7 +241,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -250,7 +250,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -269,8 +269,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/hr:
     dependencies:
@@ -279,7 +279,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -288,7 +288,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -297,7 +297,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -316,8 +316,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/procurement:
     dependencies:
@@ -326,7 +326,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -335,7 +335,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -344,7 +344,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -363,8 +363,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/project:
     dependencies:
@@ -373,7 +373,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -382,7 +382,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -391,7 +391,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -410,8 +410,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
   packages/todo:
     dependencies:
@@ -420,7 +420,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/cli':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/driver-memory':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -429,7 +429,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sqlite-wasm':
         specifier: ^9.11.0
-        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+        version: 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/metadata':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -438,7 +438,7 @@ importers:
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/runtime':
         specifier: ^9.11.0
-        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics':
         specifier: ^9.11.0
         version: 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -457,8 +457,8 @@ importers:
         version: 6.0.3
     optionalDependencies:
       better-sqlite3:
-        specifier: ^12.10.0
-        version: 12.10.0
+        specifier: ^12.11.1
+        version: 12.11.1
 
 packages:
 
@@ -1189,12 +1189,8 @@ packages:
       zod:
         optional: true
 
-  better-sqlite3@12.10.0:
-    resolution: {integrity: sha512-CyzaZRQKyHkB2ZInfTTl2nvT33EbDpjkLEbE8/Zck3Ll6O0qqvuGdrJ45HgtH+HykRg88ITY3AdreBGN70aBSQ==}
-    engines: {node: 20.x || 22.x || 23.x || 24.x || 25.x || 26.x}
-
-  better-sqlite3@12.10.1:
-    resolution: {integrity: sha512-HfFtzCqnSfwB3+HroF6PSKzyh+7RfNMGPCzHFUZXRlvrPCb4P3cvxKZNN43Sr7IrkofqQZM+gIvffGpA8VvqgA==}
+  better-sqlite3@12.11.1:
+    resolution: {integrity: sha512-dq9AtApgg5PGFtBzPFSBl3HZQjHok5gaQCM6zh2Yk0aSmDCs1CbnVI8/HgASQkNKsWFpseIO9beg5xxpYhbIfA==}
     engines: {node: 20.x || 22.x || 23.x || 24.x || 25.x || 26.x}
 
   bindings@1.5.0:
@@ -1900,6 +1896,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.8.5:
+    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   send@1.2.1:
     resolution: {integrity: sha512-1gnZf7DFcoIcajTjTwjwuDjzuz4PPcY2StKPlsGAQ1+YH20IRVrBaXSWmdjowTJ6u8Rc01PoYOGHXfP1mYcZNQ==}
     engines: {node: '>= 18'}
@@ -2155,12 +2156,12 @@ snapshots:
     optionalDependencies:
       mongodb: 7.3.0
 
-  '@better-auth/oauth-provider@1.6.18(@better-auth/core@1.6.18(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(better-call@1.3.6(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(better-auth@1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.10.0)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(better-call@1.3.6(zod@4.4.3))':
+  '@better-auth/oauth-provider@1.6.18(@better-auth/core@1.6.18(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(better-call@1.3.6(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(better-auth@1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.11.1)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(better-call@1.3.6(zod@4.4.3))':
     dependencies:
       '@better-auth/core': 1.6.18(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(better-call@1.3.6(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0)
       '@better-auth/utils': 0.4.1
       '@better-fetch/fetch': 1.3.0
-      better-auth: 1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.10.0)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      better-auth: 1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.11.1)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       better-call: 1.3.6(zod@4.4.3)
       jose: 6.2.3
       zod: 4.4.3
@@ -2326,7 +2327,7 @@ snapshots:
       - ai
       - vitest
 
-  '@objectstack/cli@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@objectstack/cli@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@ai-sdk/anthropic': 3.0.84(zod@4.4.3)
       '@ai-sdk/gateway': 3.0.131(zod@4.4.3)
@@ -2334,13 +2335,13 @@ snapshots:
       '@ai-sdk/openai': 3.0.71(zod@4.4.3)
       '@objectstack/account': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/client': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/cloud-connection': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/cloud-connection': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/console': 9.11.0
       '@objectstack/core': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-memory': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-mongodb': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sql': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/driver-sqlite-wasm': 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/driver-sqlite-wasm': 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/formula': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/mcp': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/objectql': 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -2348,7 +2349,7 @@ snapshots:
       '@objectstack/platform-objects': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-approvals': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-audit': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/plugin-auth': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/plugin-auth': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/plugin-email': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-hono-server': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-org-scoping': 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -2357,7 +2358,7 @@ snapshots:
       '@objectstack/plugin-sharing': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-webhooks': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/rest': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/runtime': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/runtime': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-ai': 9.11.0(@ai-sdk/anthropic@3.0.84(zod@4.4.3))(@ai-sdk/gateway@3.0.131(zod@4.4.3))(@ai-sdk/google@3.0.82(zod@4.4.3))(@ai-sdk/openai@3.0.71(zod@4.4.3))
       '@objectstack/service-analytics': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/service-automation': 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -2377,7 +2378,7 @@ snapshots:
       '@objectstack/trigger-record-change': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/trigger-schedule': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/types': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/verify': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/verify': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@oclif/core': 4.11.4
       bundle-require: 5.1.0(esbuild@0.28.1)
       chalk: 5.6.2
@@ -2441,10 +2442,10 @@ snapshots:
     transitivePeerDependencies:
       - ai
 
-  '@objectstack/cloud-connection@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@objectstack/cloud-connection@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@objectstack/core': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/runtime': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/runtime': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/spec': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/types': 9.11.0(ai@6.0.205(zod@4.4.3))
     transitivePeerDependencies:
@@ -2527,10 +2528,10 @@ snapshots:
     dependencies:
       '@objectstack/core': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/spec': 9.11.0(ai@6.0.205(zod@4.4.3))
-      knex: 3.2.10(better-sqlite3@12.10.1)
+      knex: 3.2.10(better-sqlite3@12.11.1)
       nanoid: 5.1.11
     optionalDependencies:
-      better-sqlite3: 12.10.1
+      better-sqlite3: 12.11.1
     transitivePeerDependencies:
       - ai
       - mysql
@@ -2538,12 +2539,12 @@ snapshots:
       - pg-query-stream
       - supports-color
 
-  '@objectstack/driver-sqlite-wasm@9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)':
+  '@objectstack/driver-sqlite-wasm@9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)':
     dependencies:
       '@objectstack/core': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sql': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/spec': 9.11.0(ai@6.0.205(zod@4.4.3))
-      knex: 3.2.10(better-sqlite3@12.10.0)
+      knex: 3.2.10(better-sqlite3@12.11.1)
       nanoid: 5.1.11
       sql.js: 1.14.1
     transitivePeerDependencies:
@@ -2655,16 +2656,16 @@ snapshots:
       - ai
       - vitest
 
-  '@objectstack/plugin-auth@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@objectstack/plugin-auth@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@better-auth/core': 1.6.18(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(better-call@1.3.6(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0)
-      '@better-auth/oauth-provider': 1.6.18(@better-auth/core@1.6.18(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(better-call@1.3.6(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(better-auth@1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.10.0)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(better-call@1.3.6(zod@4.4.3))
+      '@better-auth/oauth-provider': 1.6.18(@better-auth/core@1.6.18(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(better-call@1.3.6(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(better-auth@1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.11.1)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(better-call@1.3.6(zod@4.4.3))
       '@noble/hashes': 2.2.0
       '@objectstack/core': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/platform-objects': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/spec': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/types': 9.11.0(ai@6.0.205(zod@4.4.3))
-      better-auth: 1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.10.0)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      better-auth: 1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.11.1)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
     transitivePeerDependencies:
       - '@better-auth/utils'
       - '@better-fetch/fetch'
@@ -2770,17 +2771,17 @@ snapshots:
     transitivePeerDependencies:
       - ai
 
-  '@objectstack/runtime@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@objectstack/runtime@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@objectstack/core': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-memory': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/driver-sql': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/driver-sqlite-wasm': 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/driver-sqlite-wasm': 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/formula': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/metadata': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/objectql': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/observability': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/plugin-auth': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/plugin-auth': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/plugin-org-scoping': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-security': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/rest': 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -3006,18 +3007,18 @@ snapshots:
     transitivePeerDependencies:
       - ai
 
-  '@objectstack/verify@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@objectstack/verify@9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@objectstack/core': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/driver-sqlite-wasm': 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.10.0)
+      '@objectstack/driver-sqlite-wasm': 9.11.0(ai@6.0.205(zod@4.4.3))(better-sqlite3@12.11.1)
       '@objectstack/objectql': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/plugin-auth': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/plugin-auth': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/plugin-hono-server': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-org-scoping': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-security': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/plugin-sharing': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/rest': 9.11.0(ai@6.0.205(zod@4.4.3))
-      '@objectstack/runtime': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.10.0)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@objectstack/runtime': 9.11.0(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(ai@6.0.205(zod@4.4.3))(better-call@1.3.6(zod@4.4.3))(better-sqlite3@12.11.1)(jose@6.2.3)(kysely@0.28.17)(mongodb@7.3.0)(nanostores@1.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@objectstack/service-analytics': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/service-automation': 9.11.0(ai@6.0.205(zod@4.4.3))
       '@objectstack/service-settings': 9.11.0(ai@6.0.205(zod@4.4.3))
@@ -3153,7 +3154,7 @@ snapshots:
   base64-js@1.5.1:
     optional: true
 
-  better-auth@1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.10.0)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  better-auth@1.6.18(@opentelemetry/api@1.9.1)(better-sqlite3@12.11.1)(mongodb@7.3.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
     dependencies:
       '@better-auth/core': 1.6.18(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(better-call@1.3.6(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0)
       '@better-auth/drizzle-adapter': 1.6.18(@better-auth/core@1.6.18(@better-auth/utils@0.4.1)(@better-fetch/fetch@1.3.0)(@opentelemetry/api@1.9.1)(better-call@1.3.6(zod@4.4.3))(jose@6.2.3)(kysely@0.28.17)(nanostores@1.3.0))(@better-auth/utils@0.4.1)
@@ -3173,7 +3174,7 @@ snapshots:
       nanostores: 1.3.0
       zod: 4.4.3
     optionalDependencies:
-      better-sqlite3: 12.10.0
+      better-sqlite3: 12.11.1
       mongodb: 7.3.0
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
@@ -3190,13 +3191,7 @@ snapshots:
     optionalDependencies:
       zod: 4.4.3
 
-  better-sqlite3@12.10.0:
-    dependencies:
-      bindings: 1.5.0
-      prebuild-install: 7.1.3
-    optional: true
-
-  better-sqlite3@12.10.1:
+  better-sqlite3@12.11.1:
     dependencies:
       bindings: 1.5.0
       prebuild-install: 7.1.3
@@ -3600,7 +3595,7 @@ snapshots:
 
   json-schema@0.4.0: {}
 
-  knex@3.2.10(better-sqlite3@12.10.0):
+  knex@3.2.10(better-sqlite3@12.11.1):
     dependencies:
       colorette: 2.0.19
       commander: 10.0.1
@@ -3617,28 +3612,7 @@ snapshots:
       tarn: 3.0.2
       tildify: 2.0.0
     optionalDependencies:
-      better-sqlite3: 12.10.0
-    transitivePeerDependencies:
-      - supports-color
-
-  knex@3.2.10(better-sqlite3@12.10.1):
-    dependencies:
-      colorette: 2.0.19
-      commander: 10.0.1
-      debug: 4.3.4
-      escalade: 3.2.0
-      esm: 3.2.25
-      get-package-type: 0.1.0
-      getopts: 2.3.0
-      interpret: 2.2.0
-      lodash: 4.18.1
-      pg-connection-string: 2.6.2
-      rechoir: 0.8.0
-      resolve-from: 5.0.0
-      tarn: 3.0.2
-      tildify: 2.0.0
-    optionalDependencies:
-      better-sqlite3: 12.10.1
+      better-sqlite3: 12.11.1
     transitivePeerDependencies:
       - supports-color
 
@@ -3713,7 +3687,7 @@ snapshots:
 
   node-abi@3.92.0:
     dependencies:
-      semver: 7.8.1
+      semver: 7.8.5
     optional: true
 
   object-assign@4.1.1: {}
@@ -3869,6 +3843,9 @@ snapshots:
     optional: true
 
   semver@7.8.1: {}
+
+  semver@7.8.5:
+    optional: true
 
   send@1.2.1:
     dependencies:
