@@ -155,8 +155,12 @@ action on the record page instead of a background flow.
 
 1. `signal_to_topic_promotion` — on `signal.status → promoted`, create a `content_topic` linked back.
 2. `cta_creation_default` — on `content_piece` create, if `cta_count = 0`, create one default CTA from the channel's default goal.
-3. `publication_rollup` — on `content_metric` insert/update, refresh `publication.total_views / total_clicks / total_signups / total_revenue` denormalized fields.
-4. `stamp_lifecycle_timestamps` — on `piece.status` transitions, stamp `submitted_at / approved_at / published_at / archived_at` (todo template's pattern).
+3. `stamp_lifecycle_timestamps` — on `piece.status` transitions, notify the editor/writer/owner at the right moment.
+
+> The `publication.total_*` / `piece.total_*` denormalized fields are
+> seed/client-maintained stored values, not a live rollup (cross-object
+> aggregation has no built-in flow action and nested hook writes are unsupported
+> in the standalone runtime).
 
 **Manual actions (button on record page):**
 

@@ -160,7 +160,8 @@ export const Piece = ObjectSchema.create({
     published_at: Field.datetime({ label: 'Published At', readonly: true, group: 'planning' }),
     archived_at: Field.datetime({ label: 'Archived At', readonly: true, group: 'planning' }),
 
-    // Denormalised performance rollups (kept in sync by publication_rollup flow)
+    // Denormalised performance rollups (seed/client-maintained stored fields;
+    // cross-object rollup is not run live in the standalone runtime)
     total_views: Field.number({
       label: 'Views',
       scale: 0,
@@ -260,10 +261,17 @@ export const Piece = ObjectSchema.create({
       condition: P`record.status == "scheduled" && record.publish_at == null`,
     },
     {
+      // Advisory (warning) rather than a hard error: `assignee` is a `sys_user`
+      // lookup, and seed/historical records cannot portably reference a user
+      // (the standalone runtime seeds no users beyond the dev admin, whose id is
+      // not stable across installs). As of @objectstack 9.11.0 a `field == null`
+      // script rule fires on insert too (platform #1871), so an `error` here
+      // would reject every seeded in-review piece (and cascade to its CTAs). A
+      // fork with real users can promote this back to `severity: 'error'`.
       name: 'in_review_requires_assignee',
       type: 'script',
-      severity: 'error',
-      message: 'In-review pieces must have a writer assigned.',
+      severity: 'warning',
+      message: 'In-review pieces should have a writer assigned.',
       condition: P`record.status == "in_review" && record.assignee == null`,
     },
   ],

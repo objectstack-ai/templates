@@ -21,6 +21,12 @@ that hooks/flows actually run. Several bug classes only surface at runtime.
 Before claiming a metadata change works, boot it (see "Running the `all` env")
 and confirm `Server is ready` + `seeded on empty DB` + zero `ERROR` log lines.
 
+> **As of @objectstack 9.11.0 several gaps below are now closed by the platform**
+> (the upgrade from 9.5.1). The build validator now *rejects* the dead-flow
+> patterns it used to tolerate, and `field == null` validations now fire on
+> insert. The notes are kept for history; the "now in 9.11.0" lines flag what
+> changed and what the templates had to do in response.
+
 - **Hooks run body-only in a QuickJS sandbox.** The handler ships as just its
   function body, so it can reference **only what is declared inside the handler**.
   A module-scope helper/const referenced from the handler throws
@@ -30,23 +36,33 @@ and confirm `Server is ready` + `seeded on empty DB` + zero `ERROR` log lines.
   the sandbox and crashes the process (`memory access out of bounds`), and
   `ctx.services.data` is undefined in-sandbox. (Platform: framework#1867.)
 - **Flow trigger conditions: use the supported idioms.** `previous.<field>` and
-  plain comparisons / `!= null` work. `PRIOR(...)` and `isBlank(...)` are **not
-  evaluated** — the flow is silently skipped with no error and a clean build.
-  (Platform: framework#1877.)
+  plain comparisons / `!= null` work. `PRIOR(...)`, `ISCHANGED(...)` and
+  `isBlank(...)` are **not** valid CEL overloads. *Now in 9.11.0:* these are a
+  hard **build error** (`no matching overload`), not a silent skip — so a clean
+  build now means the condition is actually evaluable. (Platform: framework#1877.)
 - **Flow `create_record` date fields:** never pass a literal `'today()'` /
   `'now()'` string — the runtime rejects it as `invalid_date` and the whole flow
   aborts. Use a field ref (`'{rec.some_date}'`) or leave the field optional.
 - **Flow action/`invoke_function` nodes** pointing at a function no template
   registers (or a `script` node with no real `actionType`, e.g. an `aggregations`
-  node) build fine and silently **no-op** at runtime. Cross-object rollups are
-  therefore seed/client-maintained, not live. (Platform: framework#1868/#1870.)
+  node) used to build fine and silently **no-op** at runtime. *Now in 9.11.0:* a
+  `script` node that declares neither `actionType` nor `function` is a hard
+  **build error**, so these dead rollup flows must be removed (done for content's
+  `publication_rollup`). Cross-object rollups remain seed/client-maintained, not
+  live. (Platform: framework#1868/#1870.)
 - **Multi-lookup (`multiple:true`) fields** aren't on the after-create record a
   record-change condition sees, so conditions like `record.x != null` are false
   for them. (Platform: framework#1872.)
-- **Script validations** of `field == null` don't fire on insert when the field
-  is *omitted entirely* from the payload (they do on update / explicit null).
-  A field with a `defaultValue` is always present, so its rules fire on insert.
-  (Platform: framework#1871.)
+- **Script validations** of `field == null` — *fixed in 9.11.0 (framework#1871):*
+  they **now fire on insert** even when the field is omitted (absent declared
+  fields default to `null` in the rule context). Seed data that relied on the old
+  bug now fails to insert. Where the required value is a `sys_user` lookup that
+  seed cannot portably provide (no seedable users; the dev admin's id is not
+  stable across installs), downgrade the rule to `severity: 'warning'` so it
+  guides interactively without rejecting bulk/seed rows — done for
+  `compliance_assessment.completed_requires_assessor` and
+  `content_piece.in_review_requires_assignee`. Rules whose value the seed *can*
+  satisfy (e.g. `remediation_plan`, `publish_at`) stay `severity: 'error'`.
 
 ## Running the `all` env locally (for runtime/UI testing)
 

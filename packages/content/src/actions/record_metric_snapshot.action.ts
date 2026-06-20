@@ -2,9 +2,10 @@
 
 /**
  * record_metric_snapshot — manual action on a `content_publication`.
- * Inserts a `content_metric` row for the supplied period; the
- * `publication_rollup` flow then refreshes denormalised totals on the
- * publication and parent piece.
+ * Inserts a `content_metric` row for the supplied period. The denormalised
+ * `total_*` fields on the publication and parent piece are seed/client-
+ * maintained stored fields (cross-object rollup is not run live in the
+ * standalone runtime — see flows/index.ts).
  *
  * Reflects how teams actually measure: copy/paste from GA / Mixpanel /
  * Stripe weekly, not a real-time stream.

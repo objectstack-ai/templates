@@ -135,12 +135,15 @@ the charter.
 
 ## Known v0 caveats
 
-- The `publication_rollup` flow uses a `script` node placeholder (flow `aggregate`
-  nodes aren't in v6 spec yet). Live rollups happen via **`metricRollupHook`
-  + `publicationRollupHook`** in `src/objects/content_rollup.hook.ts`: every
-  metric insert/update deltas into `publication.total_*`, then up into
-  `piece.total_*`. Seed values are pre-populated so dashboards have data
-  before any metric is recorded.
+- **Metric rollups are seed/client-maintained, not live.** The
+  `publication.total_*` / `piece.total_*` denormalised columns are stored fields
+  pre-populated from seed data so dashboards have numbers before any metric is
+  recorded. Cross-object aggregation has no built-in flow action, and nested
+  engine writes from a hook are unsupported in the standalone QuickJS sandbox
+  (see `src/hooks/index.ts`), so there is no live rollup. (An earlier
+  `publication_rollup` flow used `script` aggregate nodes that never executed at
+  runtime; @objectstack 9.11.0 rejects such dead nodes at build time, so it was
+  removed.)
 - Today's Workbench KPI tiles filter on `assignee == {current_user_id} OR
   assignee == null`, so unassigned seed pieces show up immediately. Newly
   created pieces auto-assign to the creator (see `content_piece.hook.ts`).

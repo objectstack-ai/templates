@@ -113,10 +113,17 @@ export const Assessment = ObjectSchema.create({
       condition: P`(record.status == "failed" || record.status == "partial") && (record.remediation_plan == null || record.remediation_plan == "")`,
     },
     {
+      // Advisory (warning) rather than a hard error: `assessor` is a `sys_user`
+      // lookup, and seed/historical records cannot portably reference a user
+      // (the standalone runtime seeds no users beyond the dev admin, whose id is
+      // not stable across installs). As of @objectstack 9.11.0 a `field == null`
+      // script rule fires on insert too (platform #1871), so an `error` here
+      // would reject every seeded completed assessment. A fork with real users
+      // can promote this back to `severity: 'error'`.
       name: 'completed_requires_assessor',
       type: 'script',
-      severity: 'error',
-      message: 'Completed assessments must record the assessor.',
+      severity: 'warning',
+      message: 'Completed assessments should record the assessor.',
       condition: P`(record.status == "passed" || record.status == "failed" || record.status == "partial") && record.assessor == null`,
     },
   ],

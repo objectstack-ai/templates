@@ -627,8 +627,9 @@ const publications = defineSeed(Publication, {
 });
 
 // 6 weekly snapshots per recent publication, 3 monthly snapshots for the
-// archived one. Each row is one period; the publication_rollup flow keeps
-// totals in sync (the publication.total_* above is a starting denormal).
+// archived one. Each row is one period. The publication.total_* fields above
+// are seed-maintained denormalised totals (cross-object rollup is not run live
+// in the standalone runtime — see flows/index.ts).
 const metrics = defineSeed(Metric, {
   mode: 'upsert',
   externalId: 'note',

@@ -29,7 +29,11 @@ export const StampLifecycleTimestampsFlow: Flow = {
       config: {
         objectName: 'content_piece',
         triggerType: 'record-after-update',
-        condition: 'ISCHANGED(status)',
+        // Fire only on a real status transition. `ISCHANGED()` is not a CEL
+        // overload the runtime condition dialect implements (it rejects the
+        // build as of @objectstack 9.11.0); the proven record-change idiom is
+        // a plain comparison against `previous.<field>`.
+        condition: 'previous.status != status',
       },
     },
     {

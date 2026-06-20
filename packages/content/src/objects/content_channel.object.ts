@@ -56,7 +56,6 @@ export const Channel = ObjectSchema.create({
     }),
     color: Field.color({
       label: 'Color',
-      colorFormat: 'hex',
       defaultValue: '#3B82F6',
       description: 'Used on the editorial calendar to colour pieces by channel.',
     }),

@@ -7,6 +7,33 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 ## [Unreleased]
 
 ### Changed
+- **Upgraded all templates to `@objectstack/* ^9.11.0` (from `^9.5.1`).** Bumped
+  every package's deps and refreshed the `minimumReleaseAgeExclude` pins to
+  `9.11.0`. Runtime-verified end-to-end against the composed `all` env (9 apps,
+  41 objects, 30 flows): clean boot, `seeded on empty DB`, **zero** server `ERROR`
+  lines, and the console (home, list views, dashboard KPIs/charts) renders with
+  seed data and no client console errors. Metadata changes the upgrade forced:
+  - **Removed two pruned field props** — `Field.color({ colorFormat: 'hex' })` on
+    `todo_label.color` and `content_channel.color`. 9.8.0 (ADR-0049) dropped the
+    dead `colorFormat` display knob; the build now rejects it.
+  - **Removed the dead `content_publication_rollup` flow.** Its `script`
+    aggregation nodes declared no `actionType`/`function` and never ran (a proven
+    runtime no-op — cross-object rollups stay seed/client-maintained). 9.11.0
+    rejects such dead `script` nodes at build time. Reconciled the stale README /
+    SPEC / comment references.
+  - **Fixed an unsupported flow condition.** `content_piece_lifecycle_notifications`
+    used `ISCHANGED(status)`, not a valid CEL overload (9.11.0 fails the build on
+    it). Switched to the proven `previous.status != status` idiom.
+  - **Downgraded two state-invariant validations to `severity: 'warning'`** —
+    `compliance_assessment.completed_requires_assessor` and
+    `content_piece.in_review_requires_assignee`. 9.11.0 (framework#1871) makes
+    `field == null` script rules fire on insert too; both require a `sys_user`
+    lookup the seed cannot portably provide (no seedable users; the dev admin's id
+    is not stable across installs), so as hard errors they rejected every seeded
+    completed assessment / in-review piece (cascading to that piece's CTAs). As
+    warnings they still guide interactive edits; a fork with real users can promote
+    them back to `error`. Companion rules the seed *can* satisfy
+    (`failed_requires_remediation`, `scheduled_requires_publish_at`) stay `error`.
 - **Upgraded all templates to `@objectstack/* ^7.7.0` (from `^7.4.1`).** 7.6 shipped
   ADR-0032 phase 1 (build-time + runtime expression validation); 7.7 extended the
   build to **reject unknown `ObjectSchema` keys** (located, with a "move the logic
