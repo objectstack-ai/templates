@@ -9,9 +9,13 @@ import { tmpl } from '@objectstack/spec';
  * entry in `piece.target_channels`).
  *
  * Metric snapshots are recorded against this row, not the piece — so a
- * blog post + LinkedIn cross-post are measured independently. The
- * `total_*` numbers are STORED fields (seed/client-maintained); cross-object
- * rollups via hook are unsupported in the standalone runtime — see
+ * blog post + LinkedIn cross-post are measured independently. The `total_*`
+ * numbers are native `Field.summary` roll-ups (#1870): the engine recomputes
+ * them server-side from the child `content_metric` rows, and they cascade one
+ * level up to the parent `content_piece`'s own `total_*` summaries. (A piece
+ * with no publications yet has no child to trigger a recompute, so its rollups
+ * read `null` until its first publication exists.) A hook can't maintain these —
+ * a nested cross-object write is unsupported in the standalone runtime; see
  * content/src/hooks/index.ts.
  */
 export const Publication = ObjectSchema.create({

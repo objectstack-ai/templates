@@ -66,7 +66,7 @@ rm -rf packages/content/.objectstack
 | Business objects | 9 (`piece`, `topic`, `signal`, `competitor`, `channel`, `publication`, `metric`, `cta`, `template`) |
 | State machines | 2 (`piece.status` 8-state, `signal.status` 3-state) |
 | Approvals | 1 (`publish_approval`: gates `in_review → approved`) |
-| Flows | 4 (signal → topic, default CTA, publication rollup placeholder, lifecycle timestamps) |
+| Flows | 4 (signal → topic, default CTA, publish approval, lifecycle notifications) |
 | Dashboards | 3 (Today's Workbench / Editorial Calendar / Channel ROI) |
 | App | 1 (Content Ops, 7 nav items) |
 | Views | 7 (incl. kanban on `piece.status`, calendar by `publish_at`) |
@@ -135,12 +135,12 @@ the charter.
 
 ## Known v0 caveats
 
-- The `publication_rollup` flow uses a `script` node placeholder (flow `aggregate`
-  nodes aren't in v6 spec yet). Live rollups happen via **`metricRollupHook`
-  + `publicationRollupHook`** in `src/objects/content_rollup.hook.ts`: every
-  metric insert/update deltas into `publication.total_*`, then up into
-  `piece.total_*`. Seed values are pre-populated so dashboards have data
-  before any metric is recorded.
+- Performance rollups are native **`Field.summary`** fields (#1870), not a flow
+  or hook: the engine recomputes `publication.total_*` from the child
+  `content_metric` rows on every metric write, and those cascade one level up into
+  `piece.total_*`. A piece with no publications yet has no child to trigger a
+  recompute, so its `total_*` read `null` (not `0`) until its first publication
+  exists — cosmetic, and the seeded published pieces all have publications.
 - Today's Workbench KPI tiles filter on `assignee == {current_user_id} OR
   assignee == null`, so unassigned seed pieces show up immediately. Newly
   created pieces auto-assign to the creator (see `content_piece.hook.ts`).
