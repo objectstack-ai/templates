@@ -7,6 +7,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 ## [Unreleased]
 
 ### Changed
+- **Upgraded all templates to `@objectstack/* ^9.11.0` (from `^9.9.1`).** Bumped
+  every package's deps and the workspace `minimumReleaseAgeExclude` pins. No
+  metadata changes were required — 9.10.0/9.11.0 add only non-breaking surface for
+  features the templates don't use (canonical `sharingModel` OWD vocab,
+  `role_and_subordinates` sharing recipient, `isDefault` permission sets,
+  autonumber tokens + build lint). Verified end-to-end against the composed `all`
+  env (9 apps, 41 objects, 30 flows): `pnpm -r typecheck`/`build` green, clean
+  boot with `seeded on empty DB` and **zero** server `ERROR` lines, all apps' seed
+  data loads, and the console (home, list views, dashboard KPIs + time-series
+  chart) renders with no client console errors.
 - **Upgraded all templates to `@objectstack/* ^7.7.0` (from `^7.4.1`).** 7.6 shipped
   ADR-0032 phase 1 (build-time + runtime expression validation); 7.7 extended the
   build to **reject unknown `ObjectSchema` keys** (located, with a "move the logic
