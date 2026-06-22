@@ -7,6 +7,25 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 ## [Unreleased]
 
 ### Changed
+- **Upgraded all templates to `@objectstack/* ^10.0.0` (from `^9.11.0`).** Bumped
+  every package's deps and the workspace `minimumReleaseAgeExclude` pins. The 10.0
+  major lands ADR-0057 (ERP authorization core: renames the system object
+  `sys_department` → `sys_business_unit` with **no compatibility alias**, adds
+  permission-grant access depth, and seeds stack-declared `roles`/`sharingRules`
+  into `sys_role`/`sys_sharing_rule` at boot) and ADR-0058 (unified CEL→filter
+  predicate surface). No template referenced `sys_department` or used
+  hierarchy-relative access-depth scopes, so the rename needed no migration. **One
+  adjustment:** ADR-0058 routes criteria sharing-rule conditions through the same
+  CEL compiler as formula/validation predicates, which binds the record under the
+  `record` namespace — `packages/content`'s `topic_team_scope` rule was rewritten
+  from `visibility == "team"` to `record.visibility == "team"` (a bare reference is
+  now a build error). Verified end-to-end against the composed `all` env (9 apps,
+  41 objects, 30 flows): `pnpm -r typecheck`/`build`/`format:check`/`test` green,
+  clean boot with `seeded on empty DB` and **zero** server `ERROR` lines; the
+  console (home, the `content_topic` list, ROI dashboard KPIs + time-series chart)
+  renders with no client console errors; and the new authorization core is live —
+  `sys_business_unit` resolves, `sys_department` 404s, and the stack-declared roles
+  (21) + sharing rules (2) seeded into `sys_role`/`sys_sharing_rule`.
 - **Upgraded all templates to `@objectstack/* ^9.11.0` (from `^9.9.1`).** Bumped
   every package's deps and the workspace `minimumReleaseAgeExclude` pins. No
   metadata changes were required — 9.10.0/9.11.0 add only non-breaking surface for
