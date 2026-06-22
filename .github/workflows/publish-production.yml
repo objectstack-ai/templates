@@ -5,9 +5,14 @@ name: Publish to marketplace (production)
 # production-only secret `OS_CLOUD_API_KEY_PRODUCTION` (set once at the ORG
 # level), fully separate from the staging key.
 #
-# MANUAL ONLY — there is intentionally no `release`/`push` trigger. Production
-# is a deliberate promotion step: cut to staging first, verify, then dispatch
-# this.
+# Triggers:
+#   1. Manual dispatch — promote a specific set (or all) on demand, with dry-run.
+#   2. Auto-promote — when "Publish to marketplace (staging)" COMPLETES
+#      SUCCESSFULLY *and that staging run was itself triggered by a GitHub
+#      Release* (event == 'release'). This preserves the deliberate
+#      staging-first ordering: cut a Release → staging publishes → on success,
+#      production auto-promotes the same versions. Manual staging dispatches and
+#      dry-runs do NOT promote (they aren't `release`-triggered).
 on:
   workflow_dispatch:
     inputs:
@@ -19,6 +24,9 @@ on:
         description: 'Dry-run (print payloads, no HTTP)'
         type: boolean
         default: false
+  workflow_run:
+    workflows: ['Publish to marketplace (staging)']
+    types: [completed]
 
 concurrency:
   group: publish-marketplace-production
@@ -31,8 +39,19 @@ jobs:
   publish:
     name: Build + publish templates → production
     runs-on: ubuntu-latest
-    # Only run on the canonical repo, never on forks.
-    if: github.repository == 'objectstack-ai/templates'
+    # Only run on the canonical repo, and — for the auto-promote path — only when
+    # the upstream staging run SUCCEEDED and was triggered by a Release. Manual
+    # dispatches always run; dry-run staging / manual staging never promote.
+    if: >-
+      github.repository == 'objectstack-ai/templates' &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        (
+          github.event_name == 'workflow_run' &&
+          github.event.workflow_run.conclusion == 'success' &&
+          github.event.workflow_run.event == 'release'
+        )
+      )
     steps:
       - uses: actions/checkout@v4
 
@@ -53,7 +72,10 @@ jobs:
 
       - name: Resolve template filter
         id: filter
-        run: echo "filter=${{ inputs.templates }}" >> "$GITHUB_OUTPUT"
+        # Manual dispatch may scope to a subset; the auto-promote path has no
+        # inputs, so the filter is empty → publish ALL (idempotent: unchanged
+        # versions are 409 no-ops on the control plane).
+        run: echo "filter=${{ github.event.inputs.templates }}" >> "$GITHUB_OUTPUT"
 
       - name: Publish to PRODUCTION marketplace
         env:
@@ -63,5 +85,7 @@ jobs:
           # carry the prod credential and vice-versa.
           OS_CLOUD_API_KEY: ${{ secrets.OS_CLOUD_API_KEY_PRODUCTION }}
           PUBLISH_TEMPLATES: ${{ steps.filter.outputs.filter }}
-          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          # `github.event.inputs.dry_run` is only set on manual dispatch; the
+          # auto-promote path is always a real publish.
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '' }}
         run: node scripts/publish-template.mjs
