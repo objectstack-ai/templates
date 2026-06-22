@@ -38,7 +38,7 @@ jobs:
     # Only run on the canonical repo, never on forks.
     if: github.repository == 'objectstack-ai/templates'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: pnpm/action-setup@v4
         with:
