@@ -5,7 +5,7 @@
   "manifestId": "app.objectstack.template.helpdesk",
   "displayName": "AI Helpdesk",
   "description": "AI-first customer support: native AI triage, suggested replies, KB recall, sentiment-driven escalation, customer portal via permissions.",
-  "category": "starter",
+  "category": "operations",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",
