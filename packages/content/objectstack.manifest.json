@@ -6,7 +6,7 @@
   "displayName": "Content",
   "description": "Content marketing engine: pipeline → publish → measure. Editorial calendar, competitive signal capture, channel ROI rollups, and an 8-state piece workflow with approval gates.",
   "tagline": "Pipeline, publish, measure — content marketing on rails.",
-  "category": "starter",
+  "category": "marketing",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",

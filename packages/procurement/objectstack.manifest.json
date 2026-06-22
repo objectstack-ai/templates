@@ -6,7 +6,7 @@
   "displayName": "Procurement",
   "description": "Source-to-pay procurement: vendors, requisitions, purchase orders, receipts, and invoice matching on ObjectStack.",
   "tagline": "Source-to-pay: requisitions → POs → 3-way match.",
-  "category": "starter",
+  "category": "operations",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",

@@ -6,7 +6,7 @@
   "displayName": "Todo",
   "description": "Universal task & project management starter — projects, tasks, comments, approvals, and dashboards on ObjectStack.",
   "tagline": "Tasks, projects, approvals — the universal starter.",
-  "category": "starter",
+  "category": "productivity",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",

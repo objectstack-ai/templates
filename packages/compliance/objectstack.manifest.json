@@ -6,7 +6,7 @@
   "displayName": "Compliance",
   "description": "Compliance posture & evidence management: control library, evidence requests, audit findings, and remediation workflows on ObjectStack.",
   "tagline": "Controls, evidence, findings — your audit-ready starter.",
-  "category": "starter",
+  "category": "operations",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",

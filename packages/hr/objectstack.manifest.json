@@ -6,7 +6,7 @@
   "displayName": "Human Resources",
   "description": "People directory, time-off approvals, and document expiry tracking on ObjectStack.",
   "tagline": "Directory, time-off, document expiry — your starter HRIS.",
-  "category": "starter",
+  "category": "hr",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",

@@ -6,7 +6,7 @@
   "displayName": "Expense",
   "description": "Employee expense & reimbursement: multi-line expense reports, category policy, amount-tiered approvals, and reimbursement tracking on ObjectStack.",
   "tagline": "Report-first expense: claim \u2192 approve \u2192 reimburse.",
-  "category": "starter",
+  "category": "finance",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",
