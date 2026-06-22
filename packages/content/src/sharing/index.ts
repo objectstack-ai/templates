@@ -35,7 +35,7 @@ export const TopicTeamScopeRule: SharingRule = {
   // grants edit access to lead → contributor → viewer in one shot.
   sharedWith: { type: 'role_and_subordinates', value: 'lead' },
   accessLevel: 'edit',
-  condition: { dialect: 'cel', source: 'visibility == "team"' },
+  condition: { dialect: 'cel', source: 'record.visibility == "team"' },
   active: true,
 };
 
