@@ -6,7 +6,7 @@
   "displayName": "Contracts",
   "description": "Post-signature contract lifecycle: AI-extracted metadata, multi-step approvals, obligation tracking, and renewal alerts. Bring your own Word + DocuSign.",
   "tagline": "Post-signature CLM with AI extraction.",
-  "category": "starter",
+  "category": "operations",
   "isStarter": true,
   "publisher": "objectstack",
   "license": "Apache-2.0",
