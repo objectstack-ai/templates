@@ -214,7 +214,7 @@ export const en: TranslationData = {
   },
   apps: {
     helpdesk: {
-      label: 'AI Helpdesk',
+      label: 'Helpdesk',
       description: 'AI-first customer support on ObjectStack.',
       navigation: {
         nav_workbench: { label: 'My Workbench' },

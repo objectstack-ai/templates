@@ -3,7 +3,7 @@
 import type { TranslationData } from '@objectstack/spec/system';
 
 /**
- * English translations for the AI Project Management template.
+ * English translations for the Project Management template.
  *
  * Shape follows `TranslationData`: per-object label/pluralLabel/description,
  * field labels + select options under `objects.<obj>.fields.<field>`, list-view
@@ -263,7 +263,7 @@ export const en: TranslationData = {
   },
   apps: {
     pm: {
-      label: 'AI Project Management',
+      label: 'Project Management',
       description:
         'Portfolio tracking with AI risk prediction, delay forecasting, and resource-conflict detection.',
       navigation: {

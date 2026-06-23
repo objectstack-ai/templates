@@ -40,16 +40,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.33.0",
-  "objectstack": {
-    "marketplace": {
-      "manifestId": "app.objectstack.template.expense",
-      "displayName": "Expense",
-      "description": "Employee expense & reimbursement: multi-line expense reports, category policy, amount-tiered approvals, and reimbursement tracking.",
-      "category": "starter",
-      "iconUrl": "https://cdn.objectos.app/icons/expense.svg",
-      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/expense",
-      "readmePath": "README.md"
-    }
-  }
+  "packageManager": "pnpm@10.33.0"
 }

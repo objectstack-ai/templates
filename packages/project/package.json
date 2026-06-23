@@ -38,22 +38,6 @@
     "node": ">=20"
   },
   "objectstack": {
-    "port": 4010,
-    "marketplace": {
-      "manifestId": "app.objectstack.template.project",
-      "displayName": "AI Project Management",
-      "description": "Project portfolio management with AI-powered risk prediction, delay forecasting, and resource optimization",
-      "iconUrl": "https://api.iconify.design/lucide:folder-kanban.svg",
-      "category": "productivity",
-      "tags": [
-        "project-management",
-        "pmo",
-        "risk",
-        "ai",
-        "forecasting"
-      ],
-      "screenshots": [],
-      "minPlatformVersion": "6.5.0"
-    }
+    "port": 4010
   }
 }

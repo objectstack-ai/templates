@@ -198,7 +198,7 @@ export const zhCN: TranslationData = {
   },
   apps: {
     helpdesk: {
-      label: 'AI 客服工单',
+      label: '客服台',
       description: '基于 ObjectStack 的 AI 优先客户支持系统。',
       navigation: {
         nav_workbench: { label: '我的工作台' },

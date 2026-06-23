@@ -32,7 +32,7 @@ export const HelpdeskCustomerPortal = definePortal({
   kind: 'portal',
   id: 'helpdesk_customer',
   label: 'Help Center',
-  description: 'Customer-facing help center for the AI Helpdesk template.',
+  description: 'Customer-facing help center for the Helpdesk template.',
 
   // -------- Routing --------
   routePrefix: '/portal/helpdesk',

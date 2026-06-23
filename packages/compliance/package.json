@@ -40,16 +40,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.33.0",
-  "objectstack": {
-    "marketplace": {
-      "manifestId": "app.objectstack.template.compliance",
-      "displayName": "Compliance",
-      "description": "Compliance posture & evidence management: SOC 2 / ISO 27001 / GDPR frameworks, controls, evidence with expiry tracking, and assessments.",
-      "category": "starter",
-      "iconUrl": "https://cdn.objectos.app/icons/compliance.svg",
-      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/compliance",
-      "readmePath": "README.md"
-    }
-  }
+  "packageManager": "pnpm@10.33.0"
 }

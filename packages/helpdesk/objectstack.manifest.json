@@ -3,8 +3,8 @@
   "name": "helpdesk",
   "specVersion": "^6.1.0",
   "manifestId": "app.objectstack.template.helpdesk",
-  "displayName": "AI Helpdesk",
-  "description": "AI-first customer support: native AI triage, suggested replies, KB recall, sentiment-driven escalation, customer portal via permissions.",
+  "displayName": "Helpdesk",
+  "description": "Customer support starter: tickets, SLA tracking, sentiment-based escalation, knowledge base, and a permission-based customer portal. AI triage, suggested replies, and KB recall are first-class ticket fields with a deterministic baseline — wire your own LLM to make them smart.",
   "category": "operations",
   "isStarter": true,
   "publisher": "objectstack",
@@ -21,9 +21,9 @@
   "readmePath": "README.md",
   "translations": {
     "zh-CN": {
-      "displayName": "AI 客服台",
-      "description": "AI 优先的客户支持：原生 AI 工单分诊、建议回复、知识库召回、基于情绪的升级，权限驱动的客户门户。",
-      "tagline": "AI 是一等公民的客服台。"
+      "displayName": "客服台",
+      "description": "客户支持起步模板：工单、SLA、情绪驱动升级、知识库与权限制客户门户。AI 分诊、建议回复、知识库召回为一等工单字段，内置确定性基线——接上你的 LLM 即可智能化。",
+      "tagline": "工单 + SLA + 升级 + 知识库 + 门户；AI 分诊预留接口。"
     }
   }
 }

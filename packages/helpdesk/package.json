@@ -40,16 +40,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.33.0",
-  "objectstack": {
-    "marketplace": {
-      "manifestId": "app.objectstack.template.helpdesk",
-      "displayName": "AI Helpdesk",
-      "description": "Customer support with AI as a first-class citizen: auto-triage, suggested replies, KB recall, sentiment-driven escalation. Customer portal included via permissions.",
-      "category": "starter",
-      "iconUrl": "https://cdn.objectos.app/icons/helpdesk.svg",
-      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/helpdesk",
-      "readmePath": "README.md"
-    }
-  }
+  "packageManager": "pnpm@10.33.0"
 }

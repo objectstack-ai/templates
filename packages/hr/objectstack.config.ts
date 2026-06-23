@@ -21,7 +21,7 @@ export default defineStack({
     namespace: 'hr',
     version: '0.1.0',
     type: 'app',
-    name: 'HR',
+    name: 'Human Resources',
     description:
       'Starter template — people directory, time-off, and document expiry on ObjectStack.',
   },

@@ -5,11 +5,13 @@ import { tmpl } from '@objectstack/spec';
 
 /**
  * Project — the central object for project portfolio management.
- * **AI fields are first-class**: ai_completion_probability, ai_delay_days,
- * ai_risk_score, ai_budget_variance_forecast etc.
+ * The `ai_*` fields (ai_completion_probability, ai_delay_days, ai_risk_score,
+ * ai_budget_variance_forecast …) are first-class in the SCHEMA but populated
+ * by a stub today — see `flows/daily_ai_risk_assessment.flow.ts`. Wire your
+ * own LLM/ML to make them live; seed values are illustrative, not computed.
  *
  * Unlike the `todo` template (task-level), this template operates at
- * project level (weeks-months) with predictive analytics for PMOs.
+ * project level (weeks-months) with project-level planning for PMOs.
  */
 export const Project = ObjectSchema.create({
   name: 'pm_project',
@@ -17,12 +19,12 @@ export const Project = ObjectSchema.create({
   pluralLabel: 'Projects',
   icon: 'folder-kanban',
   description:
-    'A time-bound initiative with milestones, resources, and AI-powered risk prediction.',
+    'A time-bound initiative with milestones, resources, and scaffolded AI risk fields (bring your own LLM).',
 
   fieldGroups: [
     { key: 'core', label: 'Project Details', icon: 'folder', defaultExpanded: true },
     { key: 'dates', label: 'Timeline', icon: 'calendar' },
-    { key: 'ai', label: 'AI Predictions', icon: 'sparkles' },
+    { key: 'ai', label: 'AI Predictions (scaffolded)', icon: 'sparkles' },
     { key: 'budget', label: 'Budget', icon: 'dollar-sign' },
     { key: 'people', label: 'Team', icon: 'users' },
     { key: 'meta', label: 'Metadata', icon: 'info', defaultExpanded: false },
@@ -125,7 +127,8 @@ export const Project = ObjectSchema.create({
       group: 'ai',
       min: 0,
       max: 100,
-      description: 'AI-predicted likelihood of on-time completion (0-100%).',
+      description:
+        'AI-predicted likelihood of on-time completion (0-100%). Scaffolded — sample value until you wire an LLM.',
     }),
     ai_delay_days: Field.number({
       label: 'AI Predicted Delay (Days)',

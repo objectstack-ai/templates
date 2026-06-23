@@ -3,7 +3,7 @@
 import type { TranslationData } from '@objectstack/spec/system';
 
 /**
- * 中文翻译 - AI 项目管理模板。
+ * 中文翻译 - 项目管理模板。
  *
  * 结构遵循 `TranslationData`：每个对象的 label/pluralLabel/description，
  * 字段标签与下拉选项位于 `objects.<obj>.fields.<field>`，列表视图标签位于
@@ -233,7 +233,7 @@ export const zhCN: TranslationData = {
   },
   apps: {
     pm: {
-      label: 'AI 项目管理',
+      label: '项目管理',
       description: '项目组合管理 —— AI 风险预测、延期预测与资源冲突检测。',
       navigation: {
         nav_projects: { label: '项目' },

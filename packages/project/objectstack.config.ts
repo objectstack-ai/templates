@@ -18,9 +18,9 @@ export default defineStack({
     namespace: 'pm',
     version: '0.1.0',
     type: 'app',
-    name: 'AI Project Management',
+    name: 'Project Management',
     description:
-      'Project portfolio management with AI-powered risk prediction and resource optimization.',
+      'Project portfolio management for PMOs — projects, milestones, risks, resources; AI forecasting fields ship as a bring-your-own-LLM scaffold.',
   },
 
   requires: ['automation', 'triggers', 'job', 'analytics', 'auth', 'ui', 'sharing'],
