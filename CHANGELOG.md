@@ -7,6 +7,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 ## [Unreleased]
 
 ### Changed
+- **Template catalog cleanup ([#76](https://github.com/objectstack-ai/templates/pull/76)).**
+  Unified display names — dropped the "AI" prefix (`AI Helpdesk` → `Helpdesk`,
+  `AI Project Management` → `Project Management`) across manifest, config, app
+  navigation, and translations so the catalog card and installed-app name agree;
+  reconciled the hr app name (`HR` → `Human Resources`). Converged marketplace
+  metadata to a single source (`objectstack.manifest.json` — removed the dead,
+  unread `objectstack.marketplace` block from every `package.json`, which still
+  carried the stale `category:"starter"`). Made AI copy honest: helpdesk triage
+  and project forecasting are scaffolds, not delivered models, with the AI
+  implementation tracked in `docs/ROADMAP.md`. Version bumps: helpdesk `0.1.3`,
+  project `0.1.2`, hr `0.1.2`.
 - **Upgraded all templates to `@objectstack/* ^10.2.0` (from `^10.0.0`).** Bumped
   every package's deps and the workspace `minimumReleaseAgeExclude` pins. 10.2 is a
   non-breaking minor — a full sweep of every `@objectstack/*@10.2.0` release found
