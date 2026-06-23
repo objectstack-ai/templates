@@ -1,6 +1,6 @@
 {
   "name": "@objectlab/helpdesk",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "ObjectStack starter template: AI-first customer support helpdesk with native AI triage, suggested replies, and KB recall.",
   "license": "Apache-2.0",
   "private": true,
