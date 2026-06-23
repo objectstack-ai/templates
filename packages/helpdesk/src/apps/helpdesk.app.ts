@@ -4,7 +4,7 @@ import { App } from '@objectstack/spec/ui';
 
 export const HelpdeskApp = App.create({
   name: 'helpdesk',
-  label: 'AI Helpdesk',
+  label: 'Helpdesk',
   description: 'AI-first customer support on ObjectStack.',
   icon: 'life-buoy',
   branding: { primaryColor: '#A855F7' },

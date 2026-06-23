@@ -40,16 +40,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.33.0",
-  "objectstack": {
-    "marketplace": {
-      "manifestId": "app.objectstack.template.contracts",
-      "displayName": "Contracts",
-      "description": "Post-signature contract lifecycle: AI-extracted metadata, multi-step approvals, obligation tracking, and renewal alerts. Bring your own Word + DocuSign.",
-      "category": "starter",
-      "iconUrl": "https://cdn.objectos.app/icons/contracts.svg",
-      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/contracts",
-      "readmePath": "README.md"
-    }
-  }
+  "packageManager": "pnpm@10.33.0"
 }

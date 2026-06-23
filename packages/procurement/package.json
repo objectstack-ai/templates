@@ -40,16 +40,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.33.0",
-  "objectstack": {
-    "marketplace": {
-      "manifestId": "app.objectstack.template.procurement",
-      "displayName": "Procurement",
-      "description": "Source-to-pay procurement: vendor master, purchase requests with amount-tiered approvals, purchase orders, goods receipts, and 3-way-match rollup.",
-      "category": "starter",
-      "iconUrl": "https://cdn.objectos.app/icons/procurement.svg",
-      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/procurement",
-      "readmePath": "README.md"
-    }
-  }
+  "packageManager": "pnpm@10.33.0"
 }

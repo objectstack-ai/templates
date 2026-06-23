@@ -1,6 +1,6 @@
-# @objectlab/project — AI Project Management
+# @objectlab/project — Project Management
 
-> Project portfolio management with **AI-powered risk prediction**, delay forecasting, and resource conflict detection. Complements the `todo` template (task-level) with project-level planning and predictive analytics for PMOs.
+> Project portfolio management for PMOs: projects, milestones, risks, resources, and timesheets. **AI risk / delay / resource forecasting ships as a bring-your-own-LLM scaffold** (fields + flow stubs), not a live model. Complements the `todo` template (task-level) with project-level planning.
 
 [![Status: v0.1 - Work in Progress](https://img.shields.io/badge/status-v0.1--wip-yellow.svg)](./CHARTER.md)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](../../LICENSE)
@@ -9,15 +9,15 @@
 
 ## Why this template
 
-If you're managing 5-20 projects across teams and currently tracking them in spreadsheets, Notion, or basic task trackers, this template gives you **what PMOs actually need**:
+If you're managing 5-20 projects across teams and currently tracking them in spreadsheets, Notion, or basic task trackers, this template gives you a **PMO starter**:
 
-- **AI-powered predictions** — completion probability, schedule delay forecast, budget variance
-- **Proactive risk management** — AI identifies risks before they become issues
-- **Resource conflict detection** — alerts when team members are overallocated
+- **Portfolio view** — status and health across all projects at a glance
 - **Milestone tracking** — automated warnings for approaching/overdue deadlines
-- **Portfolio view** — see health across all projects at a glance
+- **Risk & issue registers** — track risks (impact/likelihood) and issues with state machines
+- **Resource & timesheet tracking** — allocations and time, with overallocation flags
+- **AI forecasting fields, scaffolded** — completion probability, delay, risk, budget variance live in the schema with stub flows; wire any LLM (OpenAI, Anthropic/Claude, local) to populate them
 
-Unlike traditional PM tools where AI is an expensive add-on, **AI fields are built into the schema** and work with any LLM provider (OpenAI, Anthropic, local models).
+The AI fields are a **design pattern, not a delivered model** — see [Plugging in your AI/ML model](#plugging-in-your-aiml-model). Seed values are illustrative.
 
 ---
 
@@ -40,12 +40,12 @@ rm -rf packages/project/.objectstack
 ## What's in the box
 
 ### Core Objects (6)
-- **pm_project** — Project with AI prediction fields
+- **pm_project** — Project with scaffolded AI forecasting fields
 - **pm_milestone** — Key delivery points
-- **pm_risk** — Risk register with AI impact/likelihood assessment
+- **pm_risk** — Risk register (impact/likelihood; AI scoring scaffolded)
 - **pm_issue** — Current problems requiring resolution
 - **pm_resource** — Team member allocations
-- **pm_timesheet** — Daily time tracking (feeds AI cost forecasting)
+- **pm_timesheet** — Daily time tracking (would feed AI cost forecasting)
 
 ### AI Fields on Projects
 ```yaml
@@ -58,7 +58,7 @@ ai_recommended_action: markdown       # What should we do?
 ```
 
 ### Automation (3 Flows)
-1. **Daily AI Risk Assessment** — Re-predicts risk daily for active projects
+1. **Daily AI Risk Assessment** — runs a **stub** that stamps the AI fields for active projects (replace with your LLM)
 2. **Milestone Deadline Warning** — Alerts 7 days before due, escalates overdue
 3. **Resource Conflict Detection** — Detects >40 hours/week allocation
 
@@ -121,7 +121,7 @@ The schema stays the same — only the flow nodes change.
 |--------|---------------|------------------|
 | **Focus** | Task execution | Project planning & prediction |
 | **Timeline** | Hours to days | Weeks to months |
-| **AI** | None | Risk forecasting, resource optimization |
+| **AI** | None | Forecasting fields (scaffolded) |
 | **Users** | Individual contributors | Project managers, PMO |
 | **Objects** | task, label | project, milestone, risk, resource |
 
@@ -131,7 +131,7 @@ They're **complementary**: use project template for high-level planning, then li
 
 ## Status & Roadmap
 
-**v0.1 (current)** — Core objects + AI flows ✅  
+**v0.1 (current)** — Core objects + deterministic flows + AI scaffold ✅  
 **v0.2** — Views, dashboards, seed data (coming soon)  
 **v0.3** — Gantt chart metadata, portfolio analytics  
 

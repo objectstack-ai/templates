@@ -40,16 +40,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.33.0",
-  "objectstack": {
-    "marketplace": {
-      "manifestId": "app.objectstack.template.content",
-      "displayName": "Content",
-      "description": "Content marketing engine: pipeline → publish → measure. Editorial calendar, competitive signal capture, channel ROI rollups, and an 8-state piece workflow with approval gates.",
-      "category": "starter",
-      "iconUrl": "https://cdn.objectos.app/icons/content.svg",
-      "homepageUrl": "https://github.com/objectstack-ai/templates/tree/main/packages/content",
-      "readmePath": "README.md"
-    }
-  }
+  "packageManager": "pnpm@10.33.0"
 }

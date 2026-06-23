@@ -26,9 +26,9 @@ export default defineStack({
     namespace: 'helpdesk',
     version: '0.1.0',
     type: 'app',
-    name: 'AI Helpdesk',
+    name: 'Helpdesk',
     description:
-      'AI-first customer support: native AI triage, suggested replies, KB recall, sentiment-driven escalation, customer portal via permissions.',
+      'Customer support starter on ObjectStack: tickets, SLA, sentiment-based escalation, KB, and a customer portal; AI triage fields ship with a deterministic baseline you extend with your own LLM.',
   },
 
   requires: ['automation', 'triggers', 'analytics', 'auth', 'ui', 'sharing'],

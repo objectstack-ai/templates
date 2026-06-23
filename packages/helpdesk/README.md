@@ -1,6 +1,6 @@
 # @objectlab/helpdesk — AI-First Customer Support
 
-> Customer support template where **AI is a first-class citizen**, not a paid add-on. Native fields for triage, sentiment, suggested replies, and KB recall — driven by your choice of LLM provider.
+> Customer support template that treats **AI as a first-class schema citizen**: triage, sentiment, suggested replies, and KB recall are native ticket fields. A deterministic baseline ships so it runs today — wire your LLM provider to make the AI fields smart.
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/objectstack-ai/templates/tree/main/packages/helpdesk)
 
@@ -18,6 +18,8 @@ Click the StackBlitz badge above to launch this template in a WebContainer. It u
 | Customer portal = +$$$/seat | Same app, just a permission profile |
 | Data is locked in vendor cloud | Open SQL, exportable, no lock-in |
 | English-first, others bolt-on | en + zh-CN shipped; ja/ko trivial to add |
+
+> **On the AI:** the rows above describe the *schema / architecture*. The `ai_*` behaviors ship as a deterministic baseline + flow scaffold — wire your LLM to populate them (see [Plugging in your LLM](#plugging-in-your-llm)).
 
 ## What's in the box
 
