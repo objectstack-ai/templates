@@ -7,6 +7,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 ## [Unreleased]
 
 ### Changed
+- **Upgraded all templates to `@objectstack/* ^10.2.0` (from `^10.0.0`).** Bumped
+  every package's deps and the workspace `minimumReleaseAgeExclude` pins. 10.2 is a
+  non-breaking minor — a full sweep of every `@objectstack/*@10.2.0` release found
+  **zero** Major/BREAKING changesets. The two additive features need no template
+  change: `@objectstack/lint` is extracted into its own public package (ADR-0019 P3
+  — the build-time `validateStackExpressions`/`validateWidgetBindings` validators
+  now ship as `(stack) => Finding[]` for reuse by `os validate`/`compile` and AI
+  authoring; pure move, no behavior change), and `responsiveStyles` is added to the
+  UI page-component envelope (ADR-0065 SDUI scoped styling). Verified end-to-end
+  against the composed `all` env (9 apps, 41 objects, 30 flows): `pnpm -r
+  typecheck`/`build`/`format:check`/`test` green, clean boot with `seeded on empty
+  DB` and **zero** server `ERROR` lines; the console (home with 11 apps, the
+  `content_topic` list with grouped seed rows, ROI dashboard KPIs 14040/708/87/21150
+  + bar chart + 90-day signup time-series) renders with no client console errors.
 - **Upgraded all templates to `@objectstack/* ^10.0.0` (from `^9.11.0`).** Bumped
   every package's deps and the workspace `minimumReleaseAgeExclude` pins. The 10.0
   major lands ADR-0057 (ERP authorization core: renames the system object
