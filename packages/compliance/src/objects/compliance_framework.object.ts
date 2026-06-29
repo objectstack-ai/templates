@@ -70,6 +70,6 @@ export const Framework = ObjectSchema.create({
 
   indexes: [{ fields: ['short_name'] }, { fields: ['family'] }, { fields: ['status'] }],
 
-  displayNameField: 'short_name',
+  nameField: 'short_name',
   compactLayout: ['short_name', 'family', 'version', 'status', 'next_audit_date'],
 });

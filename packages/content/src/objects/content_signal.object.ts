@@ -135,7 +135,7 @@ export const Signal = ObjectSchema.create({
     { fields: ['source_kind'] },
   ],
 
-  displayNameField: 'headline',
+  nameField: 'headline',
   compactLayout: ['headline', 'source_kind', 'competitor', 'impact', 'status'],
 
   validations: [

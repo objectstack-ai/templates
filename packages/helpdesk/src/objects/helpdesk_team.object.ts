@@ -49,6 +49,6 @@ export const Team = ObjectSchema.create({
 
   enable: { searchable: true, apiEnabled: true, trash: true, mru: true },
   indexes: [{ fields: ['code'] }, { fields: ['specialty'] }],
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'code', 'specialty', 'is_active'],
 });

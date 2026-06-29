@@ -125,6 +125,6 @@ export const Topic = ObjectSchema.create({
     { fields: ['visibility'] },
   ],
 
-  displayNameField: 'title',
+  nameField: 'title',
   compactLayout: ['title', 'pillar', 'funnel_stage', 'priority', 'owner', 'visibility'],
 });

@@ -123,6 +123,6 @@ export const Issue = ObjectSchema.create({
     { fields: ['type'] },
   ],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['issue_number', 'name', 'project', 'type', 'status', 'severity', 'assigned_to'],
 });

@@ -75,6 +75,6 @@ export const SLAPolicy = ObjectSchema.create({
 
   enable: { searchable: true, apiEnabled: true, trash: true, mru: true },
   indexes: [{ fields: ['applies_to_tier'] }, { fields: ['is_default'] }],
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'applies_to_tier', 'is_default'],
 });

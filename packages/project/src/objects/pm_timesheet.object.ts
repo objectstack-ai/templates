@@ -63,10 +63,10 @@ export const Timesheet = ObjectSchema.create({
 
   indexes: [{ fields: ['project'] }, { fields: ['person'] }, { fields: ['work_date'] }],
 
-  // ADR-0079: `displayNameField` names a REAL local field. The old
+  // ADR-0079: `nameField` names a REAL local field. The old
   // `titleFormat` opened with `{{record.person.name}}`, a DOT-WALK across the
   // `person` lookup — unreferenceable in a stored field (ADR-0072) — so it is
   // dropped. Degraded to the local `work_date`.
-  displayNameField: 'work_date',
+  nameField: 'work_date',
   compactLayout: ['person', 'project', 'work_date', 'hours'],
 });

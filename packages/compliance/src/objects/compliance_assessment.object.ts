@@ -88,7 +88,7 @@ export const Assessment = ObjectSchema.create({
     { fields: ['assessed_at'] },
   ],
 
-  displayNameField: 'title',
+  nameField: 'title',
   compactLayout: ['title', 'control', 'status', 'remediation_status', 'cycle', 'assessed_at'],
 
   validations: [

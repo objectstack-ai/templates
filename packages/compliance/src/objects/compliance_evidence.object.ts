@@ -106,7 +106,7 @@ export const Evidence = ObjectSchema.create({
     { fields: ['evidence_type'] },
   ],
 
-  displayNameField: 'title',
+  nameField: 'title',
   compactLayout: ['title', 'control', 'evidence_type', 'status', 'expires_on'],
 
   validations: [

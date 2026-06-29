@@ -147,7 +147,7 @@ export const PurchaseOrder = ObjectSchema.create({
     { fields: ['expected_delivery'] },
   ],
 
-  displayNameField: 'po_number',
+  nameField: 'po_number',
   compactLayout: [
     'po_number',
     'vendor',

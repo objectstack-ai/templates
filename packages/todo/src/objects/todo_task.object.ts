@@ -104,7 +104,7 @@ export const Task = ObjectSchema.create({
 
   indexes: [{ fields: ['assignee'] }, { fields: ['status'] }, { fields: ['due_date'] }],
 
-  displayNameField: 'subject',
+  nameField: 'subject',
   compactLayout: ['subject', 'status', 'priority', 'assignee', 'due_date'],
 
   validations: [

@@ -66,6 +66,6 @@ export const Customer = ObjectSchema.create({
 
   indexes: [{ fields: ['email'] }, { fields: ['tier'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'email', 'company', 'tier'],
 });

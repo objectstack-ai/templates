@@ -87,6 +87,6 @@ export const Milestone = ObjectSchema.create({
 
   indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['planned_date'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'project', 'status', 'is_critical_path', 'planned_date', 'actual_date'],
 });

@@ -181,7 +181,7 @@ export const Risk = ObjectSchema.create({
 
   indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['category'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['risk_id', 'name', 'project', 'status', 'category', 'priority'],
   validations: [
     {

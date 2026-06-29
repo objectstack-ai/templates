@@ -59,6 +59,6 @@ export const Competitor = ObjectSchema.create({
 
   indexes: [{ fields: ['name'], unique: true }, { fields: ['category'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'category', 'website'],
 });

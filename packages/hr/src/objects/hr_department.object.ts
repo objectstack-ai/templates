@@ -47,6 +47,6 @@ export const Department = ObjectSchema.create({
 
   indexes: [{ fields: ['name'], unique: true }, { fields: ['parent'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'code', 'parent', 'head'],
 });

@@ -67,7 +67,7 @@ export const GoodsReceipt = ObjectSchema.create({
 
   indexes: [{ fields: ['purchase_order'] }, { fields: ['received_at'] }, { fields: ['quality'] }],
 
-  displayNameField: 'display_name',
+  nameField: 'display_name',
   compactLayout: ['receipt_number', 'purchase_order', 'quality', 'received_value', 'received_at'],
 
   validations: [

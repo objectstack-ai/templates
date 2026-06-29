@@ -158,7 +158,7 @@ export const Employee = ObjectSchema.create({
     { fields: ['status'] },
   ],
 
-  displayNameField: 'display_name',
+  nameField: 'display_name',
   compactLayout: ['full_name', 'job_title', 'department', 'manager', 'status'],
 
   validations: [

@@ -225,7 +225,7 @@ export const Project = ObjectSchema.create({
     { fields: ['project_manager'] },
   ],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: [
     'code',
     'name',

@@ -106,7 +106,7 @@ export const TimeOffRequest = ObjectSchema.create({
 
   indexes: [{ fields: ['employee'] }, { fields: ['status'] }, { fields: ['start_date'] }],
 
-  displayNameField: 'display_name',
+  nameField: 'display_name',
   compactLayout: ['employee', 'leave_type', 'start_date', 'end_date', 'status'],
 
   validations: [

@@ -119,7 +119,7 @@ export const PurchaseRequest = ObjectSchema.create({
     { fields: ['needed_by'] },
   ],
 
-  displayNameField: 'title',
+  nameField: 'title',
   compactLayout: ['title', 'vendor', 'estimated_amount', 'status', 'needed_by'],
 
   validations: [

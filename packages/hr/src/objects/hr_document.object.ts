@@ -70,6 +70,6 @@ export const EmployeeDocument = ObjectSchema.create({
 
   indexes: [{ fields: ['employee'] }, { fields: ['doc_type'] }, { fields: ['expires_at'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'employee', 'doc_type', 'expires_at', 'expiry_status'],
 });

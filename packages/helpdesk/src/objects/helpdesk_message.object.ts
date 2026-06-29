@@ -57,6 +57,6 @@ export const Message = ObjectSchema.create({
   },
 
   indexes: [{ fields: ['ticket'] }, { fields: ['direction'] }],
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'ticket', 'direction', 'sent_at'],
 });

@@ -74,7 +74,7 @@ export const KBArticle = ObjectSchema.create({
   },
 
   indexes: [{ fields: ['status'] }, { fields: ['category'] }, { fields: ['locale'] }],
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'category', 'status', 'locale'],
   validations: [
     {

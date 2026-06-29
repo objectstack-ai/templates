@@ -66,6 +66,6 @@ export const ContentTemplate = ObjectSchema.create({
 
   indexes: [{ fields: ['name'], unique: true }, { fields: ['kind'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'kind', 'target_channel', 'target_word_count'],
 });

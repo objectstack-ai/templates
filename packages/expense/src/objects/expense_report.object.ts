@@ -138,7 +138,7 @@ export const ExpenseReport = ObjectSchema.create({
     { fields: ['period_end'] },
   ],
 
-  displayNameField: 'title',
+  nameField: 'title',
   compactLayout: ['title', 'requester', 'total_amount', 'status', 'period_end'],
 
   validations: [

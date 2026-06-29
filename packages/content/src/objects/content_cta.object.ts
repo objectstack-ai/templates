@@ -65,7 +65,7 @@ export const Cta = ObjectSchema.create({
 
   indexes: [{ fields: ['piece'] }, { fields: ['goal'] }],
 
-  displayNameField: 'label_text',
+  nameField: 'label_text',
   compactLayout: ['label_text', 'goal', 'piece', 'is_primary'],
 
   validations: [

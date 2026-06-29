@@ -245,7 +245,7 @@ export const Ticket = ObjectSchema.create({
     { fields: ['resolution_due_at'] },
   ],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['ticket_number', 'name', 'status', 'priority', 'assignee', 'ai_sentiment'],
 
   validations: [

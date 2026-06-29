@@ -100,7 +100,7 @@ export const ExpenseLine = ObjectSchema.create({
 
   indexes: [{ fields: ['expense_report'] }, { fields: ['category'] }, { fields: ['expense_date'] }],
 
-  displayNameField: 'description',
+  nameField: 'description',
   compactLayout: ['description', 'category', 'amount', 'reimbursable', 'expense_date', 'merchant'],
 
   validations: [

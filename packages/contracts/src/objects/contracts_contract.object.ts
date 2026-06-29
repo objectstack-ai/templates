@@ -261,7 +261,7 @@ export const Contract = ObjectSchema.create({
     { fields: ['owner'] },
   ],
 
-  displayNameField: 'title',
+  nameField: 'title',
   compactLayout: ['title', 'party', 'contract_type', 'status', 'total_value', 'end_date'],
 
   validations: [

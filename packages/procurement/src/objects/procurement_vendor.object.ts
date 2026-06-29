@@ -88,6 +88,6 @@ export const Vendor = ObjectSchema.create({
 
   indexes: [{ fields: ['name'] }, { fields: ['status'] }, { fields: ['category'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'vendor_code', 'category', 'status', 'risk_tier', 'is_preferred'],
 });

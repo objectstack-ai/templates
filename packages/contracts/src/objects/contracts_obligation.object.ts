@@ -118,7 +118,7 @@ export const Obligation = ObjectSchema.create({
     { fields: ['assignee'] },
   ],
 
-  displayNameField: 'summary',
+  nameField: 'summary',
   compactLayout: ['summary', 'contract', 'kind', 'status', 'due_date', 'amount'],
 
   validations: [

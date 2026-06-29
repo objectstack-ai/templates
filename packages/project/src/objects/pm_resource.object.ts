@@ -61,11 +61,11 @@ export const Resource = ObjectSchema.create({
 
   indexes: [{ fields: ['project'] }, { fields: ['person'] }, { fields: ['start_date'] }],
 
-  // ADR-0079: `displayNameField` names a REAL local field. The old
+  // ADR-0079: `nameField` names a REAL local field. The old
   // `titleFormat` was `{{record.person.name}} → {{record.project.name}}` —
   // both DOT-WALKS across the `person`/`project` lookups, unreferenceable in a
   // stored field (ADR-0072), so both are dropped. Degraded to the local
   // `role` (the most identifying local scalar on an allocation).
-  displayNameField: 'role',
+  nameField: 'role',
   compactLayout: ['person', 'project', 'role', 'allocated_hours_per_week'],
 });

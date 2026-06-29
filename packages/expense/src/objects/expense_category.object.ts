@@ -57,6 +57,6 @@ export const ExpenseCategory = ObjectSchema.create({
 
   indexes: [{ fields: ['name'] }, { fields: ['active'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'code', 'gl_account', 'per_txn_limit', 'active'],
 });

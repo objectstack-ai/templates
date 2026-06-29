@@ -223,7 +223,7 @@ export const Piece = ObjectSchema.create({
     { fields: ['published_at'] },
   ],
 
-  displayNameField: 'title',
+  nameField: 'title',
   compactLayout: ['title', 'status', 'format', 'assignee', 'publish_at'],
 
   validations: [

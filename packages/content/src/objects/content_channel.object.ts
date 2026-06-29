@@ -73,6 +73,6 @@ export const Channel = ObjectSchema.create({
 
   indexes: [{ fields: ['name'], unique: true }, { fields: ['kind'] }],
 
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'kind', 'default_cta_goal', 'active'],
 });

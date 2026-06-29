@@ -123,7 +123,7 @@ export const Control = ObjectSchema.create({
     { fields: ['last_status'] },
   ],
 
-  displayNameField: 'display_name',
+  nameField: 'display_name',
   compactLayout: ['code', 'title', 'framework', 'criticality', 'last_status'],
 
   validations: [
