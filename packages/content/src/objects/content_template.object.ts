@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Template — a reusable outline / structure a piece can be instantiated
@@ -68,6 +67,5 @@ export const ContentTemplate = ObjectSchema.create({
   indexes: [{ fields: ['name'], unique: true }, { fields: ['kind'] }],
 
   displayNameField: 'name',
-  titleFormat: tmpl`{{record.name}}`,
   compactLayout: ['name', 'kind', 'target_channel', 'target_word_count'],
 });

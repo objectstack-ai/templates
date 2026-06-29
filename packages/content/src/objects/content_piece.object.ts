@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Content piece — the unit of work. State machine drives the workflow;
  * everything else (publications, metrics, CTAs) hangs off this row.
@@ -223,7 +223,7 @@ export const Piece = ObjectSchema.create({
     { fields: ['published_at'] },
   ],
 
-  titleFormat: tmpl`{{record.title}}`,
+  displayNameField: 'title',
   compactLayout: ['title', 'status', 'format', 'assignee', 'publish_at'],
 
   validations: [

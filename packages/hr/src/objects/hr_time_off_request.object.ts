@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { F, P, tmpl } from '@objectstack/spec';
+import { F, P } from '@objectstack/spec';
 /**
  * Time-Off Request — vacation, sick, personal, unpaid. Goes through a
  * one-step approval (employee's manager). Sharing rule
@@ -85,6 +85,16 @@ export const TimeOffRequest = ObjectSchema.create({
     }),
 
     submitted_at: Field.datetime({ label: 'Submitted At', readonly: true, group: 'meta' }),
+
+    // ADR-0079: real field holding the record title (was the render-only
+    // `titleFormat` template `{{leave_type}} · {{start_date}} → {{end_date}}`).
+    // Date fields are stored as ISO strings; `string(...)` makes the concat
+    // overload explicit. A stored formula so the server can return/query it.
+    display_name: Field.formula({
+      label: 'Display Name',
+      group: 'meta',
+      expression: F`coalesce(record.leave_type, '') + ' · ' + string(record.start_date) + ' → ' + string(record.end_date)`,
+    }),
   },
 
   enable: {
@@ -96,7 +106,7 @@ export const TimeOffRequest = ObjectSchema.create({
 
   indexes: [{ fields: ['employee'] }, { fields: ['status'] }, { fields: ['start_date'] }],
 
-  titleFormat: tmpl`{{record.leave_type}} · {{record.start_date}} → {{record.end_date}}`,
+  displayNameField: 'display_name',
   compactLayout: ['employee', 'leave_type', 'start_date', 'end_date', 'status'],
 
   validations: [

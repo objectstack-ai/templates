@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Metric — a time-stamped reading for a publication. Weekly snapshot
@@ -63,6 +62,10 @@ export const Metric = ObjectSchema.create({
 
   indexes: [{ fields: ['publication'] }, { fields: ['period_start'] }, { fields: ['period_end'] }],
 
-  titleFormat: tmpl`{{record.publication}} — {{record.period_start}}`,
+  // ADR-0079: `displayNameField` names a REAL local field. The old
+  // `titleFormat` also referenced `{{record.publication}}`, a LOOKUP — a
+  // related-record reference the server can't resolve into a title here
+  // (ADR-0072), so it is dropped. Degraded to the local `period_start`.
+  displayNameField: 'period_start',
   compactLayout: ['publication', 'period_start', 'period_end', 'views', 'signups', 'revenue'],
 });

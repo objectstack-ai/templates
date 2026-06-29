@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Topic — the editorial brief. Owns the intent; one topic can spawn many
@@ -126,6 +125,6 @@ export const Topic = ObjectSchema.create({
     { fields: ['visibility'] },
   ],
 
-  titleFormat: tmpl`{{record.title}}`,
+  displayNameField: 'title',
   compactLayout: ['title', 'pillar', 'funnel_stage', 'priority', 'owner', 'visibility'],
 });

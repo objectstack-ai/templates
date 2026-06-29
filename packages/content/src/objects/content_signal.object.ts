@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, tmpl } from '@objectstack/spec';
+import { P } from '@objectstack/spec';
 /**
  * Signal — a captured event worth potentially writing about. Sources:
  *   - a competitor published something (auto-captured via RSS / manual)
@@ -135,7 +135,7 @@ export const Signal = ObjectSchema.create({
     { fields: ['source_kind'] },
   ],
 
-  titleFormat: tmpl`{{record.headline}}`,
+  displayNameField: 'headline',
   compactLayout: ['headline', 'source_kind', 'competitor', 'impact', 'status'],
 
   validations: [

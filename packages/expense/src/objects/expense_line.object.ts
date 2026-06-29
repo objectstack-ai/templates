@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 
 /**
  * Expense Line — one out-of-pocket item on a report (a meal, a flight, a
@@ -100,7 +100,6 @@ export const ExpenseLine = ObjectSchema.create({
 
   indexes: [{ fields: ['expense_report'] }, { fields: ['category'] }, { fields: ['expense_date'] }],
 
-  titleFormat: tmpl`{{record.description}}`,
   displayNameField: 'description',
   compactLayout: ['description', 'category', 'amount', 'reimbursable', 'expense_date', 'merchant'],
 

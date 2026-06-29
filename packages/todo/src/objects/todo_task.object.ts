@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Task — the unit of work. Status state machine, optional assignee, optional
  * labels (multi).
@@ -104,7 +104,7 @@ export const Task = ObjectSchema.create({
 
   indexes: [{ fields: ['assignee'] }, { fields: ['status'] }, { fields: ['due_date'] }],
 
-  titleFormat: tmpl`{{record.subject}}`,
+  displayNameField: 'subject',
   compactLayout: ['subject', 'status', 'priority', 'assignee', 'due_date'],
 
   validations: [

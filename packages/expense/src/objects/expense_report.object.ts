@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Expense Report — the reimbursement claim an employee submits. It is a
  * header over one or more `expense_line` rows. `total_amount` is a STORED
@@ -138,7 +138,7 @@ export const ExpenseReport = ObjectSchema.create({
     { fields: ['period_end'] },
   ],
 
-  titleFormat: tmpl`{{record.title}}`,
+  displayNameField: 'title',
   compactLayout: ['title', 'requester', 'total_amount', 'status', 'period_end'],
 
   validations: [

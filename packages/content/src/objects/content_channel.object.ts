@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Channel — a publishing surface (Blog, Newsletter, LinkedIn, X, YouTube).
@@ -75,6 +74,5 @@ export const Channel = ObjectSchema.create({
   indexes: [{ fields: ['name'], unique: true }, { fields: ['kind'] }],
 
   displayNameField: 'name',
-  titleFormat: tmpl`{{record.name}}`,
   compactLayout: ['name', 'kind', 'default_cta_goal', 'active'],
 });

@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Timesheet — daily time tracking for actual effort.
@@ -64,6 +63,10 @@ export const Timesheet = ObjectSchema.create({
 
   indexes: [{ fields: ['project'] }, { fields: ['person'] }, { fields: ['work_date'] }],
 
-  titleFormat: tmpl`{{record.person.name}} - {{record.work_date}}`,
+  // ADR-0079: `displayNameField` names a REAL local field. The old
+  // `titleFormat` opened with `{{record.person.name}}`, a DOT-WALK across the
+  // `person` lookup — unreferenceable in a stored field (ADR-0072) — so it is
+  // dropped. Degraded to the local `work_date`.
+  displayNameField: 'work_date',
   compactLayout: ['person', 'project', 'work_date', 'hours'],
 });

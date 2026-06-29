@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Risk — potential threats to project success.
@@ -182,7 +181,6 @@ export const Risk = ObjectSchema.create({
 
   indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['category'] }],
 
-  titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
   compactLayout: ['risk_id', 'name', 'project', 'status', 'category', 'priority'],
   validations: [

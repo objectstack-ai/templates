@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Resource — allocation of people or budget to projects.
@@ -62,6 +61,11 @@ export const Resource = ObjectSchema.create({
 
   indexes: [{ fields: ['project'] }, { fields: ['person'] }, { fields: ['start_date'] }],
 
-  titleFormat: tmpl`{{record.person.name}} → {{record.project.name}}`,
+  // ADR-0079: `displayNameField` names a REAL local field. The old
+  // `titleFormat` was `{{record.person.name}} → {{record.project.name}}` —
+  // both DOT-WALKS across the `person`/`project` lookups, unreferenceable in a
+  // stored field (ADR-0072), so both are dropped. Degraded to the local
+  // `role` (the most identifying local scalar on an allocation).
+  displayNameField: 'role',
   compactLayout: ['person', 'project', 'role', 'allocated_hours_per_week'],
 });

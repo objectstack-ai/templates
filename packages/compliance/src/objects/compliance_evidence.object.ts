@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Evidence — a piece of proof supporting one or more controls. Attach
  * PDFs / screenshots / logs via the platform's sys_attachment slot.
@@ -106,7 +106,7 @@ export const Evidence = ObjectSchema.create({
     { fields: ['evidence_type'] },
   ],
 
-  titleFormat: tmpl`{{record.title}}`,
+  displayNameField: 'title',
   compactLayout: ['title', 'control', 'evidence_type', 'status', 'expires_on'],
 
   validations: [

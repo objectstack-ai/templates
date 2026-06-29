@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { F, tmpl } from '@objectstack/spec';
+import { F } from '@objectstack/spec';
 
 /**
  * Employee Document — contract, ID copy, certification, etc. The
@@ -70,6 +70,6 @@ export const EmployeeDocument = ObjectSchema.create({
 
   indexes: [{ fields: ['employee'] }, { fields: ['doc_type'] }, { fields: ['expires_at'] }],
 
-  titleFormat: tmpl`{{record.name}}`,
+  displayNameField: 'name',
   compactLayout: ['name', 'employee', 'doc_type', 'expires_at', 'expiry_status'],
 });

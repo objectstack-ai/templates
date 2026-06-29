@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Framework — the catalog of standards you certify against. One per
@@ -71,7 +70,6 @@ export const Framework = ObjectSchema.create({
 
   indexes: [{ fields: ['short_name'] }, { fields: ['family'] }, { fields: ['status'] }],
 
-  titleFormat: tmpl`{{record.short_name}}`,
   displayNameField: 'short_name',
   compactLayout: ['short_name', 'family', 'version', 'status', 'next_audit_date'],
 });

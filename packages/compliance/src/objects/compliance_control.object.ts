@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 
 /**
  * Control — an individual requirement from a framework. e.g. SOC2
@@ -98,6 +98,15 @@ export const Control = ObjectSchema.create({
       expression: F`record.last_assessed_at == null || record.review_frequency_days == null || daysFromNow(0) > record.last_assessed_at + record.review_frequency_days * 86400000`,
     }),
     notes: Field.markdown({ label: 'Notes', group: 'meta' }),
+
+    // ADR-0079: real field holding the record title (was the render-only
+    // `titleFormat` template `{{code}} · {{title}}`). A stored formula so the
+    // server can return/query the display name.
+    display_name: Field.formula({
+      label: 'Display Name',
+      group: 'meta',
+      expression: F`coalesce(record.code, '') + ' · ' + coalesce(record.title, '')`,
+    }),
   },
 
   enable: {
@@ -114,7 +123,7 @@ export const Control = ObjectSchema.create({
     { fields: ['last_status'] },
   ],
 
-  titleFormat: tmpl`{{record.code}} · {{record.title}}`,
+  displayNameField: 'display_name',
   compactLayout: ['code', 'title', 'framework', 'criticality', 'last_status'],
 
   validations: [

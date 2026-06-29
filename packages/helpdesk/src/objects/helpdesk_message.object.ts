@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Message — a single entry in a ticket's conversation thread.
@@ -58,7 +57,6 @@ export const Message = ObjectSchema.create({
   },
 
   indexes: [{ fields: ['ticket'] }, { fields: ['direction'] }],
-  titleFormat: tmpl`{{record.name}}`,
   displayNameField: 'name',
   compactLayout: ['name', 'ticket', 'direction', 'sent_at'],
 });

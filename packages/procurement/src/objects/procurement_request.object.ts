@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Purchase Request — what someone wants to buy. Goes through approval,
  * then is converted into one Purchase Order by the
@@ -119,7 +119,7 @@ export const PurchaseRequest = ObjectSchema.create({
     { fields: ['needed_by'] },
   ],
 
-  titleFormat: tmpl`{{record.title}}`,
+  displayNameField: 'title',
   compactLayout: ['title', 'vendor', 'estimated_amount', 'status', 'needed_by'],
 
   validations: [
