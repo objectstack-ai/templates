@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Department — a node in the org tree. Self-referential `parent_id` builds
@@ -48,6 +47,6 @@ export const Department = ObjectSchema.create({
 
   indexes: [{ fields: ['name'], unique: true }, { fields: ['parent'] }],
 
-  titleFormat: tmpl`{{record.name}}`,
+  nameField: 'name',
   compactLayout: ['name', 'code', 'parent', 'head'],
 });

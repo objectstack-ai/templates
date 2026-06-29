@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Publication — "this piece went live on this channel at this time".
@@ -107,6 +106,11 @@ export const Publication = ObjectSchema.create({
 
   indexes: [{ fields: ['piece'] }, { fields: ['channel'] }, { fields: ['published_at'] }],
 
-  titleFormat: tmpl`{{record.piece}} on {{record.channel}}`,
+  // ADR-0079: `nameField` names a REAL local field. The old
+  // `titleFormat` referenced `{{record.piece}}` and `{{record.channel}}`,
+  // both LOOKUPS — related-record references the server can't resolve into a
+  // title here (ADR-0072), so both are dropped. Degraded to the local
+  // `published_at` (the only identifying local scalar).
+  nameField: 'published_at',
   compactLayout: ['piece', 'channel', 'published_at', 'total_views', 'total_signups'],
 });

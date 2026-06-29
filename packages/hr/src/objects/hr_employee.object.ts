@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { F, P, tmpl } from '@objectstack/spec';
+import { F, P } from '@objectstack/spec';
 
 /**
  * Employee — the people record. Self-referential `manager` builds the
@@ -132,6 +132,16 @@ export const Employee = ObjectSchema.create({
       expression: F`record.hire_date != null ? floor((today() - record.hire_date) / 365) : null`,
     }),
     notes: Field.markdown({ label: 'Internal Notes', group: 'meta' }),
+
+    // ADR-0079: real field holding the record title (was the render-only
+    // `titleFormat` template `{{preferred_name || record.full_name}}`).
+    // `isBlank` is the null-safe equivalent of the old `||` fallback. A stored
+    // formula so the server can return/query the display name.
+    display_name: Field.formula({
+      label: 'Display Name',
+      group: 'meta',
+      expression: F`!isBlank(record.preferred_name) ? record.preferred_name : record.full_name`,
+    }),
   },
 
   enable: {
@@ -148,7 +158,7 @@ export const Employee = ObjectSchema.create({
     { fields: ['status'] },
   ],
 
-  titleFormat: tmpl`{{record.preferred_name || record.full_name}}`,
+  nameField: 'display_name',
   compactLayout: ['full_name', 'job_title', 'department', 'manager', 'status'],
 
   validations: [

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Contract — the central record. One Contract per signed agreement (or
  * one-being-negotiated). Metadata-first: the PDF lives in sys_attachment;
@@ -261,7 +261,7 @@ export const Contract = ObjectSchema.create({
     { fields: ['owner'] },
   ],
 
-  titleFormat: tmpl`{{record.title}}`,
+  nameField: 'title',
   compactLayout: ['title', 'party', 'contract_type', 'status', 'total_value', 'end_date'],
 
   validations: [

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Helpdesk Ticket — the central object. **AI fields are first-class**:
  * `ai_summary`, `ai_category`, `ai_priority_suggestion`, `ai_sentiment`,
@@ -245,8 +245,7 @@ export const Ticket = ObjectSchema.create({
     { fields: ['resolution_due_at'] },
   ],
 
-  titleFormat: tmpl`{{record.ticket_number}} — {{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['ticket_number', 'name', 'status', 'priority', 'assignee', 'ai_sentiment'],
 
   validations: [

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 
 /**
  * Obligation — anything we (or the counterparty) committed to do on a given
@@ -118,7 +118,7 @@ export const Obligation = ObjectSchema.create({
     { fields: ['assignee'] },
   ],
 
-  titleFormat: tmpl`{{record.summary}}`,
+  nameField: 'summary',
   compactLayout: ['summary', 'contract', 'kind', 'status', 'due_date', 'amount'],
 
   validations: [

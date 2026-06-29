@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 /**
  * KB Article — knowledge base entry. The AI triage flow recalls relevant
  * articles by category and recent usage, attaching IDs to
@@ -75,8 +74,7 @@ export const KBArticle = ObjectSchema.create({
   },
 
   indexes: [{ fields: ['status'] }, { fields: ['category'] }, { fields: ['locale'] }],
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'category', 'status', 'locale'],
   validations: [
     {

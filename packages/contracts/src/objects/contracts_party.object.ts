@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Party — the counterparty on a contract. One record per legal entity (not
@@ -90,6 +89,5 @@ export const Party = ObjectSchema.create({
   indexes: [{ fields: ['legal_name'], unique: true }, { fields: ['party_type'] }],
 
   compactLayout: ['legal_name', 'party_type', 'country', 'primary_contact_email'],
-  displayNameField: 'legal_name',
-  titleFormat: tmpl`{{record.legal_name}}`,
+  nameField: 'legal_name',
 });

@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Team — a support queue / specialty group. Tickets are routed here by
@@ -50,7 +49,6 @@ export const Team = ObjectSchema.create({
 
   enable: { searchable: true, apiEnabled: true, trash: true, mru: true },
   indexes: [{ fields: ['code'] }, { fields: ['specialty'] }],
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'code', 'specialty', 'is_active'],
 });

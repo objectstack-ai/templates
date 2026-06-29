@@ -12,10 +12,10 @@
     "clean": "rm -rf .objectstack/marketplace-packages dist"
   },
   "dependencies": {
-    "@objectstack/account": "^10.2.0",
-    "@objectstack/cli": "^10.2.0",
-    "@objectstack/driver-sqlite-wasm": "^10.2.0",
-    "@objectstack/runtime": "^10.2.0",
+    "@objectstack/account": "^11.2.0",
+    "@objectstack/cli": "^11.2.0",
+    "@objectstack/driver-sqlite-wasm": "^11.2.0",
+    "@objectstack/runtime": "^11.2.0",
     "sql.js": "^1.14.1"
   },
   "optionalDependencies": {

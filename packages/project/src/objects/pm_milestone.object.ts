@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Milestone — key delivery points within a project.
@@ -88,7 +87,6 @@ export const Milestone = ObjectSchema.create({
 
   indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['planned_date'] }],
 
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'project', 'status', 'is_critical_path', 'planned_date', 'actual_date'],
 });

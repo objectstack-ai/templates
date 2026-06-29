@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Purchase Order — formal commitment to a vendor. One PO per (vendor,
  * request) pair. Line items live in `lines` as JSON to stay under the
@@ -147,7 +147,7 @@ export const PurchaseOrder = ObjectSchema.create({
     { fields: ['expected_delivery'] },
   ],
 
-  titleFormat: tmpl`{{record.po_number}}`,
+  nameField: 'po_number',
   compactLayout: [
     'po_number',
     'vendor',

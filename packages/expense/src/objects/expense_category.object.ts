@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Expense Category — the spend taxonomy. Drives GL coding and reporting,
@@ -58,7 +57,6 @@ export const ExpenseCategory = ObjectSchema.create({
 
   indexes: [{ fields: ['name'] }, { fields: ['active'] }],
 
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'code', 'gl_account', 'per_txn_limit', 'active'],
 });

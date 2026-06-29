@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Customer — the end-user submitting tickets. Lightweight contact record;
@@ -67,7 +66,6 @@ export const Customer = ObjectSchema.create({
 
   indexes: [{ fields: ['email'] }, { fields: ['tier'] }],
 
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'email', 'company', 'tier'],
 });

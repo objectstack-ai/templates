@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Project — the central object for project portfolio management.
@@ -226,8 +225,7 @@ export const Project = ObjectSchema.create({
     { fields: ['project_manager'] },
   ],
 
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: [
     'code',
     'name',

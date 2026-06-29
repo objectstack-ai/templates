@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Competitor — a tracked org / blog / creator we watch for signals.
@@ -60,7 +59,6 @@ export const Competitor = ObjectSchema.create({
 
   indexes: [{ fields: ['name'], unique: true }, { fields: ['category'] }],
 
-  displayNameField: 'name',
-  titleFormat: tmpl`{{record.name}}`,
+  nameField: 'name',
   compactLayout: ['name', 'category', 'website'],
 });

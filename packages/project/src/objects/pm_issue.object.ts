@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Issue — problems that have occurred and need resolution.
@@ -124,7 +123,6 @@ export const Issue = ObjectSchema.create({
     { fields: ['type'] },
   ],
 
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['issue_number', 'name', 'project', 'type', 'status', 'severity', 'assigned_to'],
 });

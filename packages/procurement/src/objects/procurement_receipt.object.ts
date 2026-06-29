@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 
 /**
  * Goods Receipt — one record per receiving event against a PO. The
@@ -50,6 +50,14 @@ export const GoodsReceipt = ObjectSchema.create({
         'Dollar value of goods accepted in this receipt. Rolls up into PO.received_amount via the after-create hook.',
     }),
     notes: Field.markdown({ label: 'Notes' }),
+
+    // ADR-0079: real field holding the record title (was the render-only
+    // `titleFormat` template `Receipt {{receipt_number}}`). A stored formula
+    // so the server can return/query the display name.
+    display_name: Field.formula({
+      label: 'Display Name',
+      expression: F`'Receipt ' + coalesce(record.receipt_number, '')`,
+    }),
   },
 
   enable: {
@@ -59,7 +67,7 @@ export const GoodsReceipt = ObjectSchema.create({
 
   indexes: [{ fields: ['purchase_order'] }, { fields: ['received_at'] }, { fields: ['quality'] }],
 
-  titleFormat: tmpl`Receipt {{record.receipt_number}}`,
+  nameField: 'display_name',
   compactLayout: ['receipt_number', 'purchase_order', 'quality', 'received_value', 'received_at'],
 
   validations: [

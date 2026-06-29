@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, tmpl } from '@objectstack/spec';
+import { P } from '@objectstack/spec';
 
 /**
  * CTA — a call-to-action variant attached to a piece. Carries a goal
@@ -65,7 +65,7 @@ export const Cta = ObjectSchema.create({
 
   indexes: [{ fields: ['piece'] }, { fields: ['goal'] }],
 
-  titleFormat: tmpl`{{record.label_text}}`,
+  nameField: 'label_text',
   compactLayout: ['label_text', 'goal', 'piece', 'is_primary'],
 
   validations: [

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { P, F, tmpl } from '@objectstack/spec';
+import { P, F } from '@objectstack/spec';
 /**
  * Assessment — a discrete test of a control. Each control should have
  * one per `review_frequency_days`. Result rolls up onto Control.last_status.
@@ -88,7 +88,7 @@ export const Assessment = ObjectSchema.create({
     { fields: ['assessed_at'] },
   ],
 
-  titleFormat: tmpl`{{record.title}}`,
+  nameField: 'title',
   compactLayout: ['title', 'control', 'status', 'remediation_status', 'cycle', 'assessed_at'],
 
   validations: [

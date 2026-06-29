@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * SLA Policy — first-response and resolution targets in minutes, per priority.
@@ -76,7 +75,6 @@ export const SLAPolicy = ObjectSchema.create({
 
   enable: { searchable: true, apiEnabled: true, trash: true, mru: true },
   indexes: [{ fields: ['applies_to_tier'] }, { fields: ['is_default'] }],
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'applies_to_tier', 'is_default'],
 });

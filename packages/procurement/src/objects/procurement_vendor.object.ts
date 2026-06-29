@@ -1,7 +1,6 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { ObjectSchema, Field } from '@objectstack/spec/data';
-import { tmpl } from '@objectstack/spec';
 
 /**
  * Vendor — the supplier master. One per legal entity you buy from.
@@ -89,7 +88,6 @@ export const Vendor = ObjectSchema.create({
 
   indexes: [{ fields: ['name'] }, { fields: ['status'] }, { fields: ['category'] }],
 
-  titleFormat: tmpl`{{record.name}}`,
-  displayNameField: 'name',
+  nameField: 'name',
   compactLayout: ['name', 'vendor_code', 'category', 'status', 'risk_tier', 'is_preferred'],
 });
