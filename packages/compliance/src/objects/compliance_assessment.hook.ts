@@ -68,7 +68,9 @@ const assessmentRollupHook: Hook = {
     let controlId = pick('control') as string | undefined;
     const assessmentId = pick('id') as string | undefined;
     if (!controlId && assessmentId) {
-      const row = await api.object('compliance_assessment').findOne({ where: { id: assessmentId } });
+      const row = await api
+        .object('compliance_assessment')
+        .findOne({ where: { id: assessmentId } });
       controlId = (row?.control as string | undefined) ?? undefined;
     }
     if (!controlId) return;

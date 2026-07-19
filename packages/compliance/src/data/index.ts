@@ -286,7 +286,8 @@ const assessments = defineSeed(Assessment, {
       cycle: '2026-Q1',
       assessed_at: cel`daysAgo(40)`,
       status: 'passed',
-      finding: 'Annual risk analysis completed; risk-management plan current, no high residual risks.',
+      finding:
+        'Annual risk analysis completed; risk-management plan current, no high residual risks.',
     },
   ],
 });
