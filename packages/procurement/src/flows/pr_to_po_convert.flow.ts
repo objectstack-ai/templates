@@ -55,7 +55,6 @@ export const PRToPOConvertFlow: Flow = {
           status: 'draft',
           owner: '{pr.requester}',
           total_amount: '{pr.estimated_amount}',
-          received_amount: 0,
           cost_center: '{pr.cost_center}',
           // order_date is intentionally left unset on the draft PO — the buyer
           // sets it when sending (enforced by `sent_requires_order_date`). A

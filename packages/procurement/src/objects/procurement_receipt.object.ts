@@ -4,12 +4,14 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
 import { P, F } from '@objectstack/spec';
 
 /**
- * Goods Receipt — one record per receiving event against a PO. The
- * `received_amount` rollup on PurchaseOrder is updated by the
- * `procurement_receipt.hook.ts` after-create handler.
+ * Goods Receipt — one record per receiving event against a PO. Its
+ * `received_value` rolls up into `procurement_order.received_amount` via a
+ * native `summary` field (the engine recomputes the PO total on every receipt
+ * change — no hook).
  *
- * Quality outcome ("accepted" / "rejected" / "partial") drives the 3-way
- * match: only `accepted` value rolls up into PO.received_amount.
+ * Quality outcome ("accepted" / "rejected" / "partial") drives the 3-way match:
+ * a rejected receipt carries `received_value` 0 (enforced below), so only
+ * accepted value contributes to the PO's summed `received_amount`.
  */
 export const GoodsReceipt = ObjectSchema.create({
   name: 'procurement_receipt',
@@ -48,7 +50,7 @@ export const GoodsReceipt = ObjectSchema.create({
       required: true,
       min: 0,
       description:
-        'Dollar value of goods accepted in this receipt. Rolls up into PO.received_amount via the after-create hook.',
+        'Dollar value of goods accepted in this receipt. Summed into PO.received_amount by a native summary field (0 for rejected receipts).',
     }),
     notes: Field.markdown({ label: 'Notes' }),
 
