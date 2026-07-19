@@ -48,7 +48,10 @@ export const EmployeeDocument = ObjectSchema.create({
     }),
     is_expiring_soon: Field.formula({
       label: 'Expiring Soon?',
-      expression: F`record.expires_at != null && record.expires_at >= today() && record.expires_at <= (today() + 30)`,
+      // `daysFromNow(30)`, not `today() + 30`: the CEL formula engine has no
+      // `Timestamp + int` operator, so `today() + 30` evaluates to null and the
+      // whole comparison silently fails. Day offsets go through the builtin.
+      expression: F`record.expires_at != null && record.expires_at >= today() && record.expires_at <= daysFromNow(30)`,
     }),
     is_expired: Field.formula({
       label: 'Expired?',
@@ -57,7 +60,9 @@ export const EmployeeDocument = ObjectSchema.create({
     expiry_status: Field.formula({
       label: 'Expiry Status',
       description: 'Single severity band for sorting/colour-coding the document list.',
-      expression: F`record.expires_at == null ? "none" : (record.expires_at < today() ? "expired" : (record.expires_at <= (today() + 30) ? "expiring_30d" : (record.expires_at <= (today() + 60) ? "expiring_60d" : "valid")))`,
+      // `daysFromNow(N)`, not `today() + N`: CEL has no `Timestamp + int` operator
+      // (see is_expiring_soon above), so the offset bands must use the builtin.
+      expression: F`record.expires_at == null ? "none" : (record.expires_at < today() ? "expired" : (record.expires_at <= daysFromNow(30) ? "expiring_30d" : (record.expires_at <= daysFromNow(60) ? "expiring_60d" : "valid")))`,
     }),
     notes: Field.markdown({ label: 'Notes' }),
   },
