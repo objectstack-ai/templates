@@ -96,7 +96,15 @@ export const Control = ObjectSchema.create({
     is_overdue_for_review: Field.formula({
       label: 'Overdue for Review',
       group: 'ownership',
-      expression: F`record.last_assessed_at == null || record.review_frequency_days == null || daysFromNow(0) > record.last_assessed_at + record.review_frequency_days * 86400000`,
+      // Overdue if never assessed, or the next-review date (last assessment +
+      // review_frequency_days) is already in the past. The formula engine is CEL:
+      // dates are Timestamps and there is NO `Timestamp + int` operator, so day
+      // arithmetic must go through the `addDays(date, n)` builtin (Timestamp
+      // comparison with `<` is supported). The old `last_assessed_at +
+      // review_frequency_days * 86400000` silently evaluated to null for every
+      // assessed control (no `+` on Timestamp), so only never-assessed controls
+      // ever flagged — a stale-but-assessed control (e.g. GDPR Art.32) was missed.
+      expression: F`record.last_assessed_at == null || record.review_frequency_days == null || addDays(record.last_assessed_at, record.review_frequency_days) < today()`,
     }),
     notes: Field.markdown({ label: 'Notes', group: 'meta' }),
 
