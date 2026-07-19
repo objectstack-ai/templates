@@ -69,13 +69,17 @@ export const PurchaseOrder = ObjectSchema.create({
       group: 'commercial',
       min: 0,
     }),
-    received_amount: Field.currency({
+    received_amount: Field.summary({
       label: 'Received Amount',
       group: 'commercial',
-      min: 0,
-      defaultValue: 0,
+      summaryOperations: {
+        object: 'procurement_receipt',
+        field: 'received_value',
+        function: 'sum',
+        relationshipField: 'purchase_order',
+      },
       description:
-        'Sum of accepted goods-receipt values. Stored header field — maintained at the top level (client/seed), not by a cross-object rollup hook (unsupported in the standalone runtime; see procurement/src/hooks/index.ts).',
+        'Sum of accepted goods-receipt values — a live roll-up the engine recomputes on every procurement_receipt insert/update/delete. Rejected receipts carry received_value 0, so a plain sum equals the accepted total. Previously a hand-maintained stored field because a nested-write rollup hook crashed the sandbox (framework#1867, now fixed).',
     }),
     payment_terms: Field.select({
       label: 'Payment Terms',
