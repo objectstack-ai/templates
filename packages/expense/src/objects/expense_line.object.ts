@@ -19,6 +19,8 @@ import { P, F } from '@objectstack/spec';
 export const ExpenseLine = ObjectSchema.create({
   name: 'expense_line',
   label: 'Expense Line',
+  // Owner-scoped, same as its parent report (lines are created by the submitter).
+  sharingModel: 'private',
   pluralLabel: 'Expense Lines',
   icon: 'list',
   description: 'A single itemized expense on a report.',
@@ -101,7 +103,14 @@ export const ExpenseLine = ObjectSchema.create({
   indexes: [{ fields: ['expense_report'] }, { fields: ['category'] }, { fields: ['expense_date'] }],
 
   nameField: 'description',
-  compactLayout: ['description', 'category', 'amount', 'reimbursable', 'expense_date', 'merchant'],
+  highlightFields: [
+    'description',
+    'category',
+    'amount',
+    'reimbursable',
+    'expense_date',
+    'merchant',
+  ],
 
   validations: [
     {

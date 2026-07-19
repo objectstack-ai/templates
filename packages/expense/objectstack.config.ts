@@ -12,7 +12,7 @@ import * as apps from './src/apps/index.js';
 import { ExpenseTranslations } from './src/translations/index.js';
 import { allFlows } from './src/flows/index.js';
 import { allHooks } from './src/hooks/index.js';
-import { RoleHierarchy } from './src/sharing/index.js';
+import { ExpensePositions } from './src/sharing/index.js';
 import { ExpenseSeedData } from './src/data/index.js';
 
 export default defineStack({
@@ -39,11 +39,7 @@ export default defineStack({
   translations: [ExpenseTranslations],
 
   sharingRules: [],
-  roles: RoleHierarchy.roles.map((r) => ({
-    name: r.name,
-    label: r.label,
-    parent: r.parentRole ?? undefined,
-  })),
+  positions: ExpensePositions,
 
   data: ExpenseSeedData,
 

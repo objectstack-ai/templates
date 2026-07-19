@@ -13,6 +13,8 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
 export const ExpenseCategory = ObjectSchema.create({
   name: 'expense_category',
   label: 'Expense Category',
+  // Shared spend taxonomy — every user reads it to code lines; admins curate.
+  sharingModel: 'public_read',
   pluralLabel: 'Expense Categories',
   icon: 'tag',
   description: 'A spend type (meals, travel, lodging, …) used to code and report expense lines.',
@@ -58,5 +60,5 @@ export const ExpenseCategory = ObjectSchema.create({
   indexes: [{ fields: ['name'] }, { fields: ['active'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'code', 'gl_account', 'per_txn_limit', 'active'],
+  highlightFields: ['name', 'code', 'gl_account', 'per_txn_limit', 'active'],
 });
