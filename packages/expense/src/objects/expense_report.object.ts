@@ -17,6 +17,8 @@ import { P, F } from '@objectstack/spec';
 export const ExpenseReport = ObjectSchema.create({
   name: 'expense_report',
   label: 'Expense Report',
+  // Owner-scoped: the submitter owns it; approvers/finance see it via sharing/roles.
+  sharingModel: 'private',
   pluralLabel: 'Expense Reports',
   icon: 'receipt',
   description:
@@ -139,7 +141,7 @@ export const ExpenseReport = ObjectSchema.create({
   ],
 
   nameField: 'title',
-  compactLayout: ['title', 'requester', 'total_amount', 'status', 'period_end'],
+  highlightFields: ['title', 'requester', 'total_amount', 'status', 'period_end'],
 
   validations: [
     {
