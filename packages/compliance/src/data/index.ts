@@ -9,10 +9,17 @@ import { Assessment } from '../objects/compliance_assessment.object';
 
 /**
  * Seed data — exercises full template surface:
- *   • 3 frameworks (SOC2, ISO27001, GDPR)
- *   • 6 controls across them, mixed criticality & status
+ *   • 4 frameworks (SOC2, ISO27001, GDPR, HIPAA)
+ *   • 8 controls across them, mixed criticality
  *   • 7 pieces of evidence, including one expiring soon + one expired
- *   • 5 assessments covering planned / in_progress / passed / failed / partial
+ *   • 7 assessments covering in_progress / passed / failed / partial
+ *
+ * `compliance_control.last_status` / `last_assessed_at` are a live roll-up of each
+ * control's most-recent completed assessment, written by `assessmentRollupHook` as
+ * the assessments below load — they are NOT hand-maintained per assessed control.
+ * The two never-assessed controls (A.8.16, 164.312(a)(1)) seed an explicit initial
+ * `last_status: 'not_tested'` (the hook never fires for them); their
+ * `last_assessed_at` stays null.
  */
 
 const frameworks = defineSeed(Framework, {
@@ -65,9 +72,7 @@ const controls = defineSeed(Control, {
       framework: 'SOC2',
       category: 'access',
       criticality: 'high',
-      last_status: 'passed',
       review_frequency_days: 90,
-      last_assessed_at: cel`daysAgo(20)`,
       description: 'The entity implements logical access controls to protect data.',
     },
     {
@@ -76,9 +81,7 @@ const controls = defineSeed(Control, {
       framework: 'SOC2',
       category: 'change',
       criticality: 'high',
-      last_status: 'failed',
       review_frequency_days: 90,
-      last_assessed_at: cel`daysAgo(5)`,
       description: 'Vulnerability scans run monthly; remediation in SLA.',
     },
     {
@@ -87,9 +90,7 @@ const controls = defineSeed(Control, {
       framework: 'SOC2',
       category: 'change',
       criticality: 'medium',
-      last_status: 'partial',
       review_frequency_days: 90,
-      last_assessed_at: cel`daysAgo(50)`,
       description: 'All production changes are peer-reviewed and approved.',
     },
     {
@@ -98,9 +99,7 @@ const controls = defineSeed(Control, {
       framework: 'ISO27001',
       category: 'risk',
       criticality: 'high',
-      last_status: 'passed',
       review_frequency_days: 180,
-      last_assessed_at: cel`daysAgo(100)`,
       description: 'Information security policies approved by management & published.',
     },
     {
@@ -109,6 +108,9 @@ const controls = defineSeed(Control, {
       framework: 'ISO27001',
       category: 'incident',
       criticality: 'medium',
+      // No assessment seeded for this control, so the roll-up hook never fires
+      // for it — seed the initial `not_tested` state explicitly (this is the
+      // default/never-assessed state, not a hand-maintained roll-up value).
       last_status: 'not_tested',
       review_frequency_days: 90,
       description: 'Networks, systems and apps monitored for anomalous behaviour.',
@@ -119,9 +121,7 @@ const controls = defineSeed(Control, {
       framework: 'GDPR',
       category: 'data',
       criticality: 'high',
-      last_status: 'passed',
       review_frequency_days: 180,
-      last_assessed_at: cel`daysAgo(200)`,
       description:
         'Appropriate technical & organisational measures to ensure security of personal data. Past review-frequency window.',
     },
@@ -131,9 +131,7 @@ const controls = defineSeed(Control, {
       framework: 'HIPAA',
       category: 'risk',
       criticality: 'high',
-      last_status: 'passed',
       review_frequency_days: 365,
-      last_assessed_at: cel`daysAgo(40)`,
       description:
         'Implement policies to prevent, detect, contain, and correct security violations (risk analysis + risk management).',
     },
@@ -143,6 +141,9 @@ const controls = defineSeed(Control, {
       framework: 'HIPAA',
       category: 'access',
       criticality: 'high',
+      // Never-assessed control (no assessment seeded) — seed its initial
+      // `not_tested` state explicitly; the roll-up hook only manages controls
+      // that have at least one completed assessment.
       last_status: 'not_tested',
       review_frequency_days: 180,
       description:
@@ -265,6 +266,28 @@ const assessments = defineSeed(Assessment, {
       cycle: '2026-Q1',
       status: 'in_progress',
       finding: 'Encryption-at-rest confirmed; key rotation policy under review.',
+    },
+    {
+      // Prior Art.32 review (passed) ~200 days ago — past the 180-day review
+      // window, so the control rolls up as passed-but-overdue. The 2026-Q1
+      // review above is still in_progress (no result yet), so this remains the
+      // latest *completed* outcome the roll-up hook copies onto the control.
+      title: '2025-H1 GDPR Art.32 review',
+      control: 'Art.32',
+      cycle: '2025-H1',
+      assessed_at: cel`daysAgo(200)`,
+      status: 'passed',
+      finding:
+        'TOMs verified: encryption at rest + in transit, DPAs on file with all sub-processors.',
+    },
+    {
+      title: '2026 HIPAA §164.308(a)(1) risk analysis',
+      control: '164.308(a)(1)',
+      cycle: '2026-Q1',
+      assessed_at: cel`daysAgo(40)`,
+      status: 'passed',
+      finding:
+        'Annual risk analysis completed; risk-management plan current, no high residual risks.',
     },
   ],
 });

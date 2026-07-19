@@ -29,12 +29,12 @@ you can plug in your own collectors via the API.
 |---|---|
 | 4-object schema with relationships | `framework` → `control` → (`evidence`, `assessment`) |
 | State machines on multiple objects | Evidence + Assessment lifecycles |
-| Cross-object rollup via hook | Assessment outcome → Control.last_status / last_assessed_at |
+| Non-aggregate cross-object rollup via nested-write hook | Latest completed assessment → Control.last_status / last_assessed_at, kept live by `assessmentRollupHook` (a `summary` field can't express "most recent", so it writes the parent via `ctx.api`) |
 | Time-triggered alert flows | Evidence expiring at T-30 / T-7 |
 | Auto-state-transition flows | Evidence auto-expire when expires_on passes |
 | Threshold-driven escalation | Failed high-criticality controls → notify owner + compliance team |
 | Internationalization | English + 简体中文 ship out of the box |
-| Realistic seed data | SOC2 + ISO27001 + GDPR with 6 controls, 7 evidence, 5 assessments |
+| Realistic seed data | SOC2 + ISO27001 + GDPR + HIPAA with 8 controls, 7 evidence, 7 assessments (last_status derived live from assessments) |
 
 ## Limits (LOC budget)
 
