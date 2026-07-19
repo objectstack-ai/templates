@@ -1,12 +1,13 @@
 // Copyright (c) 2026 ObjectStack contributors. Apache-2.0 license.
 
 import { evidenceHook } from '../objects/compliance_evidence.hook';
+import { assessmentRollupHook } from '../objects/compliance_assessment.hook';
 
-// NOTE: `compliance_control.last_status` / `last_assessed_at` are STORED fields,
-// not a hook-maintained rollup from assessments. A cross-object rollup needs a
-// nested engine write from a hook, which is unsupported in the standalone
-// runtime (the QuickJS hook sandbox crashes on nested writes; `ctx.services.data`
-// is undefined inside it). See packages/expense/CHARTER.md. Maintain them at the
-// top level (client/seed) or, in a fork, via a native summary field / external
-// worker.
-export const allHooks = [evidenceHook];
+// `compliance_control.last_status` / `last_assessed_at` are a LIVE roll-up of the
+// most recent completed assessment, maintained by `assessmentRollupHook` via a
+// nested `ctx.api` write to the parent control (see compliance_assessment.hook.ts).
+// This is a *non-aggregate* rollup ("latest", not a sum/count), so a native
+// `summary` field can't express it — a nested-write hook is the right tool. That
+// write used to crash the QuickJS hook sandbox (framework#1867); it is fixed now,
+// so these fields are no longer hand-maintained by seed/client.
+export const allHooks = [evidenceHook, assessmentRollupHook];
