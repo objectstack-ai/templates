@@ -13,6 +13,7 @@ import { P } from '@objectstack/spec';
  */
 export const Cta = ObjectSchema.create({
   name: 'content_cta',
+  sharingModel: 'private',
   label: 'CTA',
   pluralLabel: 'CTAs',
   icon: 'mouse-pointer-click',
@@ -66,7 +67,7 @@ export const Cta = ObjectSchema.create({
   indexes: [{ fields: ['piece'] }, { fields: ['goal'] }],
 
   nameField: 'label_text',
-  compactLayout: ['label_text', 'goal', 'piece', 'is_primary'],
+  highlightFields: ['label_text', 'goal', 'piece', 'is_primary'],
 
   validations: [
     {

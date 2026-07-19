@@ -16,6 +16,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const Ticket = ObjectSchema.create({
   name: 'helpdesk_ticket',
+  sharingModel: 'private',
   label: 'Ticket',
   pluralLabel: 'Tickets',
   icon: 'life-buoy',
@@ -246,7 +247,7 @@ export const Ticket = ObjectSchema.create({
   ],
 
   nameField: 'name',
-  compactLayout: ['ticket_number', 'name', 'status', 'priority', 'assignee', 'ai_sentiment'],
+  highlightFields: ['ticket_number', 'name', 'status', 'priority', 'assignee', 'ai_sentiment'],
 
   validations: [
     {

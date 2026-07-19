@@ -19,6 +19,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Publication = ObjectSchema.create({
   name: 'content_publication',
+  sharingModel: 'private',
   label: 'Publication',
   pluralLabel: 'Publications',
   icon: 'send',
@@ -112,5 +113,5 @@ export const Publication = ObjectSchema.create({
   // title here (ADR-0072), so both are dropped. Degraded to the local
   // `published_at` (the only identifying local scalar).
   nameField: 'published_at',
-  compactLayout: ['piece', 'channel', 'published_at', 'total_views', 'total_signups'],
+  highlightFields: ['piece', 'channel', 'published_at', 'total_views', 'total_signups'],
 });

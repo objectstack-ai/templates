@@ -8,6 +8,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const Assessment = ObjectSchema.create({
   name: 'compliance_assessment',
+  sharingModel: 'private',
   label: 'Assessment',
   pluralLabel: 'Assessments',
   icon: 'clipboard-check',
@@ -89,7 +90,7 @@ export const Assessment = ObjectSchema.create({
   ],
 
   nameField: 'title',
-  compactLayout: ['title', 'control', 'status', 'remediation_status', 'cycle', 'assessed_at'],
+  highlightFields: ['title', 'control', 'status', 'remediation_status', 'cycle', 'assessed_at'],
 
   validations: [
     {

@@ -13,6 +13,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Message = ObjectSchema.create({
   name: 'helpdesk_message',
+  sharingModel: 'private',
   label: 'Message',
   pluralLabel: 'Messages',
   icon: 'message-circle',
@@ -58,5 +59,5 @@ export const Message = ObjectSchema.create({
 
   indexes: [{ fields: ['ticket'] }, { fields: ['direction'] }],
   nameField: 'name',
-  compactLayout: ['name', 'ticket', 'direction', 'sent_at'],
+  highlightFields: ['name', 'ticket', 'direction', 'sent_at'],
 });

@@ -41,10 +41,9 @@ export default defineStack({
   translations: [ContractsTranslations],
 
   sharingRules: [],
-  roles: RoleHierarchy.roles.map((r) => ({
+  positions: RoleHierarchy.roles.map((r) => ({
     name: r.name,
     label: r.label,
-    parent: r.parentRole ?? undefined,
   })),
 
   data: ContractsSeedData,

@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Issue = ObjectSchema.create({
   name: 'pm_issue',
+  sharingModel: 'private',
   label: 'Issue',
   pluralLabel: 'Issues',
   icon: 'octagon-x',
@@ -124,5 +125,5 @@ export const Issue = ObjectSchema.create({
   ],
 
   nameField: 'name',
-  compactLayout: ['issue_number', 'name', 'project', 'type', 'status', 'severity', 'assigned_to'],
+  highlightFields: ['issue_number', 'name', 'project', 'type', 'status', 'severity', 'assigned_to'],
 });

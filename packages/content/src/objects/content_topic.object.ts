@@ -12,6 +12,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Topic = ObjectSchema.create({
   name: 'content_topic',
+  sharingModel: 'public_read',
   label: 'Topic',
   pluralLabel: 'Topics',
   icon: 'lightbulb',
@@ -126,5 +127,5 @@ export const Topic = ObjectSchema.create({
   ],
 
   nameField: 'title',
-  compactLayout: ['title', 'pillar', 'funnel_stage', 'priority', 'owner', 'visibility'],
+  highlightFields: ['title', 'pillar', 'funnel_stage', 'priority', 'owner', 'visibility'],
 });

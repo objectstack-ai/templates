@@ -11,6 +11,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Customer = ObjectSchema.create({
   name: 'helpdesk_customer',
+  sharingModel: 'private',
   label: 'Customer',
   pluralLabel: 'Customers',
   icon: 'user',
@@ -67,5 +68,5 @@ export const Customer = ObjectSchema.create({
   indexes: [{ fields: ['email'] }, { fields: ['tier'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'email', 'company', 'tier'],
+  highlightFields: ['name', 'email', 'company', 'tier'],
 });

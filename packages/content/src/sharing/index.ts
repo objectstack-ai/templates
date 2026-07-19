@@ -31,9 +31,11 @@ export const TopicTeamScopeRule: SharingRule = {
     'Topics marked visibility=team are readable+editable by every team member. Private topics remain owner-only.',
   object: 'content_topic',
   type: 'criteria',
-  // The role hierarchy puts `lead` at the top, so role_and_subordinates(lead)
-  // grants edit access to lead → contributor → viewer in one shot.
-  sharedWith: { type: 'role_and_subordinates', value: 'lead' },
+  // Positions are flat in @objectstack ≥12 (no subordinates — ADR-0090 D3), so
+  // the former role_and_subordinates(lead) grant becomes a share to the `lead`
+  // position. (The old lead → contributor → viewer inheritance is expressed via
+  // the positions/profiles rather than a role tree.)
+  sharedWith: { type: 'position', value: 'lead' },
   accessLevel: 'edit',
   condition: { dialect: 'cel', source: 'record.visibility == "team"' },
   active: true,

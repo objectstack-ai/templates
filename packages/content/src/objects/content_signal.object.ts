@@ -14,6 +14,7 @@ import { P } from '@objectstack/spec';
  */
 export const Signal = ObjectSchema.create({
   name: 'content_signal',
+  sharingModel: 'private',
   label: 'Signal',
   pluralLabel: 'Signals',
   icon: 'rss',
@@ -136,7 +137,7 @@ export const Signal = ObjectSchema.create({
   ],
 
   nameField: 'headline',
-  compactLayout: ['headline', 'source_kind', 'competitor', 'impact', 'status'],
+  highlightFields: ['headline', 'source_kind', 'competitor', 'impact', 'status'],
 
   validations: [
     {

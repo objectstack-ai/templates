@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Team = ObjectSchema.create({
   name: 'helpdesk_team',
+  sharingModel: 'public_read',
   label: 'Team',
   pluralLabel: 'Teams',
   icon: 'users',
@@ -50,5 +51,5 @@ export const Team = ObjectSchema.create({
   enable: { searchable: true, apiEnabled: true, trash: true, mru: true },
   indexes: [{ fields: ['code'] }, { fields: ['specialty'] }],
   nameField: 'name',
-  compactLayout: ['name', 'code', 'specialty', 'is_active'],
+  highlightFields: ['name', 'code', 'specialty', 'is_active'],
 });

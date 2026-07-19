@@ -14,6 +14,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Project = ObjectSchema.create({
   name: 'pm_project',
+  sharingModel: 'private',
   label: 'Project',
   pluralLabel: 'Projects',
   icon: 'folder-kanban',
@@ -226,7 +227,7 @@ export const Project = ObjectSchema.create({
   ],
 
   nameField: 'name',
-  compactLayout: [
+  highlightFields: [
     'code',
     'name',
     'status',

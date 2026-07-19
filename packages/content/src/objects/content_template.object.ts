@@ -14,6 +14,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const ContentTemplate = ObjectSchema.create({
   name: 'content_template',
+  sharingModel: 'public_read',
   label: 'Template',
   pluralLabel: 'Templates',
   icon: 'layout-template',
@@ -67,5 +68,5 @@ export const ContentTemplate = ObjectSchema.create({
   indexes: [{ fields: ['name'], unique: true }, { fields: ['kind'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'kind', 'target_channel', 'target_word_count'],
+  highlightFields: ['name', 'kind', 'target_channel', 'target_word_count'],
 });

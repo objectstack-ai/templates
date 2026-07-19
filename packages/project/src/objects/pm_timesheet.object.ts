@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Timesheet = ObjectSchema.create({
   name: 'pm_timesheet',
+  sharingModel: 'private',
   label: 'Timesheet Entry',
   pluralLabel: 'Timesheet Entries',
   icon: 'clock',
@@ -68,5 +69,5 @@ export const Timesheet = ObjectSchema.create({
   // `person` lookup — unreferenceable in a stored field (ADR-0072) — so it is
   // dropped. Degraded to the local `work_date`.
   nameField: 'work_date',
-  compactLayout: ['person', 'project', 'work_date', 'hours'],
+  highlightFields: ['person', 'project', 'work_date', 'hours'],
 });

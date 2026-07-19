@@ -14,6 +14,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const SLAPolicy = ObjectSchema.create({
   name: 'helpdesk_sla_policy',
+  sharingModel: 'public_read',
   label: 'SLA Policy',
   pluralLabel: 'SLA Policies',
   icon: 'clock',
@@ -76,5 +77,5 @@ export const SLAPolicy = ObjectSchema.create({
   enable: { searchable: true, apiEnabled: true, trash: true, mru: true },
   indexes: [{ fields: ['applies_to_tier'] }, { fields: ['is_default'] }],
   nameField: 'name',
-  compactLayout: ['name', 'applies_to_tier', 'is_default'],
+  highlightFields: ['name', 'applies_to_tier', 'is_default'],
 });

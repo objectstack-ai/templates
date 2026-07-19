@@ -13,7 +13,7 @@ export const ResourceViews = defineView({
     label: 'All Allocations',
     data: { provider: 'object', object: 'pm_resource' },
     columns: [
-      { field: 'role', width: 280, link: true, pinned: 'left', sortable: true },
+      { field: 'job_function', width: 280, link: true, pinned: 'left', sortable: true },
       { field: 'person', width: 160, sortable: true },
       { field: 'project', width: 200, sortable: true },
       { field: 'allocated_hours_per_week', width: 150, align: 'right', sortable: true },
@@ -46,7 +46,7 @@ export const ResourceViews = defineView({
       data: { provider: 'object', object: 'pm_resource' },
       columns: [
         { field: 'person', width: 180, pinned: 'left' },
-        { field: 'role', width: 260 },
+        { field: 'job_function', width: 260 },
         { field: 'project', width: 200 },
         { field: 'allocated_hours_per_week', width: 150, align: 'right' },
       ],

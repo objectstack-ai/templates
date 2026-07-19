@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Framework = ObjectSchema.create({
   name: 'compliance_framework',
+  sharingModel: 'public_read',
   label: 'Framework',
   pluralLabel: 'Frameworks',
   icon: 'shield-check',
@@ -71,5 +72,5 @@ export const Framework = ObjectSchema.create({
   indexes: [{ fields: ['short_name'] }, { fields: ['family'] }, { fields: ['status'] }],
 
   nameField: 'short_name',
-  compactLayout: ['short_name', 'family', 'version', 'status', 'next_audit_date'],
+  highlightFields: ['short_name', 'family', 'version', 'status', 'next_audit_date'],
 });

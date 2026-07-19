@@ -11,6 +11,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const KBArticle = ObjectSchema.create({
   name: 'helpdesk_kb_article',
+  sharingModel: 'public_read',
   label: 'KB Article',
   pluralLabel: 'KB Articles',
   icon: 'book-open',
@@ -75,7 +76,7 @@ export const KBArticle = ObjectSchema.create({
 
   indexes: [{ fields: ['status'] }, { fields: ['category'] }, { fields: ['locale'] }],
   nameField: 'name',
-  compactLayout: ['name', 'category', 'status', 'locale'],
+  highlightFields: ['name', 'category', 'status', 'locale'],
   validations: [
     {
       type: 'state_machine',

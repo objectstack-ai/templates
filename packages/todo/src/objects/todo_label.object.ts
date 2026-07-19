@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Label = ObjectSchema.create({
   name: 'todo_label',
+  sharingModel: 'private',
   label: 'Label',
   pluralLabel: 'Labels',
   icon: 'tag',
