@@ -13,8 +13,9 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  * them server-side from the child `content_metric` rows, and they cascade one
  * level up to the parent `content_piece`'s own `total_*` summaries. (A piece
  * with no publications yet has no child to trigger a recompute, so its rollups
- * read `null` until its first publication exists.) A hook can't maintain these —
- * a nested cross-object write is unsupported in the standalone runtime; see
+ * read `null` until its first publication exists.) These are declared as
+ * `summary` fields rather than hook-maintained because a pure aggregate needs a
+ * delete-safe recompute — which the engine does natively off the child FK; see
  * content/src/hooks/index.ts.
  */
 export const Publication = ObjectSchema.create({
@@ -67,9 +68,10 @@ export const Publication = ObjectSchema.create({
     // recomputes these server-side whenever a child `content_metric` row is
     // inserted/updated/deleted (FK `content_metric.publication` auto-detected).
     // This replaces the old `publication_rollup` flow, whose script-node
-    // "aggregations" never ran (the automation engine has no aggregate node) —
-    // and a hook can't do it either (nested cross-object write is unsupported in
-    // the standalone QuickJS runtime; see content/src/hooks/index.ts).
+    // "aggregations" never ran (the automation engine has no aggregate node). A
+    // hook could do it now (nested cross-object writes are safe since
+    // framework#1867), but a `summary` field is the delete-safe, declarative fit
+    // for a pure aggregate; see content/src/hooks/index.ts.
     total_views: Field.summary({
       label: 'Views',
       group: 'rollups',
