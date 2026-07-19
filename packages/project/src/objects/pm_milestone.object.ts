@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Milestone = ObjectSchema.create({
   name: 'pm_milestone',
+  sharingModel: 'private',
   label: 'Milestone',
   pluralLabel: 'Milestones',
   icon: 'flag',
@@ -88,5 +89,5 @@ export const Milestone = ObjectSchema.create({
   indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['planned_date'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'project', 'status', 'is_critical_path', 'planned_date', 'actual_date'],
+  highlightFields: ['name', 'project', 'status', 'is_critical_path', 'planned_date', 'actual_date'],
 });

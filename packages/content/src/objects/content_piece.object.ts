@@ -18,6 +18,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const Piece = ObjectSchema.create({
   name: 'content_piece',
+  sharingModel: 'private',
   label: 'Content Piece',
   pluralLabel: 'Content Pieces',
   icon: 'file-text',
@@ -224,7 +225,7 @@ export const Piece = ObjectSchema.create({
   ],
 
   nameField: 'title',
-  compactLayout: ['title', 'status', 'format', 'assignee', 'publish_at'],
+  highlightFields: ['title', 'status', 'format', 'assignee', 'publish_at'],
 
   validations: [
     {

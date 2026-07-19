@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Resource = ObjectSchema.create({
   name: 'pm_resource',
+  sharingModel: 'public_read',
   label: 'Resource',
   pluralLabel: 'Resources',
   icon: 'users',
@@ -26,8 +27,8 @@ export const Resource = ObjectSchema.create({
       required: false,
       group: 'core',
     }),
-    role: Field.text({
-      label: 'Role',
+    job_function: Field.text({
+      label: 'Function',
       required: false,
       maxLength: 100,
       group: 'core',
@@ -65,7 +66,7 @@ export const Resource = ObjectSchema.create({
   // `titleFormat` was `{{record.person.name}} → {{record.project.name}}` —
   // both DOT-WALKS across the `person`/`project` lookups, unreferenceable in a
   // stored field (ADR-0072), so both are dropped. Degraded to the local
-  // `role` (the most identifying local scalar on an allocation).
-  nameField: 'role',
-  compactLayout: ['person', 'project', 'role', 'allocated_hours_per_week'],
+  // `job_function` (the most identifying local scalar on an allocation).
+  nameField: 'job_function',
+  highlightFields: ['person', 'project', 'job_function', 'allocated_hours_per_week'],
 });

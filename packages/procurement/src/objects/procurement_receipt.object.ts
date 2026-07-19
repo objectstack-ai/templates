@@ -13,6 +13,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const GoodsReceipt = ObjectSchema.create({
   name: 'procurement_receipt',
+  sharingModel: 'private',
   label: 'Goods Receipt',
   pluralLabel: 'Goods Receipts',
   icon: 'package',
@@ -68,7 +69,7 @@ export const GoodsReceipt = ObjectSchema.create({
   indexes: [{ fields: ['purchase_order'] }, { fields: ['received_at'] }, { fields: ['quality'] }],
 
   nameField: 'display_name',
-  compactLayout: ['receipt_number', 'purchase_order', 'quality', 'received_value', 'received_at'],
+  highlightFields: ['receipt_number', 'purchase_order', 'quality', 'received_value', 'received_at'],
 
   validations: [
     {

@@ -9,6 +9,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Vendor = ObjectSchema.create({
   name: 'procurement_vendor',
+  sharingModel: 'public_read',
   label: 'Vendor',
   pluralLabel: 'Vendors',
   icon: 'building',
@@ -89,5 +90,5 @@ export const Vendor = ObjectSchema.create({
   indexes: [{ fields: ['name'] }, { fields: ['status'] }, { fields: ['category'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'vendor_code', 'category', 'status', 'risk_tier', 'is_preferred'],
+  highlightFields: ['name', 'vendor_code', 'category', 'status', 'risk_tier', 'is_preferred'],
 });

@@ -14,6 +14,7 @@ import { F, P } from '@objectstack/spec';
  */
 export const Employee = ObjectSchema.create({
   name: 'hr_employee',
+  sharingModel: 'private',
   label: 'Employee',
   pluralLabel: 'Employees',
   icon: 'user',
@@ -159,7 +160,7 @@ export const Employee = ObjectSchema.create({
   ],
 
   nameField: 'display_name',
-  compactLayout: ['full_name', 'job_title', 'department', 'manager', 'status'],
+  highlightFields: ['full_name', 'job_title', 'department', 'manager', 'status'],
 
   validations: [
     {

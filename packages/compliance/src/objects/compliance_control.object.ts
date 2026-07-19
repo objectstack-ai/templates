@@ -10,6 +10,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const Control = ObjectSchema.create({
   name: 'compliance_control',
+  sharingModel: 'private',
   label: 'Control',
   pluralLabel: 'Controls',
   icon: 'shield',
@@ -124,7 +125,7 @@ export const Control = ObjectSchema.create({
   ],
 
   nameField: 'display_name',
-  compactLayout: ['code', 'title', 'framework', 'criticality', 'last_status'],
+  highlightFields: ['code', 'title', 'framework', 'criticality', 'last_status'],
 
   validations: [
     {

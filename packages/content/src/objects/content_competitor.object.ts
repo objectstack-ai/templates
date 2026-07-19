@@ -10,6 +10,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Competitor = ObjectSchema.create({
   name: 'content_competitor',
+  sharingModel: 'public_read',
   label: 'Competitor',
   pluralLabel: 'Competitors',
   icon: 'eye',
@@ -60,5 +61,5 @@ export const Competitor = ObjectSchema.create({
   indexes: [{ fields: ['name'], unique: true }, { fields: ['category'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'category', 'website'],
+  highlightFields: ['name', 'category', 'website'],
 });

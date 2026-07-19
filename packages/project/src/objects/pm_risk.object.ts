@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Risk = ObjectSchema.create({
   name: 'pm_risk',
+  sharingModel: 'private',
   label: 'Risk',
   pluralLabel: 'Risks',
   icon: 'alert-triangle',
@@ -182,7 +183,7 @@ export const Risk = ObjectSchema.create({
   indexes: [{ fields: ['project'] }, { fields: ['status'] }, { fields: ['category'] }],
 
   nameField: 'name',
-  compactLayout: ['risk_id', 'name', 'project', 'status', 'category', 'priority'],
+  highlightFields: ['risk_id', 'name', 'project', 'status', 'category', 'priority'],
   validations: [
     {
       type: 'state_machine',

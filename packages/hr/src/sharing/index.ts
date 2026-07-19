@@ -24,9 +24,9 @@ export const RoleHierarchy = {
  * company would leak medical/personal context.
  *
  * Owner-only access is the default per-row behaviour. We grant HR Admins
- * (the `hr_admin` role explicitly — NOT `role_and_subordinates`, because in
- * this template `hr_admin` is the root of the hierarchy with `hr_employee`
- * as a child, so subordinates would mean "every employee").
+ * (the `hr_admin` position explicitly — positions are flat in @objectstack ≥12,
+ * ADR-0090 D3, so there is no "and subordinates" that would leak every
+ * employee's requests).
  */
 export const TimeOffPrivacyRule: SharingRule = {
   name: 'time_off_hr_admin_visibility',
@@ -35,7 +35,7 @@ export const TimeOffPrivacyRule: SharingRule = {
     'Time-off requests are owner-private by default; HR Admins also get edit access so they can audit and intervene.',
   object: 'hr_time_off_request',
   type: 'criteria',
-  sharedWith: { type: 'role', value: 'hr_admin' },
+  sharedWith: { type: 'position', value: 'hr_admin' },
   accessLevel: 'edit',
   condition: { dialect: 'cel', source: 'true' },
   active: true,

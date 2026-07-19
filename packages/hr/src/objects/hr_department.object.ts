@@ -8,6 +8,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Department = ObjectSchema.create({
   name: 'hr_department',
+  sharingModel: 'public_read',
   label: 'Department',
   pluralLabel: 'Departments',
   icon: 'building',
@@ -48,5 +49,5 @@ export const Department = ObjectSchema.create({
   indexes: [{ fields: ['name'], unique: true }, { fields: ['parent'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'code', 'parent', 'head'],
+  highlightFields: ['name', 'code', 'parent', 'head'],
 });

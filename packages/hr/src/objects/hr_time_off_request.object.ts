@@ -10,6 +10,7 @@ import { F, P } from '@objectstack/spec';
  */
 export const TimeOffRequest = ObjectSchema.create({
   name: 'hr_time_off_request',
+  sharingModel: 'private',
   label: 'Time-Off Request',
   pluralLabel: 'Time-Off Requests',
   icon: 'calendar-off',
@@ -107,7 +108,7 @@ export const TimeOffRequest = ObjectSchema.create({
   indexes: [{ fields: ['employee'] }, { fields: ['status'] }, { fields: ['start_date'] }],
 
   nameField: 'display_name',
-  compactLayout: ['employee', 'leave_type', 'start_date', 'end_date', 'status'],
+  highlightFields: ['employee', 'leave_type', 'start_date', 'end_date', 'status'],
 
   validations: [
     {

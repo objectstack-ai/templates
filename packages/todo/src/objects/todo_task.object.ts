@@ -13,6 +13,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const Task = ObjectSchema.create({
   name: 'todo_task',
+  sharingModel: 'private',
   label: 'Task',
   pluralLabel: 'Tasks',
   icon: 'check-square',
@@ -105,7 +106,7 @@ export const Task = ObjectSchema.create({
   indexes: [{ fields: ['assignee'] }, { fields: ['status'] }, { fields: ['due_date'] }],
 
   nameField: 'subject',
-  compactLayout: ['subject', 'status', 'priority', 'assignee', 'due_date'],
+  highlightFields: ['subject', 'status', 'priority', 'assignee', 'due_date'],
 
   validations: [
     {

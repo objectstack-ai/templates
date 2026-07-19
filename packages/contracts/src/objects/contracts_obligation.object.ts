@@ -15,6 +15,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const Obligation = ObjectSchema.create({
   name: 'contracts_obligation',
+  sharingModel: 'private',
   label: 'Obligation',
   pluralLabel: 'Obligations',
   icon: 'check-circle',
@@ -119,7 +120,7 @@ export const Obligation = ObjectSchema.create({
   ],
 
   nameField: 'summary',
-  compactLayout: ['summary', 'contract', 'kind', 'status', 'due_date', 'amount'],
+  highlightFields: ['summary', 'contract', 'kind', 'status', 'due_date', 'amount'],
 
   validations: [
     {

@@ -9,30 +9,30 @@ import { Resource } from '../objects/pm_resource.object.js';
  *
  * NOTE: the `person` lookup (→ user) is intentionally left unset — seed data
  * cannot reference real platform users that only exist after first signup.
- * The `role` text field carries the human-readable allocation label instead.
+ * The `job_function` text field carries the human-readable allocation label instead.
  * `project` references the parent project by its `name` externalId.
  */
 export const resources = defineSeed(Resource, {
   mode: 'upsert',
-  externalId: 'role',
+  externalId: 'job_function',
   records: [
     // Mobile App Redesign
     {
-      role: 'Project Manager — Mobile App Redesign',
+      job_function: 'Project Manager — Mobile App Redesign',
       project: 'Mobile App Redesign',
       allocated_hours_per_week: 20,
       start_date: cel`daysAgo(45)`,
       end_date: cel`daysFromNow(75)`,
     },
     {
-      role: 'iOS Developer — Mobile App Redesign',
+      job_function: 'iOS Developer — Mobile App Redesign',
       project: 'Mobile App Redesign',
       allocated_hours_per_week: 40,
       start_date: cel`daysAgo(30)`,
       end_date: cel`daysFromNow(75)`,
     },
     {
-      role: 'UI Designer — Mobile App Redesign',
+      job_function: 'UI Designer — Mobile App Redesign',
       project: 'Mobile App Redesign',
       allocated_hours_per_week: 32,
       start_date: cel`daysAgo(45)`,
@@ -40,28 +40,28 @@ export const resources = defineSeed(Resource, {
     },
     // ERP System Migration
     {
-      role: 'Project Manager — ERP System Migration',
+      job_function: 'Project Manager — ERP System Migration',
       project: 'ERP System Migration',
       allocated_hours_per_week: 40,
       start_date: cel`daysAgo(90)`,
       end_date: cel`daysFromNow(30)`,
     },
     {
-      role: 'SAP Consultant — ERP System Migration',
+      job_function: 'SAP Consultant — ERP System Migration',
       project: 'ERP System Migration',
       allocated_hours_per_week: 40,
       start_date: cel`daysAgo(75)`,
       end_date: cel`daysFromNow(45)`,
     },
     {
-      role: 'Data Analyst — ERP System Migration',
+      job_function: 'Data Analyst — ERP System Migration',
       project: 'ERP System Migration',
       allocated_hours_per_week: 40,
       start_date: cel`daysAgo(60)`,
       end_date: cel`daysFromNow(30)`,
     },
     {
-      role: 'QA Engineer — ERP System Migration',
+      job_function: 'QA Engineer — ERP System Migration',
       project: 'ERP System Migration',
       allocated_hours_per_week: 32,
       start_date: cel`daysAgo(30)`,
@@ -69,21 +69,21 @@ export const resources = defineSeed(Resource, {
     },
     // AI Chatbot MVP
     {
-      role: 'Project Manager — AI Chatbot MVP',
+      job_function: 'Project Manager — AI Chatbot MVP',
       project: 'AI Chatbot MVP',
       allocated_hours_per_week: 16,
       start_date: cel`daysFromNow(7)`,
       end_date: cel`daysFromNow(97)`,
     },
     {
-      role: 'ML Engineer — AI Chatbot MVP',
+      job_function: 'ML Engineer — AI Chatbot MVP',
       project: 'AI Chatbot MVP',
       allocated_hours_per_week: 40,
       start_date: cel`daysFromNow(7)`,
       end_date: cel`daysFromNow(97)`,
     },
     {
-      role: 'Backend Developer — AI Chatbot MVP',
+      job_function: 'Backend Developer — AI Chatbot MVP',
       project: 'AI Chatbot MVP',
       allocated_hours_per_week: 32,
       start_date: cel`daysFromNow(14)`,

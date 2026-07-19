@@ -18,6 +18,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const Contract = ObjectSchema.create({
   name: 'contracts_contract',
+  sharingModel: 'private',
   label: 'Contract',
   pluralLabel: 'Contracts',
   icon: 'file-text',
@@ -262,7 +263,7 @@ export const Contract = ObjectSchema.create({
   ],
 
   nameField: 'title',
-  compactLayout: ['title', 'party', 'contract_type', 'status', 'total_value', 'end_date'],
+  highlightFields: ['title', 'party', 'contract_type', 'status', 'total_value', 'end_date'],
 
   validations: [
     {

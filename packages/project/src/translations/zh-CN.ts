@@ -182,7 +182,7 @@ export const zhCN: TranslationData = {
       fields: {
         project: { label: '所属项目' },
         person: { label: '成员' },
-        role: { label: '角色' },
+        job_function: { label: '职能' },
         allocated_hours_per_week: { label: '每周分配工时' },
         start_date: { label: '分配开始' },
         end_date: { label: '分配结束' },

@@ -211,7 +211,7 @@ export const en: TranslationData = {
       fields: {
         project: { label: 'Project' },
         person: { label: 'Person' },
-        role: { label: 'Role' },
+        job_function: { label: 'Function' },
         allocated_hours_per_week: { label: 'Allocated Hours/Week' },
         start_date: { label: 'Allocation Start' },
         end_date: { label: 'Allocation End' },

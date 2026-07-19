@@ -12,6 +12,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Channel = ObjectSchema.create({
   name: 'content_channel',
+  sharingModel: 'public_read',
   label: 'Channel',
   pluralLabel: 'Channels',
   icon: 'megaphone',
@@ -74,5 +75,5 @@ export const Channel = ObjectSchema.create({
   indexes: [{ fields: ['name'], unique: true }, { fields: ['kind'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'kind', 'default_cta_goal', 'active'],
+  highlightFields: ['name', 'kind', 'default_cta_goal', 'active'],
 });

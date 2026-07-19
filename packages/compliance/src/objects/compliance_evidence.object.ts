@@ -9,6 +9,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const Evidence = ObjectSchema.create({
   name: 'compliance_evidence',
+  sharingModel: 'private',
   label: 'Evidence',
   pluralLabel: 'Evidence',
   icon: 'paperclip',
@@ -107,7 +108,7 @@ export const Evidence = ObjectSchema.create({
   ],
 
   nameField: 'title',
-  compactLayout: ['title', 'control', 'evidence_type', 'status', 'expires_on'],
+  highlightFields: ['title', 'control', 'evidence_type', 'status', 'expires_on'],
 
   validations: [
     {

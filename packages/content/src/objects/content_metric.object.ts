@@ -14,6 +14,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Metric = ObjectSchema.create({
   name: 'content_metric',
+  sharingModel: 'private',
   label: 'Metric Snapshot',
   pluralLabel: 'Metric Snapshots',
   icon: 'bar-chart-2',
@@ -67,5 +68,5 @@ export const Metric = ObjectSchema.create({
   // related-record reference the server can't resolve into a title here
   // (ADR-0072), so it is dropped. Degraded to the local `period_start`.
   nameField: 'period_start',
-  compactLayout: ['publication', 'period_start', 'period_end', 'views', 'signups', 'revenue'],
+  highlightFields: ['publication', 'period_start', 'period_end', 'views', 'signups', 'revenue'],
 });

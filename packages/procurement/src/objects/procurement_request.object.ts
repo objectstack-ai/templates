@@ -13,6 +13,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const PurchaseRequest = ObjectSchema.create({
   name: 'procurement_request',
+  sharingModel: 'private',
   label: 'Purchase Request',
   pluralLabel: 'Purchase Requests',
   icon: 'shopping-cart',
@@ -120,7 +121,7 @@ export const PurchaseRequest = ObjectSchema.create({
   ],
 
   nameField: 'title',
-  compactLayout: ['title', 'vendor', 'estimated_amount', 'status', 'needed_by'],
+  highlightFields: ['title', 'vendor', 'estimated_amount', 'status', 'needed_by'],
 
   validations: [
     {

@@ -13,6 +13,7 @@ import { ObjectSchema, Field } from '@objectstack/spec/data';
  */
 export const Party = ObjectSchema.create({
   name: 'contracts_party',
+  sharingModel: 'public_read',
   label: 'Party',
   pluralLabel: 'Parties',
   icon: 'building',
@@ -88,6 +89,6 @@ export const Party = ObjectSchema.create({
 
   indexes: [{ fields: ['legal_name'], unique: true }, { fields: ['party_type'] }],
 
-  compactLayout: ['legal_name', 'party_type', 'country', 'primary_contact_email'],
+  highlightFields: ['legal_name', 'party_type', 'country', 'primary_contact_email'],
   nameField: 'legal_name',
 });

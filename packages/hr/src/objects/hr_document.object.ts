@@ -13,6 +13,7 @@ import { F } from '@objectstack/spec';
  */
 export const EmployeeDocument = ObjectSchema.create({
   name: 'hr_document',
+  sharingModel: 'private',
   label: 'Employee Document',
   pluralLabel: 'Employee Documents',
   icon: 'file-text',
@@ -71,5 +72,5 @@ export const EmployeeDocument = ObjectSchema.create({
   indexes: [{ fields: ['employee'] }, { fields: ['doc_type'] }, { fields: ['expires_at'] }],
 
   nameField: 'name',
-  compactLayout: ['name', 'employee', 'doc_type', 'expires_at', 'expiry_status'],
+  highlightFields: ['name', 'employee', 'doc_type', 'expires_at', 'expiry_status'],
 });

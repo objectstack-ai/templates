@@ -13,6 +13,7 @@ import { P, F } from '@objectstack/spec';
  */
 export const PurchaseOrder = ObjectSchema.create({
   name: 'procurement_order',
+  sharingModel: 'private',
   label: 'Purchase Order',
   pluralLabel: 'Purchase Orders',
   icon: 'file-check',
@@ -148,7 +149,7 @@ export const PurchaseOrder = ObjectSchema.create({
   ],
 
   nameField: 'po_number',
-  compactLayout: [
+  highlightFields: [
     'po_number',
     'vendor',
     'total_amount',
