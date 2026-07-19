@@ -181,8 +181,11 @@ export const Project = ObjectSchema.create({
       required: false,
       group: 'budget',
       description:
-        'Cost to date. Maintained by seed/client or an out-of-sandbox worker — NOT a live ' +
-        'hook rollup (a nested write from a timesheet hook crashes the QuickJS sandbox).',
+        'Cost to date — an externally-computed actual (hours × a person/role rate). ' +
+        'pm_timesheet records hours only, so there is no child cost column to sum: this is ' +
+        'not a summary/hook roll-up but a value set by seed/client or a finance worker. ' +
+        '(Nested hook writes are safe now — framework#1867 — the blocker is the missing rate, ' +
+        'not the sandbox.)',
     }),
 
     // Team
@@ -206,8 +209,10 @@ export const Project = ObjectSchema.create({
       min: 0,
       max: 100,
       description:
-        'Share of completed milestones. Maintained by seed/client (not a live hook ' +
-        'rollup — see actual_cost note).',
+        'Delivery progress (0–100). A curated metric, not a naive completed/total milestone ' +
+        'count — the seeded per-project values differ where a count would flatten them — so it ' +
+        'is kept by seed/client. It could be made a live milestone roll-up via an afterInsert/' +
+        'afterUpdate hook now that framework#1867 is fixed, if count-based progress is acceptable.',
     }),
   },
 
