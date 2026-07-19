@@ -83,13 +83,17 @@ export const ExpenseReport = ObjectSchema.create({
       ],
       description: 'Single currency per report. Multi-currency FX is a fork point.',
     }),
-    total_amount: Field.currency({
+    total_amount: Field.summary({
       label: 'Total Amount',
       group: 'financial',
-      min: 0,
-      defaultValue: 0,
+      summaryOperations: {
+        object: 'expense_line',
+        field: 'amount',
+        function: 'sum',
+        relationshipField: 'expense_report',
+      },
       description:
-        'Sum of line amounts. Stored header field maintained client-side/seed (not a line rollup hook — that crashes the sandbox; see object docstring).',
+        'Sum of the report’s line amounts — a live roll-up the engine recomputes whenever a line is inserted/updated/deleted. Previously a hand-maintained stored field because a nested-write rollup hook crashed the sandbox (framework#1867, now fixed).',
     }),
     approval_required: Field.formula({
       label: 'Approval Required',
@@ -162,7 +166,11 @@ export const ExpenseReport = ObjectSchema.create({
       type: 'script',
       severity: 'error',
       message: 'Submitted reports must have at least one expense line (total > 0).',
-      condition: P`record.status == "submitted" && (record.total_amount == null || record.total_amount <= 0)`,
+      // total_amount is a live summary now (0 until lines roll up), so this fires
+      // only on the draft→submitted TRANSITION — when the lines already exist —
+      // not on every write. The seed inserts reports in their final state
+      // directly (previous == null), so it is not gated by the rollup timing.
+      condition: P`previous != null && previous.status != "submitted" && record.status == "submitted" && (record.total_amount == null || record.total_amount <= 0)`,
     },
     {
       name: 'submitted_requires_purpose',

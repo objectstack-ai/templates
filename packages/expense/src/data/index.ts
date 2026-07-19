@@ -10,11 +10,11 @@ import { ExpenseLine } from '../objects/expense_line.object';
  * Seed data — covers the full template surface:
  *   • 8 categories with soft per-transaction limits (incl. Mileage, Telecom)
  *   • 5 reports spanning every lifecycle state + the approval threshold
- *   • 13 lines whose amounts match each report's total_amount
+ *   • 13 lines whose amounts roll up into each report's total_amount
  *
- * Report totals are set explicitly because `total_amount` is a stored header
- * field maintained at the top level — there is no line rollup hook (a nested
- * parent write from a line hook crashes the sandbox; see CHARTER.md).
+ * Report totals are NOT seeded: `total_amount` is a live `summary` roll-up that
+ * the engine computes from the seeded lines (sum of `expense_line.amount`) as
+ * they load. See CHARTER.md ("Rollup vs. lifecycle hooks").
  */
 
 const categories = defineSeed(ExpenseCategory, {
@@ -75,7 +75,6 @@ const reports = defineSeed(ExpenseReport, {
       period_end: cel`daysAgo(33)`,
       cost_center: 'SALES',
       currency: 'usd',
-      total_amount: 2223,
       submitted_at: cel`daysAgo(32)`,
       approved_at: cel`daysAgo(30)`,
       reimbursed_at: cel`daysAgo(25)`,
@@ -91,7 +90,6 @@ const reports = defineSeed(ExpenseReport, {
       period_end: cel`daysAgo(6)`,
       cost_center: 'SALES',
       currency: 'usd',
-      total_amount: 247,
       submitted_at: cel`daysAgo(3)`,
     },
     {
@@ -103,7 +101,6 @@ const reports = defineSeed(ExpenseReport, {
       period_end: cel`daysAgo(14)`,
       cost_center: 'ENG',
       currency: 'usd',
-      total_amount: 550,
       submitted_at: cel`daysAgo(10)`,
       approved_at: cel`daysAgo(7)`,
       payment_method: 'payroll',
@@ -117,7 +114,6 @@ const reports = defineSeed(ExpenseReport, {
       period_end: cel`daysFromNow(13)`,
       cost_center: 'MKT',
       currency: 'usd',
-      total_amount: 850,
     },
     {
       title: 'Misc taxi receipts',
@@ -128,7 +124,6 @@ const reports = defineSeed(ExpenseReport, {
       period_end: cel`daysAgo(12)`,
       cost_center: 'OPS',
       currency: 'usd',
-      total_amount: 69,
       submitted_at: cel`daysAgo(9)`,
       notes: 'Rejected — split personal and business rides, then resubmit.',
     },

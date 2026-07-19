@@ -31,7 +31,8 @@ const reportHook: Hook = {
 
     if (event === 'beforeInsert') {
       if (!input.status) input.status = 'draft';
-      if (input.total_amount == null) input.total_amount = 0;
+      // total_amount is a live summary roll-up now — the engine computes it from
+      // the report's lines; do not seed a header default here.
       if (!input.report_number) {
         const ts = new Date();
         const date = `${ts.getUTCFullYear()}${String(ts.getUTCMonth() + 1).padStart(2, '0')}${String(
