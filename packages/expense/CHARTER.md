@@ -36,37 +36,42 @@ fork points.
 | Internationalization | English + 简体中文 ship out of the box |
 | Realistic seed data | 6 categories, 5 reports across every state, 13 lines |
 
-## Rollup vs. lifecycle hooks (an important runtime constraint)
+## Rollup: `total_amount` is a live summary
 
-`expense_report.total_amount` is the sum of its lines. The obvious way to keep
-it current is a child hook that, on every line change, recomputes the sum and
-writes it back to the parent. **This template deliberately does *not* do that**,
-and the reason is worth understanding before you fork:
+`expense_report.total_amount` is the sum of its lines, kept current
+automatically by a native **`summary` field** — the engine recomputes it
+whenever an `expense_line` is inserted, updated, or deleted:
 
-- Hook bodies run inside a single shared **QuickJS (asyncify) sandbox** that
-  allows only **one** suspended async call at a time. A hook that performs a
-  *nested* engine write — `ctx.api.object('expense_report').update(...)` from
-  an `expense_line` hook — re-enters that sandbox while the line hook is still
-  suspended, corrupting asyncify state and **crashing the process**
-  (`memory access out of bounds`). This is a hard platform limit in the
-  standalone runtime, not a bug in the hook.
-- Several reference templates appear to roll up via `ctx.services.data`, but
-  that service is **undefined inside the sandbox**, so those rollups silently
-  no-op — they neither update the parent nor crash. Don't copy that pattern
-  expecting it to work.
+```ts
+total_amount: Field.summary({
+  summaryOperations: {
+    object: 'expense_line',
+    field: 'amount',
+    function: 'sum',
+    relationshipField: 'expense_report',
+  },
+});
+```
 
-So in this template `total_amount` is treated as a stored header field:
-defaulted on insert, shipped correct in the seed, and meant to be maintained by
-the client (or a server-side aggregation in your fork). What a hook *can* safely
-do is mutate **its own** incoming payload — which is exactly what
-`expense_report.hook.ts` does for the auto-number and the lifecycle timestamps
-(`submitted_at` / `approved_at` / `reimbursed_at`), with no nested writes.
+No hook, no denormalization, no client-maintained header. Two consequences worth
+knowing before you fork:
 
-**Fork point:** to make the total self-maintaining, compute it outside the
-sandbox — e.g. a native aggregate/summary field once the runtime computes the
-`summary` field type, a database trigger/view, or an external worker that
-listens for line changes and patches the parent at top level (not nested in a
-hook).
+- `total_amount` is **not seeded** — it is computed, so the summary derives it
+  from the seeded lines as they load.
+- The "submitted reports need a positive total" rule fires on the
+  draft→submitted **transition** (`previous.status != "submitted"`), when the
+  lines already exist — not on every write — so a report seeded directly in its
+  final state isn't gated by rollup timing.
+
+**History:** earlier versions of this template hand-maintained `total_amount` as
+a stored header field, because a child hook doing a nested parent write
+(`ctx.api.object('expense_report').update(...)`) crashed the sandbox
+(`memory access out of bounds`, framework#1867). That is now fixed — nested
+writes from hooks are safe. For a plain aggregate the `summary` field above is
+the delete-safe, declarative tool; for a **non-aggregate** cross-object rollup
+(e.g. copying a child's latest status onto the parent) an `afterInsert` /
+`afterUpdate` hook doing `ctx.api.object(parent).update(...)` is now the
+sanctioned pattern.
 
 ## Limits (LOC budget)
 
