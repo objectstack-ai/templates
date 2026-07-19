@@ -12,11 +12,16 @@ import type { Hook, HookContext } from '@objectstack/spec/data';
  *   and group on a single signal.
  *
  * NOTE — this hook only mutates the incoming `input` payload; it never issues a
- * nested `ctx.api` write. Hook bodies share one QuickJS (asyncify) sandbox that
- * permits a single suspended async call, so a nested engine write crashes the
- * process. That is why `progress_percent` / `actual_cost` (which would need a
- * cross-object rollup from milestones / timesheets) are stored fields kept in
- * sync by seed/client, not by this hook.
+ * nested `ctx.api` write. Nested cross-object writes from a hook are safe now
+ * (framework#1867 is fixed), but `progress_percent` / `actual_cost` are still
+ * deliberately NOT hook roll-ups — neither is a plain aggregate of a child field:
+ *   - `actual_cost` is an externally-computed actual (hours × a person/role rate).
+ *     `pm_timesheet` records hours only; there is no child cost column to sum, and
+ *     the per-rate data lives outside the 4-object CHARTER schema.
+ *   - `progress_percent` is a curated delivery metric, not a naive completed/total
+ *     milestone count (the seeded per-project values differ where a count would
+ *     flatten them to the same number).
+ * Both are kept by seed/client; see each field's note in pm_project.object.ts.
  *
  * IMPORTANT — the handler runs **body-only** in the QuickJS sandbox: only the
  * function body ships, so module-scope helpers are NOT in scope at runtime.

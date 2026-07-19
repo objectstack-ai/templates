@@ -4,7 +4,8 @@ import { defineView } from '@objectstack/spec/ui';
 
 /**
  * Timesheet views — daily effort entries, grouped by project, with a billable
- * tab. Timesheets feed the project's actual_cost (maintained out of sandbox).
+ * tab. Timesheets record effort (hours); the project's actual_cost is computed
+ * externally (hours × rate), not rolled up from these rows.
  */
 export const TimesheetViews = defineView({
   list: {
