@@ -49,7 +49,7 @@ export const TimeOffRequest = ObjectSchema.create({
       group: 'core',
       description:
         'Inclusive calendar-day span (weekends + holidays counted). Switch to a working-days helper if your policy excludes them.',
-      expression: F`record.start_date != null && record.end_date != null ? (record.end_date - record.start_date) + 1 : null`,
+      expression: F`record.start_date != null && record.end_date != null ? daysBetween(record.start_date, record.end_date) + 1 : null`,
     }),
     reason: Field.markdown({
       label: 'Reason',

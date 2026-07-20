@@ -130,7 +130,7 @@ export const Employee = ObjectSchema.create({
     tenure_years: Field.formula({
       label: 'Tenure (years)',
       group: 'meta',
-      expression: F`record.hire_date != null ? floor((today() - record.hire_date) / 365) : null`,
+      expression: F`record.hire_date != null ? daysBetween(record.hire_date, today()) / 365 : null`,
     }),
     notes: Field.markdown({ label: 'Internal Notes', group: 'meta' }),
 
